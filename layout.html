@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
+<meta http-equiv="X-UA-Compatible" content="IE=9" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>用户管理 - 爱尔医院筹建管理系统</title>
+<link type="text/css" rel="stylesheet" href="js/lib/SyntaxHighlighter/brush.css" />
+<link rel="stylesheet" type="text/css" media="all" href="js/lib/easyui/themes/gray/easyui.css" />
+<link type="text/css" rel="stylesheet" href="css/easy-plus.css" />
+<link type="text/css" rel="stylesheet" href="css/socss.css" />
+<link type="text/css" rel="stylesheet" href="css/plugins.css" />
+<!--[if lt IE 9]>
+  <script src="js/lib/html5.min.js"></script>
+<![endif]-->
+
+<style type="text/css">
+.h2-api{
+color: #c00;
+font-size: 16px;
+font-weight: bold;
+padding: 8px 5px 8px 15px;
+margin:10px 20px 0 ;
+background-color: #e3e3e3;
+}
+.one{float: left;width:200px;height:280px;position: relative;padding:0 5px;}
+.h4-api{border-bottom: 1px dotted #ddd;padding-bottom:10px;margin-bottom: 15px;}
+.exbox{margin:0 20px 20px;padding:20px;border:1px solid #ddd;border-top:0;-moz-border-radius:0 0 2px 2px;-webkit-border-radius:0 0 2px 2px;border-radius:0 0 2px 2px;overflow: hidden;zoom: 1;}
+.htmlbox{float: left;width:50%;margin-right:2%;}
+.codebox{float: right;width:48%;}
+</style>
+</head>
+
+<body data-js="form:init">
+
+
+  <div class="easyui-layout" data-options="fit:true">
+      <div data-options="region:'west',title:'西部',border:false,split:true" style="width:260px;border-right-width:1px;">
+          <div class="easyui-toolbar">
+              <a class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">新增</a>
+              <a class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true">编辑</a>
+              <a class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">删除</a>
+              <a class="easyui-linkbutton" data-options="iconCls:'icon-reload',plain:true">刷新</a>
+          </div>
+          <ul id="tree" class="easyui-tree" data-options="url:'/Jsons/Tree/tree-common-data.json',method:'get'"></ul>
+      </div>
+      <div data-options="region:'center',title:'中部',border:false" style="border-left-width:1px;">
+          <table id="dg"></table>
+      </div>
+  </div>
+
+
+
+<script src="js/require.js" data-main="js/main.un"></script>
+</body>
+
+</html>

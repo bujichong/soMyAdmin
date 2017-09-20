@@ -1,0 +1,27 @@
+/* easyui repair */
+.textbox{border-radius:1px;}
+.panel{border:0;}
+.panel-header, .panel-body{border:0;}
+
+
+.ul-userTree .tree-file{background:url(../images/easyui/i-user.png) no-repeat center;}
+.ul-powerTree .tree-file{background:url(../images/easyui/i-key.png) no-repeat ;}
+.combo-panel{border:1px solid #e5e5e5;}
+.combo-arrow{border-left: 1px solid #e5e5e5;}
+
+.combo-panel{border: 1px solid #ddd;border-top:0;-webkit-box-shadow:1px 1px 1px #ccc;box-shadow:1px 1px 1px #ccc;}
+.tooltip{
+background-color: #fdf7db!important;
+border-color: #fbd396!important;
+color: #000000!important;
+}
+
+
+.datagrid-view {position: relative;overflow: hidden;border-top: 2px solid #6fbcfd;}
+.datagrid-header td, .datagrid-body td, .datagrid-footer td{border-color:#e3e3e3;}
+.datagrid-cell,.datagrid-cell-group, .datagrid-header-rownumber, .datagrid-cell-rownumber{height:28px!important;line-height:28px!important;}
+.datagrid-header .datagrid-cell{height:32px!important;line-height:32px!important;}
+.datagrid-row{height:28px;}
+.datagrid-row-over{background-color:#d9e9ff;}
+.datagrid-row-selected{background-color:#fff1d2;color:#000;}
+.pagination .pagination-num{padding:0;}

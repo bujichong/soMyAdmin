@@ -1,0 +1,48 @@
+//node r.js -o build-bmap.js
+require.config({
+    // baseUrl: "/",
+    paths: {
+        "my97":"lib/my97/WdatePicker",
+        "jquery": "jquery-1.11.3.min",
+        "easyui":"lib/easyui/jquery.easyui.min",
+        // "jquery.jdirk": "lib/easyui/jquery.jdirk",
+        "easyui.extend":"lib/easyui/jquery.easyui.base.extend",
+        "md5":"lib/md5",
+        "jquery.validate": "plus/jquery.validate",
+        "jquery.extend": "plus/jquery.extend",
+        "param":"plus/param",
+        "pub":"plus/pub",
+        "print":"plus/print",
+        "layer.min":"lib/layer/layer.min",
+        "pinyin_dict":"lib/pinyinjs/dict/pinyin_dict",
+        "pinyin":"lib/pinyinjs/pinyinUtil",
+        "template":"lib/template",
+        "echarts":"lib/echarts/echarts",
+        "echartsMap":"lib/echarts/echarts-map",
+        "chinaMap":"lib/echarts/china",
+        "WebUploader":"lib/webuploader/webuploader.min",
+        "fancybox":"lib/fancybox/jquery.fancybox-1.3.4.pack",
+        "myupload":"lib/webuploader/MyAmdWebUpload",
+        "baidueditor": "lib/ueditor1.4.3.3-utf8-jsp/myue",
+        "bdlang": "lib/ueditor1.4.3.3-utf8-jsp/lang/zh-cn/zh-cn",
+        "zeroclipboard": "lib/ueditor1.4.3.3-utf8-jsp/third-party/zeroclipboard/ZeroClipboard.min",
+        "hightlight": "lib/SyntaxHighlighter/brush"
+    },
+    shim:{
+        "jquery.validate":["jquery"],
+        "layer.min":["jquery"],
+        "fancybox":["jquery"],
+        "hightlight":["jquery"],
+        "jquery.extend":["param","layer.min","jquery.validate","my97"],
+        "easyui":["jquery"],
+        // "jquery.jdirk":["jquery"],
+        "easyui.extend":["easyui"],
+        "bootstrap":["jquery"],
+        "pinyin": ["pinyin_dict"],
+        // "template": {exports: "template"},
+        "chinaMap":["echarts","echartsMap"],
+        "pub":["jquery.extend","easyui.extend"],
+        "baidueditor": {deps: ["lib/ueditor1.4.3.3-utf8-jsp/ueditor.config", "css!lib/ueditor1.4.3.3-utf8-jsp/themes/default/css/ueditor"]},
+        "bdlang":{deps: ["baidueditor"]}
+    }
+});

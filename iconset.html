@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
+<meta http-equiv="X-UA-Compatible" content="IE=9" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>用户管理 - 爱尔医院筹建管理系统</title>
+<link type="text/css" rel="stylesheet" href="css/bootstrap.css" />
+<link type="text/css" rel="stylesheet" href="css/bootstrap-theme.css" />
+<link rel="stylesheet" type="text/css" media="all" href="js/lib/easyui/themes/gray/easyui.css" />
+<link type="text/css" rel="stylesheet" href="css/newbase.css" />
+</head>
+
+<body data-js="sys:icons">
+
+<div class="wrapper-popForm">
+    <!-- <h3 class="h3-form"><span class="span-title">筹建医院-修改</span></h3> -->
+    <!-- <form class="soForm hk_form pad-t15"> -->
+<form class="form-horizontal hk_form pad-t15 pad-r30" role="form" method="post" data-opt="" id="vform" action="json/true.js">
+
+        <fieldset>
+           <div class="form-group">
+              <label class="col-xs-2 control-label">图标选择：</label>
+              <div class="col-xs-4 control-cont">
+                <span class="s-seledIcon" title="点击选择图片">&#xe651;</span><span class="btn s-dropIcon btn-default"><b class="glyphicon glyphicon-pencil"></b> 选择</span>
+                <input id="txt-selIcon" name="seledIcon" type="hidden" value="">
+                 <!-- <input class="form-control dropIcons required" type="text" name="userName" value="" maxlength="20" placeholder="" /> -->
+                 <!-- <input class="form-control required {remote:'json/remote.js?proUserName=myadmin',messages:{remote:'用户名已存在'}}" type="text" name="userName" value="ss" maxlength="20" placeholder="用户名" /> -->
+              </div>
+           </div>
+
+
+        </fieldset>
+
+        <p class="pad-t10 center">
+          <input type="submit" class="btn btn-info btn-formS btn-submit" name="btnSubmit" value="保 存" />
+          <input type="button" class="btn btn-default btn-formS btn-cancel" name="btnCancel" value="取 消" />
+        </p>
+    </form>
+</div>
+
+<div class="">
+  <div class="iconsbox none">
+    <ul class="ul-icons">
+      <li class="li-icon">&#xe602;</li>
+      <li class="li-icon">&#xe630;</li>
+      <li class="li-icon">&#xe609;</li>
+      <li class="li-icon">&#xe66f;</li>
+      <li class="li-icon">&#xe614;</li>
+      <li class="li-icon">&#xe61b;</li>
+      <li class="li-icon">&#xe61d;</li>
+      <li class="li-icon">&#xe61e;</li>
+      <li class="li-icon">&#xe61f;</li>
+      <li class="li-icon">&#xe62b;</li>
+      <li class="li-icon">&#xe636;</li>
+      <li class="li-icon">&#xe64e;</li>
+      <li class="li-icon">&#xe655;</li>
+      <li class="li-icon">&#xe656;</li>
+      <li class="li-icon">&#xe6a9;</li>
+      <li class="li-icon">&#xe631;</li>
+      <li class="li-icon">&#xe6bb;</li>
+      <li class="li-icon">&#xe6bc;</li>
+      <li class="li-icon">&#xe799;</li>
+      <li class="li-icon">&#xe642;</li>
+      <li class="li-icon">&#xe6b8;</li>
+      <li class="li-icon">&#xe6c5;</li>
+      <li class="li-icon">&#xe6cb;</li>
+      <li class="li-icon">&#xe6de;</li>
+      <li class="li-icon">&#xe6e6;</li>
+      <li class="li-icon">&#xe6f6;</li>
+      <li class="li-icon">&#xe606;</li>
+      <li class="li-icon">&#xe60c;</li>
+      <li class="li-icon">&#xe644;</li>
+      <li class="li-icon">&#xe613;</li>
+      <li class="li-icon">&#xe621;</li>
+      <li class="li-icon">&#xe704;</li>
+      <li class="li-icon">&#xe705;</li>
+      <li class="li-icon">&#xe70c;</li>
+      <li class="li-icon">&#xe611;</li>
+      <li class="li-icon">&#xe62e;</li>
+      <li class="li-icon">&#xe63a;</li>
+      <li class="li-icon">&#xe63c;</li>
+      <li class="li-icon">&#xe696;</li>
+      <li class="li-icon">&#xe699;</li>
+      <li class="li-icon">&#xe69b;</li>
+      <li class="li-icon">&#xe6ac;</li>
+      <li class="li-icon">&#xe6cc;</li>
+      <li class="li-icon">&#xe612;</li>
+      <li class="li-icon">&#xe67a;</li>
+      <li class="li-icon">&#xe635;</li>
+      <li class="li-icon">&#xe60b;</li>
+      <li class="li-icon">&#xe603;</li>
+      <li class="li-icon">&#xe632;</li>
+      <li class="li-icon">&#xe701;</li>
+      <li class="li-icon">&#xe620;</li>
+      <li class="li-icon">&#xe622;</li>
+      <li class="li-icon">&#xe623;</li>
+      <li class="li-icon">&#xe624;</li>
+      <li class="li-icon">&#xe625;</li>
+      <li class="li-icon">&#xe6a8;</li>
+      <li class="li-icon">&#xe73e;</li>
+      <li class="li-icon">&#xe60e;</li>
+      <li class="li-icon">&#xe610;</li>
+      <li class="li-icon">&#xe654;</li>
+      <li class="li-icon">&#xe661;</li>
+      <li class="li-icon">&#xe669;</li>
+      <li class="li-icon">&#xe672;</li>
+      <li class="li-icon">&#xe675;</li>
+      <li class="li-icon">&#xe67f;</li>
+      <li class="li-icon">&#xe68a;</li>
+      <li class="li-icon">&#xe68e;</li>
+      <li class="li-icon">&#xe695;</li>
+      <li class="li-icon">&#xe69a;</li>
+      <li class="li-icon">&#xe6a5;</li>
+      <li class="li-icon">&#xe6c6;</li>
+      <li class="li-icon">&#xe6df;</li>
+      <li class="li-icon">&#xe6e0;</li>
+      <li class="li-icon">&#xe6e1;</li>
+      <li class="li-icon">&#xe6e2;</li>
+      <li class="li-icon">&#xe6e3;</li>
+      <li class="li-icon">&#xe6e4;</li>
+      <li class="li-icon">&#xe6e5;</li>
+      <li class="li-icon">&#xe6e7;</li>
+      <li class="li-icon">&#xe6e9;</li>
+      <li class="li-icon">&#xe63e;</li>
+      <li class="li-icon">&#xe63f;</li>
+      <li class="li-icon">&#xe60f;</li>
+      <li class="li-icon">&#xe639;</li>
+      <li class="li-icon">&#xe6f1;</li>
+      <li class="li-icon">&#xe673;</li>
+      <li class="li-icon">&#xe60a;</li>
+      <li class="li-icon">&#xe685;</li>
+      <li class="li-icon">&#xe687;</li>
+      <li class="li-icon">&#xe629;</li>
+      <li class="li-icon">&#xe74c;</li>
+      <li class="li-icon">&#xe74e;</li>
+      <li class="li-icon">&#xe787;</li>
+      <li class="li-icon">&#xe714;</li>
+      <li class="li-icon">&#xe756;</li>
+      <li class="li-icon">&#xe604;</li>
+      <li class="li-icon">&#xe64d;</li>
+      <li class="li-icon">&#xe618;</li>
+      <li class="li-icon">&#xe62a;</li>
+      <li class="li-icon">&#xe757;</li>
+      <li class="li-icon">&#xe750;</li>
+      <li class="li-icon">&#xe615;</li>
+      <li class="li-icon">&#xe608;</li>
+      <li class="li-icon">&#xe62f;</li>
+      <li class="li-icon">&#xe638;</li>
+      <li class="li-icon">&#xe67d;</li>
+      <li class="li-icon">&#xe710;</li>
+      <li class="li-icon">&#xe605;</li>
+      <li class="li-icon">&#xe694;</li>
+      <li class="li-icon">&#xe640;</li>
+      <li class="li-icon">&#xe626;</li>
+      <li class="li-icon">&#xe6b3;</li>
+      <li class="li-icon">&#xe6bf;</li>
+      <li class="li-icon">&#xe6c2;</li>
+      <li class="li-icon">&#xe723;</li>
+      <li class="li-icon">&#xe6b5;</li>
+      <li class="li-icon">&#xe677;</li>
+      <li class="li-icon">&#xe601;</li>
+      <li class="li-icon">&#xe61c;</li>
+      <li class="li-icon">&#xe643;</li>
+      <li class="li-icon">&#xe6fa;</li>
+      <li class="li-icon">&#xe746;</li>
+      <li class="li-icon">&#xe719;</li>
+      <li class="li-icon">&#xe730;</li>
+      <li class="li-icon">&#xe725;</li>
+      <li class="li-icon">&#xe75c;</li>
+      <li class="li-icon">&#xe75e;</li>
+      <li class="li-icon">&#xe760;</li>
+      <li class="li-icon">&#xe811;</li>
+      <li class="li-icon">&#xe678;</li>
+      <li class="li-icon">&#xe71d;</li>
+      <li class="li-icon">&#xe607;</li>
+      <li class="li-icon">&#xe61a;</li>
+      <li class="li-icon">&#xe67b;</li>
+      <li class="li-icon">&#xe67c;</li>
+      <li class="li-icon">&#xe641;</li>
+      <li class="li-icon">&#xe619;</li>
+      <li class="li-icon">&#xe828;</li>
+      <li class="li-icon">&#xe627;</li>
+      <li class="li-icon">&#xe616;</li>
+      <li class="li-icon">&#xe64c;</li>
+      <li class="li-icon">&#xe63b;</li>
+      <li class="li-icon">&#xe63d;</li>
+      <li class="li-icon">&#xe6fe;</li>
+      <li class="li-icon">&#xe60d;</li>
+      <li class="li-icon">&#xe628;</li>
+      <li class="li-icon">&#xe62c;</li>
+      <li class="li-icon">&#xe62d;</li>
+      <li class="li-icon">&#xe633;</li>
+      <li class="li-icon">&#xe634;</li>
+      <!-- <li class="li-icon">&#xe651;</li> -->
+      <li class="li-icon">&#xe679;</li>
+      <li class="li-icon">&#xe64f;</li>
+      <li class="li-icon">&#xe637;</li>
+      <li class="li-icon">&#xe645;</li>
+      <li class="li-icon">&#xe617;</li>
+    </ul>
+  </div>
+</div>
+<script src="js/require.js" data-main="js/main.un"></script>
+</body>
+
+</html>

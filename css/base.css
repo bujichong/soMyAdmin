@@ -1,0 +1,33 @@
+/*--from now--*/
+/*.wrapper{min-width: 980px;margin:0 auto;}*/
+.wrapper-popForm{}
+.h2-pageTitle,.h2-normalTitle{
+height:35px;line-height: 35px;padding:0 0 0 40px;margin:0;font-size: 14px;font-weight: bold;background:#f7f7f7 url(../images/icon/i-form.png) no-repeat 15px center;box-shadow:1px 1px 2px #ccc;-webkit-box-shadow:1px 1px 2px #ccc;-moz-box-shadow:1px 1px 2px #ccc;*border-bottom: 1px solid #e5e5e5;}
+.h2-pageTitle{position: fixed;left:0;right: 0;top:0;z-index:5;}
+
+.sideBarBox{position: absolute;left:0px;top:36px;bottom:0px;width:200px;overflow: auto;border-right:1px solid #e5e5e5;}
+.mainContBox{position: absolute;left:201px;right:0px;top:36px;bottom:0px;overflow: auto;}
+.sideTreeC{padding:10px;}
+
+
+.s-seledIcon{display: -moz-inline-stack;display:inline-block;*display:inline;*zoom:1;width:50px;height:50px;line-height:50px;font-family:'iconfont';font-size:30px;text-align: center;color:#ddd;vertical-align: middle;}
+.seledOne{color:#00A0E9;}
+.ul-icons{overflow: hidden;zoom: 1;padding:0;margin:0;list-style: none;}
+.li-icon{float: left;width:60px;height:60px;line-height:60px;font-family:'iconfont';font-size:32px;text-align: center;color:#00A0E9;cursor:hand;cursor:pointer;padding:0;margin:0;list-style: none;}
+.li-icon:hover{background-color: #00A0E9;color:#fff;}
+
+/* searchHead */
+.searchHead{position: relative;margin:45px 10px 7px;}
+.mainContBox .searchHead{margin-top:10px;}
+.searchHead .drop{min-width:90px;}
+/* baseToobar */
+.baseToobar{padding:0 0 9px;/*background-color: #f3f3f3;margin: 0 10px 1px;*/background-color: #fff;border:0;overflow: hidden;}
+.baseToobar .toolGroup,.baseToobar .s-tool-singer{float: left;}
+/* gridWrap */
+.gridWrap{padding:0 10px;}
+
+.popGridHead{padding:10px;}
+.popGridHead .btn{margin-left: 5px;}
+
+.err-404{position: absolute;width:580px;height:280px;top:50%;left:50%;margin:-260px 0 0 -290px;}
+.errInfoCont{position: absolute;width:520px;height:240px;top:50%;left:50%;margin:0px 0 0 -230px;border:1px dotted #ccc;overflow: auto;font-size: 12px;line-height:24px;padding:10px;font-family:Verdana;color:#3f4df3;}

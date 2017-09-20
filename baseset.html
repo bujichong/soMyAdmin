@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
+<meta http-equiv="X-UA-Compatible" content="IE=9" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>基础设置 - 爱尔医院筹建管理系统</title>
+<link rel="stylesheet" type="text/css" media="all" href="js/lib/easyui/themes/gray/easyui.css" />
+<link type="text/css" rel="stylesheet" href="css/easy-plus.css" />
+<link type="text/css" rel="stylesheet" href="css/socss.css" />
+<link type="text/css" rel="stylesheet" href="css/plugins.css" />
+<link type="text/css" rel="stylesheet" href="css/base.css" />
+</head>
+
+<body data-js="baseset:init">
+<div class="wrapper">
+  <h2 class="h2-normalTitle">基础设置</h2>
+
+  <!-- <div role="tabpanel" class="tab-pane" id="other"> -->
+    <form class="soform form-validate pad-t15 max-w1000 marauto" role="form" method="post" data-opt="" id="vform" action="json/true.js">
+      <fieldset>
+        <div class="row">
+          <div class="p6">
+            <div class="item-one"><label class="lab-item">系统名称：</label>
+                <input class="txt" type="text" name="userName" value="" maxlength="20" placeholder="系统名称" />
+             </div>
+          </div>
+          <div class="p6">
+            <div class="item-one"><label class="lab-item">关键词：</label>
+              <div class="item-group">
+               <input class="txt wp-70" type="text" name="realName" value="" maxlength="20" placeholder="关键词" data-option="required:true" /><button class="btn btn-small btn-primary wp-30" type="button">关键词测试</button>
+             </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="p6">
+            <div class="item-one"><label class="lab-item">上传目录配置：</label>
+              <div class="item-group">
+               <input class="txt" type="text" name="realName" value="" placeholder="上传目录" data-option="required:true" />
+             </div>
+            </div>
+          </div>
+          <div class="p6">
+            <div class="item-one"><label class="lab-item">邮箱：</label>
+              <div class="item-group">
+                <input type="text" class="txt item-l wp-60"><span class="item-on btn-warning wp-10">@</span><input type="text" class="txt wp-30">
+             </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="p6">
+            <div class="item-one">
+              <label class="lab-item">系统类型：</label>
+                <select name="type" class="drop">
+                  <option value="">请选择...</option>
+                  <option value="1">部门一</option>
+                  <option value="2">部门二</option>
+                  <option value="3">部门三</option>
+                  <option value="4">部门四</option>
+                </select>
+            </div>
+          </div>
+          <div class="p6">
+            <div class="item-one">
+              <label class="lab-item">启用缓存：</label>
+              <label class="lab-val"><input class="rad" type="radio" value="1" name="state" />启用</label>
+              <label class="lab-val"><input class="rad" type="radio" value="2" name="state" />停用</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="item-one">
+           <label class="lab-item">备注：</label>
+           <script id="editor" class="hk_editor hk_editor_required editorkey_myue" name="myue" type="text/plain" style="height:300px;"></script>
+           </div>
+        </div>
+
+        </fieldset>
+
+        <p class="pad-t10 center">
+          <input type="button" class="btn btn-primary btn-easyFormSubmit" name="btnSubmit" value="保 存" />
+          <input type="button" class="btn btn-cancel" name="btnCancel" value="取 消" />
+        </p>
+    </form>
+
+    <!-- </div> -->
+
+  <!-- </div> -->
+
+
+
+  </div>
+<!--
+  <ul class="nav nav-tabs mar-t10" role="tablist">
+    <li role="presentation" class="active"><a href="#">基础设置</a></li>
+    <li role="presentation"><a href="#">安全设置</a></li>
+    <li role="presentation"><a href="#">其他设置</a></li>
+  </ul> -->
+
+
+
+
+
+
+<script src="js/require.js" data-main="js/main.un"></script>
+<!-- <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script> -->
+
+<!--<script type="text/javascript" charset="utf-8" src="js/lib/umeditor1.2.3-utf8-jsp/umeditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/lib/umeditor1.2.3-utf8-jsp/umeditor.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/lib/umeditor1.2.3-utf8-jsp/lang/zh-cn/zh-cn.js"></script>
+<script type="text/javascript">
+var um = UM.getEditor('editor');
+</script>-->
+<!--<script type="text/javascript" charset="utf-8" src="js/lib/ueditor1.4.3.3-utf8-jsp/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/lib/ueditor1.4.3.3-utf8-jsp/ueditor.all.min.js"> </script>
+<script type="text/javascript" charset="utf-8" src="js/lib/ueditor1.4.3.3-utf8-jsp/lang/zh-cn/zh-cn.js"></script>
+<script type="text/javascript">
+var ue = UE.getEditor('editor');
+</script> -->
+
+</body>
+
+</html>
