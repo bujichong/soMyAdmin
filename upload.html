@@ -24,14 +24,14 @@
           <div class="row">
             <div class="item-one">
               <label class="lab-item">名称：</label>
-              <input class="txt" type="text" name="group" value="" maxlength="20" placeholder="名称" data-options="required:true" />
+              <input class="txt easyui-validatebox" type="text" name="group" value="" maxlength="20" placeholder="名称" data-options="required:true" missingMessage="请输入名称" invalidMessage="请输入名称" />
             </div>
           </div>
 
           <div class="row">
             <div class="item-one">
               <label class="lab-item">排序：</label>
-              <input class="txt number" type="text" name="sort" value="" maxlength="20" placeholder="0" />
+              <input class="txt number" type="text" name="sort" value="" maxlength="20" placeholder="0"  validType="number" invalidMessage="序号必须为数字" />
             </div>
           </div>
 

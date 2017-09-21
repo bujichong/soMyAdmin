@@ -16,12 +16,18 @@ border-color: #fbd396!important;
 color: #000000!important;
 }
 
-
+.panel-body{color:#555;}
+.datagrid-htable, .datagrid-btable, .datagrid-ftable{color:#555;}
 .datagrid-view {position: relative;overflow: hidden;border-top: 2px solid #6fbcfd;}
 .datagrid-header td, .datagrid-body td, .datagrid-footer td{border-color:#e3e3e3;}
 .datagrid-cell,.datagrid-cell-group, .datagrid-header-rownumber, .datagrid-cell-rownumber{height:28px!important;line-height:28px!important;}
-.datagrid-header .datagrid-cell{height:32px!important;line-height:32px!important;}
+.datagrid-header .datagrid-cell{height:32px!important;line-height:32px!important;font-weight: bold;color:#000;}
 .datagrid-row{height:28px;}
-.datagrid-row-over{background-color:#d9e9ff;}
-.datagrid-row-selected{background-color:#fff1d2;color:#000;}
+.datagrid-row-over,.tree-node-hover{background-color:#deeefb;color:#000;}
+.datagrid-row-selected,.tree-node-selected{background-color:#fff1d2;color:#000;}
 .pagination .pagination-num{padding:0;}
+
+.tree-expanded {background: url(../images/easyui/tree_icons.png) no-repeat -18px 0px;}
+.tree-folder {background: url(../images/easyui/tree_icons.png) no-repeat -208px 0;}
+.tree-folder-open {background:url(../images/easyui/tree_icons.png) no-repeat -224px 0;}
+.tree-file {background:url(../images/easyui/tree_icons.png) no-repeat -240px 0;}

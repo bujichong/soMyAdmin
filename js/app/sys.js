@@ -4,12 +4,12 @@ define(['template'],function (template) {
       $grid.newGrid("#gridBox",{
         // toolbar:'#baseToobar',
         tools:[
-        [{iconCls:'add',text:'新增',url:'login.html',popMax:true,title:'用户信息-新增'}
+        [{iconCls:'add',text:'新增',url:'userForm.html?id={id}',popMax:true,title:'用户信息-新增'}
           ,{iconCls:'edit',btnCls:'warning',text:'修改',onlyOne:true,popHeight:400,popWidth:560,popMax:true,url:'userForm.html?id={id}',title:'用户信息-修改',notNull:'请选择你要修改的记录!'}
           ,{iconCls:'del',btnCls:'danger',text:'删除',check:true,url:'json/true.js',post:'id=id',notNull:'请 <strong class="red">勾选</strong> 需要删除的一项或多项！', ajax:true,ajaxMsg:'你确定提交此删除操作吗？'}]
           ,[{iconCls:'unlock',btnCls:'warning',text:'重置密码',check:true,url:'json/true.js?id={id}',notNull:'请 <strong class="red">勾选</strong> 需要重置密码的一项或多项！', ajax:true,ajaxMsg:'你确定重置密码为 <strong class="orange">123456</strong> 吗？'}
           ,{iconCls:'hot',btnCls:'warning',text:'更新状态',check:true,url:'json/true.js?id={id}',notNull:'请 <strong class="red">勾选</strong> 需要更新状态的一项或多项！', ajax:true,ajaxMsg:'你确定提交此更新操作吗？'}]
-          ,[{iconCls:'usersetting',text:'分配角色',url:'userRole.html?id={id}',onlyOne:true,popHeight:380,popWidth:360,title:'用户信息-分配角色',notNull:'请选择你要分配角色的用户！'}]
+          ,[{iconCls:'usersetting',text:'分配角色',url:'userRole.html?id={id}',onlyOne:true,popHeight:440,popWidth:560,title:'用户信息-分配角色',notNull:'请选择你要分配角色的用户！'}]
           // ,{iconCls:'share-alt',text:'撤销角色',url:'userRole.html?id={id}',onlyOne:true,popHeight:380,popWidth:360,title:'用户信息-撤销角色',notNull:'请选择你要撤销角色的用户！'}
         ],
         rownumbers : false,
@@ -48,10 +48,10 @@ define(['template'],function (template) {
     role : function () {
       $grid.newGrid("#gridBox",{
         tools:[
-          [{iconCls:'plus',text:'新增',url:'roleForm.html',noMax: true,popHeight:240,popWidth:420,title:'角色信息-新增'}
-          ,{iconCls:'trash',btnCls:'danger',text:'删除',check:true,url:'json/true.js?id={id}',notNull:'请 <strong class="red">勾选</strong> 需要删除的一项或多项！', ajax:true}]
-          ,[{iconCls:'user',btnCls:'primary',text:'查看权限',url:'rolePower.html?id={id}',onlyOne:true,popHeight:380,popWidth:360,title:'角色信息-查看权限',notNull:'请选择你要查看权限的用户行！'}
-          ,{iconCls:'user',btnCls:'warning',text:'设置权限',url:'setRolePower.html?id={id}',onlyOne:true,popMax:true,popHeight:420,popWidth:700,title:'角色信息-设置权限',notNull:'请选择你要设置权限的用户行！'}]
+          [{iconCls:'add',text:'新增',url:'roleForm.html',noMax: true,popHeight:240,popWidth:420,title:'角色信息-新增'}
+          ,{iconCls:'del',btnCls:'danger',text:'删除',check:true,url:'json/true.js?id={id}',notNull:'请 <strong class="red">勾选</strong> 需要删除的一项或多项！', ajax:true}]
+          ,[{iconCls:'admin',btnCls:'primary',text:'查看权限',url:'rolePower.html?id={id}',onlyOne:true,popHeight:380,popWidth:360,title:'角色信息-查看权限',notNull:'请选择你要查看权限的用户行！'}
+          ,{iconCls:'crown',btnCls:'warning',text:'设置权限',url:'setRolePower.html?id={id}',onlyOne:true,popMax:true,popHeight:420,popWidth:700,title:'角色信息-设置权限',notNull:'请选择你要设置权限的用户行！'}]
         ],
         rownumbers : false,
         // singleSelect : false,
@@ -171,7 +171,7 @@ define(['template'],function (template) {
           ,{title:'描述',field:'desc',width:120}
           ,{title:'创建时间',field:'createTime',width:120}
         ]],
-        height:376,
+        height:340,
         pagination : false,
         url:'json/role.js'
       });
@@ -326,7 +326,7 @@ define(['template'],function (template) {
     log : function () {
       $grid.newGrid("#gridBox",{
         tools:[
-          {iconCls:'trash',btnCls:'danger',text:'删除',check:true,url:'json/true.js?id={id}',notNull:'请 <strong class="red">勾选</strong> 需要删除的一项或多项！', ajax:true}
+          {iconCls:'delete',btnCls:'danger',text:'删除',check:true,url:'json/true.js?id={id}',notNull:'请 <strong class="red">勾选</strong> 需要删除的一项或多项！', ajax:true}
         ],
         fitColumns : true,
         rownumbers : false,

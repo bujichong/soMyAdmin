@@ -23,13 +23,13 @@
         <div class="row">
           <div class="p6">
             <div class="item-one"><label class="lab-item">系统名称：</label>
-                <input class="txt" type="text" name="userName" value="" maxlength="20" placeholder="系统名称" />
+                <input class="txt easyui-validatebox" type="text" name="userName" value="" maxlength="20" placeholder="系统名称" data-options="required:true" missingMessage="请输入系统名称" invalidMessage="系统名称为必填" />
              </div>
           </div>
           <div class="p6">
             <div class="item-one"><label class="lab-item">关键词：</label>
               <div class="item-group">
-               <input class="txt wp-70" type="text" name="realName" value="" maxlength="20" placeholder="关键词" data-option="required:true" /><button class="btn btn-small btn-primary wp-30" type="button">关键词测试</button>
+               <input class="txt wp-70 easyui-validatebox" type="text" name="keyword" value="" maxlength="20" placeholder="关键词" data-options="required:true" missingMessage="请输入关键词" invalidMessage="关键词为必填" /><button class="btn btn-small btn-primary wp-30" type="button">关键词测试</button>
              </div>
             </div>
           </div>
@@ -39,7 +39,7 @@
           <div class="p6">
             <div class="item-one"><label class="lab-item">上传目录配置：</label>
               <div class="item-group">
-               <input class="txt" type="text" name="realName" value="" placeholder="上传目录" data-option="required:true" />
+               <input class="txt easyui-validatebox" type="text" name="realName" value="" placeholder="上传目录" data-options="required:true" missingMessage="请输入上传目录" invalidMessage="上传目录为必填" />
              </div>
             </div>
           </div>

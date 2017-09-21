@@ -5,7 +5,7 @@ body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input
 .area-a{border:1px solid #ddd;font-size:14px;margin-top:20px;-moz-border-radius:2px;-webkit-border-radius:2px;border-radius:2px;}
 .h3-abs{margin:0px;padding:15px 20px 0;border-bottom:1px solid #ddd;font-size: 1em;line-height:25px;height:80px;}
 .ul-abs{overflow: hidden;zoom: 1;}
-.li-abs{float: left;width:33.33%;height:108px;padding:20px 0;border-right:1px solid #ddd;}
+.li-abs{float: left;width:33%;height:108px;padding:20px 0;border-right:1px solid #ddd;}
 .li-abs-3{border-right:0px;}
 .li-abs .item{display: block;padding:10px 0 10px 55px;width:120px;margin:0 auto;}
 .li-abs-3 .item{width:145px;}
@@ -16,7 +16,7 @@ body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input
 .li-abs .s-num{font-size:1.6em;color: #00A0E9;margin-left:12px;}
 
 .area-b{position: relative;margin-top:20px;}
-.h3-list{position: relative;border-bottom:2px solid #ddd;height:32px;line-height: 28px;margin-bottom: 8px;font-weight: bold;font-size: 14px;}
+.h3-list{position: relative;border-bottom:2px solid #ddd;height:30px;line-height: 28px;margin-bottom: 8px;font-weight: bold;font-size: 14px;}
 .h3-list .s-title{display: -moz-inline-stack;display:inline-block;*display:inline;*zoom:1;border-bottom:2px solid #00A0E9;position: relative;top:2px;padding:0 10px 0 30px;background:url(../images/home/i-4.png) no-repeat 2px center;}
 .h3-list-1 .s-title{background-image: url(../images/home/i-4.png);}
 .h3-list-2 .s-title{background-image: url(../images/home/i-5.png);}
@@ -37,14 +37,3 @@ body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input
 .ul-d .s-perNum{float: left;margin:0 5px 0 0;color:#00A0E9;}
 .ul-d .s-per{float: left;width:35%;height:12px;line-height:12px;}
 .ul-d .em-per{display: -moz-inline-stack;display:inline-block;*display:inline;*zoom:1;background-color:#00A0E9;height:12px;margin-top:7px;}
-
-
-
-
-
-
-
-
-
-
-

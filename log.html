@@ -7,23 +7,26 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <title>日志管理 - 爱尔医院筹建管理系统</title>
 <link rel="icon" href="images/logo.ico" type="image/x-icon" />
-<link type="text/css" rel="stylesheet" href="css/bootstrap.css" />
-<link type="text/css" rel="stylesheet" href="css/bootstrap-theme.css" />
 <link rel="stylesheet" type="text/css" media="all" href="js/lib/easyui/themes/gray/easyui.css" />
-<link type="text/css" rel="stylesheet" href="css/newbase.css" />
+<link type="text/css" rel="stylesheet" href="css/easy-plus.css" />
+<link type="text/css" rel="stylesheet" href="css/socss.css" />
+<link type="text/css" rel="stylesheet" href="css/plugins.css" />
+<link type="text/css" rel="stylesheet" href="css/base.css" />
 </head>
 <body data-js="sys:log">
 
 <div class="wrapper">
   <h2 class="h2-pageTitle">日志管理</h2>
 
-    <div class="searchHead">
+    <div class="soform searchHead">
       <form id="sbox" class="form-inline">
-          <div class="form-group"><input type="text" class="form-control" name="userName" placeholder="登录名称"></div>
-          <div class="form-group"><input type="text" class="form-control" name="ip" placeholder="登录IP"></div>
-          <div class="form-group"><input type="text" class="form-control hk_time" name="startTime" placeholder="日志开始时间"></div>
-          <div class="form-group"><input type="text" class="form-control hk_time" name="endTime" placeholder="日志结束时间"></div>
-          <button type="button" class="btn btn-info hk_search"  data-opt="{grid:'#gridBox',scope:'#sbox'}">查 询</button>
+        <div class="item-group">
+          <label class="lab-inline">登录名称：</label><input type="text" class="txt w-120" name="userName" placeholder="登录名称">
+          <label class="lab-inline">登录IP：</label><input type="text" class="txt w-120" name="ip" placeholder="登录IP">
+          <label class="lab-inline">时间：</label><input type="text" class="txt w-140 hk_time" name="startTime" placeholder="日志开始时间"> -
+          <input type="text" class="txt w-140 hk_time" name="endTime" placeholder="日志结束时间">
+          <button type="button" class="btn btn-small btn-primary hk_search"  data-opt="{grid:'#gridBox',scope:'#sbox'}">查 询</button>
+        </div>
       </form>
     </div>
 

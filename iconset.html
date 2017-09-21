@@ -6,10 +6,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <title>用户管理 - 爱尔医院筹建管理系统</title>
-<link type="text/css" rel="stylesheet" href="css/bootstrap.css" />
-<link type="text/css" rel="stylesheet" href="css/bootstrap-theme.css" />
 <link rel="stylesheet" type="text/css" media="all" href="js/lib/easyui/themes/gray/easyui.css" />
-<link type="text/css" rel="stylesheet" href="css/newbase.css" />
+<link type="text/css" rel="stylesheet" href="css/easy-plus.css" />
+<link type="text/css" rel="stylesheet" href="css/socss.css" />
+<link type="text/css" rel="stylesheet" href="css/plugins.css" />
+<link type="text/css" rel="stylesheet" href="css/base.css" />
 </head>
 
 <body data-js="sys:icons">
@@ -17,25 +18,25 @@
 <div class="wrapper-popForm">
     <!-- <h3 class="h3-form"><span class="span-title">筹建医院-修改</span></h3> -->
     <!-- <form class="soForm hk_form pad-t15"> -->
-<form class="form-horizontal hk_form pad-t15 pad-r30" role="form" method="post" data-opt="" id="vform" action="json/true.js">
+<form class="soform form-validate pad-t15" role="form" method="post" data-opt="" id="vform" action="json/true.js">
 
         <fieldset>
-           <div class="form-group">
-              <label class="col-xs-2 control-label">图标选择：</label>
-              <div class="col-xs-4 control-cont">
-                <span class="s-seledIcon" title="点击选择图片">&#xe651;</span><span class="btn s-dropIcon btn-default"><b class="glyphicon glyphicon-pencil"></b> 选择</span>
+           <div class="row">
+             <div class="item-one">
+              <label class="lab-item">图标选择：</label>
+                <span class="s-seledIcon" title="点击选择图片">&#xe651;</span><span class="btn btn-small s-dropIcon"><b class="glyphicon glyphicon-pencil"></b> 选择</span>
                 <input id="txt-selIcon" name="seledIcon" type="hidden" value="">
                  <!-- <input class="form-control dropIcons required" type="text" name="userName" value="" maxlength="20" placeholder="" /> -->
                  <!-- <input class="form-control required {remote:'json/remote.js?proUserName=myadmin',messages:{remote:'用户名已存在'}}" type="text" name="userName" value="ss" maxlength="20" placeholder="用户名" /> -->
-              </div>
-           </div>
+            </div>
+         </div>
 
 
         </fieldset>
 
         <p class="pad-t10 center">
-          <input type="submit" class="btn btn-info btn-formS btn-submit" name="btnSubmit" value="保 存" />
-          <input type="button" class="btn btn-default btn-formS btn-cancel" name="btnCancel" value="取 消" />
+          <input type="submit" class="btn btn-primary btn-easyFormSubmit" name="btnSubmit" value="保 存" />
+          <input type="button" class="btn btn-cancel" name="btnCancel" value="取 消" />
         </p>
     </form>
 </div>
