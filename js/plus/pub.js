@@ -854,7 +854,7 @@ var $ff = {
      * 页面表格查询功能绑定
      */
     search: function (btnCls) {
-        var cls = btnCls || '.hk_search';
+        var cls = btnCls || '.so-search';
         if ($(cls).length) {
             $(cls).each(function () {
                 var data = $T.data(this);
@@ -942,8 +942,8 @@ var $ff = {
     },
     someMix: function () {
         var me = this;
-        if ($('.hk_time').length) {
-            $('.hk_time').addClass('Wdate').each(function () {
+        if ($('.so-time').length) {
+            $('.so-time').addClass('Wdate').each(function () {
                 var _self = $(this);
                 if (_self.hasClass('inline')) {_self.css('width', 150)};
                 _self.click(function () {
@@ -953,29 +953,9 @@ var $ff = {
                 });
             });
         }
-        // if ($(".hk_form .btn-cancel").length) {
-        //     $(".hk_form .btn-cancel").click(function () {
-        //         $util.closePop();
-        //     });
-        // }
-        if ($(".form-validate .btn-cancel").length) {
-            $(".form-validate .btn-cancel").click(function () {
-                $util.closePop();
-            });
-        }
-        if ($('.form-enter').length) {//回车替代tab事件
-          me.formAEnterFun();
-          me.formAEnterFunB();
-        };
-        if ($(".form-validate .btn-closePop").length) {
-            $(".form-validate .btn-closePop").click(function () {
-                $util.closePop();
-            });
 
-        }
-
-        if ($('.hk_date').length) {
-            $('.hk_date').addClass('Wdate').each(function () {
+        if ($('.so-date').length) {
+            $('.so-date').addClass('Wdate').each(function () {
                 var _self = $(this);
                 if (_self.hasClass('inline')) {_self.css('width', 100)};
                 _self.click(function () {
@@ -985,6 +965,26 @@ var $ff = {
                 });
             });
         }
+        // if ($(".so-form .btn-cancel").length) {
+        //     $(".so-form .btn-cancel").click(function () {
+        //         $util.closePop();
+        //     });
+        // }
+        if ($(".form-validate .btn-cancel").length) {
+            $(".form-validate .btn-cancel").click(function () {
+                $util.closePop();
+            });
+        }
+        if ($(".form-validate .btn-closePop").length) {
+            $(".form-validate .btn-closePop").click(function () {
+                $util.closePop();
+            });
+
+        }
+        if ($('.form-enter').length) {//回车替代tab事件
+          me.formAEnterFun();
+          me.formAEnterFunB();
+        };
 
         if ($('.drop').length) {
             $('.drop').each(function () {
@@ -996,16 +996,16 @@ var $ff = {
         if ($('.required').length) {
             $('.required').each(function () {
                 var _self = $(this);
-                if (_self.hasClass('hk_time') || _self.hasClass('hk_date')) {
+                if (_self.hasClass('so-time') || _self.hasClass('so-date')) {
                     _self.addClass('txt_requireDate');
                 }
-                if (_self.hasClass('hk_choice') || _self.hasClass('hk_pop')) {
-                    _self.addClass('hk_requirePop');
+                if (_self.hasClass('so-choice') || _self.hasClass('so-pop')) {
+                    _self.addClass('so-requirePop');
                 }
             });
         }
-        if ($('.hk_drop').length) {
-            $('.hk_drop').each(function () {
+        if ($('.so-drop').length) {
+            $('.so-drop').each(function () {
                 var _self = $(this);
                 var url = _self.attr('url');
                 var required = _self.hasClass('required');
@@ -1026,8 +1026,8 @@ var $ff = {
             });
         };
 
-        if ($('.hk_pop').length) {
-            $('.hk_pop').each(function () {
+        if ($('.so-pop').length) {
+            $('.so-pop').each(function () {
                 var _self = $(this);
                 var rdm = Math.floor(Math.random()*1000000);
                 var myOpt = $T.data(_self);
@@ -1097,9 +1097,9 @@ var $ff = {
             });
         };
         // 下拉框初始化
-        if ($("select.hk_select").length) {
+        if ($("select.so-select").length) {
             var codes = [], params = {muti: true};
-            var ss = $("select.hk_select");
+            var ss = $("select.so-select");
             ss.each(function () {
                 var data = $T.data(this) || {};
                 if (data.textTo) {
@@ -1338,7 +1338,7 @@ var $ff = {
         };
     },
     popGrid: function (cls) {
-        cls = cls || '.hk_popGrid';
+        cls = cls || '.so-popGrid';
         if ($(cls).length) {
             $(cls).click(function () {
                 var data = $T.data(this);
@@ -1348,7 +1348,7 @@ var $ff = {
         }
     },
     popTree: function (cls) {
-        cls = cls || '.hk_popTree';
+        cls = cls || '.so-popTree';
         $(cls).click(function () {
             var data = $T.data(this);
             data.textId = data.textId || this.name;

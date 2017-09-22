@@ -3,7 +3,7 @@ define(function () {
     edit : function () {
       var random = Math.floor(Math.random()*1000000);
 
-      $('.hk_pop').click(function() {
+      $('.so-pop').click(function() {
           var popId = layer.open({
             type: 0,
             content: '<ul id="ul-Tree-'+random+'"></ul>',
@@ -18,7 +18,7 @@ define(function () {
             flatData: true,
             onClick : function (node) {
               window.console && console.log(node);
-              $('.hk_pop').val(node.text);
+              $('.so-pop').val(node.text);
               layer.close(popId);
             }
           });
