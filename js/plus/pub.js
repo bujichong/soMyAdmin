@@ -1,99 +1,4 @@
-var $math = {
-    mul : function (a, b) {
-        var c = 0,
-            d = a.toString(),
-            e = b.toString();
-        try {
-            c += d.split(".")[1].length;
-        } catch (f) {}
-        try {
-            c += e.split(".")[1].length;
-        } catch (f) {}
-        return Number(d.replace(".", "")) * Number(e.replace(".", "")) / Math.pow(10, c);
-    },
-    add : function (a,b) {
-        var me = this;
-        var c, d, e;
-        try {
-            c = a.toString().split(".")[1].length;
-        } catch (f) {
-            c = 0;
-        }
-        try {
-            d = b.toString().split(".")[1].length;
-        } catch (f) {
-            d = 0;
-        }
-        return e = Math.pow(10, Math.max(c, d)), (me.mul(a, e) + me.mul(b, e)) / e;
-    },
-    sub : function (a,b) {
-        var me = this;
-        var c, d, e;
-        try {
-            c = a.toString().split(".")[1].length;
-        } catch (f) {
-            c = 0;
-        }
-        try {
-            d = b.toString().split(".")[1].length;
-        } catch (f) {
-            d = 0;
-        }
-        return e = Math.pow(10, Math.max(c, d)), (me.mul(a, e) - me.mul(b, e)) / e;
-    },
-    div : function (a,b) {
-        var me = this;
-        var c, d, e = 0,
-            f = 0;
-        try {
-            e = a.toString().split(".")[1].length;
-        } catch (g) {}
-        try {
-            f = b.toString().split(".")[1].length;
-        } catch (g) {}
-        return c = Number(a.toString().replace(".", "")), d = Number(b.toString().replace(".", "")), me.mul(c / d, Math.pow(10, f - e));
-    }
-}
-
 var $util = {
-    data: function (el, attrName) {
-        attrName = attrName || 'data-opt';
-        var data = $(el).attr(attrName), m = /({.*})/.exec(data);
-        if (m)data = m[1];
-        data = data ? eval("(" + data + ")") : {};
-        return data;
-    },
-    format: function (tpl, params) {
-        if (arguments.length > 2 && params.constructor != Array) {
-            params = $.makeArray(arguments).slice(1);
-        }
-        if (params.constructor == String || params.constructor == Number) {
-            params = [params];
-        }
-        function _replace(m, word) {
-            var rst;
-            if (Boolean(word.match(/^[0-9]+$/)) && params.constructor == Array) {
-                rst = params[word * 1];
-            } else {
-                rst = params[word];
-            }
-            return rst === undefined || rst === null ? "" : rst;
-        }
-
-        return tpl.replace(/#?\{([A-Za-z_0-9]+)\}/g, _replace);
-    },
-    parseParam : function(param, key){
-        var paramStr="";
-        if(param instanceof String||param instanceof Number||param instanceof Boolean){
-            paramStr+="&"+key+"="+encodeURIComponent(param);
-        }else{
-            $.each(param,function(i){
-                var k=key==null?i:key+(param instanceof Array?"["+i+"]":"."+i);
-                paramStr+='&'+$util.parseParam(this, k);
-            });
-        }
-        return paramStr.substr(1);
-    },
     excel: function (url, titles, fields, param) {
         param = param || {};
         $.applyIf(param, {
@@ -118,7 +23,7 @@ var $util = {
         }
         form.attr("action", url);
         $.each(param, function (k, v) {
-            form.append($util.format(
+            form.append($T.format(
                 "<input type='hidden' name='#{name}' value='#{value}'>", {
                     name: k,
                     value: v
@@ -159,44 +64,6 @@ var $util = {
         }
         window.console && console.log(str);
         $pop[str] = popIndex;
-    },
-    fmtDate: function (format, date) {
-        date = date || new Date();
-        if (typeof(date) == 'number') {
-            date = new Date(date);
-        }
-        var o = {
-            "M+": date.getMonth() + 1, //month
-            "d+": date.getDate(), //day
-            "h+": date.getHours() % 12 == 0 ? 12 : date.getHours() % 12, //hour
-            "H+": date.getHours(), //hour
-            "m+": date.getMinutes(), //minute
-            "s+": date.getSeconds(), //second
-            "q+": Math.floor((date.getMonth() + 3) / 3), //quarter
-            "S": date.getMilliseconds() //millisecond
-        };
-        var week = {
-            "0": "\u65e5",
-            "1": "\u4e00",
-            "2": "\u4e8c",
-            "3": "\u4e09",
-            "4": "\u56db",
-            "5": "\u4e94",
-            "6": "\u516d"
-        };
-        if (/(y+)/.test(format)) {
-            format = format.replace(RegExp.$1, (date.getFullYear() + "").substr(4 - RegExp.$1.length));
-        }
-
-        if (/(E+)/.test(format)) {
-            format = format.replace(RegExp.$1, ((RegExp.$1.length > 1) ? (RegExp.$1.length > 2 ? "\u661f\u671f" : "\u5468") : "") + week[this.getDay() + ""]);
-        }
-        for (var k in o) {
-            if (new RegExp("(" + k + ")").test(format)) {
-                format = format.replace(RegExp.$1, RegExp.$1.length == 1 ? o[k] : ("00" + o[k]).substr(("" + o[k]).length));
-            }
-        }
-        return format;
     },
     gridMergeCols : function (grid,data,aStr,bStr) {//grid,数据,值相同的字段,需要合并的字段(不设置，则使用aStr)
         if (data&&data.rows.length) {
@@ -239,23 +106,6 @@ var $util = {
                 }
             }
         };
-    },
-    closeSoPop: function (fn) {
-        var p = parent.window;
-        if (fn) {
-            try {
-                fn(p);
-            } catch (e) {
-                window.console && console.log(e);
-            }
-        }
-        try {
-            var tt = location.pathname + (location.search || '');
-            window.console && console.log(tt);
-            if (p.$pop[tt])p.$pop[tt].removePop();
-        } catch (e) {
-            window.console && console.log(e);
-        }
     },
     closePop : function (opt) {
         var opt = $.extend({
@@ -300,7 +150,7 @@ var $util = {
         }
         if (param) {
             $.each(param, function (k, v) {
-                inputs.put($util.format("<input type='hidden' name='#{name}' value='#{value}'>", {name: k, value: v}));
+                inputs.put($T.format("<input type='hidden' name='#{name}' value='#{value}'>", {name: k, value: v}));
             });
         }
         if (!$('_exprotBox').length) {
@@ -311,13 +161,6 @@ var $util = {
             $("#_exportBox form").html(inputs.join(''));
         }
         $("#_exportBox form").submit();
-    },
-    notNull: function (obj, msg) {
-        if (!$(obj).val()) {
-            layer.msg( msg || '不能为空!',{icon:0});
-            return false;
-        }
-        return true;
     },
     tabs: function (tab, events, cfg) {
         events = events || [];
@@ -549,7 +392,7 @@ var $grid = {
                 $.applyIf(col, {align: 'center'});
                 if (col.format) {
                     col.formatter = function (v, r, inx) {
-                        return v ? $util.fmtDate(col.format, v) : '';
+                        return v ? $T.fmtDate(col.format, v) : '';
                     }
                 }
                 if (!col.width)col.width = 60;
@@ -707,7 +550,7 @@ var $grid = {
                             for (var k in map) {
                                 map[k] = map[k].join(",");
                             }
-                            url = $util.format(url, map);
+                            url = $T.format(url, map);
                         }
                     };
                     // window.console && console.log(url);
@@ -821,7 +664,7 @@ var $grid = {
                             for (var k in map) {
                                 map[k] = map[k].join(",");
                             }
-                            url = $util.format(url, map);
+                            url = $T.format(url, map);
                         }
                         if(opt.newWin){
                             window.open(url);
@@ -926,7 +769,7 @@ var $pop = {
                 // "<input type='button' class='btn btn-submit fnSure' value='确 定' />"+
             "</form>"+
             "<div class='pad-l10 pad-r10 pad-b5'><div id='{gridId}'></div></div></div>";
-            $('body').append($util.format(boxTpl, {gridId: gridId}));
+            $('body').append($T.format(boxTpl, {gridId: gridId}));
         }
 
         var boxOpt = {
@@ -1007,7 +850,7 @@ var $pop = {
         if (typeof(urlParams) == "function") {
             urlParams = urlParams();
         }
-        // urlParams = $util.parseParam(urlParams);
+        // urlParams = $T.parseParam(urlParams);
         params.$url = url;
         if (urlParams) {params.$url = params.$url+urlParams};
         $grid.load('#' + gridId, params);
@@ -1112,7 +955,7 @@ var $hook = {
         var cls = btnCls || '.hk_search';
         if ($(cls).length) {
             $(cls).each(function () {
-                var data = $util.data(this);
+                var data = $T.data(this);
                 var scope = data.scope;
                 if (scope != null ){
                     $(scope).submit(function () {
@@ -1131,7 +974,7 @@ var $hook = {
                 }
             });
             $(cls).click(function () {
-                var data = $util.data(this);
+                var data = $T.data(this);
                 var scope = data.scope;
                 $(scope).submit();
                 return false;
@@ -1147,7 +990,7 @@ var $hook = {
                 var _self = $(this);
                 if (_self.hasClass('inline')) {_self.css('width', 150)};
                 _self.click(function () {
-                    var data = $util.data(this) || {};
+                    var data = $T.data(this) || {};
                     $.applyIf(data, {dateFmt: 'yyyy-MM-dd HH:mm', readOnly: true});
                     WdatePicker(data);
                 });
@@ -1192,7 +1035,7 @@ var $hook = {
                 var _self = $(this);
                 if (_self.hasClass('inline')) {_self.css('width', 100)};
                 _self.click(function () {
-                    var data = $util.data(this) || {};
+                    var data = $T.data(this) || {};
                     $.applyIf(data, {dateFmt: 'yyyy-MM-dd', readOnly: true});
                     WdatePicker(data);
                 });
@@ -1243,7 +1086,7 @@ var $hook = {
             $('.hk_pop').each(function () {
                 var _self = $(this);
                 var rdm = Math.floor(Math.random()*1000000);
-                var myOpt = $util.data(_self);
+                var myOpt = $T.data(_self);
                 if (myOpt.type=='tree') {
                     var pData = $.extend({
                         // type: null,//'tree'
@@ -1314,7 +1157,7 @@ var $hook = {
             var codes = [], params = {muti: true};
             var ss = $("select.hk_select");
             ss.each(function () {
-                var data = $util.data(this) || {};
+                var data = $T.data(this) || {};
                 if (data.textTo) {
                     $(this).change(
                         data.textTo,
@@ -1340,7 +1183,7 @@ var $hook = {
                 if (rst.state) {
                     var data = rst.data;
                     ss.each(function () {
-                        var mData = $util.data(this);
+                        var mData = $T.data(this);
                         var list = data[mData.code];
                         if (!list) {
                             alert("未配置下拉框数据源" + mData.code);
@@ -1374,7 +1217,7 @@ var $hook = {
            var validate = $form.form("validate");
            var back = false;
            if(validate){
-             var formData = $util.data($form);//form个性化附加数据
+             var formData = $T.data($form);//form个性化附加数据
              var loadingIndex = null;//loading容器
              var msg = $btn.attr("msg") || "您确定要提交吗?";//确认框提示信息
              var action = $btn.attr("action") || $form.action;//表单请求地址
@@ -1467,7 +1310,7 @@ var $hook = {
                     var msg = $(this.submitButton).attr("tip") || $p.submitTip;
                     var action = $(this.submitButton).attr("action") || vform.action;
                     $(".hk_form .txta,:input").tooltip("destroy");
-                    var data = $util.data(vform), params;
+                    var data = $T.data(vform), params;
                     window.console && console.log(data);
                     if (typeof (data.params) == 'function') {
                         params = data.params();
@@ -1527,7 +1370,7 @@ var $hook = {
         if ($(formCls).length) {
             $(formCls).form({
                 onSubmit: function () {
-                    var fm = $(this), url = fm.attr("action"), data = $util.data(this);
+                    var fm = $(this), url = fm.attr("action"), data = $T.data(this);
                     var rst = fm.form("validate");
                     if (rst) {
                         $ajax.post(url, $(this).vals(), true).done(function (rst) {
@@ -1554,7 +1397,7 @@ var $hook = {
         cls = cls || '.hk_popGrid';
         if ($(cls).length) {
             $(cls).click(function () {
-                var data = $util.data(this);
+                var data = $T.data(this);
                 data.textId = data.textId || this.name;
                 $pop.popGrid(data,this);
             });
@@ -1563,7 +1406,7 @@ var $hook = {
     popTree: function (cls) {
         cls = cls || '.hk_popTree';
         $(cls).click(function () {
-            var data = $util.data(this);
+            var data = $T.data(this);
             data.textId = data.textId || this.name;
             $pop.popTree(data);
         });
@@ -1579,26 +1422,26 @@ var $hook = {
             $(".first", cls).click(function () {
                 var startDate = new Date(start.val().replace(/-/g, '/'));
                 startDate.setDate(1);
-                start.val($util.fmtDate('yyyy-MM-dd', startDate));
+                start.val($T.fmtDate('yyyy-MM-dd', startDate));
                 if (target.length)target.click();
             });
             $(".prev", cls).click(function () {
                 var startDate = new Date(start.val().replace(/-/g, '/'));
                 startDate.setDate(startDate.getDate() - 1);
-                start.val($util.fmtDate('yyyy-MM-dd', startDate));
+                start.val($T.fmtDate('yyyy-MM-dd', startDate));
                 if (target.length)target.click();
             });
             $(".next", cls).click(function () {
                 var endDate = new Date(end.val().replace(/-/g, '/'));
                 endDate.setDate(endDate.getDate() + 1);
-                end.val($util.fmtDate('yyyy-MM-dd', endDate));
+                end.val($T.fmtDate('yyyy-MM-dd', endDate));
                 if (target.length)target.click();
             });
             $(".last", cls).click(function () {
                 var endDate = new Date(end.val().replace(/-/g, '/'));
                 endDate.setMonth(endDate.getMonth() + 1);
                 endDate.setDate(0);
-                end.val($util.fmtDate('yyyy-MM-dd', endDate));
+                end.val($T.fmtDate('yyyy-MM-dd', endDate));
                 if (target.length)target.click();
             });
         }

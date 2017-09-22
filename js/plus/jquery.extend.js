@@ -32,7 +32,6 @@ jQuery.cookie=function(a,b,c){var d,e,f,g,h,i,j,k,l;if("undefined"==typeof b){if
 (function(a){a.fn.extend({soChange:function(b){b=a.extend({thumbObj:null,btnPrev:null,btnNext:null,changeType:"fade",thumbNowClass:"now",thumbOverEvent:true,slideTime:1000,autoChange:true,clickFalse:true,overStop:true,changeTime:5000,delayTime:300,callback:function(){}},b||{});var h=a(this);var i;var k=h.size();var e=0;var g;var c;var f;function d(){if(e!=g){if(b.thumbObj){a(b.thumbObj).removeClass(b.thumbNowClass).eq(g).addClass(b.thumbNowClass)}if(b.slideTime<=0){h.eq(e).hide();h.eq(g).show()}else{if(b.changeType=="fade"){h.eq(e).fadeOut(b.slideTime);h.eq(g).fadeIn(b.slideTime)}else{h.eq(e).slideUp(b.slideTime);h.eq(g).slideDown(b.slideTime)}}if(b.callback){b.callback(e,g)}e=g}}function j(){g=(e+1)%k;d()}h.hide().eq(0).show();if(b.thumbObj){i=a(b.thumbObj);i.removeClass(b.thumbNowClass).eq(0).addClass(b.thumbNowClass);i.click(function(){g=i.index(a(this));d();if(b.clickFalse){return false}});if(b.thumbOverEvent){i.hover(function(){g=i.index(a(this));f=setTimeout(d,b.delayTime)},function(){clearTimeout(f)})}}if(b.btnNext){a(b.btnNext).click(function(){if(h.queue().length<1){j()}return false})}if(b.btnPrev){a(b.btnPrev).click(function(){if(h.queue().length<1){g=(e+k-1)%k;d()}return false})}if(b.autoChange){c=setInterval(j,b.changeTime);if(b.overStop){h.hover(function(){clearInterval(c)},function(){c=setInterval(j,b.changeTime)})}}}})})(jQuery);
 
     $.extend({
-
         /**
          * 地址转换 tree:dept -> /base/treeUrl?_code=dept
          */
@@ -46,109 +45,6 @@ jQuery.cookie=function(a,b,c){var d,e,f,g,h,i,j,k,l;if("undefined"==typeof b){if
                 rst = url;
             }
             return rst;
-        },
-        /**
-         * 统一的后台ajax请求
-         */
-        reqUrl : function(url, data, success,maskOpt) {
-            var ajaxLoading = null;
-            $.ajax({
-                url:url,
-                type:'post',
-                beforeSend:function(jqXHR, settings){
-                    maskOpt = $.extend({showMask:false},maskOpt||{});
-                    ajaxLoading = $.sobox.loading(maskOpt);
-                    //显示"操作中"提示
-                },
-                complete:function(jqXHR, textStatus){
-                    //根据textStatus修改提示
-                    //2秒后去掉提示
-                },
-                data:data,
-                dataType:'json',
-                success:function (rst) {
-                    if(rst&&rst.result){
-                        ajaxLoading.close();
-                    }
-                    success&&success(rst);
-                },
-                error : function (XMLHttpRequest, textStatus, errorThrown) {
-                    ajaxLoading.close();
-                    $.sobox.pop({
-                        cls : 'so-popError',
-                        title : '错误提示',
-                        width : 310,
-                        showTitle : false,
-                        content : '<p class="p-popError">对不起，数据请求失败！</p>请检查网络或联系管理员...',
-                        btn :[{text:'确定'}]
-                    });
-                }
-            });
-            return ajaxLoading;
-        },
-        /**
-         * 统一的后台ajax请求增强版,增加确认提示技术后台交互提示
-         */
-        reqUrlEx : function(url, data, sucess, msg,noConfirm) {
-            data=data||{};
-            var ajaxLoading = null;
-            if (noConfirm) {
-                ajaxEvent();
-            }else {
-                $.sobox.confirm("提示",msg||$p.submitTip,function(){
-                    ajaxEvent();
-                });
-            }
-            function ajaxEvent() {
-                $.ajax({
-                    url:url,
-                    type:'post',
-                    beforeSend:function(jqXHR, settings){
-                        ajaxLoading = $.sobox.loading({cls:'so-ajaxLoading',width:158,content : '提交中，请稍候...'});
-                        //显示"操作中"提示
-                    },
-                    complete:function(jqXHR, textStatus){
-                        //根据textStatus修改提示
-                        //2秒后去掉提示
-                    },
-                    data:data,
-                    dataType:'json',
-                    success:function(rst){
-                        if(rst){
-                            var msg="信息提交成功";
-                            if(rst.tip==1){
-                                msg=rst.msg;
-                            }
-                            ajaxLoading.close();
-                            if(rst.result){
-                                ajaxLoading = $.sobox.loading({cls:'so-ajaxSuccess',width:143,content : msg,stayTime : 1200});
-                            }else{
-                                $.sobox.pop({
-                                    cls : 'so-popError',
-                                    title : '错误提示',
-                                    width : 310,
-                                    showTitle : false,
-                                    content : '<p class="p-popError">对不起，提交数据失败！</p>'+msg,
-                                    btn :[{text:'确定'}]
-                                });
-                            }
-                            //提示操作成功
-                        }
-                        if(sucess)sucess(rst);
-                    },
-                    error : function (XMLHttpRequest, textStatus, errorThrown) {
-                        ajaxLoading.close();
-                        $.sobox.pop({
-                            cls : 'so-popError',
-                            title : '错误提示',
-                            width : 310,
-                            showTitle : false,
-                            content : '<p class="p-popError">对不起，提交数据失败！</p>请检查网络或联系管理员...',
-                            btn :[{text:'确定'}]
-                        });
-                    }
-                });
-            }
         },
         /**
          * 默认值赋值
@@ -165,6 +61,44 @@ jQuery.cookie=function(a,b,c){var d,e,f,g,h,i,j,k,l;if("undefined"==typeof b){if
                 }
             }
             return o;
+        },
+        fmtDate: function (format, date) {
+            date = date || new Date();
+            if (typeof(date) == 'number') {
+                date = new Date(date);
+            }
+            var o = {
+                "M+": date.getMonth() + 1, //month
+                "d+": date.getDate(), //day
+                "h+": date.getHours() % 12 == 0 ? 12 : date.getHours() % 12, //hour
+                "H+": date.getHours(), //hour
+                "m+": date.getMinutes(), //minute
+                "s+": date.getSeconds(), //second
+                "q+": Math.floor((date.getMonth() + 3) / 3), //quarter
+                "S": date.getMilliseconds() //millisecond
+            };
+            var week = {
+                "0": "\u65e5",
+                "1": "\u4e00",
+                "2": "\u4e8c",
+                "3": "\u4e09",
+                "4": "\u56db",
+                "5": "\u4e94",
+                "6": "\u516d"
+            };
+            if (/(y+)/.test(format)) {
+                format = format.replace(RegExp.$1, (date.getFullYear() + "").substr(4 - RegExp.$1.length));
+            }
+
+            if (/(E+)/.test(format)) {
+                format = format.replace(RegExp.$1, ((RegExp.$1.length > 1) ? (RegExp.$1.length > 2 ? "\u661f\u671f" : "\u5468") : "") + week[this.getDay() + ""]);
+            }
+            for (var k in o) {
+                if (new RegExp("(" + k + ")").test(format)) {
+                    format = format.replace(RegExp.$1, RegExp.$1.length == 1 ? o[k] : ("00" + o[k]).substr(("" + o[k]).length));
+                }
+            }
+            return format;
         },
         getFullDate : function (date,type) {// Date,'long/short'
             var that = this;
@@ -190,15 +124,6 @@ jQuery.cookie=function(a,b,c){var d,e,f,g,h,i,j,k,l;if("undefined"==typeof b){if
                 return year+'-'+month+'-'+day+' '+hh+':'+mm;
             }
         },
-        arrHasVal : function (arr,val) {
-            var l = arr.length;
-            for (i = 0; i < l; i++) {
-                if (arr[i] === val) {
-                    return i;
-                }
-            }
-            return -1;
-        },
         getLocalTime :function (nS) {// 转时间戳为本地时间
             return new Date(nS*1).toLocaleString().replace(/年|月/g, "-").replace(/日/g," ");
         },
@@ -211,32 +136,41 @@ jQuery.cookie=function(a,b,c){var d,e,f,g,h,i,j,k,l;if("undefined"==typeof b){if
             s = s>9?s:('0'+s);
             return h==0?(m+':'+s):(h+':'+m+':'+s);
         },
-        fullscreen : function (tofull) {
-                if(tofull){
-                    var docElm = document.documentElement;
-                    if (docElm.requestFullscreen) {
-                        window.console && console.log(11);
-                        docElm.requestFullscreen();
-                    }
-                    else if (docElm.mozRequestFullScreen) {
-                        window.console && console.log(12);
-                        docElm.mozRequestFullScreen();
-                    }
-                    else if (docElm.webkitRequestFullScreen) {
-                        window.console && console.log(13);
-                        docElm.webkitRequestFullScreen();
-                    }
-                }else{
-                    if (document.exitFullscreen) {
-                        document.exitFullscreen();
-                    }
-                    else if (document.mozCancelFullScreen) {
-                        document.mozCancelFullScreen();
-                    }
-                    else if (document.webkitCancelFullScreen) {
-                        document.webkitCancelFullScreen();
-                    }
+        arrHasVal : function (arr,val) {
+            var l = arr.length;
+            for (i = 0; i < l; i++) {
+                if (arr[i] === val) {
+                    return i;
                 }
+            }
+            return -1;
+        },
+        fullscreen : function (tofull) {
+          if(tofull){
+            var docElm = document.documentElement;
+            if (docElm.requestFullscreen) {
+              window.console && console.log(11);
+              docElm.requestFullscreen();
+            }
+            else if (docElm.mozRequestFullScreen) {
+              window.console && console.log(12);
+              docElm.mozRequestFullScreen();
+            }
+            else if (docElm.webkitRequestFullScreen) {
+              window.console && console.log(13);
+              docElm.webkitRequestFullScreen();
+            }
+          }else{
+            if (document.exitFullscreen) {
+              document.exitFullscreen();
+            }
+            else if (document.mozCancelFullScreen) {
+              document.mozCancelFullScreen();
+            }
+            else if (document.webkitCancelFullScreen) {
+              document.webkitCancelFullScreen();
+            }
+          }
         },
         winW : $(window).width(),
         winH :$(window).height()
@@ -249,25 +183,6 @@ jQuery.cookie=function(a,b,c){var d,e,f,g,h,i,j,k,l;if("undefined"==typeof b){if
     $.fn.extend({
         hoverClass:function(b){var a=this;a.each(function(c){a.eq(c).mouseenter(function(){$(this).addClass(b)});a.eq(c).mouseleave(function(){$(this).removeClass(b)})});return a},
         focusChangeStyle : function(b){var a=this;var b=(b==null)?"txt_focus":b;a.focus(function(){$(this).addClass(b)});a.blur(function(){$(this).removeClass(b)});return a},
-        placeholder : function () {
-            return this.each(function () {
-                var _this = $(this);
-                var holdTxt = _this.attr("placeholder");
-                _this.addClass('txtNoVal').val(holdTxt).focus(function () {
-                    if (_this.val() === holdTxt) {
-                        _this.val("");
-                    }
-                }).blur(function () {
-                    if ($.trim(_this.val().length === 0)) {
-                        _this.val(holdTxt).addClass('txtNoVal');
-                    }
-                }).keyup(function () {
-                    if (_this.val()!==holdTxt) {
-                        _this.removeClass('txtNoVal');
-                    };
-                });
-            });
-        },
         tabChange:function (o) {
             o= $.extend({
                 thumbObj:null,//导航对象
@@ -308,101 +223,11 @@ jQuery.cookie=function(a,b,c){var d,e,f,g,h,i,j,k,l;if("undefined"==typeof b){if
             });
             return $(this);
         },
-        /**
-         * 取ID范围内所有值 $('#id').vals(空或true) -->{xx:yy} $('#id').vals(flase)
-         * -->xx=yy 赋值 $('#id').vals({xx:yy})
-         */
-        vals : function(param) {
-            if (typeof (param) == 'boolean' || param === undefined) {
-                var c = {};// 暂存checkbox,选中的值用逗号隔开
-                this.each(function() {
-                    if(/input/i.test(this.tagName)){
-                        if(this.type=='button'||this.type=='submit'){
-                            return;
-                        }
-
-                        var key = this.name || this.id;
-                        if (/checkbox/i.test(this.type)) {
-                            var val = this.checked ? (this.value || 'on') : '';
-                            if(val!=''){
-                                if (c[key]) {
-                                    c[key] = c[key] + "," + val;
-                                } else {
-                                    c[key] = val;
-                                }
-                            }
-                        } else if (/radio/i.test(this.type)) {
-                            if (this.checked){
-                                c[key] = $.trim($(this).val());
-                            }
-                        } else {
-                            c[key] = $.trim($(this).val());
-                        }
-                    } else if (/select/i.test(this.tagName)) {
-                        var key = this.name || this.id;
-                        c[key] = $.trim($(this).val()) + "";
-                    } else if ($(this).has(":input").length) {
-                        var sub = $(":input", this).vals();
-                        $.extend(c, sub);
-                    } else {
-                        if(this.type=='button'||this.type=='submit'){
-                            return;
-                        }
-                        var key = this.name || this.id;
-                        c[key] = $.trim($(this).val());
-                    }
-                    //console.timeEnd(xx);
-                });
-                return param !== false ? c : $.param(c);
-            } else if (typeof (param) == 'object') {
-                this.each(function() {
-                    if (/div|span|table|form|ul|li/i.test(this.tagName)) {
-                        $(":input,label,b", this).vals(param);
-                    } else {
-                        var nm = this.name || this.id;
-                        if(nm){
-                            var vl    = param[nm],
-                              arr  = nm.match(/(\w*)\[(\d*)\]/),
-                              obj  = nm.match(/(\w*)\.(\w*)/);
-                        if(arr&&arr.length==3){
-                            vl=param[arr[1]][arr[2]];
-                        }
-                        if(obj&&obj.length==3){
-                            vl=param[arr[1]][arr[2]];
-                        }
-                        if (vl !== undefined && vl !== null) {
-                            if (/label|b/i.test(this.tagName)) {
-                                $(this).text(vl);
-                            }else if(/checkbox/i.test(this.type)){
-                                if(vl===true) {
-                                    $(this).attr("checked","checked");
-                                }else{
-                                    $(this).removeAttr("checked");
-                                }
-                            }else if(/radio/i.test(this.type)){
-                                if(vl===true){
-                                    if($(this).val()==='true'||$(this).val()==='1'){
-                                        $(this).attr("checked","checked");
-                                    }
-                                }else{
-                                    if($(this).val()==='false'||$(this).val()==='0'){
-                                        $(this).attr("checked","checked");
-                                    }
-                                }
-                            }else  {
-                                $(this).val(vl);
-                            }
-                        }
-                        }
-                    }
-                });
-            }
-        },
-        clear : function(data) {
-            $(":input:not(:submit)", this).val("");
-            if (data)
-                $(this).vals(data);
-        },
+        // clear : function(data) {
+        //     $(":input:not(:submit)", this).val("");
+        //     if (data)
+        //         $(this).vals(data);
+        // },
         sovals : function(dataToString) {
             var o = {};
             var a = this.serializeArray();
@@ -428,7 +253,61 @@ jQuery.cookie=function(a,b,c){var d,e,f,g,h,i,j,k,l;if("undefined"==typeof b){if
     });
 
 var $T = {
-    getCookie : function (key,co) {
+    mul : function (a, b) {//修正版乘法
+        var c = 0,
+            d = a.toString(),
+            e = b.toString();
+        try {
+            c += d.split(".")[1].length;
+        } catch (f) {}
+        try {
+            c += e.split(".")[1].length;
+        } catch (f) {}
+        return Number(d.replace(".", "")) * Number(e.replace(".", "")) / Math.pow(10, c);
+    },
+    add : function (a,b) {//修正版加法
+        var me = this;
+        var c, d, e;
+        try {
+            c = a.toString().split(".")[1].length;
+        } catch (f) {
+            c = 0;
+        }
+        try {
+            d = b.toString().split(".")[1].length;
+        } catch (f) {
+            d = 0;
+        }
+        return e = Math.pow(10, Math.max(c, d)), (me.mul(a, e) + me.mul(b, e)) / e;
+    },
+    sub : function (a,b) {//修正版减法
+        var me = this;
+        var c, d, e;
+        try {
+            c = a.toString().split(".")[1].length;
+        } catch (f) {
+            c = 0;
+        }
+        try {
+            d = b.toString().split(".")[1].length;
+        } catch (f) {
+            d = 0;
+        }
+        return e = Math.pow(10, Math.max(c, d)), (me.mul(a, e) - me.mul(b, e)) / e;
+    },
+    div : function (a,b) {//修正版除法
+        var me = this;
+        var c, d, e = 0,
+            f = 0;
+        try {
+            e = a.toString().split(".")[1].length;
+        } catch (g) {}
+        try {
+            f = b.toString().split(".")[1].length;
+        } catch (g) {}
+        return c = Number(a.toString().replace(".", "")), d = Number(b.toString().replace(".", "")), me.mul(c / d, Math.pow(10, f - e));
+    },
+    getCookie : function (key,co) {//增强版取cookie
         var co = co||'aso',$co = $.cookie(co);
         if ($co!==null) {
             var coArr = $co.split('||');
@@ -443,7 +322,7 @@ var $T = {
             return null;
         }
     },
-    setCookie : function (key,value,co,root) {
+    setCookie : function (key,value,co,root) {//增强版设置cookie
         root = root==undefined?true:root;
         var co = co||'aso',$co = $.cookie(co);
         var coVal;
@@ -470,5 +349,50 @@ var $T = {
             $.cookie(co,coVal);
         }
         window.console && console.log('cooke中 '+co+'更新为 " '+$.cookie(co)+' " ');
+    },
+    data: function (el, attrName) {
+        attrName = attrName || 'data-opt';
+        var data = $(el).attr(attrName), m = /({.*})/.exec(data);
+        if (m)data = m[1];
+        data = data ? eval("(" + data + ")") : {};
+        return data;
+    },
+    format: function (tpl, params) {
+        if (arguments.length > 2 && params.constructor != Array) {
+            params = $.makeArray(arguments).slice(1);
+        }
+        if (params.constructor == String || params.constructor == Number) {
+            params = [params];
+        }
+        function _replace(m, word) {
+            var rst;
+            if (Boolean(word.match(/^[0-9]+$/)) && params.constructor == Array) {
+                rst = params[word * 1];
+            } else {
+                rst = params[word];
+            }
+            return rst === undefined || rst === null ? "" : rst;
+        }
+
+        return tpl.replace(/#?\{([A-Za-z_0-9]+)\}/g, _replace);
+    },
+    parseParam : function(param, key){
+        var paramStr="";
+        if(param instanceof String||param instanceof Number||param instanceof Boolean){
+            paramStr+="&"+key+"="+encodeURIComponent(param);
+        }else{
+            $.each(param,function(i){
+                var k=key==null?i:key+(param instanceof Array?"["+i+"]":"."+i);
+                paramStr+='&'+$T.parseParam(this, k);
+            });
+        }
+        return paramStr.substr(1);
+    },
+    notNull: function (obj, msg) {
+        if (!$(obj).val()) {
+            layer.msg( msg || '不能为空!',{icon:0});
+            return false;
+        }
+        return true;
     }
 }

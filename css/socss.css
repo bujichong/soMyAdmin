@@ -34,20 +34,28 @@ abbr[title], abbr[data-original-title] {cursor: help;border-bottom: 1px dotted #
 blockquote {padding: 0 0 0 15px;margin: 0 0 20px;border-left: 5px solid #eee;}
 blockquote p {line-height: 25px;}
 blockquote small {display: block;line-height: 20px; color: #999;}
-
-@font-face {
-  font-family: 'iconfont';  /* project id 178087 */
+/* project id 178087 */
+/*@font-face {
+  font-family: 'iconfont';
   src: url('//at.alicdn.com/t/font_178087_h2lkywskovo0f6r.eot');
   src: url('//at.alicdn.com/t/font_178087_h2lkywskovo0f6r.eot?#iefix') format('embedded-opentype'),
   url('//at.alicdn.com/t/font_178087_h2lkywskovo0f6r.woff') format('woff'),
   url('//at.alicdn.com/t/font_178087_h2lkywskovo0f6r.ttf') format('truetype'),
   url('//at.alicdn.com/t/font_178087_h2lkywskovo0f6r.svg#iconfont') format('svg');
+}*/
+@font-face {
+  font-family: 'iconfont';  /* project id 416297 */
+  src: url('//at.alicdn.com/t/font_416297_u4l8utskbebi6bt9.eot');
+  src: url('//at.alicdn.com/t/font_416297_u4l8utskbebi6bt9.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_416297_u4l8utskbebi6bt9.woff') format('woff'),
+  url('//at.alicdn.com/t/font_416297_u4l8utskbebi6bt9.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_416297_u4l8utskbebi6bt9.svg#iconfont') format('svg');
 }
 .icon{
 display: -moz-inline-stack;display:inline-block;*display:inline;*zoom:1;
 font-family:'iconfont';
 position: relative;
-top: 1px;
+top:-1px;
 font-style:normal;
 font-weight:normal;
 width: 14px;
@@ -60,7 +68,7 @@ text-align: center;
 -webkit-font-smoothing: antialiased;
 -moz-osx-font-smoothing: grayscale;
 }
-
+/*
 .icon-exit:before{content: "\e602";}
 .icon-home:before{content: "\e609";}
 .icon-storage:before{content: "\e66f";}
@@ -201,7 +209,94 @@ text-align: center;
 .icon-survey1:before{content: "\e637";}
 .icon-data2:before{content: "\e645";}
 .icon-chart2:before{content: "\e617";}
-.icon-usecard:before{content: "\e6ae";}
+.icon-usecard:before{content: "\e6ae";}*/
+
+.icon-doc:before { content: "\e628"; }
+.icon-fav2:before { content: "\e621"; }
+.icon-yisheng:before { content: "\e618"; }
+.icon-arrowup:before { content: "\e629"; }
+.icon-chuanweiappmenzhenzhiliang:before { content: "\e71c"; }
+.icon-downok:before { content: "\e61a"; }
+.icon-edit2:before { content: "\e62d"; }
+.icon-del2:before { content: "\e627"; }
+.icon-card:before { content: "\e63a"; }
+.icon-zhuyuanyumenzhen:before { content: "\e66b"; }
+.icon-del:before { content: "\e6a3"; }
+.icon-paycard:before { content: "\e679"; }
+.icon-yiliao:before { content: "\e69c"; }
+.icon-refresh2:before { content: "\e75c"; }
+.icon-refresh:before { content: "\e655"; }
+.icon-yituifei:before { content: "\e632"; }
+.icon-stop2:before { content: "\e6f3"; }
+.icon-return:before { content: "\e886"; }
+.icon-copy:before { content: "\e614"; }
+.icon-buqia:before { content: "\e603"; }
+.icon-upload:before { content: "\e678"; }
+.icon-sendcard:before { content: "\e638"; }
+.icon-edit:before { content: "\e639"; }
+.icon-lady:before { content: "\e71a"; }
+.icon-down:before { content: "\e84f"; }
+.icon-stop:before { content: "\e697"; }
+.icon-fav1:before { content: "\e622"; }
+.icon-right:before { content: "\e7d0"; }
+.icon-hsp-menzhenyuyue:before { content: "\e61c"; }
+.icon-arrowdown:before { content: "\e600"; }
+.icon-add:before { content: "\e677"; }
+.icon-print:before { content: "\e659"; }
+.icon-search:before { content: "\e732"; }
+.icon-userdatelist:before { content: "\e676"; }
+.icon-baifangjihua:before { content: "\e62f"; }
+.icon-daibanshixiang:before { content: "\e630"; }
+.icon-gongzuorizhi:before { content: "\e631"; }
+.icon-huiyuanguanli:before { content: "\e633"; }
+.icon-huodongzhihang:before { content: "\e634"; }
+.icon-jingpincaiji:before { content: "\e635"; }
+.icon-kaoqinbaobei:before { content: "\e636"; }
+.icon-kehuziliao:before { content: "\e637"; }
+.icon-kucunshangbao:before { content: "\e63b"; }
+.icon-denglupaihang:before { content: "\e63c"; }
+.icon-liuchengchaxun:before { content: "\e63d"; }
+.icon-linqishangbao:before { content: "\e63e"; }
+.icon-liuchengliebiao:before { content: "\e63f"; }
+.icon-qingjiashenqing:before { content: "\e640"; }
+.icon-shishidianming:before { content: "\e641"; }
+.icon-shoudongshangchuan:before { content: "\e642"; }
+.icon-tuanduikaoqin:before { content: "\e643"; }
+.icon-wenjuantiaocha:before { content: "\e644"; }
+.icon-wentifankui:before { content: "\e645"; }
+.icon-wodeshenqing:before { content: "\e646"; }
+.icon-xiaoliangchaxun:before { content: "\e647"; }
+.icon-wodezancun:before { content: "\e648"; }
+.icon-yedaipinggu:before { content: "\e649"; }
+.icon-yewutixing:before { content: "\e64a"; }
+.icon-xieyizhihang:before { content: "\e64b"; }
+.icon-zengpinguanli:before { content: "\e64c"; }
+.icon-zhaopianqiang:before { content: "\e64e"; }
+.icon-zhishiku:before { content: "\e64f"; }
+.icon-zhihangzhongdian:before { content: "\e650"; }
+.icon-yibanshixiang:before { content: "\e651"; }
+.icon-quehuoshangbao:before { content: "\e652"; }
+.icon-readcard:before { content: "\e601"; }
+.icon-mendianchaxun:before { content: "\e67d"; }
+.icon-baifangjihuashenpi:before { content: "\e67e"; }
+.icon-gonggaoxinxi:before { content: "\e67f"; }
+.icon-lincuzhaomu:before { content: "\e680"; }
+.icon-kaoqinchaxun:before { content: "\e681"; }
+.icon-wuliuma:before { content: "\e682"; }
+.icon-qitakaoqin:before { content: "\e683"; }
+.icon-mendianxiugai:before { content: "\e684"; }
+.icon-xinjianmendian:before { content: "\e685"; }
+.icon-zhuguanxiefang:before { content: "\e686"; }
+.icon-kaoqindaqia:before { content: "\e689"; }
+.icon-zhuanxiangjiancha:before { content: "\e68a"; }
+.icon-lock:before { content: "\e64d"; }
+.icon-editinfo:before { content: "\e657"; }
+.icon-taskplan:before { content: "\e65b"; }
+.icon-loginout:before { content: "\e65d"; }
+.icon-shuaqiashoukuan:before { content: "\e6ae"; }
+.icon-chuyidong:before { content: "\e602"; }
+.icon-daibanshenpi:before { content: "\e68b"; }
+.icon-huiyuanchaxun:before { content: "\e68c"; }
 
 
 
@@ -312,7 +407,7 @@ border-color: #4d90fe;
 input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"],textarea,select,.txt,.txta,.drop,.item-on{width:100%;box-sizing:border-box; -moz-box-sizing:border-box;-webkit-box-sizing:border-box;border-radius:1px;}
 
 input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"],.txt{
-height:26px;line-height:24px;*height:24px;width:120px;border:1px solid #d3d3d3;vertical-align:top;text-indent:0.5em;
+height:26px;line-height:24px;*height:24px;width:120px;border:1px solid #d3d3d3; vertical-align:top;text-indent:0.5em;
 box-shadow:1px 1px 1px #f3f3f3 inset;-webkit-box-shadow:1px 1px 1px #f3f3f3 inset;-moz-box-shadow:1px 1px 1px #f3f3f3 inset;
 }
 textarea,.txta{
@@ -378,7 +473,7 @@ box-shadow:0 0 0 #fff;-webkit-box-shadow:0 0 0 #fff;-moz-box-shadow:0 0 0 #fff;
 .solab-ld .lab-item{width:222px;}
 
 /* required inputmark */
-input.validatebox-invalid{border:1px solid #ffa8a8;background:url(../images/icon/inputmark.png) no-repeat 100% -998px;}
+input.validatebox-invalid{border:1px solid #ffa8a8;background-color:#fff;}
 .required{background:url(../images/icon/inputmark.png) no-repeat 100% -998px;}
 .hk_time,.hk_date{background:url(../images/icon/inputmark.png) no-repeat 100% 0;}
 .txt_requireDate{background:url(../images/icon/inputmark.png) no-repeat 100% -1500px;}
@@ -1129,8 +1224,8 @@ background-image: linear-gradient(45deg,rgba(255,255,255,0.15) 25%,transparent 2
 
 /* table-list */
 .table-list{width:100%;border-top:2px solid #6fbcfd;line-height:1.7em;border-collapse:collapse;}
-.table-list .tr-head th{background-color: #f1f7f9;border-bottom:1px solid #BCCBDF;padding:6px;text-align: center;font-weight: bold;}
-.table-list td{border-bottom:1px dotted #e3e3e3;padding:2px 6px;text-align:center;}
+.table-list .tr-head th{background-color: #f1f7f9;border-right:1px dotted #e3e3e3;border-bottom:1px solid #d5e0ef;padding:6px;text-align: center;font-weight: bold;}
+.table-list td{border-right:1px dotted #e3e3e3;border-bottom:1px dotted #e3e3e3;padding:2px 6px;text-align:center;}
 .table-list .tal,.table-list td.tal,.table-list .tal td{text-align:left;}
 .table-list .tac,.table-list td.tac,.table-list .tac td{text-align:center;}
 .table-list tr.tr-odd{background-color:#F5F9Fa;}

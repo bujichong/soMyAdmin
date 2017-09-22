@@ -46,11 +46,11 @@ background-color: #e3e3e3;
           <div class="row">
               <div class="p6"><div class="item-one">
                   <label class="lab-item">用户名：</label>
-                  <input class="txt easyui-validatebox" type="text" name="userName" value="" maxlength="20" placeholder="用户名" data-options="required:true" missingMessage="请输入用户名" invalidMessage="请输入用户名" />
+                  <input class="txt easyui-validatebox required" type="text" name="userName" value="" maxlength="20" placeholder="用户名" data-options="required:true" missingMessage="请输入用户名" invalidMessage="请输入用户名" />
               </div></div>
               <div class="p3"><div class="item-one">
-                  <label class="lab-item">姓名：</label>
-                  <input class="txt easyui-validatebox" type="text" name="realName" value="" maxlength="20" placeholder="姓名" data-options="required:true" missingMessage="请输入姓名" invalidMessage="请输入姓名" />
+                  <label class="lab-item">年龄：</label>
+                  <input class="txt easyui-validatebox required" type="text" name="realName" value="" maxlength="20" placeholder="年龄" data-options="required:true" validType="isAge" missingMessage="请输入年龄" invalidMessage="年龄必须为数字并小于120" />
               </div></div>
               <div class="p3"><div class="item-one solab-sb">
                   <label class="lab-item">姓名：</label>
@@ -65,14 +65,14 @@ background-color: #e3e3e3;
               </div></div>
               <div class="p6"><div class="item-one">
                   <label class="lab-item">描述：</label>
-                   <input class="txt easyui-validatebox" type="text" name="repassword" value="" maxlength="20" placeholder="描述" />
+                   <input class="txt easyui-validatebox" type="text" name="repassword" value="" maxlength="20" placeholder="描述" validType= "many['pFloatFix','range[0,20.12]']" />
               </div></div>
             </div>
 
           <div class="row">
               <div class="p6"><div class="item-one">
                   <label class="lab-item">密码：</label>
-                   <input class="txt easyui-validatebox" id="password" type="password" name="password" value="" maxlength="20" placeholder="默认密码123456" data-options="required:true" missingMessage="请输入密码" />
+                   <input class="txt easyui-validatebox required" id="password" type="password" name="password" value="" maxlength="20" placeholder="默认密码123456" data-options="required:true" missingMessage="请输入密码" />
               </div></div>
               <div class="p6"><div class="item-one">
                   <label class="lab-item">确认密码：</label>
@@ -87,7 +87,7 @@ background-color: #e3e3e3;
               </div></div>
               <div class="p6"><div class="item-one">
                   <label class="lab-item">性别：</label>
-                    <label class="lab-val"><input class="rad {required:true}"  type="radio" value="1" name="sex" />男</label>
+                    <label class="lab-val"><input class="rad" type="radio" value="1" name="sex" />男</label>
                     <label class="lab-val"><input class="rad" type="radio" value="2" name="sex" />女</label>
                     <label class="lab-val"><input type="checkbox" class="chk" name="chk-1" />选项1</label>
                     <label class="lab-val"><input type="checkbox" class="chk" name="chk-1" />选项2</label>

@@ -4,12 +4,12 @@ define(['template'],function (template) {
       $grid.newGrid("#gridBox",{
         // toolbar:'#baseToobar',
         tools:[
-        [{iconCls:'add',text:'新增',url:'userForm.html?id={id}',popMax:true,title:'用户信息-新增'}
-          ,{iconCls:'edit',btnCls:'warning',text:'修改',onlyOne:true,popHeight:400,popWidth:560,popMax:true,url:'userForm.html?id={id}',title:'用户信息-修改',notNull:'请选择你要修改的记录!'}
-          ,{iconCls:'del',btnCls:'danger',text:'删除',check:true,url:'json/true.js',post:'id=id',notNull:'请 <strong class="red">勾选</strong> 需要删除的一项或多项！', ajax:true,ajaxMsg:'你确定提交此删除操作吗？'}]
-          ,[{iconCls:'unlock',btnCls:'warning',text:'重置密码',check:true,url:'json/true.js?id={id}',notNull:'请 <strong class="red">勾选</strong> 需要重置密码的一项或多项！', ajax:true,ajaxMsg:'你确定重置密码为 <strong class="orange">123456</strong> 吗？'}
-          ,{iconCls:'hot',btnCls:'warning',text:'更新状态',check:true,url:'json/true.js?id={id}',notNull:'请 <strong class="red">勾选</strong> 需要更新状态的一项或多项！', ajax:true,ajaxMsg:'你确定提交此更新操作吗？'}]
-          ,[{iconCls:'usersetting',text:'分配角色',url:'userRole.html?id={id}',onlyOne:true,popHeight:440,popWidth:560,title:'用户信息-分配角色',notNull:'请选择你要分配角色的用户！'}]
+        [{iconCls:'huiyuanchaxun',text:'新增',url:'userForm.html?id={id}',popMax:true,title:'用户信息-新增'}
+          ,{iconCls:'zhuanxiangjiancha',btnCls:'warning',text:'修改',onlyOne:true,popHeight:400,popWidth:560,popMax:true,url:'userForm.html?id={id}',title:'用户信息-修改',notNull:'请选择你要修改的记录!'}
+          ,{iconCls:'yewutixing',btnCls:'danger',text:'删除',check:true,url:'json/true.js',post:'id=id',notNull:'请 <strong class="red">勾选</strong> 需要删除的一项或多项！', ajax:true,ajaxMsg:'你确定提交此删除操作吗？'}]
+          ,[{iconCls:'shishidianming',btnCls:'warning',text:'重置密码',check:true,url:'json/true.js?id={id}',notNull:'请 <strong class="red">勾选</strong> 需要重置密码的一项或多项！', ajax:true,ajaxMsg:'你确定重置密码为 <strong class="orange">123456</strong> 吗？'}
+          ,{iconCls:'kaoqinbaobei',btnCls:'warning',text:'更新状态',check:true,url:'json/true.js?id={id}',notNull:'请 <strong class="red">勾选</strong> 需要更新状态的一项或多项！', ajax:true,ajaxMsg:'你确定提交此更新操作吗？'}]
+          ,[{iconCls:'xiaoliangchaxun',text:'分配角色',url:'userRole.html?id={id}',onlyOne:true,popHeight:440,popWidth:560,title:'用户信息-分配角色',notNull:'请选择你要分配角色的用户！'}]
           // ,{iconCls:'share-alt',text:'撤销角色',url:'userRole.html?id={id}',onlyOne:true,popHeight:380,popWidth:360,title:'用户信息-撤销角色',notNull:'请选择你要撤销角色的用户！'}
         ],
         rownumbers : false,

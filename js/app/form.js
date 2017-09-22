@@ -8,7 +8,7 @@ define(function () {
           var validate = $form.form("validate");
           var back = false;
           if(validate){
-            var formData = $util.data($form);//form个性化附加数据
+            var formData = $T.data($form);//form个性化附加数据
             var loadingIndex = null;//loading容器
             var msg = $btn.attr("msg") || "您确定要提交吗?";//确认框提示信息
             var action = $btn.attr("action") || $form.action;//表单请求地址
@@ -82,7 +82,7 @@ define(function () {
       $('.form-validate').form({
           iframe: false,
           onSubmit: function () {
-              var fm = $(this), url = fm.attr("action"), data = $util.data(this);
+              var fm = $(this), url = fm.attr("action"), data = $T.data(this);
               var rst = fm.form("validate");
               if (rst) {
                   $ajax.post(url, $(this).sovals(), true).done(function (rst) {
