@@ -345,7 +345,7 @@ var $grid = {
                 $.applyIf(col, {align: 'center'});
                 if (col.format) {
                     col.formatter = function (v, r, inx) {
-                        return v ? $T.fmtDate(col.format, v) : '';
+                        return v ? $.fmtDate(col.format, v) : '';
                     }
                 }
                 if (!col.width)col.width = 60;
@@ -1375,26 +1375,26 @@ var $hook = {
             $(".first", cls).click(function () {
                 var startDate = new Date(start.val().replace(/-/g, '/'));
                 startDate.setDate(1);
-                start.val($T.fmtDate('yyyy-MM-dd', startDate));
+                start.val($.fmtDate('yyyy-MM-dd', startDate));
                 if (target.length)target.click();
             });
             $(".prev", cls).click(function () {
                 var startDate = new Date(start.val().replace(/-/g, '/'));
                 startDate.setDate(startDate.getDate() - 1);
-                start.val($T.fmtDate('yyyy-MM-dd', startDate));
+                start.val($.fmtDate('yyyy-MM-dd', startDate));
                 if (target.length)target.click();
             });
             $(".next", cls).click(function () {
                 var endDate = new Date(end.val().replace(/-/g, '/'));
                 endDate.setDate(endDate.getDate() + 1);
-                end.val($T.fmtDate('yyyy-MM-dd', endDate));
+                end.val($.fmtDate('yyyy-MM-dd', endDate));
                 if (target.length)target.click();
             });
             $(".last", cls).click(function () {
                 var endDate = new Date(end.val().replace(/-/g, '/'));
                 endDate.setMonth(endDate.getMonth() + 1);
                 endDate.setDate(0);
-                end.val($T.fmtDate('yyyy-MM-dd', endDate));
+                end.val($.fmtDate('yyyy-MM-dd', endDate));
                 if (target.length)target.click();
             });
         }
