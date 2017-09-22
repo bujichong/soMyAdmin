@@ -1,4 +1,23 @@
 var $util = {
+    down: function (url, param, method) {
+        var inputs = [];
+        if (!method) {
+            method = !param ? "get" : "post";
+        }
+        if (param) {
+            $.each(param, function (k, v) {
+                inputs.put($T.format("<input type='hidden' name='#{name}' value='#{value}'>", {name: k, value: v}));
+            });
+        }
+        if (!$('_exprotBox').length) {
+            $('<div id="_exportBox" class="hide"></div>').append("<iframe id='export_frame' name='export_frame'></iframe>")
+                .append('<form action="' + url + '" method="' + (method || 'post') + '" target="export_frame">' + inputs.join('') + '</form>')
+                .appendTo('body');
+        } else {
+            $("#_exportBox form").html(inputs.join(''));
+        }
+        $("#_exportBox form").submit();
+    },
     excel: function (url, titles, fields, param) {
         param = param || {};
         $.applyIf(param, {
@@ -30,6 +49,21 @@ var $util = {
                 }));
         });
         form.submit().html("");
+    },
+    tabs: function (tab, events, cfg) {
+        events = events || [];
+        $(tab).tabs({
+            onSelect: function (t, ix) {
+                console.log("init tab" + ix);
+                $('.tabs', this).attr('class', 'tabs tab-state-' + ix);
+                var init = $(this).attr("data-init" + ix);
+                if (!init) {
+                    var fn = events[ix];
+                    if (fn && $.isFunction(fn))fn();
+                    $(this).attr("data-init" + ix, true);
+                }
+            }
+        });
     },
     iframePop : function (opt,grid) {
         window._refreshParent = false;
@@ -64,6 +98,40 @@ var $util = {
         }
         window.console && console.log(str);
         $pop[str] = popIndex;
+    },
+    closePop : function (opt) {
+        var opt = $.extend({
+            popIndex : null,
+            callback : function () {},
+            refreshGrid : false
+        },opt||{});
+
+        if (opt.popIndex) {//如果关闭当前window下的pop
+            opt.callback();
+            layer.close(opt.popIndex);
+            return;
+        }else{//关闭父级pop
+            var p = parent.window;
+            if (opt.refreshGrid) {
+                p._refreshParent = true;
+            };
+            try {//试运行callback
+                opt.callback(p);
+            } catch (e) {
+                window.console && console.log(e);
+            }
+
+            try {//试关闭open
+                var tt = location.pathname + (location.search || '');
+                window.console && console.log(tt);
+                window.console && console.log(p.$pop[tt]);
+                // if (p.$pop[tt])p.$pop[tt].removePop();
+                if (p.$pop[tt])p.layer.close(p.$pop[tt]);
+
+            } catch (e) {
+                window.console && console.log(e);
+            }
+        };
     },
     gridMergeCols : function (grid,data,aStr,bStr) {//grid,数据,值相同的字段,需要合并的字段(不设置，则使用aStr)
         if (data&&data.rows.length) {
@@ -107,76 +175,6 @@ var $util = {
             }
         };
     },
-    closePop : function (opt) {
-        var opt = $.extend({
-            popIndex : null,
-            callback : function () {},
-            refreshGrid : false
-        },opt||{});
-
-        if (opt.popIndex) {//如果关闭当前window下的pop
-            opt.callback();
-            layer.close(opt.popIndex);
-            return;
-        }else{//关闭父级pop
-            var p = parent.window;
-            if (opt.refreshGrid) {
-                p._refreshParent = true;
-            };
-            try {//试运行callback
-                opt.callback(p);
-            } catch (e) {
-                window.console && console.log(e);
-            }
-
-            try {//试关闭open
-                var tt = location.pathname + (location.search || '');
-                window.console && console.log(tt);
-                window.console && console.log(p.$pop[tt]);
-                // if (p.$pop[tt])p.$pop[tt].removePop();
-                if (p.$pop[tt])p.layer.close(p.$pop[tt]);
-
-            } catch (e) {
-                window.console && console.log(e);
-            }
-        };
-
-
-    },
-    down: function (url, param, method) {
-        var inputs = [];
-        if (!method) {
-            method = !param ? "get" : "post";
-        }
-        if (param) {
-            $.each(param, function (k, v) {
-                inputs.put($T.format("<input type='hidden' name='#{name}' value='#{value}'>", {name: k, value: v}));
-            });
-        }
-        if (!$('_exprotBox').length) {
-            $('<div id="_exportBox" class="hide"></div>').append("<iframe id='export_frame' name='export_frame'></iframe>")
-                .append('<form action="' + url + '" method="' + (method || 'post') + '" target="export_frame">' + inputs.join('') + '</form>')
-                .appendTo('body');
-        } else {
-            $("#_exportBox form").html(inputs.join(''));
-        }
-        $("#_exportBox form").submit();
-    },
-    tabs: function (tab, events, cfg) {
-        events = events || [];
-        $(tab).tabs({
-            onSelect: function (t, ix) {
-                console.log("init tab" + ix);
-                $('.tabs', this).attr('class', 'tabs tab-state-' + ix);
-                var init = $(this).attr("data-init" + ix);
-                if (!init) {
-                    var fn = events[ix];
-                    if (fn && $.isFunction(fn))fn();
-                    $(this).attr("data-init" + ix, true);
-                }
-            }
-        });
-    },
     id: function (prefix, n) {
         if (n < 1)n = 3;
         var rnd = "";
@@ -191,103 +189,61 @@ var $ajax = {
     post: function (url, data, tip) {
         var ajaxLoading = null, maskOpt = null, dtd = null;
         if (tip) {//提示
-            var msg = (tip === true ? $p.submitTip : tip);
-            dtd = $.Deferred();
-            var event = function (dtd) {
-                var loadingIndex = null;
-                layer.confirm(msg, {
-                    icon: 0, title:false,btnAlign: 'c'
-                    }, function(){
-                        $.ajax({
-                            url: url, type: 'post', data: data, dataType: 'json',
-                            beforeSend: function (jqXHR, settings) {
-                                loadingIndex = layer.load(0, {shade: false});
-                                //ajaxLoading = $.sobox.loading({cls: 'so-ajaxLoading', width: 158, content: '提交中，请稍候...'});
-                            },
-                            complete: function (jqXHR, textStatus) {
-                                //根据textStatus修改提示
-                                //2秒后去掉提示
-                            },
-                            success: function (rst) {
-                                layer.close(loadingIndex);
-                                // ajaxLoading.close();
-                                if (rst) {
-                                    var msg = (rst.tip == 1 ? rst.msg : (rst.state?"信息提交成功":"信息提交失败"));
-                                    if (rst.state) {
-                                        layer.msg(msg,{icon:1});
-                                        // ajaxLoading = $.sobox.loading({
-                                        //     cls: 'so-ajaxSuccess',
-                                        //     width: 143,
-                                        //     content: msg,
-                                        //     stayTime: 1200
-                                        // });
-                                    } else {
-                                        layer.alert('<p class="red">对不起，提交数据失败！</p>' + msg,{icon: 2, title:false,btnAlign: 'c'});
-                                        // ajaxLoading.close();
-                                        // $.sobox.pop({
-                                        //     cls: 'so-popError',
-                                        //     title: '错误提示',
-                                        //     width: 310,
-                                        //     showTitle: false,
-                                        //     content: '<p class="p-popError">对不起，提交数据失败！</p>' + msg,
-                                        //     btn: [{text: '确定'}]
-                                        // });
-                                    }
-                                }
-                                dtd.resolve(rst);
-                            },
-                            error: function (XMLHttpRequest, textStatus, errorThrown) {
-                                // ajaxLoading.close();
-                                layer.close(loadingIndex);
-                                layer.alert('<p class="red">对不起，提交数据失败！</p>请检查网络或联系管理员...',{icon: 2, title:false,btnAlign: 'c'});
-                                // $.sobox.pop({
-                                //     cls: 'so-popError',
-                                //     title: '错误提示',
-                                //     width: 310,
-                                //     showTitle: false,
-                                //     content: '<p class="p-popError">对不起，提交数据失败！</p>请检查网络或联系管理员...',
-                                //     btn: [{text: '确定'}]
-                                // });
-                                dtd.reject();
-                            }
-                        });
-                    });
-
-
-
-                return dtd.promise();
-            }
-            return $.when(event(dtd));
+          var msg = (tip === true ? $p.submitTip : tip);
+          dtd = $.Deferred();
+          var event = function (dtd) {
+            var loadingIndex = null;
+            layer.confirm(msg, {icon: 0, title:false,btnAlign: 'c'}, function(){
+                $.ajax({
+                  url: url, type: 'post', data: data, dataType: 'json',
+                  beforeSend: function (jqXHR, settings) {
+                      loadingIndex = layer.load(0, {shade: false});
+                  },
+                  complete: function (jqXHR, textStatus) {
+                      //根据textStatus修改提示
+                      //2秒后去掉提示
+                  },
+                  success: function (rst) {
+                    layer.close(loadingIndex);
+                    if (rst) {
+                      var msg = (rst.tip == 1 ? rst.msg : (rst.state?"信息提交成功":"信息提交失败"));
+                      if (rst.state) {
+                        layer.msg(msg,{icon:1});
+                      } else {
+                        layer.alert('<p class="red">对不起，提交数据失败！</p>' + msg,{icon: 2, title:false,btnAlign: 'c'});
+                      }
+                    }
+                    dtd.resolve(rst);
+                  },
+                  error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    layer.close(loadingIndex);
+                    layer.alert('<p class="red">对不起，提交数据失败！</p>请检查网络或联系管理员...',{icon: 2, title:false,btnAlign: 'c'});
+                    dtd.reject();
+                  }
+              });
+            });
+            return dtd.promise();
+          }
+          return $.when(event(dtd));
         } else {
             var loadingIndex = null;
             dtd = $.ajax({
-                url: url, type: 'post', data: data, dataType: 'json',
-                beforeSend: function (jqXHR, settings) {
-                    maskOpt = $.extend({shade: false}, maskOpt || {});
-                    loadingIndex = layer.load(0, maskOpt);
-                    // ajaxLoading = $.sobox.loading(maskOpt);
-                    //显示"操作中"提示
-                },
-                complete: function (jqXHR, textStatus) {
-                    //根据textStatus修改提示
-                    //2秒后去掉提示
-                },
-                success: function (rst) {
-                    layer.close(loadingIndex);
-                },
-                error: function (XMLHttpRequest, textStatus, errorThrown) {
-                    layer.close(loadingIndex);
-                    layer.alert('<p class="p-popError">对不起，提交数据失败！</p>请检查网络或联系管理员...');
-                    // ajaxLoading.close();
-                    // $.sobox.pop({
-                    //     cls: 'so-popError',
-                    //     title: '错误提示',
-                    //     width: 310,
-                    //     showTitle: false,
-                    //     content: '<p class="p-popError">对不起，数据请求失败！</p>请检查网络或联系管理员...',
-                    //     btn: [{text: '确定'}]
-                    // });
-                }
+              url: url, type: 'post', data: data, dataType: 'json',
+              beforeSend: function (jqXHR, settings) {
+                maskOpt = $.extend({shade: false}, maskOpt || {});
+                loadingIndex = layer.load(0, maskOpt);
+              },
+              complete: function (jqXHR, textStatus) {
+                  //根据textStatus修改提示
+                  //2秒后去掉提示
+              },
+              success: function (rst) {
+                layer.close(loadingIndex);
+              },
+              error: function (XMLHttpRequest, textStatus, errorThrown) {
+                layer.close(loadingIndex);
+                layer.alert('<p class="p-popError">对不起，提交数据失败！</p>请检查网络或联系管理员...');
+              }
             });
         }
         return dtd;
@@ -296,24 +252,21 @@ var $ajax = {
 
 var $event = {
     stopBubble: function (e) {
-        // 如果提供了事件对象，则这是一个非IE浏览器
-        if (e && e.stopPropagation) {
-            // 因此它支持W3C的stopPropagation()方法
-            e.stopPropagation();
-        } else {
-            // 否则，我们需要使用IE的方式来取消事件冒泡
-            window.event.cancelBubble = true;
-        }
+      if (e && e.stopPropagation) {//非IE浏览器
+        e.stopPropagation();
+      } else {
+        window.event.cancelBubble = true;
+      }
     },
     stopDefault: function (e) {
-        // 阻止默认浏览器动作(W3C)
-        if (e && e.preventDefault) {
-            e.preventDefault();
-        } else {
-            // IE中阻止函数器默认动作的方式
-            window.event.returnValue = false;
-        }
-        return false;
+      // 阻止默认浏览器动作(W3C)
+      if (e && e.preventDefault) {
+        e.preventDefault();
+      } else {
+          // IE中阻止函数器默认动作的方式
+        window.event.returnValue = false;
+      }
+      return false;
     }
 };
 
