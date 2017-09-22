@@ -41,7 +41,7 @@ background-color: #e3e3e3;
     <div class="exbox">
       <!-- <h3 class="h3-form"><span class="span-title">筹建医院-修改</span></h3> -->
       <!-- <form class="soForm hk_form pad-t15"> -->
-  <form class="soform form-validate pad-t15" role="form" method="post"  action="json/true.js" data-opt="{callback:'updateMenu||updateMenuComplete',params:{a:1,b:2,c:3}}">
+  <form class="soform form-validate form-enter pad-t15" role="form" method="post"  action="json/true.js" data-opt="{callback:'updateMenu||updateMenuComplete',params:{a:1,b:2,c:3}}">
           <fieldset>
           <div class="row">
               <div class="p6"><div class="item-one">
@@ -97,11 +97,11 @@ background-color: #e3e3e3;
           <div class="row">
               <div class="p6"><div class="item-one">
                   <label class="lab-item">关联网站：</label>
-                   <input class="txt easyui-combobox" style="width:100%;" id="userSites" type="text" name="userSites" value="" placeholder="请选择关联组织" data-options="valueField: 'id',textField: 'text',url: 'json/combo.js',method:'get',multiple:true,required:true"/>
+                   <input class="txt easyui-combobox required" style="width:100%;" id="userSites" type="text" name="userSites" value="" placeholder="请选择关联组织" data-options="valueField: 'id',textField: 'text',url: 'json/combo.js',method:'get',multiple:true,required:true"/>
               </div></div>
               <div class="p6"><div class="item-one">
                   <label class="lab-item">关联组织：</label>
-                   <input class="txt easyui-combotree" style="width:100%;" data-options="url:'json/groupTree.js',method:'get',flatData:true,method:'get',multiple:true,onlyLeafCheck:true,required:true,prompt:'请选择关联组织'" type="text" name="group" value="" maxlength="20" placeholder="请选择关联组织" invalidMessage="请选择关联组织" />
+                   <input class="txt easyui-combotree required" style="width:100%;" data-options="url:'json/groupTree.js',method:'get',flatData:true,method:'get',multiple:true,onlyLeafCheck:true,required:true,prompt:'请选择关联组织'" type="text" name="group" value="" maxlength="20" placeholder="请选择关联组织" invalidMessage="请选择关联组织" />
               </div></div>
             </div>
 

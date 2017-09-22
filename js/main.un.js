@@ -25,6 +25,7 @@ require.config({
         "pinyin_dict":"lib/pinyinjs/dict/pinyin_dict",
         "pinyin":"lib/pinyinjs/pinyinUtil",
         "template":"lib/template",
+        "hotkeys" : "lib/hotkeys",
         "echarts":"lib/echarts/echarts",
         "echartsMap":"lib/echarts/echarts-map",
         "chinaMap":"lib/echarts/china",

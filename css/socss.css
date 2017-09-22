@@ -589,16 +589,22 @@ box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
 }
 .btn-primary:active,
 .btn-primary.active,
+.btn-primary:focus,
 .btn-warning:active,
 .btn-warning.active,
+.btn-warning:focus,
 .btn-danger:active,
 .btn-danger.active,
+.btn-danger:focus,
 .btn-success:active,
 .btn-success.active,
+.btn-success:focus,
 .btn-info:active,
 .btn-info.active,
+.btn-info:focus,
 .btn-inverse:active,
-.btn-inverse.active {
+.btn-inverse.active,
+.btn-inverse:focus{
 -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.3);
 box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.3);
 }

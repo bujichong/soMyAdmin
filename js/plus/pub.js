@@ -250,36 +250,7 @@ var $ajax = {
     }
 };
 
-var $event = {
-    stopBubble: function (e) {
-      if (e && e.stopPropagation) {//非IE浏览器
-        e.stopPropagation();
-      } else {
-        window.event.cancelBubble = true;
-      }
-    },
-    stopDefault: function (e) {
-      // 阻止默认浏览器动作(W3C)
-      if (e && e.preventDefault) {
-        e.preventDefault();
-      } else {
-          // IE中阻止函数器默认动作的方式
-        window.event.returnValue = false;
-      }
-      return false;
-    }
-};
 
-var $fmt = {
-    toHour: function (v) {
-        v = v * 1 || 0;
-        return Math.ceil((v * 100) / (1000 * 60 * 60)) / 100;
-    },
-    toDay: function (v) {
-        v = v * 1 || 0;
-        return Math.ceil((v * 100) / (1000 * 60 * 60 * 24)) / 100;
-    }
-}
 
 var $grid = {
     getRows: function (grid) {
@@ -665,242 +636,220 @@ var $grid = {
             }
         });
         return cfg;
-    },
-    clickFn: function (box, fields, url) {
-        return function (grid, rows) {
-            var row = rows[0];
-            var title = $(box).attr("data-title") || '提示';
-            $.sobox.pop({
-                title: title,
-                type: 'target',
-                target: box,
-                btn: [{
-                    text: '确定', callback: function () {
-                        var ps = $(box).serializeObject();
-                        for (var i = 0; i < fields.length; i++) {
-                            ps[fields[i]] = row[fields[i]];
-                        }
-                        $ajax.post(url, ps, function (rst) {
-                            if (rst.state)$grid.load(grid)
-                        }, true);
-                    }
-                }]
-            });
-        }
     }
 };
 
 var $pop = {
-    popGrid: function (opt,target) {
-        opt = opt || {};
-        if (!opt.url && !opt.code) {
-            alert("请配置表格数据源参数url或者code");
-            return;
-        }
-        if (!opt.code && !opt.gridId) {
-            alert("请配置表格数据参数gridId");
-            return;
-        }
-        var data = opt || {};
-        data.gridCfg = data.gridCfg ||{};
-        var gridId = data.gridId || 'grid_' + data.code.replace(/[\^@]/g, '')
-            , url = data.url || "/sys/widget/grid.htm?_code=" + encodeURIComponent(data.code)
-            , init = $('#' + gridId).length > 0;
-            data.gridCfg.singleSelect = data.gridCfg.singleSelect  || !data.muti;
-        var muti = !data.gridCfg.singleSelect;
-            window.console && console.log(muti);
-        if (init && $('#pop_' + gridId).length == 0) alert("请另外指定gridId," + gridId + "已存在!");
-        if (!init) {
-            var searchName = data.searchName || 'searchValue';
-            var searchLabel = data.searchLabel || '';
-            var boxTpl = "<div id='pop_{gridId}' style='display:none'>"+
-            "<form class='form-inline popGridHead pad10'>"+
-            "<div class='form-group'><input type='text' class='form-control' name='"+searchName+"' placeholder='"+searchLabel+"'> </div>"+
-            " <button type='button' class='btn btn-info fnSearch'>查 询</button>"+
-            "<button type='button' class='btn btn-warning fnSure"+(muti?'':' none')+"'>确 定</button>"+
-                // "<span><input type='button' class='btn btn-submit fnSearch' value='查 询' /></span>"+
-                // "<input type='button' class='btn btn-submit fnSure' value='确 定' />"+
-            "</form>"+
-            "<div class='pad-l10 pad-r10 pad-b5'><div id='{gridId}'></div></div></div>";
-            $('body').append($T.format(boxTpl, {gridId: gridId}));
-        }
+  popForm : function (opt) {
+      var opt =$.extend({
+          target : null,//需要弹出的对象class或者id
+          refreshGrid : true,//是否刷新grid
+          gridId : 'gridBox',//需要刷新grid的id
+          width : 400,height:300,//pop宽高
+          beforePop : function ($formBox) {},//弹窗之前的事情
+          afterSubmit : function (rst,$formBox) {}//提交之后的事件
+      },opt||{});
+      var temPop;
+      var $formBox = $(opt.target);
+      $formBox.find('.form-validate').attr("data-opt","{'callback':'submitPopForm'}");
+      window.submitPopForm = function (rst) {
+          if (rst.state) {
+              layer.close(temPop);
+              if (opt.refreshGrid) {$grid.reload(opt.grid);};
+              opt.afterSubmit(rst,$formBox);
+          };
+      }
+      opt.beforePop($formBox);
+      temPop = layer.open({
+          type:1,
+          title : opt.title,
+          area:[opt.width+'px',opt.height+'px'],
+          content : $formBox,
+          end: function () {
+              $formBox.clear();
+          }
+      });
+      $formBox.find('.btn-closePop').click(function () {
+          layer.close(temPop);
+      });
+      return temPop;//返回layer的序列
+  },
+  popGrid: function (opt,target) {
+      opt = opt || {};
+      if (!opt.url && !opt.code) {
+          alert("请配置表格数据源参数url或者code");
+          return;
+      }
+      if (!opt.code && !opt.gridId) {
+          alert("请配置表格数据参数gridId");
+          return;
+      }
+      var data = opt || {};
+      data.gridCfg = data.gridCfg ||{};
+      var gridId = data.gridId || 'grid_' + data.code.replace(/[\^@]/g, '')
+          , url = data.url || "/sys/widget/grid.htm?_code=" + encodeURIComponent(data.code)
+          , init = $('#' + gridId).length > 0;
+          data.gridCfg.singleSelect = data.gridCfg.singleSelect  || !data.muti;
+      var muti = !data.gridCfg.singleSelect;
+          window.console && console.log(muti);
+      if (init && $('#pop_' + gridId).length == 0) alert("请另外指定gridId," + gridId + "已存在!");
+      if (!init) {
+          var searchName = data.searchName || 'searchValue';
+          var searchLabel = data.searchLabel || '';
+          var boxTpl = "<div id='pop_{gridId}' style='display:none'>"+
+          "<form class='form-inline popGridHead pad10'>"+
+          "<div class='form-group'><input type='text' class='form-control' name='"+searchName+"' placeholder='"+searchLabel+"'> </div>"+
+          " <button type='button' class='btn btn-info fnSearch'>查 询</button>"+
+          "<button type='button' class='btn btn-warning fnSure"+(muti?'':' none')+"'>确 定</button>"+
+              // "<span><input type='button' class='btn btn-submit fnSearch' value='查 询' /></span>"+
+              // "<input type='button' class='btn btn-submit fnSure' value='确 定' />"+
+          "</form>"+
+          "<div class='pad-l10 pad-r10 pad-b5'><div id='{gridId}'></div></div></div>";
+          $('body').append($T.format(boxTpl, {gridId: gridId}));
+      }
 
-        var boxOpt = {
-            type :1,
-            title: muti?'选择后点击确定按钮':'请双击选择行',
-	    area : ['500px','494px'],
-            content: $('#pop_' + gridId)
-        };
-        $.extend(true, boxOpt, data.boxOpt || {});
-        if (data.boxOpt.width) {boxOpt.area[0] = data.boxOpt.width+'px'};
-        if (data.boxOpt.height) {boxOpt.area[1] = data.boxOpt.height+'px'};
-        //清除验证的tooltip
-        // var $form = $(target).parents('.form-validate');
-        // if ($form) {
-        //     $form.find(".form-validate .txta,:input").tooltip("destroy");
-        // };
-        $pop[gridId] = layer.open(boxOpt);
-        if (!init) {
-            var valueId = data.valueId, textId = data.textId
-            ,valueVal = data.valueVal||'id', textVal = data.textVal||'text'
-                , gridCfg = {height: (boxOpt.height - 85), width: '100%'};
-            $.extend(true, gridCfg, data.gridCfg || {});
-            gridCfg.columns = gridCfg.columns || data.cols;
-            if (!gridCfg.columns && data.code) {
-                var cType = data.code.replace(/[\^@]/g, '');
-                if (!$cols[cType]) {
-                    alert('请在param.js里面定义' + cType + '表格列信息!');
-                    return;
-                }
-                gridCfg.columns = $cols[cType];
-            }
-            if (!gridCfg.columns) {
-                alert("请配置表格列信息!");
-                return;
-            }
-	    gridCfg.fitColumns = (opt.fitCol?opt.fitCol:true);
-            gridCfg.onDblClickRow = function (index, row) {
-                window.console && console.log(textId,valueId,row);
-                if (valueId)$('#' + valueId).val(row[valueVal]);
-                if (textId)$('#' + textId).val(row[textVal]);
-                if (boxOpt.onOk)boxOpt.onOk([row]);
-                layer.close($pop[gridId]);
-                if(data.values){
-                    $.each(data.values,function (key,val) {
-                        $('#'+key).val(row[val]);
-                    });
-                }
-                // $pop[gridId].removePop();
-            }
-            $grid.newGrid('#' + gridId, gridCfg);
-            $('.fnSearch', '#pop_' + gridId).click(function () {
-                var ps = $('#pop_' + gridId).find('.popGridHead').serializeObject();
-                $grid.load('#' + gridId, ps);
-            });
-            if (muti) {
-                $('.fnSure', '#pop_' + gridId).show().click(function () {
-                    console.log("点击确定按钮!");
-                    var rows = muti ? ($('#' + gridId).datagrid("getChecked") || []) : [$('#' + gridId).datagrid("getSelected")];
-                    var id = [], text = [];
-                    for (var i = 0; i < rows.length; i++) {
-                        var row = rows[i];
-                        id.push(row[valueVal]);
-                        text.push(row[textVal]);
-                    }
-                    if (valueId)$('#' + valueId).val(id.join(','));
-                    if (textId)$('#' + textId).val(text.join(','));
-                    if (boxOpt.onOk)boxOpt.onOk(rows);
-                    layer.close($pop[gridId]);
-                });
-            };
+      var boxOpt = {
+          type :1,
+          title: muti?'选择后点击确定按钮':'请双击选择行',
+    area : ['500px','494px'],
+          content: $('#pop_' + gridId)
+      };
+      $.extend(true, boxOpt, data.boxOpt || {});
+      if (data.boxOpt.width) {boxOpt.area[0] = data.boxOpt.width+'px'};
+      if (data.boxOpt.height) {boxOpt.area[1] = data.boxOpt.height+'px'};
+      //清除验证的tooltip
+      // var $form = $(target).parents('.form-validate');
+      // if ($form) {
+      //     $form.find(".form-validate .txta,:input").tooltip("destroy");
+      // };
+      $pop[gridId] = layer.open(boxOpt);
+      if (!init) {
+          var valueId = data.valueId, textId = data.textId
+          ,valueVal = data.valueVal||'id', textVal = data.textVal||'text'
+              , gridCfg = {height: (boxOpt.height - 85), width: '100%'};
+          $.extend(true, gridCfg, data.gridCfg || {});
+          gridCfg.columns = gridCfg.columns || data.cols;
+          if (!gridCfg.columns && data.code) {
+              var cType = data.code.replace(/[\^@]/g, '');
+              if (!$cols[cType]) {
+                  alert('请在param.js里面定义' + cType + '表格列信息!');
+                  return;
+              }
+              gridCfg.columns = $cols[cType];
+          }
+          if (!gridCfg.columns) {
+              alert("请配置表格列信息!");
+              return;
+          }
+    gridCfg.fitColumns = (opt.fitCol?opt.fitCol:true);
+          gridCfg.onDblClickRow = function (index, row) {
+              window.console && console.log(textId,valueId,row);
+              if (valueId)$('#' + valueId).val(row[valueVal]);
+              if (textId)$('#' + textId).val(row[textVal]);
+              if (boxOpt.onOk)boxOpt.onOk([row]);
+              layer.close($pop[gridId]);
+              if(data.values){
+                  $.each(data.values,function (key,val) {
+                      $('#'+key).val(row[val]);
+                  });
+              }
+              // $pop[gridId].removePop();
+          }
+          $grid.newGrid('#' + gridId, gridCfg);
+          $('.fnSearch', '#pop_' + gridId).click(function () {
+              var ps = $('#pop_' + gridId).find('.popGridHead').serializeObject();
+              $grid.load('#' + gridId, ps);
+          });
+          if (muti) {
+              $('.fnSure', '#pop_' + gridId).show().click(function () {
+                  console.log("点击确定按钮!");
+                  var rows = muti ? ($('#' + gridId).datagrid("getChecked") || []) : [$('#' + gridId).datagrid("getSelected")];
+                  var id = [], text = [];
+                  for (var i = 0; i < rows.length; i++) {
+                      var row = rows[i];
+                      id.push(row[valueVal]);
+                      text.push(row[textVal]);
+                  }
+                  if (valueId)$('#' + valueId).val(id.join(','));
+                  if (textId)$('#' + textId).val(text.join(','));
+                  if (boxOpt.onOk)boxOpt.onOk(rows);
+                  layer.close($pop[gridId]);
+              });
+          };
 
-        }
-        var params = data.gridParams || data.params || {};
-        if (typeof(params) == "function") {
-            params = params();
-        }
-        var urlParams = data.urlParams || '';
-        if (typeof(urlParams) == "function") {
-            urlParams = urlParams();
-        }
-        // urlParams = $T.parseParam(urlParams);
-        params.$url = url;
-        if (urlParams) {params.$url = params.$url+urlParams};
-        $grid.load('#' + gridId, params);
-    },
-    popTree: function (opt) {
-        if (opt == null || (!opt.treeId && !opt.code)) alert("请配置treeId或者code");
-        var data = opt || {}
-            , treeId = (data.treeId || ('tree-' + data.code)).replace(/@|\^/, '')
-            , valueId = data.valueId, textId = data.textId, init = $('#' + treeId).length > 0
-            , muti = data.treeCfg && data.treeCfg.checkbox;
-        if (!init) {
-            $('body').append("<div id='" + treeId + "' style='display:none'></div>");
-            var treeCfg = {checkbox: false, url: "/sys/widget/tree.htm?_code=" + encodeURIComponent(data.code)};
-            $.extend(true, treeCfg, data.treeCfg);
-            //单选双击默认
-            if (!muti) {
-                if (!treeCfg.onDblClick) {
-                    treeCfg.onDblClick = function (node) {
-                        if (valueId)$('#' + valueId).val(node.id);
-                        if (textId) $('#' + textId).val(node.text);
-                        $pop[treeId].removePop();
-                    };
-                } else {
-                    var tmp = treeCfg.onDblClick;
-                    treeCfg.onDblClick = function (node) {
-                        var rst = tmp(node);
-                        if (rst !== false) {
-                            if (valueId)$('#' + valueId).val(node.id);
-                            if (textId) $('#' + textId).val(node.text);
-                            $pop[treeId].removePop();
-                        }
-                    }
-                }
-            }
-            $('#' + treeId).tree(treeCfg);
-            console.log("初始化树", treeCfg);
-        }
-        var boxOpt = {title: '请选择', type: 'target', target: '#' + treeId, width: 300/*,height:400*/};
-        $.extend(true, boxOpt, data.boxOpt || {});
-        if (muti) {
-            boxOpt.btn = [{
-                text: '确定', callback: function () {
-                    var nodes = muti ? ($('#' + treeId).tree("getChecked") || []) : [$('#' + treeId).tree("getSelected")];
-                    if (boxOpt.onOk) {
-                        var rst = boxOpt.onOk(nodes);
-                    } else {
-                        var id = [], text = [];
-                        for (var i = 0; i < nodes.length; i++) {
-                            var node = nodes[i];
-                            id.push(node.id);
-                            text.push(node.text);
-                        }
-                        if (valueId)$('#' + valueId).val(id.join(','));
-                        if (textId)$('#' + textId).val(text.join(','));
-                    }
-                }
-            }];
-        }
-        $pop[treeId] = $.sobox.pop(boxOpt);
-    },
-    popForm : function (opt) {
-        var opt =$.extend({
-            target : null,//需要弹出的对象class或者id
-            refreshGrid : true,//是否刷新grid
-            gridId : 'gridBox',//需要刷新grid的id
-            width : 400,height:300,//pop宽高
-            beforePop : function ($formBox) {},//弹窗之前的事情
-            afterSubmit : function (rst,$formBox) {}//提交之后的事件
-        },opt||{});
-        var temPop;
-        var $formBox = $(opt.target);
-        $formBox.find('.form-validate').attr("data-opt","{'callback':'submitPopForm'}");
-        window.submitPopForm = function (rst) {
-            if (rst.state) {
-                layer.close(temPop);
-                if (opt.refreshGrid) {$grid.reload(opt.grid);};
-                opt.afterSubmit(rst,$formBox);
-            };
-        }
-        opt.beforePop($formBox);
-        temPop = layer.open({
-            type:1,
-            title : opt.title,
-            area:[opt.width+'px',opt.height+'px'],
-            content : $formBox,
-            end: function () {
-                $formBox.clear();
-            }
-        });
-        $formBox.find('.btn-closePop').click(function () {
-            layer.close(temPop);
-        });
-        return temPop;//返回layer的序列
-    }
+      }
+      var params = data.gridParams || data.params || {};
+      if (typeof(params) == "function") {
+          params = params();
+      }
+      var urlParams = data.urlParams || '';
+      if (typeof(urlParams) == "function") {
+          urlParams = urlParams();
+      }
+      // urlParams = $T.parseParam(urlParams);
+      params.$url = url;
+      if (urlParams) {params.$url = params.$url+urlParams};
+      $grid.load('#' + gridId, params);
+  },
+  popTree: function (opt) {
+      if (opt == null || (!opt.treeId && !opt.code)) alert("请配置treeId或者code");
+      var data = opt || {}
+          , treeId = (data.treeId || ('tree-' + data.code)).replace(/@|\^/, '')
+          , valueId = data.valueId, textId = data.textId, init = $('#' + treeId).length > 0
+          , muti = data.treeCfg && data.treeCfg.checkbox;
+      if (!init) {
+          $('body').append("<div id='" + treeId + "' style='display:none'></div>");
+          var treeCfg = {checkbox: false, url: "/sys/widget/tree.htm?_code=" + encodeURIComponent(data.code)};
+          $.extend(true, treeCfg, data.treeCfg);
+          //单选双击默认
+          if (!muti) {
+              if (!treeCfg.onDblClick) {
+                  treeCfg.onDblClick = function (node) {
+                      if (valueId)$('#' + valueId).val(node.id);
+                      if (textId) $('#' + textId).val(node.text);
+                      $pop[treeId].removePop();
+                  };
+              } else {
+                  var tmp = treeCfg.onDblClick;
+                  treeCfg.onDblClick = function (node) {
+                      var rst = tmp(node);
+                      if (rst !== false) {
+                          if (valueId)$('#' + valueId).val(node.id);
+                          if (textId) $('#' + textId).val(node.text);
+                          $pop[treeId].removePop();
+                      }
+                  }
+              }
+          }
+          $('#' + treeId).tree(treeCfg);
+          console.log("初始化树", treeCfg);
+      }
+      var boxOpt = {title: '请选择', type: 'target', target: '#' + treeId, width: 300/*,height:400*/};
+      $.extend(true, boxOpt, data.boxOpt || {});
+      if (muti) {
+          boxOpt.btn = [{
+              text: '确定', callback: function () {
+                  var nodes = muti ? ($('#' + treeId).tree("getChecked") || []) : [$('#' + treeId).tree("getSelected")];
+                  if (boxOpt.onOk) {
+                      var rst = boxOpt.onOk(nodes);
+                  } else {
+                      var id = [], text = [];
+                      for (var i = 0; i < nodes.length; i++) {
+                          var node = nodes[i];
+                          id.push(node.id);
+                          text.push(node.text);
+                      }
+                      if (valueId)$('#' + valueId).val(id.join(','));
+                      if (textId)$('#' + textId).val(text.join(','));
+                  }
+              }
+          }];
+      }
+      $pop[treeId] = $.sobox.pop(boxOpt);
+  }
 };
 
-var $hook = {
+var $ff = {
     /**
      * 页面表格查询功能绑定
      */
@@ -937,7 +886,62 @@ var $hook = {
     /**
      * 页面控件初始化
      */
-    widget: function () {
+    formAEnterFun : function(callback,formCls){
+      setTimeout(function () {
+          var $form = $(formCls?formCls:'.form-enter');
+          var $input = $form.find(':input').filter(':visible');
+          // window.console && console.log($input);
+          $input.keydown(function(e) {
+              if (e.keyCode == 13) {
+                  if ($(this).hasClass('btn')) {return;};
+                  var ix = $input.index(this);
+                  // window.console && console.log(ix);
+                  $input.eq(ix+1).focus();
+                  return false;
+              };
+          });
+          $input&&$input.eq(0).focus();
+          callback&&callback();
+      },400);
+    },
+    formAEnterFunB : function (callback,formCls) {
+
+      setTimeout(function () {//重置输入框回车事件
+
+          var $form = $(formCls?formCls:'.form-enter');
+
+          $form.find('.textbox-text').each(function (){
+            var _self = $(this);
+            var $sourInput = _self.parents('.combo').prev('.required');
+            if ($sourInput.length) {_self.addClass('required')};
+          });
+
+          var $input = $form.find(':input.required,.btn-easyFormSubmit').filter(':visible');
+          //$("input:disabled")
+          // window.console && console.log($input);
+          $input.keydown(function(e) {//required输入框进入获取下一焦点
+              if (e.keyCode == 13) {
+                  if ($(this).hasClass('btn')) {return;};
+                  var ix = $input.index(this);
+                  // window.console && console.log(ix);
+                  $input.eq(ix+1).focus();
+                  return false;
+              };
+          });
+
+          $form.find('.textbox-text').focus(function () {//获取焦点时自动下拉
+            var $prev = $(this).parents('.combo').prev();
+            if ($prev.hasClass('easyui-combogrid')||$prev.hasClass('easyui-combobox')||$prev.hasClass('easyui-combotree')) {
+              $prev.combo('showPanel');
+            }
+          });
+          $input&&$input.eq(0).focus();
+          // window.console && console.log($input.eq(0));
+          callback&&callback();
+      },500);
+    },
+    someMix: function () {
+        var me = this;
         if ($('.hk_time').length) {
             $('.hk_time').addClass('Wdate').each(function () {
                 var _self = $(this);
@@ -949,7 +953,6 @@ var $hook = {
                 });
             });
         }
-
         // if ($(".hk_form .btn-cancel").length) {
         //     $(".hk_form .btn-cancel").click(function () {
         //         $util.closePop();
@@ -960,21 +963,9 @@ var $hook = {
                 $util.closePop();
             });
         }
-        if ($('.formA').length) {//回车替代tab事件
-            setTimeout(function () {
-                var $input = $('.formA').find(':input').filter(':visible');
-                // window.console && console.log($input);
-                $input.eq(0).focus();
-                $input.keydown(function(e) {
-                    if (e.keyCode == 13) {
-                        if ($(this).hasClass('btn')) {return;};
-                        var ix = $input.index(this);
-                        // window.console && console.log(ix);
-                        $input.eq(ix+1).focus();
-                        return false;
-                    };
-                });
-            },600);
+        if ($('.form-enter').length) {//回车替代tab事件
+          me.formAEnterFun();
+          me.formAEnterFunB();
         };
         if ($(".form-validate .btn-closePop").length) {
             $(".form-validate .btn-closePop").click(function () {
@@ -1434,11 +1425,11 @@ var JPlaceHolder = {
 };
 
 $(function () {
-    $hook.widget();//存放比较零碎的
-    $hook.validate();
-    $hook.search();
-    $hook.popGrid();
-    $hook.popTree();
-    $hook.wdDate();
+    $ff.someMix();//存放比较零碎的
+    $ff.validate();
+    $ff.search();
+    $ff.popGrid();
+    $ff.popTree();
+    $ff.wdDate();
     JPlaceHolder.init();
 });
