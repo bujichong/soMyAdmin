@@ -42,199 +42,216 @@ background-color: #e3e3e3;
       <!-- <h3 class="h3-form"><span class="span-title">筹建医院-修改</span></h3> -->
       <!-- <form class="soForm pad-t15"> -->
   <form class="soform form-validate form-enter pad-t15" role="form" method="post"  action="json/true.js" data-opt="{callback:'updateMenu||updateMenuComplete',params:{a:1,b:2,c:3}}">
-          <fieldset>
-          <div class="row">
-              <div class="p6"><div class="item-one">
-                  <label class="lab-item">用户名：</label>
-                  <input class="txt easyui-validatebox required" type="text" name="userName" value="" maxlength="20" placeholder="用户名" data-options="required:true" missingMessage="请输入用户名" invalidMessage="请输入用户名" />
-              </div></div>
-              <div class="p3"><div class="item-one">
-                  <label class="lab-item">年龄：</label>
-                  <input class="txt easyui-validatebox required" type="text" name="realName" value="" maxlength="20" placeholder="年龄" data-options="required:true" validType="isAge" missingMessage="请输入年龄" invalidMessage="年龄必须为数字并小于120" />
-              </div></div>
-              <div class="p3"><div class="item-one solab-sb">
-                  <label class="lab-item">生日：</label>
-                  <input class="txt so-date" type="text" name="birthday" value="" maxlength="20" placeholder="生日" />
-              </div></div>
-            </div>
+      <fieldset>
+      <div class="row">
+          <div class="p6"><div class="item-one">
+              <label class="lab-item">用户名：</label>
+              <input class="txt easyui-validatebox required" type="text" name="userName" value="" maxlength="20" placeholder="用户名" data-options="required:true" missingMessage="请输入用户名" invalidMessage="请输入用户名" />
+          </div></div>
+          <div class="p3"><div class="item-one">
+              <label class="lab-item">年龄：</label>
+              <input class="txt easyui-validatebox required" type="text" name="realName" value="" maxlength="20" placeholder="年龄" data-options="required:true" validType="isAge" missingMessage="请输入年龄" invalidMessage="年龄必须为数字并小于120" />
+          </div></div>
+          <div class="p3"><div class="item-one solab-sb">
+              <label class="lab-item">生日：</label>
+              <input class="txt so-date" type="text" name="birthday" value="" maxlength="20" placeholder="生日" />
+          </div></div>
+        </div>
+      <div class="row">
+        <div class="p6">
+          <div class="item-one">
+            <label class="lab-item">证件类型：</label>
+            <select id="cardType" class="drop" name="cardType" data-option="required:true">
+              <option value="">请选择...</option>
+              <option value="1">身份证</option>
+              <option value="2">其他证件</option>
+            </select>
+          </div>
+        </div>
+        <div class="p6">
+          <label class="lab-item">证件号码：</label>
+          <input type="text" class="txt" value="" placeholder="请输入证件号码" data-option="required:true">
+        </div>
+      </div>
+      <div class="row">
+        <div class="p6"></div>
+      </div>
+      <div class="row">
+          <div class="p6"><div class="item-one item-group">
+              <label class="lab-item">头像：</label>
+               <span class="item-on wp-10 item-l">@</span><input class="txt easyui-validatebox wp-65"  id="password" type="text" name="password" value="" maxlength="20" /><span class="item-on wp-5 item-r">.</span><input type="button" class="btn btn-warning btn-small wp-20 item-r" name="btnCancel" value="上传" />
+          </div></div>
+          <div class="p6"><div class="item-one">
+              <label class="lab-item">描述：</label>
+               <input class="txt easyui-validatebox" type="text" name="repassword" value="" maxlength="20" placeholder="描述" validType= "many['pFloatFix','range[0,20.12]']" />
+          </div></div>
+        </div>
 
-          <div class="row">
-              <div class="p6"><div class="item-one item-group">
-                  <label class="lab-item">头像：</label>
-                   <span class="item-on wp-10 item-l">@</span><input class="txt easyui-validatebox wp-65"  id="password" type="text" name="password" value="" maxlength="20" /><span class="item-on wp-5 item-r">.</span><input type="button" class="btn btn-warning btn-small wp-20 item-r" name="btnCancel" value="上传" />
-              </div></div>
-              <div class="p6"><div class="item-one">
-                  <label class="lab-item">描述：</label>
-                   <input class="txt easyui-validatebox" type="text" name="repassword" value="" maxlength="20" placeholder="描述" validType= "many['pFloatFix','range[0,20.12]']" />
-              </div></div>
-            </div>
+      <div class="row">
+          <div class="p6"><div class="item-one">
+              <label class="lab-item">密码：</label>
+               <input class="txt easyui-validatebox required" id="password" type="password" name="password" value="" maxlength="20" placeholder="默认密码123456" data-options="required:true" missingMessage="请输入密码" />
+          </div></div>
+          <div class="p6"><div class="item-one">
+              <label class="lab-item">确认密码：</label>
+               <input class="txt easyui-validatebox" type="password" name="repassword" value="" maxlength="20" placeholder="再输入一次密码" validType="equals['#password']" missingMessage="请确认密码" />
+          </div></div>
+        </div>
 
-          <div class="row">
-              <div class="p6"><div class="item-one">
-                  <label class="lab-item">密码：</label>
-                   <input class="txt easyui-validatebox required" id="password" type="password" name="password" value="" maxlength="20" placeholder="默认密码123456" data-options="required:true" missingMessage="请输入密码" />
-              </div></div>
-              <div class="p6"><div class="item-one">
-                  <label class="lab-item">确认密码：</label>
-                   <input class="txt easyui-validatebox" type="password" name="repassword" value="" maxlength="20" placeholder="再输入一次密码" validType="equals['#password']" missingMessage="请确认密码" />
-              </div></div>
-            </div>
+      <div class="row">
+          <div class="p6"><div class="item-one">
+              <label class="lab-item">电话号码：</label>
+               <input class="txt easyui-validatebox" type="text" name="mobile" value="" maxlength="20" placeholder="电话号码" />
+          </div></div>
+          <div class="p6"><div class="item-one">
+              <label class="lab-item">性别：</label>
+                <label class="lab-val"><input class="rad" type="radio" value="1" name="sex" />男</label>
+                <label class="lab-val"><input class="rad" type="radio" value="2" name="sex" />女</label>
+                <label class="lab-val"><input type="checkbox" class="chk" name="chk-1" />选项1</label>
+                <label class="lab-val"><input type="checkbox" class="chk" name="chk-1" />选项2</label>
+          </div></div>
+        </div>
 
-          <div class="row">
-              <div class="p6"><div class="item-one">
-                  <label class="lab-item">电话号码：</label>
-                   <input class="txt easyui-validatebox" type="text" name="mobile" value="" maxlength="20" placeholder="电话号码" />
-              </div></div>
-              <div class="p6"><div class="item-one">
-                  <label class="lab-item">性别：</label>
-                    <label class="lab-val"><input class="rad" type="radio" value="1" name="sex" />男</label>
-                    <label class="lab-val"><input class="rad" type="radio" value="2" name="sex" />女</label>
-                    <label class="lab-val"><input type="checkbox" class="chk" name="chk-1" />选项1</label>
-                    <label class="lab-val"><input type="checkbox" class="chk" name="chk-1" />选项2</label>
-              </div></div>
-            </div>
+      <div class="row">
+          <div class="p6"><div class="item-one">
+              <label class="lab-item">关联网站：</label>
+               <input class="txt easyui-combobox required" style="width:100%;" id="userSites" type="text" name="userSites" value="" placeholder="请选择关联组织" data-options="valueField: 'id',textField: 'text',url: 'json/combo.js',method:'get',multiple:true,required:true" missingMessage="请选择关联网站(多选)" />
+          </div></div>
+          <div class="p6"><div class="item-one">
+              <label class="lab-item">关联组织：</label>
+               <input class="txt easyui-combotree required" style="width:100%;" data-options="url:'json/groupTree.js',method:'get',flatData:true,method:'get',multiple:true,onlyLeafCheck:true,required:true,prompt:'请选择关联组织'" type="text" name="group" value="" maxlength="20" placeholder="请选择关联组织" missingMessage="请选择关联组织(多选)" />
+          </div></div>
+        </div>
 
-          <div class="row">
-              <div class="p6"><div class="item-one">
-                  <label class="lab-item">关联网站：</label>
-                   <input class="txt easyui-combobox required" style="width:100%;" id="userSites" type="text" name="userSites" value="" placeholder="请选择关联组织" data-options="valueField: 'id',textField: 'text',url: 'json/combo.js',method:'get',multiple:true,required:true"/>
-              </div></div>
-              <div class="p6"><div class="item-one">
-                  <label class="lab-item">关联组织：</label>
-                   <input class="txt easyui-combotree required" style="width:100%;" data-options="url:'json/groupTree.js',method:'get',flatData:true,method:'get',multiple:true,onlyLeafCheck:true,required:true,prompt:'请选择关联组织'" type="text" name="group" value="" maxlength="20" placeholder="请选择关联组织" invalidMessage="请选择关联组织" />
-              </div></div>
-            </div>
+      <div class="row">
+          <div class="p6"><div class="item-one">
+              <label class="lab-item">Email：</label>
+               <input class="txt easyui-validatebox" type="text" name="email" value="" maxlength="20" placeholder="请输入email地址" data-options="validType:['email','length[0,20]']" invalidMessage="您的邮箱地址不正确" />
+          </div></div>
+          <div class="p6"><div class="item-one">
+              <label class="lab-item">QQ：</label>
+               <input class="txt easyui-validatebox" type="text" name="QQ" value="" maxlength="20" placeholder="QQ号码" />
+          </div></div>
+        </div>
 
-          <div class="row">
-              <div class="p6"><div class="item-one">
-                  <label class="lab-item">Email：</label>
-                   <input class="txt easyui-validatebox" type="text" name="email" value="" maxlength="20" placeholder="请输入email地址" data-options="validType:['email','length[0,20]']" invalidMessage="您的邮箱地址不正确" />
-              </div></div>
-              <div class="p6"><div class="item-one">
-                  <label class="lab-item">QQ：</label>
-                   <input class="txt easyui-validatebox" type="text" name="QQ" value="" maxlength="20" placeholder="QQ号码" />
-              </div></div>
-            </div>
+      <div class="row">
+          <div class="p6"><div class="item-one">
+              <label class="lab-item">微信：</label>
+               <input class="txt easyui-validatebox" type="text" name="weChat" value="" maxlength="20" placeholder="" />
+          </div></div>
+          <div class="p6"><div class="item-one">
+              <label class="lab-item">账号状态：</label>
+              <label class="lab-val"><input class="rad {required:true}"  type="radio" value="1" name="state" />启用</label>
+              <label class="lab-val"><input class="rad"   type="radio" value="2" name="state" />停用</label>
+          </div></div>
+        </div>
 
-          <div class="row">
-              <div class="p6"><div class="item-one">
-                  <label class="lab-item">微信：</label>
-                   <input class="txt easyui-validatebox" type="text" name="weChat" value="" maxlength="20" placeholder="" />
-              </div></div>
-              <div class="p6"><div class="item-one">
-                  <label class="lab-item">账号状态：</label>
-                  <label class="lab-val"><input class="rad {required:true}"  type="radio" value="1" name="state" />启用</label>
-                  <label class="lab-val"><input class="rad"   type="radio" value="2" name="state" />停用</label>
-              </div></div>
-            </div>
+      </fieldset>
 
-          </fieldset>
-
-            <p class="row-btn center">
-              <input type="button" class="btn btn-primary btn-easyFormSubmit" lay-submit name="btnSubmit" value="保存" />
-              <input type="button" class="btn btn-primary disabled" lay-submit name="btnSubmit" value="立即保存" />
-              <input type="button" class="btn btn-cancel" name="btnCancel" value="取 消" />
-            </p>
-      </form>
+        <p class="row-btn center">
+          <input type="button" class="btn btn-primary btn-easyFormSubmit" lay-submit name="btnSubmit" value="保存" />
+          <input type="button" class="btn btn-primary disabled" lay-submit name="btnSubmit" value="立即保存" />
+          <input type="button" class="btn btn-cancel" name="btnCancel" value="取 消" />
+        </p>
+  </form>
 
 
       <pre class="brush:html">
+        &lt;form class="soform form-validate form-enter pad-t15" role="form" method="post"  action="json/true.js" data-opt="{callback:'updateMenu||updateMenuComplete',params:{a:1,b:2,c:3}}"&gt;
+            &lt;fieldset&gt;
+            &lt;div class="row"&gt;
+                &lt;div class="p6"&gt;&lt;div class="item-one"&gt;
+                    &lt;label class="lab-item"&gt;用户名：&lt;/label&gt;
+                    &lt;input class="txt easyui-validatebox required" type="text" name="userName" value="" maxlength="20" placeholder="用户名" data-options="required:true" missingMessage="请输入用户名" invalidMessage="请输入用户名" /&gt;
+                &lt;/div&gt;&lt;/div&gt;
+                &lt;div class="p3"&gt;&lt;div class="item-one"&gt;
+                    &lt;label class="lab-item"&gt;年龄：&lt;/label&gt;
+                    &lt;input class="txt easyui-validatebox required" type="text" name="realName" value="" maxlength="20" placeholder="年龄" data-options="required:true" validType="isAge" missingMessage="请输入年龄" invalidMessage="年龄必须为数字并小于120" /&gt;
+                &lt;/div&gt;&lt;/div&gt;
+                &lt;div class="p3"&gt;&lt;div class="item-one solab-sb"&gt;
+                    &lt;label class="lab-item"&gt;生日：&lt;/label&gt;
+                    &lt;input class="txt so-date" type="text" name="birthday" value="" maxlength="20" placeholder="生日" /&gt;
+                &lt;/div&gt;&lt;/div&gt;
+              &lt;/div&gt;
 
-  &lt;form class="soform pad-t15" role="form" method="post" data-opt="" id="vform" action="json/true.js"&gt;
-          &lt;fieldset&gt;
-          &lt;div class="row"&gt;
-              &lt;div class="p6"&gt;&lt;div class="item-one"&gt;
-                  &lt;label class="lab-item"&gt;用户名：&lt;/label&gt;
-                  &lt;input class="txt required" type="text" name="userName" value="" maxlength="20" placeholder="用户名" /&gt;
-              &lt;/div&gt;&lt;/div&gt;
-              &lt;div class="p3"&gt;&lt;div class="item-one"&gt;
-                  &lt;label class="lab-item"&gt;姓名：&lt;/label&gt;
-                  &lt;input class="txt required" type="text" name="realName" value="" maxlength="20" placeholder="姓名" /&gt;
-              &lt;/div&gt;&lt;/div&gt;
-              &lt;div class="p3"&gt;&lt;div class="item-one solab-sb"&gt;
-                  &lt;label class="lab-item"&gt;姓名：&lt;/label&gt;
-                  &lt;input class="txt required" disabled="disabled" type="text" name="realName" value="" maxlength="20" placeholder="姓名" /&gt;
-              &lt;/div&gt;&lt;/div&gt;
-            &lt;/div&gt;
+            &lt;div class="row"&gt;
+                &lt;div class="p6"&gt;&lt;div class="item-one item-group"&gt;
+                    &lt;label class="lab-item"&gt;头像：&lt;/label&gt;
+                     &lt;span class="item-on wp-10 item-l"&gt;@&lt;/span&gt;&lt;input class="txt easyui-validatebox wp-65"  id="password" type="text" name="password" value="" maxlength="20" /&gt;&lt;span class="item-on wp-5 item-r"&gt;.&lt;/span&gt;&lt;input type="button" class="btn btn-warning btn-small wp-20 item-r" name="btnCancel" value="上传" /&gt;
+                &lt;/div&gt;&lt;/div&gt;
+                &lt;div class="p6"&gt;&lt;div class="item-one"&gt;
+                    &lt;label class="lab-item"&gt;描述：&lt;/label&gt;
+                     &lt;input class="txt easyui-validatebox" type="text" name="repassword" value="" maxlength="20" placeholder="描述" validType= "many['pFloatFix','range[0,20.12]']" /&gt;
+                &lt;/div&gt;&lt;/div&gt;
+              &lt;/div&gt;
 
-          &lt;div class="row"&gt;
-              &lt;div class="p6"&gt;&lt;div class="item-one item-group"&gt;
-                  &lt;label class="lab-item"&gt;密码：&lt;/label&gt;
-                   &lt;span class="item-on wp-10 item-l"&gt;@&lt;/span&gt;&lt;span class="item-on wp-10 item-l"&gt;@&lt;/span&gt;&lt;input class="txt wp-65"  id="password" type="password" name="password" value="" maxlength="20" placeholder="默认密码123456" /&gt;&lt;span class="item-on wp-5 item-r"&gt;.&lt;/span&gt;&lt;input type="button" class="btn btn-warning btn-small wp-10 item-r" name="btnCancel" value="上传" /&gt;
-              &lt;/div&gt;&lt;/div&gt;
-              &lt;div class="p6"&gt;&lt;div class="item-one"&gt;
-                  &lt;label class="lab-item"&gt;确认密码：&lt;/label&gt;
-                   &lt;input class="txt {equalTo:'#password'}" type="password" name="repassword" value="" maxlength="20" placeholder="再输入一次密码" /&gt;
-              &lt;/div&gt;&lt;/div&gt;
-            &lt;/div&gt;
+            &lt;div class="row"&gt;
+                &lt;div class="p6"&gt;&lt;div class="item-one"&gt;
+                    &lt;label class="lab-item"&gt;密码：&lt;/label&gt;
+                     &lt;input class="txt easyui-validatebox required" id="password" type="password" name="password" value="" maxlength="20" placeholder="默认密码123456" data-options="required:true" missingMessage="请输入密码" /&gt;
+                &lt;/div&gt;&lt;/div&gt;
+                &lt;div class="p6"&gt;&lt;div class="item-one"&gt;
+                    &lt;label class="lab-item"&gt;确认密码：&lt;/label&gt;
+                     &lt;input class="txt easyui-validatebox" type="password" name="repassword" value="" maxlength="20" placeholder="再输入一次密码" validType="equals['#password']" missingMessage="请确认密码" /&gt;
+                &lt;/div&gt;&lt;/div&gt;
+              &lt;/div&gt;
 
-          &lt;div class="row"&gt;
-              &lt;div class="p6"&gt;&lt;div class="item-one"&gt;
-                  &lt;label class="lab-item"&gt;密码：&lt;/label&gt;
-                   &lt;input class="txt"  id="password" type="password" name="password" value="" maxlength="20" placeholder="默认密码123456" /&gt;
-              &lt;/div&gt;&lt;/div&gt;
-              &lt;div class="p6"&gt;&lt;div class="item-one"&gt;
-                  &lt;label class="lab-item"&gt;确认密码：&lt;/label&gt;
-                   &lt;input class="txt {equalTo:'#password'}" type="password" name="repassword" value="" maxlength="20" placeholder="再输入一次密码" /&gt;
-              &lt;/div&gt;&lt;/div&gt;
-            &lt;/div&gt;
+            &lt;div class="row"&gt;
+                &lt;div class="p6"&gt;&lt;div class="item-one"&gt;
+                    &lt;label class="lab-item"&gt;电话号码：&lt;/label&gt;
+                     &lt;input class="txt easyui-validatebox" type="text" name="mobile" value="" maxlength="20" placeholder="电话号码" /&gt;
+                &lt;/div&gt;&lt;/div&gt;
+                &lt;div class="p6"&gt;&lt;div class="item-one"&gt;
+                    &lt;label class="lab-item"&gt;性别：&lt;/label&gt;
+                      &lt;label class="lab-val"&gt;&lt;input class="rad" type="radio" value="1" name="sex" /&gt;男&lt;/label&gt;
+                      &lt;label class="lab-val"&gt;&lt;input class="rad" type="radio" value="2" name="sex" /&gt;女&lt;/label&gt;
+                      &lt;label class="lab-val"&gt;&lt;input type="checkbox" class="chk" name="chk-1" /&gt;选项1&lt;/label&gt;
+                      &lt;label class="lab-val"&gt;&lt;input type="checkbox" class="chk" name="chk-1" /&gt;选项2&lt;/label&gt;
+                &lt;/div&gt;&lt;/div&gt;
+              &lt;/div&gt;
 
-          &lt;div class="row"&gt;
-              &lt;div class="p6"&gt;&lt;div class="item-one"&gt;
-                  &lt;label class="lab-item"&gt;电话号码：&lt;/label&gt;
-                   &lt;input class="txt" type="text" name="mobile" value="" maxlength="20" placeholder="电话号码" /&gt;
-              &lt;/div&gt;&lt;/div&gt;
-              &lt;div class="p6"&gt;&lt;div class="item-one"&gt;
-                  &lt;label class="lab-item"&gt;性别：&lt;/label&gt;
-                    &lt;label class="lab-val"&gt;&lt;input class="rad {required:true}"  type="radio" value="1" name="sex" /&gt;男&lt;/label&gt;
-                    &lt;label class="lab-val"&gt;&lt;input class="rad" type="radio" value="2" name="sex" /&gt;女&lt;/label&gt;
-                    &lt;label class="lab-val"&gt;&lt;input type="checkbox" class="chk" name="chk-1" /&gt;选项1&lt;/label&gt;
-                    &lt;label class="lab-val"&gt;&lt;input type="checkbox" class="chk" name="chk-1" /&gt;选项2&lt;/label&gt;
-              &lt;/div&gt;&lt;/div&gt;
-            &lt;/div&gt;
+            &lt;div class="row"&gt;
+                &lt;div class="p6"&gt;&lt;div class="item-one"&gt;
+                    &lt;label class="lab-item"&gt;关联网站：&lt;/label&gt;
+                     &lt;input class="txt easyui-combobox required" style="width:100%;" id="userSites" type="text" name="userSites" value="" placeholder="请选择关联组织" data-options="valueField: 'id',textField: 'text',url: 'json/combo.js',method:'get',multiple:true,required:true" missingMessage="请选择关联网站(多选)" /&gt;
+                &lt;/div&gt;&lt;/div&gt;
+                &lt;div class="p6"&gt;&lt;div class="item-one"&gt;
+                    &lt;label class="lab-item"&gt;关联组织：&lt;/label&gt;
+                     &lt;input class="txt easyui-combotree required" style="width:100%;" data-options="url:'json/groupTree.js',method:'get',flatData:true,method:'get',multiple:true,onlyLeafCheck:true,required:true,prompt:'请选择关联组织'" type="text" name="group" value="" maxlength="20" placeholder="请选择关联组织" missingMessage="请选择关联组织(多选)" /&gt;
+                &lt;/div&gt;&lt;/div&gt;
+              &lt;/div&gt;
 
-          &lt;div class="row"&gt;
-              &lt;div class="p6"&gt;&lt;div class="item-one"&gt;
-                  &lt;label class="lab-item"&gt;关联网站：&lt;/label&gt;
-                   &lt;input class="txt easyui-combobox required" style="width:100%;" id="userSites" type="text" name="userSites" value="" placeholder="请选择关联组织" data-options="valueField: 'id',textField: 'text',url: 'json/combo.js',method:'get',multiple:true,required:true"/&gt;
-              &lt;/div&gt;&lt;/div&gt;
-              &lt;div class="p6"&gt;&lt;div class="item-one"&gt;
-                  &lt;label class="lab-item"&gt;关联组织：&lt;/label&gt;
-                   &lt;input class="txt easyui-combotree required" style="width:100%;" data-options="url:'json/groupTree.js',method:'get',flatData:true,method:'get',multiple:true,onlyLeafCheck:true,required:true" type="text" name="group" value="" maxlength="20" placeholder="请选择关联组织" /&gt;
-              &lt;/div&gt;&lt;/div&gt;
-            &lt;/div&gt;
+            &lt;div class="row"&gt;
+                &lt;div class="p6"&gt;&lt;div class="item-one"&gt;
+                    &lt;label class="lab-item"&gt;Email：&lt;/label&gt;
+                     &lt;input class="txt easyui-validatebox" type="text" name="email" value="" maxlength="20" placeholder="请输入email地址" data-options="validType:['email','length[0,20]']" invalidMessage="您的邮箱地址不正确" /&gt;
+                &lt;/div&gt;&lt;/div&gt;
+                &lt;div class="p6"&gt;&lt;div class="item-one"&gt;
+                    &lt;label class="lab-item"&gt;QQ：&lt;/label&gt;
+                     &lt;input class="txt easyui-validatebox" type="text" name="QQ" value="" maxlength="20" placeholder="QQ号码" /&gt;
+                &lt;/div&gt;&lt;/div&gt;
+              &lt;/div&gt;
 
-          &lt;div class="row"&gt;
-              &lt;div class="p6"&gt;&lt;div class="item-one"&gt;
-                  &lt;label class="lab-item"&gt;Email：&lt;/label&gt;
-                   &lt;input class="txt email" type="text" name="email" value="" maxlength="20" placeholder="请输入email地址" /&gt;
-              &lt;/div&gt;&lt;/div&gt;
-              &lt;div class="p6"&gt;&lt;div class="item-one"&gt;
-                  &lt;label class="lab-item"&gt;QQ：&lt;/label&gt;
-                   &lt;input class="txt number" type="text" name="QQ" value="" maxlength="20" placeholder="QQ号码" /&gt;
-              &lt;/div&gt;&lt;/div&gt;
-            &lt;/div&gt;
+            &lt;div class="row"&gt;
+                &lt;div class="p6"&gt;&lt;div class="item-one"&gt;
+                    &lt;label class="lab-item"&gt;微信：&lt;/label&gt;
+                     &lt;input class="txt easyui-validatebox" type="text" name="weChat" value="" maxlength="20" placeholder="" /&gt;
+                &lt;/div&gt;&lt;/div&gt;
+                &lt;div class="p6"&gt;&lt;div class="item-one"&gt;
+                    &lt;label class="lab-item"&gt;账号状态：&lt;/label&gt;
+                    &lt;label class="lab-val"&gt;&lt;input class="rad {required:true}"  type="radio" value="1" name="state" /&gt;启用&lt;/label&gt;
+                    &lt;label class="lab-val"&gt;&lt;input class="rad"   type="radio" value="2" name="state" /&gt;停用&lt;/label&gt;
+                &lt;/div&gt;&lt;/div&gt;
+              &lt;/div&gt;
 
-          &lt;div class="row"&gt;
-              &lt;div class="p6"&gt;&lt;div class="item-one"&gt;
-                  &lt;label class="lab-item"&gt;微信：&lt;/label&gt;
-                   &lt;input class="txt" type="text" name="weChat" value="" maxlength="20" placeholder="" /&gt;
-              &lt;/div&gt;&lt;/div&gt;
-              &lt;div class="p6"&gt;&lt;div class="item-one"&gt;
-                  &lt;label class="lab-item"&gt;账号状态：&lt;/label&gt;
-                  &lt;label class="lab-val"&gt;&lt;input class="rad {required:true}"  type="radio" value="1" name="state" /&gt;启用&lt;/label&gt;
-                  &lt;label class="lab-val"&gt;&lt;input class="rad"   type="radio" value="2" name="state" /&gt;停用&lt;/label&gt;
-              &lt;/div&gt;&lt;/div&gt;
-            &lt;/div&gt;
+            &lt;/fieldset&gt;
 
-          &lt;/fieldset&gt;
-
-            &lt;p class="row-btn center"&gt;
-              &lt;input type="submit" class="btn btn-primary" lay-submit name="btnSubmit" value="保存" /&gt;
-              &lt;input type="submit" class="btn btn-primary disabled" lay-submit name="btnSubmit" value="立即保存" /&gt;
-              &lt;input type="button" class="btn" name="btnCancel" value="取 消" /&gt;
-            &lt;/p&gt;
-      &lt;/form&gt;
+              &lt;p class="row-btn center"&gt;
+                &lt;input type="button" class="btn btn-primary btn-easyFormSubmit" lay-submit name="btnSubmit" value="保存" /&gt;
+                &lt;input type="button" class="btn btn-primary disabled" lay-submit name="btnSubmit" value="立即保存" /&gt;
+                &lt;input type="button" class="btn btn-cancel" name="btnCancel" value="取 消" /&gt;
+              &lt;/p&gt;
+        &lt;/form&gt;
 
       </pre>
 

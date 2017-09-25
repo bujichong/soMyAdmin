@@ -393,249 +393,249 @@ var $grid = {
         }
     },
     renderTools : function (grid,btnArr,$par,singerMode) {
-        var $gridO = $(grid);
-         $.each(btnArr, function (i, opt) {
-            //iconCls:'icon-add',text:'新增',url:'form.html',noMax: true,popHeight:350,title:'用户信息-新增'
-            var o= $.extend({
-                iconCls :'plus',//默认按钮图标
-                btnCls : 'default',//默认按钮类型
-                text : '新增',//按钮文本
-                url : null,//请求地址
-                popMax : false,//是否最大化
-                popWidth : 560,//弹窗宽度
-                popHeight : 300,//弹窗高度
-                ajaxMsg : '你确定提交此操作吗？',
-                title : '信息窗口',//默认弹窗标题
-                check:false,//是否返回是check的值，即勾选行，默认返回select的值，即选择行
-                notNull : false,//不能不选择行
-                onlyOne : false,//只能选择一行
-                newWin : false,//在新窗口打开
-                ajax : false,//ajax事件
-                post : false,//ajax改为 post参数方式
-                endBack : function () {},
-                ajaxBack : function (data) {},
-                click : function () {}
-            },opt||{});
-            var $btn = $('<span class="btn btn-small s-tool'+(singerMode?" s-tool-singer":"")+' btn-default"><b class="icon icon-'+o.iconCls+'"></b> '+o.text+'</span>');
-            $btn.click(function () {
-                var _self = $(this);
-                var rows = $gridO.datagrid(o.check?"getChecked":"getSelections");
-                if (o.notNull && rows.length == 0) {
-                    if (o.notNull === true) o.notNull = "请选择记录!";
-                    layer.msg(o.notNull,{icon:0});
-                    // $.sobox.warning(o.notNull);
-                     _self.blur();
-                    return;
-                }
-                if (o.onlyOne && rows.length != 1) {
-                    if (o.onlyOne === true)o.onlyOne = "请选择需要操作的一条记录!";
-                    layer.msg(o.onlyOne,{icon:0});
-                    // $.sobox.warning(o.onlyOne);
-                     _self.blur();
-                    return;
-                }
-                var url = o.url;
-                if (url) {
-                    if (typeof url == 'function') {
-                        url = url();
-                    };
-                    if (o.post) {
-                        if (o.post.constructor !== String) {o.post = 'id=id'};//默认取id
-                        var map= [];
-                        if (rows.length>0) {
-                            var ps = [],keyArr = [];
-                            ps = o.post.split('&');
-                            for (var c = 0; c < ps.length; c++) {
-                                keyArr.push(ps[c].split('='));
-                                // map[keyArr[c][0]]=[];
-                            }
-                            for (var i = 0; i < rows.length; i++) {
-                                var tt = rows[i];
-                                for (var j = 0; j < ps.length; j++) {
-                                    map.push(keyArr[j][0]+'='+tt[keyArr[j][1]]);
-                                }
-                            }
-                            map = map.join('&');
-
-                        };
-                    }else{
-                        var ps = [], re = /\{(\w+)\}/g, c, map = {};
-                        while (c = re.exec(url)) {
-                            ps.push(c[1]);
-                            map[c[1]] = [];
-                        }
-                        if (ps.length > 0 && rows.length > 0) {
-                            for (var i = 0; i < rows.length; i++) {
-                                var tt = rows[i];
-                                for (var j = 0; j < ps.length; j++) {
-                                    map[ps[j]].push(tt[ps[j]]);
-                                }
-                            }
-                            for (var k in map) {
-                                map[k] = map[k].join(",");
-                            }
-                            url = $T.format(url, map);
-                        }
-                    };
-                    // window.console && console.log(url);
-                    // window.console && console.log(map);
-                    if(o.newWin){
-                        window.open(url);
-                        _self.blur();
-                        return;
-                    }
-                    if (o.ajax) {
-                        var ajaxData = o.post?map:{};
-                        $ajax.post(url, ajaxData, o.ajaxMsg).done(function (rst) {
-                            o.ajaxBack(rst);
-                            if (rst.state) {
-                                $grid.reload(grid);
-                            }
-                        });
-                        _self.blur();
-                    } else {
-                        window._refreshParent = false;
-                        var areaVal = o.popMax?['100%', '100%']:[(o.popWidth+'px') || '560px',(o.popHeight+'px') || '300px'];
-                        var popIndex = layer.open({//layer
-                          type: 2,
-                          title : o.title,
-                          content:url,
-                          area :areaVal,
-                          end : function () {
-                              if (window._refreshParent){
-                                $grid.reload(grid);
-                                o.endBack();
+      var $gridO = $(grid);
+       $.each(btnArr, function (i, opt) {
+          //iconCls:'icon-add',text:'新增',url:'form.html',noMax: true,popHeight:350,title:'用户信息-新增'
+          var o= $.extend({
+              iconCls :'plus',//默认按钮图标
+              btnCls : 'default',//默认按钮类型
+              text : '新增',//按钮文本
+              url : null,//请求地址
+              popMax : false,//是否最大化
+              popWidth : 560,//弹窗宽度
+              popHeight : 300,//弹窗高度
+              ajaxMsg : '你确定提交此操作吗？',
+              title : '信息窗口',//默认弹窗标题
+              check:false,//是否返回是check的值，即勾选行，默认返回select的值，即选择行
+              notNull : false,//不能不选择行
+              onlyOne : false,//只能选择一行
+              newWin : false,//在新窗口打开
+              ajax : false,//ajax事件
+              post : false,//ajax改为 post参数方式
+              endBack : function () {},
+              ajaxBack : function (data) {},
+              click : function () {}
+          },opt||{});
+          var $btn = $('<span class="btn btn-small s-tool'+(singerMode?" s-tool-singer":"")+' btn-default"><b class="icon icon-'+o.iconCls+'"></b> '+o.text+'</span>');
+          $btn.click(function () {
+              var _self = $(this);
+              var rows = $gridO.datagrid(o.check?"getChecked":"getSelections");
+              if (o.notNull && rows.length == 0) {
+                  if (o.notNull === true) o.notNull = "请选择记录!";
+                  layer.msg(o.notNull,{icon:0});
+                  // $.sobox.warning(o.notNull);
+                   _self.blur();
+                  return;
+              }
+              if (o.onlyOne && rows.length != 1) {
+                  if (o.onlyOne === true)o.onlyOne = "请选择需要操作的一条记录!";
+                  layer.msg(o.onlyOne,{icon:0});
+                  // $.sobox.warning(o.onlyOne);
+                   _self.blur();
+                  return;
+              }
+              var url = o.url;
+              if (url) {
+                  if (typeof url == 'function') {
+                      url = url();
+                  };
+                  if (o.post) {
+                      if (o.post.constructor !== String) {o.post = 'id=id'};//默认取id
+                      var map= [];
+                      if (rows.length>0) {
+                          var ps = [],keyArr = [];
+                          ps = o.post.split('&');
+                          for (var c = 0; c < ps.length; c++) {
+                              keyArr.push(ps[c].split('='));
+                              // map[keyArr[c][0]]=[];
+                          }
+                          for (var i = 0; i < rows.length; i++) {
+                              var tt = rows[i];
+                              for (var j = 0; j < ps.length; j++) {
+                                  map.push(keyArr[j][0]+'='+tt[keyArr[j][1]]);
                               }
                           }
-                        });
-                        // window.console && console.log(popIndex);
-                        var str = url;
-                        if (str.indexOf("/") != 0) {
-                            str = location.pathname.replace(/\/[^/]*$/, "/") + url;
-                            window.console && console.log(str);
+                          map = map.join('&');
+
+                      };
+                  }else{
+                      var ps = [], re = /\{(\w+)\}/g, c, map = {};
+                      while (c = re.exec(url)) {
+                          ps.push(c[1]);
+                          map[c[1]] = [];
+                      }
+                      if (ps.length > 0 && rows.length > 0) {
+                          for (var i = 0; i < rows.length; i++) {
+                              var tt = rows[i];
+                              for (var j = 0; j < ps.length; j++) {
+                                  map[ps[j]].push(tt[ps[j]]);
+                              }
+                          }
+                          for (var k in map) {
+                              map[k] = map[k].join(",");
+                          }
+                          url = $T.format(url, map);
+                      }
+                  };
+                  // window.console && console.log(url);
+                  // window.console && console.log(map);
+                  if(o.newWin){
+                      window.open(url);
+                      _self.blur();
+                      return;
+                  }
+                  if (o.ajax) {
+                      var ajaxData = o.post?map:{};
+                      $ajax.post(url, ajaxData, o.ajaxMsg).done(function (rst) {
+                          o.ajaxBack(rst);
+                          if (rst.state) {
+                              $grid.reload(grid);
+                          }
+                      });
+                      _self.blur();
+                  } else {
+                      window._refreshParent = false;
+                      var areaVal = o.popMax?['100%', '100%']:[(o.popWidth+'px') || '560px',(o.popHeight+'px') || '300px'];
+                      var popIndex = layer.open({//layer
+                        type: 2,
+                        title : o.title,
+                        content:url,
+                        area :areaVal,
+                        end : function () {
+                            if (window._refreshParent){
+                              $grid.reload(grid);
+                              o.endBack();
+                            }
                         }
-                        $pop[str] = popIndex;
-                        _self.blur();
-                    }
-                }else{
-                    if (o.onlyOne) {rows = rows[0]};
-                    if (o.click) {
-                        o.click($gridO,rows);
-                        _self.blur();
-                        return;
-                    };
-                }
-            });
-            $par.append($btn);
-         });
-        // return $par;
+                      });
+                      // window.console && console.log(popIndex);
+                      var str = url;
+                      if (str.indexOf("/") != 0) {
+                          str = location.pathname.replace(/\/[^/]*$/, "/") + url;
+                          window.console && console.log(str);
+                      }
+                      $pop[str] = popIndex;
+                      _self.blur();
+                  }
+              }else{
+                  if (o.onlyOne) {rows = rows[0]};
+                  if (o.click) {
+                      o.click($gridO,rows);
+                      _self.blur();
+                      return;
+                  };
+              }
+          });
+          $par.append($btn);
+       });
+      // return $par;
     },
     initTools : function (grid,cfg) {
-        var me = this;
-        var randomId = 'tool-'+Math.ceil(Math.random()*100000000);
-        var $wrap = $('<div id="'+randomId+'" class="baseToobar"></div>');
-        var $gridO = $(grid);
-        // window.console && console.log(cfg);
-        if (cfg[0] instanceof Array) {
-            $.each(cfg,function (h,btnArr) {
-                var $btnGroup = $('<div class="item-group toolGroup"></div>');
-                me.renderTools(grid,btnArr,$btnGroup);
-                $wrap.append($btnGroup);
-            });
-        }else{
-            me.renderTools(grid,cfg,$wrap,true);
-        };
-        var $none = $('<div class="none"></div>');
-        $none.append($wrap);
-        $('body').append($none);
-        return randomId;
+      var me = this;
+      var randomId = 'tool-'+Math.ceil(Math.random()*100000000);
+      var $wrap = $('<div id="'+randomId+'" class="baseToobar"></div>');
+      var $gridO = $(grid);
+      // window.console && console.log(cfg);
+      if (cfg[0] instanceof Array) {
+          $.each(cfg,function (h,btnArr) {
+              var $btnGroup = $('<div class="item-group toolGroup"></div>');
+              me.renderTools(grid,btnArr,$btnGroup);
+              $wrap.append($btnGroup);
+          });
+      }else{
+          me.renderTools(grid,cfg,$wrap,true);
+      };
+      var $none = $('<div class="none"></div>');
+      $none.append($wrap);
+      $('body').append($none);
+      return randomId;
     },
     initToolBar: function (grid, cfg) {
-        $.each(cfg, function (i, opt) {
-            if (opt == '-')return;
-            if (!opt.handler) {
-                opt.handler = function () {
-                    var _self = $(this);
-                    var rows = $(grid).datagrid(opt.check?"getChecked":"getSelections");
-                    if (opt.notNull && rows.length == 0) {
-                        if (opt.notNull === true) opt.notNull = "请选择记录!";
-                        layer.msg(opt.notNull,{icon:0});
-                        // $.sobox.warning(opt.notNull);
-                        _self.blur();
-                        return;
-                    }
-                    if (opt.onlyOne && rows.length != 1) {
-                        if (opt.onlyOne === true)opt.onlyOne = "请选择需要操作的一条记录!";
-                        layer.msg(opt.onlyOne,{icon:0});
-                        _self.blur();
-                        // $.sobox.warning(opt.onlyOne);
-                        return;
-                    }
-                    var url = opt.url;
-                    if (url) {
-                        var ps = [], re = /\{(\w+)\}/g, c, map = {};
-                        while (c = re.exec(url)) {
-                            ps.push(c[1]);
-                            map[c[1]] = [];
-                        }
-                        if (ps.length > 0 && rows.length > 0) {
-                            for (var i = 0; i < rows.length; i++) {
-                                var tt = rows[i];
-                                for (var j = 0; j < ps.length; j++) {
-                                    map[ps[j]].push(tt[ps[j]]);
-                                }
-                            }
-                            for (var k in map) {
-                                map[k] = map[k].join(",");
-                            }
-                            url = $T.format(url, map);
-                        }
-                        if(opt.newWin){
-                            window.open(url);
-                            _self.blur();
-                            return;
-                        }
-                        if (opt.ajax) {
-                            $ajax.post(url, {}, true).done(function (rst) {
-                                if (rst.state) {
-                                    $grid.reload(grid);
-                                }
-                            });
-                            _self.blur();
-                        } else {
-                            window._refreshParent = false;
-                            opt.popWidth = opt.popWidth || 560;
-                            opt.popHeight = opt.popHeight || 300;
-                            var areaVal = opt.popMax?['100%', '100%']:[(opt.popWidth+'px'),(opt.popHeight+'px')];
-                            var popIndex = layer.open({//layer
-                              type: 2,
-                              title : opt.title,
-                              content:url,
-                              area :areaVal,
-                              end : function () {
-                                  if (window._refreshParent)$grid.reload(grid);
+      $.each(cfg, function (i, opt) {
+          if (opt == '-')return;
+          if (!opt.handler) {
+              opt.handler = function () {
+                  var _self = $(this);
+                  var rows = $(grid).datagrid(opt.check?"getChecked":"getSelections");
+                  if (opt.notNull && rows.length == 0) {
+                      if (opt.notNull === true) opt.notNull = "请选择记录!";
+                      layer.msg(opt.notNull,{icon:0});
+                      // $.sobox.warning(opt.notNull);
+                      _self.blur();
+                      return;
+                  }
+                  if (opt.onlyOne && rows.length != 1) {
+                      if (opt.onlyOne === true)opt.onlyOne = "请选择需要操作的一条记录!";
+                      layer.msg(opt.onlyOne,{icon:0});
+                      _self.blur();
+                      // $.sobox.warning(opt.onlyOne);
+                      return;
+                  }
+                  var url = opt.url;
+                  if (url) {
+                      var ps = [], re = /\{(\w+)\}/g, c, map = {};
+                      while (c = re.exec(url)) {
+                          ps.push(c[1]);
+                          map[c[1]] = [];
+                      }
+                      if (ps.length > 0 && rows.length > 0) {
+                          for (var i = 0; i < rows.length; i++) {
+                              var tt = rows[i];
+                              for (var j = 0; j < ps.length; j++) {
+                                  map[ps[j]].push(tt[ps[j]]);
                               }
-                            });
-                            // window.console && console.log(popIndex);
-                            var str = url;
-                            if (str.indexOf("/") != 0) {
-                                str = location.pathname.replace(/\/[^/]*$/, "/") + url;
-                                window.console && console.log(str);
+                          }
+                          for (var k in map) {
+                              map[k] = map[k].join(",");
+                          }
+                          url = $T.format(url, map);
+                      }
+                      if(opt.newWin){
+                          window.open(url);
+                          _self.blur();
+                          return;
+                      }
+                      if (opt.ajax) {
+                          $ajax.post(url, {}, true).done(function (rst) {
+                              if (rst.state) {
+                                  $grid.reload(grid);
+                              }
+                          });
+                          _self.blur();
+                      } else {
+                          window._refreshParent = false;
+                          opt.popWidth = opt.popWidth || 560;
+                          opt.popHeight = opt.popHeight || 300;
+                          var areaVal = opt.popMax?['100%', '100%']:[(opt.popWidth+'px'),(opt.popHeight+'px')];
+                          var popIndex = layer.open({//layer
+                            type: 2,
+                            title : opt.title,
+                            content:url,
+                            area :areaVal,
+                            end : function () {
+                                if (window._refreshParent)$grid.reload(grid);
                             }
-                            $pop[str] = popIndex;
-                            _self.blur();
-                        }
-                    } else {
-                        if (opt.onlyOne) {rows = rows[0]};
-                        if (opt.click){
-                            opt.click($(grid), rows);
-                            _self.blur();
-                        };
-                    }
-                }
-            }
-        });
-        return cfg;
+                          });
+                          // window.console && console.log(popIndex);
+                          var str = url;
+                          if (str.indexOf("/") != 0) {
+                              str = location.pathname.replace(/\/[^/]*$/, "/") + url;
+                              window.console && console.log(str);
+                          }
+                          $pop[str] = popIndex;
+                          _self.blur();
+                      }
+                  } else {
+                      if (opt.onlyOne) {rows = rows[0]};
+                      if (opt.click){
+                          opt.click($(grid), rows);
+                          _self.blur();
+                      };
+                  }
+              }
+          }
+      });
+      return cfg;
     }
 };
 
