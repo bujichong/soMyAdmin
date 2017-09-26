@@ -416,7 +416,7 @@ var $grid = {
               ajaxBack : function (data) {},
               click : function () {}
           },opt||{});
-          var $btn = $('<span class="btn btn-small s-tool'+(singerMode?" s-tool-singer":"")+' btn-default"><b class="icon icon-'+o.iconCls+'"></b> '+o.text+'</span>');
+          var $btn = $('<span class="btn s-tool'+(singerMode?" s-tool-singer":"")+' btn-default"><b class="icon icon-'+o.iconCls+'"></b> '+o.text+'</span>');
           $btn.click(function () {
               var _self = $(this);
               var rows = $gridO.datagrid(o.check?"getChecked":"getSelections");

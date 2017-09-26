@@ -962,9 +962,7 @@ box-shadow:none;-webkit-box-shadow:none;-moz-box-shadow:none;
 .item-group input,.item-group textarea,.item-group select,.item-group .txt,.item-group .txta,.item-group .drop,.item-group .item-on{border-radius:0px;}
 .item-group .item-l{border-radius:1px 0 0 1px;border-right:0px;}
 .item-group .item-r{border-radius:0 1px 1px 0;border-left:0px;}
-.item-group + .item-group {
-margin-left: 16px;
-}
+.item-group + .item-group {margin-left: 10px;}
 
 .item-group > input,
 .item-group > .btn,
