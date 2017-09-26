@@ -6,52 +6,54 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <title>角色管理 - 爱尔医院筹建管理系统</title>
-<link type="text/css" rel="stylesheet" href="css/bootstrap.css" />
-<link type="text/css" rel="stylesheet" href="css/bootstrap-theme.css" />
 <link rel="stylesheet" type="text/css" media="all" href="js/lib/easyui/themes/gray/easyui.css" />
-<link type="text/css" rel="stylesheet" href="css/newbase.css" />
+<link type="text/css" rel="stylesheet" href="css/easy-plus.css" />
+<link type="text/css" rel="stylesheet" href="css/socss.css" />
+<link type="text/css" rel="stylesheet" href="css/plugins.css" />
+<link type="text/css" rel="stylesheet" href="css/base.css" />
 </head>
 <body data-js="sys:dictEdit">
 <div class="wrapper-popForm">
+    <form class="soform form-validate form-enter pad-t15" method="post" action="json/true.js">
+      <fieldset>
+        <div class="row">
+          <div class="p6"><div class="item-one">
+              <label class="lab-item">名称：</label>
+              <input id="txt-dicName" class="txt easyui-validatebox required" type="text" name="name" value="" placeholder="字典名称" data-options="required:true" missingMessage="请输入字典名称" />
+          </div></div>
+          <div class="p6">
+            <div class="item-one">
+                <label class="lab-item">字典值：</label>
+                <input class="txt easyui-validatebox required" type="text" name="value" value="" placeholder="字典值" data-options="required:true" missingMessage="请输入字典值" />
+            </div>
+          </div>
+        </div>
 
-    <form class="form-horizontal soform pad-t15 pad-r30" role="form" method="post" id="vform" action="${base}/admin/system/dictionary/create">
-        <fieldset>
-           <div class="form-group">
-              <label class="col-xs-2 control-label">名称：</label>
-              <div class="col-xs-10">
-                 <input id="txt-dicName" class="form-control required" type="text" name="name" value="" maxlength="50" placeholder="字典名称" />
-              </div>
-           </div>
-           <div class="form-group">
-              <label class="col-xs-2 control-label">字典值：</label>
-              <div class="col-xs-10">
-                 <input class="form-control required" type="text" name="value" value="" maxlength="100" placeholder="字典值" />
-              </div>
-           </div>
-           <div class="form-group">
-              <label class="col-xs-2 control-label">拼音码：</label>
-              <div class="col-xs-10">
-                 <input id="pinyinCode" class="form-control required" type="text" name="pinyinCode" value="" maxlength="50" placeholder="拼音码" />
-              </div>
-           </div>
-           <div class="form-group">
-              <label class="col-xs-2 control-label">排序：</label>
-              <div class="col-xs-10">
-                 <input class="form-control number" type="text" name="order" value="" maxlength="20" placeholder="字典排序" />
-              </div>
-           </div>
-           <div class="form-group">
-              <label class="col-xs-2 control-label">描述：</label>
-              <div class="col-xs-10">
-                 <input class="form-control" type="text" name="description" value="" maxlength="200" placeholder="描述" />
-              </div>
-           </div>
-        </fieldset>
-        <p class="p-item p-btn center">
-          <input type="submit" class="btn btn-info btn-formS btn-submit" name="btnSubmit" value="保 存" />
-          <input type="button" class="btn btn-default btn-formS btn-cancel" name="btnCancel" value="取 消" />
+        <div class="row">
+          <div class="p6"><div class="item-one">
+              <label class="lab-item">拼音码：</label>
+              <input id="pinyinCode" class="txt easyui-validatebox required" type="text" name="pinyinCode" value="" placeholder="拼音码" maxlength="50" data-options="required:true" missingMessage="请输入拼音码" />
+          </div></div>
+          <div class="p6">
+            <div class="item-one">
+                <label class="lab-item">排序：</label>
+                <input class="txt easyui-validatebox required" type="text" name="order" value="" placeholder="字典排序" data-options="required:true" validType="pInt" missingMessage="请输入排序号" invalidMessage="排序号必须为正整数" />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="p12"><div class="item-one">
+              <label class="lab-item">描述：</label>
+              <textarea class="txta" name="txta" rows="4" cols="80"></textarea>
+          </div></div>
+        </div>
+        <p class="row-btn">
+          <input type="button" class="btn btn-primary btn-easyFormSubmit" lay-submit name="btnSubmit" value="保 存" />
+          <input type="button" class="btn btn-cancel" name="btnCancel" value="取 消" />
         </p>
+      </fieldset>
     </form>
+
 </div>
 <script src="js/require.js" data-main="js/main.un"></script>
 </body>

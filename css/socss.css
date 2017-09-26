@@ -67,7 +67,9 @@ font-size:14px;
 text-align: center;
 -webkit-font-smoothing: antialiased;
 -moz-osx-font-smoothing: grayscale;
+outline:none;
 }
+.icon:before{display: -moz-inline-stack;display:inline-block;*display:inline;*zoom:1;height:14px;overflow: hidden;}
 /*
 .icon-exit:before{content: "\e602";}
 .icon-home:before{content: "\e609";}
@@ -302,7 +304,7 @@ text-align: center;
 
 /*布局*/
 .row{width: 98%;padding:0 1%;vertical-align: top;}
-.row-btn{padding:20px 0 0;}
+.row-btn{padding:10px 0 0;text-align: center;}
 /*.row .txt{border:1px solid #5f86a7;height: 19px;line-height: 19px;padding: 0 3px;vertical-align:middle;}
 .row .txta{width:78%;height:6em; border:1px solid #5f86a7;vertical-align:top;line-height:1.7; }
 .row .txt_focus{border:1px solid #cc6600;background-color:#fefcda;}*/
@@ -416,7 +418,7 @@ box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
 transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
 }
 textarea,.txta{
-line-height:22px;width:120px;height:92px;*height:88px;padding:2px 4px;border:1px solid #d3d3d3;
+line-height:22px;width:120px;height:70px;*height:88px;padding:2px 4px;border:1px solid #d3d3d3;
 box-shadow:1px 1px 1px #f3f3f3 inset;-webkit-box-shadow:1px 1px 1px #f3f3f3 inset;-moz-box-shadow:1px 1px 1px #f3f3f3 inset;
 }
 input[type="text"]:focus, input[type="password"]:focus, input[type="datetime"]:focus,
@@ -489,11 +491,11 @@ input.validatebox-invalid:focus{
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 4px #ce8483;
 }
 .required{background:url(../images/icon/inputmark.png) no-repeat 100% -998px;}
-.hk_time,.hk_date{background:url(../images/icon/inputmark.png) no-repeat 100% 0;}
-.txt_requireDate{background:url(../images/icon/inputmark.png) no-repeat 100% -1500px;}
-.hk_pop,.hk_popList{background:url(../images/icon/inputmark.png) no-repeat 100% -496px;}
-.txt_requireSelect{background:url(../images/icon/inputmark.png) no-repeat 100% -248px;}
-.hk_requirePop{background:url(../images/icon/inputmark.png) no-repeat 100% -1996px;}
+.so-time,.so-date{background:url(../images/icon/inputmark.png) no-repeat 100% 0;}
+.txt-requireDate{background:url(../images/icon/inputmark.png) no-repeat 100% -1500px;}
+.so-pop,.so-popList{background:url(../images/icon/inputmark.png) no-repeat 100% -496px;}
+.txt-requireSelect{background:url(../images/icon/inputmark.png) no-repeat 100% -248px;}
+.so-requirePop{background:url(../images/icon/inputmark.png) no-repeat 100% -1996px;}
 
 
 
@@ -555,9 +557,7 @@ filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff6f6f6', en
 position: relative;
 /* Blue border on button focus. */
 border-color: #4D90FE;
-outline: thin dotted;
-outline: 5px auto -webkit-focus-ring-color;
-outline-offset: -2px;
+
 }
 .btn-block{display: block;width: 100%;padding-right: 0;padding-left: 0;-webkit-box-sizing: border-box;box-sizing: border-box;}
 .btn-large{
@@ -1265,7 +1265,7 @@ background-image: linear-gradient(45deg,rgba(255,255,255,0.15) 25%,transparent 2
 .badge{position: relative;display: -moz-inline-stack;display:inline-block;*display:inline;*zoom:1;height: 18px;line-height: 18px;font-size: 12px;padding: 0 5px;background-color: #FF5722;color: #fff;min-width: 8px;text-align: center;border-radius:9px;}
 .nav-tabs .dot,.dot-top,.badge-top{top:-5px;}
 
-.a-op{display: -moz-inline-stack;display:inline-block;*display:inline;*zoom:1;width:20px;height:20px;text-indent: -999em;overflow: hidden;background:url(../images/icon/i-op.png) no-repeat;margin:9px 5px 0;cursor:hand;cursor:pointer;}
+.a-op{display: -moz-inline-stack;display:inline-block;*display:inline;*zoom:1;width:20px;height:20px;text-indent: -999em;overflow: hidden;background:url(../images/icon/i-op.png) no-repeat;margin:4px 5px 0;cursor:hand;cursor:pointer;}
 .a-opEdit{background-position: 0 0;}
 .a-opDel{background-position: -20px 0px;}
 .a-opSearch{background-position: -40px 0px;}

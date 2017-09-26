@@ -997,7 +997,7 @@ var $ff = {
             $('.required').each(function () {
                 var _self = $(this);
                 if (_self.hasClass('so-time') || _self.hasClass('so-date')) {
-                    _self.addClass('txt_requireDate');
+                    _self.addClass('txt-requireDate');
                 }
                 if (_self.hasClass('so-choice') || _self.hasClass('so-pop')) {
                     _self.addClass('so-requirePop');
@@ -1160,19 +1160,26 @@ var $ff = {
            var $form = $btn.parents('.form-validate');
            var validate = $form.form("validate");
            var back = false;
+           window.console&&console.log(validate);
            if(validate){
              var formData = $T.data($form);//form个性化附加数据
              var loadingIndex = null;//loading容器
              var msg = $btn.attr("msg") || "您确定要提交吗?";//确认框提示信息
              var action = $btn.attr("action") || $form.action;//表单请求地址
+             var noconfirm = $btn.attr("noconfirm");//获取不弹窗提示确认，只能为true才不提示
              var formSubmitEvent = me.formSubmitEvent(action,formData,loadingIndex);
 
-             layer.confirm(msg, {
-               icon: 0, title:false,btnAlign: 'c'
-             }, function(index){
-                 layer.close(index);
-                 $form.form('submit',formSubmitEvent);
-             });
+             if( noconfirm==='true'){//如果不弹窗提示确认
+               $form.form('submit',formSubmitEvent);
+             }else{//不弹窗提示确认
+               layer.confirm(msg, {
+                 icon: 0, title:false,btnAlign: 'c'
+               }, function(index){
+                   layer.close(index);
+                   $form.form('submit',formSubmitEvent);
+               });
+             }
+
            }
        });
 
@@ -1198,6 +1205,7 @@ var $ff = {
              var dataPlus = formData.params ||{};//附加提交表单值
              param = $.extend(param,dataPlus);
              console.log(param);
+             if(!callSumbit){layer.close(loadingIndex);};
              return callSumbit;
            },
            success:function(rst){

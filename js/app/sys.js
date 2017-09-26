@@ -192,6 +192,9 @@ define(['template'],function (template) {
         animate : true,
         url : 'json/powerTree.js',
         // onlyLeafCheck : true,
+        flatData:true,
+        // id : 'id',
+        // text : 'name',
         checkbox : true,
         lines : true,
         onClick : function (node) {
@@ -225,17 +228,17 @@ define(['template'],function (template) {
     group : function () {
       $grid.newGrid("#gridBox",{
         tools:[
-          [{iconCls:'plus',text:'新增',url:'groupAdd.html',popHeight:260,popWidth:450,title:'组织管理-新增'}
-          ,{iconCls:'pencil',btnCls:'warning',text:'修改',onlyOne:true,popHeight:330,popWidth:450,url:'groupEdit.html?id={id}',title:'组织管理-修改',notNull:'请选择你要修改的记录!',popBack : function () {
+          [{iconCls:'add',text:'新增',url:'groupAdd.html',popHeight:260,popWidth:450,title:'组织管理-新增'}
+          ,{iconCls:'edit',btnCls:'warning',text:'修改',onlyOne:true,popHeight:280,popWidth:450,url:'groupEdit.html?id={id}',title:'组织管理-修改',notNull:'请选择你要修改的记录!',popBack : function () {
             window.console && console.log(111);
           }}
-          ,{iconCls:'trash',btnCls:'danger',text:'删除',check:true,url:'json/true.js?id={id}',notNull:'请 <strong class="red">勾选</strong> 需要删除的一项或多项！', ajax:true,ajaxBack: function (rst) {
+          ,{iconCls:'del',btnCls:'danger',text:'删除',check:true,url:'json/true.js?id={id}',notNull:'请 <strong class="red">勾选</strong> 需要删除的一项或多项！', ajax:true,ajaxBack: function (rst) {
             window.console && console.log(rst);
             if (rst.state) {
               $('#ul-groupTree').tree('reload');
             };
           }}]
-          ,[{iconCls:'user',btnCls:'warning',text:'分配角色',url:'userRole.html?id={id}',onlyOne:true,popHeight:480,popWidth:550,title:'组织管理-分配角色',notNull:'请选择你要分配角色的行！'}]
+          ,[{iconCls:'admin',btnCls:'warning',text:'分配角色',url:'userRole.html?id={id}',onlyOne:true,popHeight:480,popWidth:550,title:'组织管理-分配角色',notNull:'请选择你要分配角色的行！'}]
         ],
         fitColumns : true,
         rownumbers : false,
@@ -268,10 +271,10 @@ define(['template'],function (template) {
     module : function () {
       $grid.newGrid("#gridBox",{
         tools:[
-          [{iconCls:'eye-open',text:'查看',url:'moduleAdd.html?id={id}',onlyOne:true,popHeight:530,popWidth:660,title:'模块管理-查看',notNull:'请 <strong class="red">勾选</strong> 需要删除的一项或多项！'}
-          ,{iconCls:'plus',text:'新增',url:'moduleAdd.html',popHeight:530,popWidth:660,title:'模块管理-新增'}
-          ,{iconCls:'pencil',btnCls:'warning',text:'修改',onlyOne:true,popHeight:530,popWidth:660,url:'moduleAdd.html?id={id}',title:'模块管理-修改',notNull:'请选择你要修改的记录!'}
-          ,{iconCls:'trash',btnCls:'danger',text:'删除',check:true,url:'json/true.js?id={id}',notNull:'请 <strong class="red">勾选</strong> 需要删除的一项或多项！', ajax:true}]
+          [{iconCls:'look',text:'查看',url:'moduleAdd.html?id={id}',onlyOne:true,popHeight:540,popWidth:660,title:'模块管理-查看',notNull:'请 <strong class="red">勾选</strong> 需要删除的一项或多项！'}
+          ,{iconCls:'add',text:'新增',url:'moduleAdd.html',popHeight:540,popWidth:660,title:'模块管理-新增'}
+          ,{iconCls:'edit',btnCls:'warning',text:'修改',onlyOne:true,popHeight:540,popWidth:660,url:'moduleAdd.html?id={id}',title:'模块管理-修改',notNull:'请选择你要修改的记录!'}
+          ,{iconCls:'del',btnCls:'danger',text:'删除',check:true,url:'json/true.js?id={id}',notNull:'请 <strong class="red">勾选</strong> 需要删除的一项或多项！', ajax:true}]
         ],
         fitColumns : true,
         rownumbers : false,
@@ -307,15 +310,10 @@ define(['template'],function (template) {
     moduleAdd : function () {
 
       // $hook.validate('#formModule');
-      $hook.validate('#formModuleAdd');
-
-      $('.btn-addNewFunc').click(function () {
-        $('#formModuleAdd').submit();
-      });
 
       var moduleLen = $('.chk-module').length-1;
       window.addOneModule = function () {
-          var vals = $('#formModuleAdd').serializeObject();
+          var vals = $('#formModuleAdd').sovals();
           moduleLen++;
           vals.num = moduleLen;
           $('#moduleBox').append(template('newModule',vals));
