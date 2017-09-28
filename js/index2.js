@@ -74,7 +74,7 @@ var eyeIndex = {
             type:2,
             content : url,
             title : '修改密码',
-            area : ['400px','280px']
+            area : ['400px','240px']
           });
           if (url.indexOf("/") != 0) {
               url = location.pathname.replace(/\/[^/]*$/, "/") + url;

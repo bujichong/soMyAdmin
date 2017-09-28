@@ -90,8 +90,10 @@ html #layuicss-skinlayercss{display:none;position:absolute;width:1989px}
 .layui-layer-btn{text-align:right;padding:0 10px 15px;pointer-events:auto;user-select:none;-webkit-user-select:none}
 .layui-layer-btn a{height:30px;line-height:30px;margin:0 4px;padding:0 18px;border:1px solid #dedede;background-color:#f1f1f1;color:#333;border-radius:1px;font-weight:400;cursor:pointer;text-decoration:none}
 .layui-layer-btn a:hover{opacity:.9;text-decoration:none}
-.layui-layer-btn a:active{opacity:.8}
+.layui-layer-btn a:active{opacity:.8;}
+.layui-layer-btn a:focus{box-shadow:0px 0px 6px #999;-webkit-box-shadow:0px 0px 6px #999;-moz-box-shadow:0px 0px 6px #999;}
 .layui-layer-btn .layui-layer-btn0{border-color:#1DAFDA;background-color:#12C1F7;color:#fff}
+.layui-layer-btn .layui-layer-btn0:focus{border:1px dotted #0798c5;}
 .layui-layer-btn-l{text-align:left}
 .layui-layer-btn-c{text-align:center}
 .layui-layer-dialog{min-width:280px}

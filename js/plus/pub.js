@@ -193,7 +193,9 @@ var $ajax = {
           dtd = $.Deferred();
           var event = function (dtd) {
             var loadingIndex = null;
-            layer.confirm(msg, {icon: 0, title:false,btnAlign: 'c'}, function(){
+            layer.confirm(msg, {icon: 0, title:false,btnAlign: 'c',success: function ($layer) {
+                $layer.find('.layui-layer-btn0').focus();//提交按钮获取焦点
+            }}, function(){
                 $.ajax({
                   url: url, type: 'post', data: data, dataType: 'json',
                   beforeSend: function (jqXHR, settings) {
@@ -1173,7 +1175,9 @@ var $ff = {
                $form.form('submit',formSubmitEvent);
              }else{//不弹窗提示确认
                layer.confirm(msg, {
-                 icon: 0, title:false,btnAlign: 'c'
+                 icon: 0, title:false,btnAlign: 'c',success: function ($layer) {
+                     $layer.find('.layui-layer-btn0').focus();//提交按钮获取焦点
+                 }
                }, function(index){
                    layer.close(index);
                    $form.form('submit',formSubmitEvent);

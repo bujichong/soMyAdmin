@@ -6,37 +6,38 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <title>用户管理 - 爱尔医院筹建管理系统</title>
-<link type="text/css" rel="stylesheet" href="css/bootstrap.css" />
-<link type="text/css" rel="stylesheet" href="css/bootstrap-theme.css" />
 <link rel="stylesheet" type="text/css" media="all" href="js/lib/easyui/themes/gray/easyui.css" />
-<link type="text/css" rel="stylesheet" href="css/newbase.css" />
+<link type="text/css" rel="stylesheet" href="css/easy-plus.css" />
+<link type="text/css" rel="stylesheet" href="css/socss.css" />
+<link type="text/css" rel="stylesheet" href="css/plugins.css" />
+<link type="text/css" rel="stylesheet" href="css/base.css" />
 </head>
 <body>
 <div class="wrapper-popForm">
-    <form class="form-horizontal soform pad-t25 pad-r30" role="form" method="post" data-opt="" id="vform" action="json/true.js">
-       <div class="form-group">
-          <label class="col-xs-4 control-label">旧密码：</label>
-          <div class="col-xs-7 control-cont">
-            <input id="oldPwd" name="oldPwd" type="password" data-errpos="1" class="form-control required {rangelength:[6,16],messages:{rangelength:'密码长6-16位',required:'请输入密码'}}" placeholder="请输入旧密码" />
-          </div>
-        </div>
-       <div class="form-group">
-          <label class="col-xs-4 control-label">新密码：</label>
-          <div class="col-xs-7 control-cont">
-            <input id="newPwd" name="newPwd" type="password" data-errpos="1" class="form-control required {rangelength:[6,16],messages:{rangelength:'密码长6-16位',required:'请输入新密码'}}" placeholder="请输入新密码" />
-          </div>
-        </div>
-       <div class="form-group">
-          <label class="col-xs-4 control-label">重复新密码：</label>
-          <div class="col-xs-7 control-cont">
-            <input id="repPwd" name="repPwd" type="password" data-errpos="1" class="form-control required {rangelength:[6,16],equalTo:'#newPwd',messages:{rangelength:'密码长6-16位',required:'请重复新密码',equalTo:'密码不一致'}}" placeholder="请重复新密码" />
-          </div>
-        </div>
 
-        <p class="pad-t10 center">
-          <input type="submit" class="btn btn-info btn-formS btn-submit" name="btnSubmit" value="保 存" />
-          <input type="button" class="btn btn-default btn-formS btn-cancel" name="btnCancel" value="取 消" />
-        </p>
+  <form class="soform form-validate form-enter pad-t25" method="post" action="json/true.js" data-opt="{callback:'',beforeCallback:'',params:{}}">
+    <div class="row">
+      <div class="p10"><div class="item-one solab-lb">
+          <label class="lab-item">旧密码：</label>
+          <input class="txt easyui-validatebox required" id="oldPwd" type="password" name="oldPwd" value="" placeholder="请输入旧密码" data-options="required:true" validType="length[6,16]" missingMessage="请输入旧密码" invalidMessage="密码长6-16位" />
+      </div></div>
+    </div>
+    <div class="row">
+      <div class="p10"><div class="item-one solab-lb">
+          <label class="lab-item">新密码：</label>
+          <input class="txt easyui-validatebox required" id="newPwd" type="password" name="newPwd" value="" placeholder="请输入新密码" data-options="required:true" validType="normalPass" missingMessage="请输入新密码" />
+      </div></div>
+    </div>
+    <div class="row">
+      <div class="p10"><div class="item-one solab-lb">
+          <label class="lab-item">重复新密码：</label>
+          <input class="txt easyui-validatebox required" id="repPwd" type="password" name="repPwd" value="" placeholder="请重复新密码" data-options="required:true" validType="equals['#newPwd']" missingMessage="请重复新密码" />
+      </div></div>
+    </div>
+    <p class="row-btn">
+      <input type="button" class="btn btn-primary btn-easyFormSubmit" name="btnSubmit" value="保 存" />
+      <input type="button" class="btn btn-cancel" name="btnCancel" value="取 消" />
+    </p>
   </form>
 </div>
 <script src="js/require.js" data-main="js/main.un"></script>

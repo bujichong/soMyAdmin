@@ -98,13 +98,13 @@
         validator: function (value) {
             return /^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\d).*$/.test(value);
         },
-        message: '必须含大小写字母及数字'
+        message: '须含大小写字母及数字'
       },
       complexPass : {
         validator: function (value) {
             return /^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\d)(?=.*?[-`=\\\[\];',./~!@#$%^&*()_+|{}:"<>?]).*$/.test(value);
         },
-        message: '必须含大小写字母、数字及特殊字符'
+        message: '须含大小写字母、数字及特殊字符'
       },
       cn : {
         validator: function (value) {
@@ -329,7 +329,7 @@
       //  输入的字符必须是指定的内容相同
       equals: {
           validator: function (value, param) {
-            console.log(param);
+            // console.log(param);
               return value == $(param[0]).val();
           },
           message: "输入的内容不匹配."
