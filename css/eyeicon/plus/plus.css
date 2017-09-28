@@ -10,8 +10,8 @@ padding-top:120px;}
 .fs1 {font-size: 16px;}
 .fs2 {font-size: 16px;}
 
-.glyph{padding:0.2em;margin:1px;background-color:#eee;}
-.glyph:hover{background-color: #e3f9fc;}
+.glyph{padding:0.2em;margin:1px;background-color:#f3f3f3;}
+.glyph:hover{background-color: #e3f9fc;cursor:hand;cursor:pointer;}
 .bshadow0{box-shadow:none;-webkit-box-shadow:none;-moz-box-shadow:none;padding:0 0 0 10px;}
 .mhmm{background-color:#f1f1f1;}
 fieldset,.hidden-true,.mbl,p.mhl:last-child{display:none;}
@@ -34,7 +34,7 @@ transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
 }
 .txt:focus{
 position: relative;
-background-color:#f7faff;border:1px solid #6a9ef3;color:#5b3411;
+background-color:#fbf0fa;border:1px solid #f36a9e;color:#5b3411;
 /*box-shadow:0px 1px 2px #c9c9c9 inset;-webkit-box-shadow:0px 1px 2px #c9c9c9 inset;-moz-box-shadow:0px 1px 2px #c9c9c9 inset;*/
 outline: 0;
 -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, 0.6);
