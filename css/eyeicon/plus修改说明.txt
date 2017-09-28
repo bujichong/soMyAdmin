@@ -1,4 +1,11 @@
-复制以下内容到demo.html中：
+1，在  https://icomoon.io/app/#/select  将图标合并，
+合并教程：
+http://blog.csdn.net/crystal6918/article/details/52994393
 
+2，下载图标后覆盖所有eyeicon文件夹
+
+3，复制以下内容到 demo.html 中：
 <script type="text/javascript" src="plus/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="plus/plus.js"></script>
+
+4，单独使用，可以增值添加style-plus.css，可以实现图标多尺寸、动画旋转、角度旋转等变化
