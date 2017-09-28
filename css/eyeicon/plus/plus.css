@@ -1,21 +1,30 @@
 body{
 font-size:0.75em;
 font-family:Helvetica Neue,Helvetica,PingFang SC,\5FAE\8F6F\96C5\9ED1,Tahoma,Arial,sans-serif,"Microsoft YaHei";
-color:#555;
-padding-top:120px;}
+color:#555;  line-height: 1.5;  color: #555;  background: #fff;margin: 0;padding:120px 0 0;}
 .searchhead{background-color:#dff2ff;padding:20px 1em 0;position: fixed;top:0;left:0;right:0;height:98px;border-bottom: 1px solid #afd0f9;}
 .none{display: none;}
 
-.fs0 {font-size:16px;}
-.fs1 {font-size: 16px;}
-.fs2 {font-size: 16px;}
-
-.glyph{padding:0.2em;margin:1px;background-color:#f3f3f3;}
+h1 {font-size: 1.5em;font-weight: normal;}
+.mvm {margin:0.75em 0;}
+.mhmm {margin:0 1em;}
+.clearfix:before, .clearfix:after {content: " ";display: table;}
+.clearfix:after {clear: both;}
+.ptl {padding-top: 1.5em;}
+.mal, .mhl {margin-left: 1.5em;margin-right: 1.5em;}
+.glyph{font-size: 16px;width: 15em;float: left;overflow: hidden;padding:0.2em;margin:1px;background-color:#f3f3f3;}
 .glyph:hover{background-color: #e3f9fc;cursor:hand;cursor:pointer;}
 .bshadow0{box-shadow:none;-webkit-box-shadow:none;-moz-box-shadow:none;padding:0 0 0 10px;}
 .mhmm{background-color:#f1f1f1;}
 fieldset,.hidden-true,.mbl,p.mhl:last-child{display:none;}
+.bgc1 {background: #f1f1f1;}
+.fgc1 {color: #999;}
 
+.mvm {margin-top: .75em;margin-bottom: .75em;}
+
+.fs0 {font-size:16px;}
+.fs1 {font-size: 16px;}
+.fs2 {font-size: 16px;}
 
 /* soform */
 .form-item{padding-bottom:20px;overflow:hidden;zoom:1;}

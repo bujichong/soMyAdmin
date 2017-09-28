@@ -10,7 +10,7 @@
 (function() {
 	function addIcon(el, entity) {
 		var html = el.innerHTML;
-		el.innerHTML = '<span style="font-family: \'eyeicon\'">' + entity + '</span>' + html;
+		el.innerHTML = '<span style="font-family: \'soicon\'">' + entity + '</span>' + html;
 	}
 	var icons = {
 		'icon-home': '&#xe93b;',

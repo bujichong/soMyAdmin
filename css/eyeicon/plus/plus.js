@@ -1,4 +1,5 @@
-var plusHtml = '<link rel="stylesheet" href="plus/plus.css">'+
+var plusHtml =
+//'<link rel="stylesheet" href="plus/plus.css">'+
 '<div class="searchhead soform">'+
 	'<div class="item-one item-group"><label class="lab-item">过滤图标：</label><input class="txt" id="txt-search" type="text" name="keyword" value="" placeholder="输入字母过滤图标" /></div>'+
 	'<div class="item-one">'+

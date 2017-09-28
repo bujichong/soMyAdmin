@@ -30353,7 +30353,7 @@
   ],
   "height": 1024,
   "metadata": {
-    "name": "eyeicon"
+    "name": "soicon"
   },
   "preferences": {
     "showGlyphs": true,
@@ -30363,7 +30363,7 @@
     "fontPref": {
       "prefix": "icon-",
       "metadata": {
-        "fontFamily": "eyeicon",
+        "fontFamily": "soicon",
         "majorVersion": 1,
         "minorVersion": 0
       },
