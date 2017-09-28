@@ -6,9 +6,9 @@ padding-top:120px;}
 .searchhead{background-color:#dff2ff;padding:20px 1em 0;position: fixed;top:0;left:0;right:0;height:98px;border-bottom: 1px solid #afd0f9;}
 .none{display: none;}
 
-.fs0 {font-size: 20px;}
-.fs1 {font-size: 20px;}
-.fs2 {font-size: 20px;}
+.fs0 {font-size:16px;}
+.fs1 {font-size: 16px;}
+.fs2 {font-size: 16px;}
 
 .glyph{padding:0.2em;margin:1px;background-color:#eee;}
 .glyph:hover{background-color: #e3f9fc;}
