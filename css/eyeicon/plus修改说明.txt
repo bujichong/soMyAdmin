@@ -1,0 +1,4 @@
+复制以下内容到demo.html中：
+
+<script type="text/javascript" src="plus/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="plus/plus.js"></script>
