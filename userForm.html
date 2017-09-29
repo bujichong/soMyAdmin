@@ -6,7 +6,6 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <title>用户管理 - 爱尔医院筹建管理系统</title>
-<link type="text/css" rel="stylesheet" href="js/lib/SyntaxHighlighter/brush.css" />
 <link rel="stylesheet" type="text/css" media="all" href="js/lib/easyui/themes/gray/easyui.css" />
 <link type="text/css" rel="stylesheet" href="css/easy-plus.css" />
 <link type="text/css" rel="stylesheet" href="css/socss.css" />
@@ -36,8 +35,6 @@ background-color: #e3e3e3;
 
 <div class="wrapper-popForm">
 
-    <h2 class="h2-api">form</h2>
-    <div class="exbox">
       <!-- <h3 class="h3-form"><span class="span-title">筹建医院-修改</span></h3> -->
       <!-- <form class="soForm pad-t15"> -->
   <form class="soform form-validate form-enter pad-t15" role="form" method="post"  action="json/true.js" data-opt="{callback:'updateMenu||updateMenuComplete',params:{a:1,b:2,c:3}}">
@@ -47,42 +44,41 @@ background-color: #e3e3e3;
               <label class="lab-item">用户名：</label>
               <input class="txt easyui-validatebox required" type="text" name="userName" value="" maxlength="20" placeholder="用户名" data-options="required:true" missingMessage="请输入用户名" invalidMessage="请输入用户名" />
           </div></div>
-          <div class="p3"><div class="item-one">
-              <label class="lab-item">年龄：</label>
-              <input class="txt easyui-validatebox required" type="text" name="realName" value="" maxlength="20" placeholder="年龄" data-options="required:true" validType="isAge" missingMessage="请输入年龄" invalidMessage="年龄必须为数字并小于120" />
-          </div></div>
-          <div class="p3"><div class="item-one solab-sb">
-              <label class="lab-item">生日：</label>
-              <input class="txt easyui-validatebox so-date required" type="text" name="birthday" data-options="required:true" value="" maxlength="20" placeholder="生日" />
+          <div class="p6"><div class="item-one">
+            <label class="lab-item">证件类型：</label>
+            <select id="cardType" class="drop" name="cardType" data-option="required:true">
+              <option value="">请选择...</option>
+              <option value="1">身份证</option>
+              <option value="2">其他证件</option>
+            </select>
           </div></div>
         </div>
       <div class="row">
-        <div class="p6"><div class="item-one">
-          <label class="lab-item">证件类型：</label>
-          <select id="cardType" class="drop" name="cardType" data-option="required:true">
-            <option value="">请选择...</option>
-            <option value="1">身份证</option>
-            <option value="2">其他证件</option>
-          </select>
-        </div></div>
         <div class="p6"><div class="item-one">
           <label class="lab-item">证件号码：</label>
           <input type="text" class="txt" value="" placeholder="请输入证件号码" data-option="required:true">
         </div></div>
+
+        <div class="p3"><div class="item-one">
+            <label class="lab-item">年龄：</label>
+            <input class="txt easyui-validatebox required" type="text" name="realName" value="" maxlength="20" placeholder="年龄" data-options="required:true" validType="isAge" missingMessage="请输入年龄" invalidMessage="年龄必须为数字并小于120" />
+        </div></div>
+        <div class="p3"><div class="item-one solab-sb">
+            <label class="lab-item">生日：</label>
+            <input class="txt easyui-validatebox so-date required" type="text" name="birthday" data-options="required:true" value="" maxlength="20" placeholder="生日" />
+        </div></div>
       </div>
+
       <div class="row">
-        <div class="p6"></div>
+        <div class="p6"><div class="item-one item-group">
+            <label class="lab-item">头像：</label>
+             <input class="txt easyui-validatebox wp-75"  id="password" type="text" name="password" value="" maxlength="20" /><input type="button" class="btn btn-warning btn-small wp-25" name="btnCancel" value="上传" />
+        </div></div>
+        <div class="p6"><div class="item-one">
+            <label class="lab-item">描述：</label>
+             <input class="txt easyui-validatebox" type="text" name="repassword" value="" maxlength="20" placeholder="描述" validType= "many['pFloatFix','range[0,20.12]']" />
+        </div></div>
       </div>
-      <div class="row">
-          <div class="p6"><div class="item-one item-group">
-              <label class="lab-item">头像：</label>
-               <span class="item-on wp-10 item-l">@</span><input class="txt easyui-validatebox wp-65"  id="password" type="text" name="password" value="" maxlength="20" /><span class="item-on wp-5 item-r">.</span><input type="button" class="btn btn-warning btn-small wp-20 item-r" name="btnCancel" value="上传" />
-          </div></div>
-          <div class="p6"><div class="item-one">
-              <label class="lab-item">描述：</label>
-               <input class="txt easyui-validatebox" type="text" name="repassword" value="" maxlength="20" placeholder="描述" validType= "many['pFloatFix','range[0,20.12]']" />
-          </div></div>
-        </div>
 
       <div class="row">
           <div class="p6"><div class="item-one">
@@ -91,7 +87,7 @@ background-color: #e3e3e3;
           </div></div>
           <div class="p6"><div class="item-one">
               <label class="lab-item">确认密码：</label>
-               <input class="txt easyui-validatebox" type="password" name="repassword" value="" maxlength="20" placeholder="再输入一次密码" validType="equals['#password']" missingMessage="请确认密码" />
+               <input class="txt easyui-validatebox required" type="password" name="repassword" value="" maxlength="20" placeholder="再输入一次密码" data-options="required:true" validType="equals['#password']" missingMessage="请确认密码" invalidMessage="两次密码不一致" />
           </div></div>
         </div>
 
@@ -104,8 +100,6 @@ background-color: #e3e3e3;
               <label class="lab-item">性别：</label>
                 <label class="lab-val"><input class="rad" type="radio" value="1" name="sex" />男</label>
                 <label class="lab-val"><input class="rad" type="radio" value="2" name="sex" />女</label>
-                <label class="lab-val"><input type="checkbox" class="chk" name="chk-1" />选项1</label>
-                <label class="lab-val"><input type="checkbox" class="chk" name="chk-1" />选项2</label>
           </div></div>
         </div>
 
@@ -147,662 +141,14 @@ background-color: #e3e3e3;
 
         <p class="row-btn center">
           <input type="button" class="btn btn-primary btn-easyFormSubmit" lay-submit name="btnSubmit" value="保存" />
-          <input type="button" class="btn btn-primary disabled" lay-submit name="btnSubmit" value="立即保存" />
+          <!-- <input type="button" class="btn btn-primary disabled" lay-submit name="btnSubmit" value="立即保存" /> -->
           <input type="button" class="btn btn-cancel" name="btnCancel" value="取 消" />
         </p>
   </form>
 
 
-      <pre class="brush:html">
-        &lt;form class="soform form-validate form-enter pad-t15" role="form" method="post"  action="json/true.js" data-opt="{callback:'updateMenu||updateMenuComplete',params:{a:1,b:2,c:3}}"&gt;
-            &lt;fieldset&gt;
-            &lt;div class="row"&gt;
-                &lt;div class="p6"&gt;&lt;div class="item-one"&gt;
-                    &lt;label class="lab-item"&gt;用户名：&lt;/label&gt;
-                    &lt;input class="txt easyui-validatebox required" type="text" name="userName" value="" maxlength="20" placeholder="用户名" data-options="required:true" missingMessage="请输入用户名" invalidMessage="请输入用户名" /&gt;
-                &lt;/div&gt;&lt;/div&gt;
-                &lt;div class="p3"&gt;&lt;div class="item-one"&gt;
-                    &lt;label class="lab-item"&gt;年龄：&lt;/label&gt;
-                    &lt;input class="txt easyui-validatebox required" type="text" name="realName" value="" maxlength="20" placeholder="年龄" data-options="required:true" validType="isAge" missingMessage="请输入年龄" invalidMessage="年龄必须为数字并小于120" /&gt;
-                &lt;/div&gt;&lt;/div&gt;
-                &lt;div class="p3"&gt;&lt;div class="item-one solab-sb"&gt;
-                    &lt;label class="lab-item"&gt;生日：&lt;/label&gt;
-                    &lt;input class="txt so-date" type="text" name="birthday" value="" maxlength="20" placeholder="生日" /&gt;
-                &lt;/div&gt;&lt;/div&gt;
-              &lt;/div&gt;
-
-            &lt;div class="row"&gt;
-                &lt;div class="p6"&gt;&lt;div class="item-one item-group"&gt;
-                    &lt;label class="lab-item"&gt;头像：&lt;/label&gt;
-                     &lt;span class="item-on wp-10 item-l"&gt;@&lt;/span&gt;&lt;input class="txt easyui-validatebox wp-65"  id="password" type="text" name="password" value="" maxlength="20" /&gt;&lt;span class="item-on wp-5 item-r"&gt;.&lt;/span&gt;&lt;input type="button" class="btn btn-warning btn-small wp-20 item-r" name="btnCancel" value="上传" /&gt;
-                &lt;/div&gt;&lt;/div&gt;
-                &lt;div class="p6"&gt;&lt;div class="item-one"&gt;
-                    &lt;label class="lab-item"&gt;描述：&lt;/label&gt;
-                     &lt;input class="txt easyui-validatebox" type="text" name="repassword" value="" maxlength="20" placeholder="描述" validType= "many['pFloatFix','range[0,20.12]']" /&gt;
-                &lt;/div&gt;&lt;/div&gt;
-              &lt;/div&gt;
-
-            &lt;div class="row"&gt;
-                &lt;div class="p6"&gt;&lt;div class="item-one"&gt;
-                    &lt;label class="lab-item"&gt;密码：&lt;/label&gt;
-                     &lt;input class="txt easyui-validatebox required" id="password" type="password" name="password" value="" maxlength="20" placeholder="默认密码123456" data-options="required:true" missingMessage="请输入密码" /&gt;
-                &lt;/div&gt;&lt;/div&gt;
-                &lt;div class="p6"&gt;&lt;div class="item-one"&gt;
-                    &lt;label class="lab-item"&gt;确认密码：&lt;/label&gt;
-                     &lt;input class="txt easyui-validatebox" type="password" name="repassword" value="" maxlength="20" placeholder="再输入一次密码" validType="equals['#password']" missingMessage="请确认密码" /&gt;
-                &lt;/div&gt;&lt;/div&gt;
-              &lt;/div&gt;
-
-            &lt;div class="row"&gt;
-                &lt;div class="p6"&gt;&lt;div class="item-one"&gt;
-                    &lt;label class="lab-item"&gt;电话号码：&lt;/label&gt;
-                     &lt;input class="txt easyui-validatebox" type="text" name="mobile" value="" maxlength="20" placeholder="电话号码" /&gt;
-                &lt;/div&gt;&lt;/div&gt;
-                &lt;div class="p6"&gt;&lt;div class="item-one"&gt;
-                    &lt;label class="lab-item"&gt;性别：&lt;/label&gt;
-                      &lt;label class="lab-val"&gt;&lt;input class="rad" type="radio" value="1" name="sex" /&gt;男&lt;/label&gt;
-                      &lt;label class="lab-val"&gt;&lt;input class="rad" type="radio" value="2" name="sex" /&gt;女&lt;/label&gt;
-                      &lt;label class="lab-val"&gt;&lt;input type="checkbox" class="chk" name="chk-1" /&gt;选项1&lt;/label&gt;
-                      &lt;label class="lab-val"&gt;&lt;input type="checkbox" class="chk" name="chk-1" /&gt;选项2&lt;/label&gt;
-                &lt;/div&gt;&lt;/div&gt;
-              &lt;/div&gt;
-
-            &lt;div class="row"&gt;
-                &lt;div class="p6"&gt;&lt;div class="item-one"&gt;
-                    &lt;label class="lab-item"&gt;关联网站：&lt;/label&gt;
-                     &lt;input class="txt easyui-combobox required" style="width:100%;" id="userSites" type="text" name="userSites" value="" placeholder="请选择关联组织" data-options="valueField: 'id',textField: 'text',url: 'json/combo.js',method:'get',multiple:true,required:true" missingMessage="请选择关联网站(多选)" /&gt;
-                &lt;/div&gt;&lt;/div&gt;
-                &lt;div class="p6"&gt;&lt;div class="item-one"&gt;
-                    &lt;label class="lab-item"&gt;关联组织：&lt;/label&gt;
-                     &lt;input class="txt easyui-combotree required" style="width:100%;" data-options="url:'json/groupTree.js',method:'get',flatData:true,method:'get',multiple:true,onlyLeafCheck:true,required:true,prompt:'请选择关联组织'" type="text" name="group" value="" maxlength="20" placeholder="请选择关联组织" missingMessage="请选择关联组织(多选)" /&gt;
-                &lt;/div&gt;&lt;/div&gt;
-              &lt;/div&gt;
-
-            &lt;div class="row"&gt;
-                &lt;div class="p6"&gt;&lt;div class="item-one"&gt;
-                    &lt;label class="lab-item"&gt;Email：&lt;/label&gt;
-                     &lt;input class="txt easyui-validatebox" type="text" name="email" value="" maxlength="20" placeholder="请输入email地址" data-options="validType:['email','length[0,20]']" invalidMessage="您的邮箱地址不正确" /&gt;
-                &lt;/div&gt;&lt;/div&gt;
-                &lt;div class="p6"&gt;&lt;div class="item-one"&gt;
-                    &lt;label class="lab-item"&gt;QQ：&lt;/label&gt;
-                     &lt;input class="txt easyui-validatebox" type="text" name="QQ" value="" maxlength="20" placeholder="QQ号码" /&gt;
-                &lt;/div&gt;&lt;/div&gt;
-              &lt;/div&gt;
-
-            &lt;div class="row"&gt;
-                &lt;div class="p6"&gt;&lt;div class="item-one"&gt;
-                    &lt;label class="lab-item"&gt;微信：&lt;/label&gt;
-                     &lt;input class="txt easyui-validatebox" type="text" name="weChat" value="" maxlength="20" placeholder="" /&gt;
-                &lt;/div&gt;&lt;/div&gt;
-                &lt;div class="p6"&gt;&lt;div class="item-one"&gt;
-                    &lt;label class="lab-item"&gt;账号状态：&lt;/label&gt;
-                    &lt;label class="lab-val"&gt;&lt;input class="rad {required:true}"  type="radio" value="1" name="state" /&gt;启用&lt;/label&gt;
-                    &lt;label class="lab-val"&gt;&lt;input class="rad"   type="radio" value="2" name="state" /&gt;停用&lt;/label&gt;
-                &lt;/div&gt;&lt;/div&gt;
-              &lt;/div&gt;
-
-            &lt;/fieldset&gt;
-
-              &lt;p class="row-btn center"&gt;
-                &lt;input type="button" class="btn btn-primary btn-easyFormSubmit" lay-submit name="btnSubmit" value="保存" /&gt;
-                &lt;input type="button" class="btn btn-primary disabled" lay-submit name="btnSubmit" value="立即保存" /&gt;
-                &lt;input type="button" class="btn btn-cancel" name="btnCancel" value="取 消" /&gt;
-              &lt;/p&gt;
-        &lt;/form&gt;
-
-      </pre>
-
-  </div>
-
-
-    <h2 class="h2-api">alert</h2>
-  <div class="exbox"><div class="htmlbox">
-    <div class="alert">
-      <button type="button" class="close" data-dismiss="alert">×</button>
-      <strong>提示：</strong>你可以先提交流程，通过打印的方式将表单输出。
-    </div>
-    <br />
-    <div class="alert alert-info">
-      <button type="button" class="close" data-dismiss="alert">×</button>
-      <strong>提示：</strong>你可以先提交流程，通过打印的方式将表单输出。
-    </div>
-    <br />
-    <div class="alert alert-danger">
-      <button type="button" class="close" data-dismiss="alert">×</button>
-      <strong>注意：</strong>这里必须要注册以后才可以使用。
-    </div>
-    <br />
-    <div class="alert alert-success">
-      <button type="button" class="close" data-dismiss="alert">×</button>
-      <strong>提示：</strong>提交成功~
-    </div>
-</div>
-<div class="codebox">
-<pre class="brush:html">
-    &lt;div class="alert"&gt;
-      &lt;button type="button" class="close" data-dismiss="alert"&gt;×&lt;/button&gt;
-      &lt;strong&gt;提示：&lt;/strong&gt;你可以先提交流程，通过打印的方式将表单输出。
-    &lt;/div&gt;
-
-    &lt;div class="alert alert-info"&gt;
-      &lt;button type="button" class="close" data-dismiss="alert"&gt;×&lt;/button&gt;
-      &lt;strong&gt;Heads up!&lt;/strong&gt; This alert needs your attention, but it's not super important.
-    &lt;/div&gt;
-
-    &lt;div class="alert alert-danger"&gt;
-      &lt;button type="button" class="close" data-dismiss="alert"&gt;×&lt;/button&gt;
-      &lt;strong&gt;Oh snap!&lt;/strong&gt; Change a few things up and try submitting again.
-    &lt;/div&gt;
-
-    &lt;div class="alert alert-success"&gt;
-      &lt;button type="button" class="close" data-dismiss="alert"&gt;×&lt;/button&gt;
-      &lt;strong&gt;提示：&lt;/strong&gt;提交成功~
-    &lt;/div&gt;
-
-</pre>
 </div>
 
-  </div>
-
-
-    <h2 class="h2-api">table</h2>
-  <div class="exbox"><div class="htmlbox">
-<div class="overhidden">
-      <table class="table-list-a" cellspacing="0" cellpadding="0">
-          <tr>
-            <th>&nbsp;</th>
-            <th>票据号</th>
-            <th>使用原因</th>
-            <th>使用时间</th>
-            <th>使用人</th>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>002145</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>002146</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>002147</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-          </tr>
-          <tr>
-            <td>4</td>
-            <td>0021458</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-          </tr>
-          <tr>
-            <td>5</td>
-            <td>002149</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-          </tr>
-      </table>
-    </div>
-<br />
-
-      <table class="table-list-a" cellspacing="0" cellpadding="0">
-          <tr>
-            <th>&nbsp;</th>
-            <th>票据号</th>
-            <th>使用原因</th>
-            <th>使用时间</th>
-            <th>使用人</th>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>002145</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-          </tr>
-          <tr class="tr-odd">
-            <td>2</td>
-            <td>002146</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>002147</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-          </tr>
-          <tr class="tr-odd">
-            <td>4</td>
-            <td>0021458</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-          </tr>
-          <tr>
-            <td>5</td>
-            <td>002149</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-          </tr>
-      </table>
-      <br />
-
-</div>
-<div class="codebox">
-
-<pre class="brush:html">
-&lt;table class="table-list-a" cellspacing="0" cellpadding="0" &gt;
-    &lt;tr&gt;
-      &lt;th&gt;&nbsp;&lt;/th&gt;
-      &lt;th&gt;票据号&lt;/th&gt;
-      &lt;th&gt;使用原因&lt;/th&gt;
-      &lt;th&gt;使用时间&lt;/th&gt;
-      &lt;th&gt;使用人&lt;/th&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;1&lt;/td&gt;
-      &lt;td&gt;&nbsp;&lt;/td&gt;
-      &lt;td&gt;&nbsp;&lt;/td&gt;
-      &lt;td&gt;&nbsp;&lt;/td&gt;
-      &lt;td&gt;&nbsp;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr class="tr-odd"&gt;
-      &lt;td&gt;2&lt;/td&gt;
-      &lt;td&gt;&nbsp;&lt;/td&gt;
-      &lt;td&gt;&nbsp;&lt;/td&gt;
-      &lt;td&gt;&nbsp;&lt;/td&gt;
-      &lt;td&gt;&nbsp;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;3&lt;/td&gt;
-      &lt;td&gt;&nbsp;&lt;/td&gt;
-      &lt;td&gt;&nbsp;&lt;/td&gt;
-      &lt;td&gt;&nbsp;&lt;/td&gt;
-      &lt;td&gt;&nbsp;&lt;/td&gt;
-    &lt;/tr&gt;
-&lt;/table&gt;
-
-</pre>
-
-
-  </div>
-  </div>
-
-  <h2 class="h2-api">nav-tabs</h2>
-  <div class="exbox"><div class="htmlbox">
-  <ul class="nav-tabs">
-    <li class="now"><a href="#">首页</a></li>
-    <li><a href="#">概要</a></li>
-    <li><a href="#">留言</a></li>
-  </ul>
-
-</div>
-<div class="codebox">
-  <pre class="brush:html">
-  &lt;ul class="nav-tabs"&gt;
-    &lt;li class="now"&gt;&lt;a href="#"&gt;首页&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a href="#"&gt;概要&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a href="#"&gt;留言&lt;/a&gt;&lt;/li&gt;
-  &lt;/ul&gt;
-  </pre>
-
-  </div>
-  </div>
-
-  <h2 class="h2-api">progress</h2>
-  <div class="exbox"><div class="htmlbox">
-      <div class="soprogress"><div class="bar" style="width: 60%;"></div></div>
-      <div class="soprogress soprogress-striped"><div class="bar" style="width:50%;"></div></div>
-      <div class="soprogress soprogress-striped active"><div class="bar bar-danger" style="width:40%;"></div></div>
-      <div class="soprogress soprogress-warning"><div class="bar" style="width: 60%;"></div></div>
-      <div class="soprogress">
-        <div class="bar bar-success" style="width: 35%"></div>
-        <div class="bar bar-warning" style="width: 20%"></div>
-        <div class="bar bar-danger" style="width: 10%"></div>
-      </div>
-
-</div>
-<div class="codebox">
-    <pre class="brush:html">
-      &lt;div class="soprogress"&gt;&lt;div class="bar" style="width: 60%;"&gt;&lt;/div&gt;&lt;/div&gt;
-      &lt;div class="soprogress soprogress-striped"&gt;&lt;div class="bar" style="width: 50%;"&gt;&lt;/div&gt;&lt;/div&gt;
-      &lt;div class="soprogress soprogress-striped active"&gt;&lt;div class="bar bar-danger" style="width:40%;"&gt;&lt;/div&gt;&lt;/div&gt;
-      &lt;div class="soprogress soprogress-warning"&gt;&lt;div class="bar" style="width: 60%;"&gt;&lt;/div&gt;&lt;/div&gt;
-      &lt;div class="soprogress"&gt;
-        &lt;div class="bar bar-success" style="width: 35%"&gt;&lt;/div&gt;
-        &lt;div class="bar bar-warning" style="width: 20%"&gt;&lt;/div&gt;
-        &lt;div class="bar bar-danger" style="width: 10%"&gt;&lt;/div&gt;
-      &lt;/div&gt;
-    </pre>
-
-  </div>
-  </div>
-
-
-  <h2 class="h2-api">drop-menu</h2>
-  <div class="exbox"><div class="htmlbox">
-<div class="overhidden">
-
-    <div class="one">
-      <ul class="drop-menu">
-        <li><a href="#">Action</a></li>
-        <li><a href="#">Another action</a></li>
-        <li><a href="#">Something else here</a></li>
-        <li class="justline"></li>
-        <li class="drop-submenu">
-          <a href="#">More options</a>
-          <ul class="drop-menu">
-            <li><a href="#">Second level link</a></li>
-            <li><a href="#">Second level link</a></li>
-            <li><a href="#">Second level link</a></li>
-            <li><a href="#">Second level link</a></li>
-            <li><a href="#">Second level link</a></li>
-          </ul>
-        </li>
-      </ul>
-    </div>
-
-    <div class="one">
-        <div class="row">
-          <div class="por">
-            <button class="btn btn-primary"><i class="icon icon-exit"></i> 编辑<span class="drop-arrow"></span></button>
-            <ul class="drop-menu" role="menu">
-              <li><a href="#"><i class="icon icon-search2"></i> 查看详情</a></li>
-              <li><a href="#"><i class="icon icon-outtime"></i> 审核</a></li>
-              <li class="justline"></li>
-              <li class="drop-submenu">
-                <a href="#"><i class="icon icon-setting3"></i> 更多</a>
-                <ul class="drop-menu">
-                  <li><a href="#"><i class="icon icon-edit"></i> 编辑</a></li>
-                  <li><a href="#"><i class="icon icon-doc"></i> 文档</a></li>
-                  <li><a href="#"><i class="icon icon-bell"></i> 消息提醒</a></li>
-                  <li class="justline"></li>
-                  <li><a href="#"><i class="icon icon-markright"></i> 返回首页</a></li>
-                  <li><a href="#"><i class="icon icon-exit"></i> 退出</a></li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-    </div>
-
-    <div class="one">
-        <div class="row">
-          <div class="por">
-            <button class="btn btn-primary"><i class="icon icon-exit"></i> 编辑<span class="drop-arrow"></span></button>
-            <ul class="drop-menu" role="menu">
-              <li><a href="#"><i class="icon icon-search2"></i> 查看详情</a></li>
-              <li><a href="#"><i class="icon icon-outtime"></i> 审核</a></li>
-              <li class="justline"></li>
-              <li class="drop-submenu drop-left">
-                <a href="#"><i class="icon icon-setting3"></i> 更多</a>
-                <ul class="drop-menu">
-                  <li><a href="#"><i class="icon icon-edit"></i> 编辑</a></li>
-                  <li><a href="#"><i class="icon icon-doc"></i> 文档</a></li>
-                  <li><a href="#"><i class="icon icon-bell"></i> 消息提醒</a></li>
-                  <li class="justline"></li>
-                  <li><a href="#"><i class="icon icon-markright"></i> 返回首页</a></li>
-                  <li><a href="#"><i class="icon icon-exit"></i> 退出</a></li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-    </div>
-
-    </div>
-
-
-</div>
-<div class="codebox">
-
-    <pre class="brush:html">
-
-          &lt;div class="por"&gt;
-            &lt;button class="btn btn-primary"&gt;&lt;i class="icon icon-exit"&gt;&lt;/i&gt; 编辑&lt;span class="drop-arrow"&gt;&lt;/span&gt;&lt;/button&gt;
-            &lt;ul class="drop-menu" role="menu"&gt;
-              &lt;li&gt;&lt;a href="#"&gt;&lt;i class="icon icon-search2"&gt;&lt;/i&gt; 查看详情&lt;/a&gt;&lt;/li&gt;
-              &lt;li&gt;&lt;a href="#"&gt;&lt;i class="icon icon-outtime"&gt;&lt;/i&gt; 审核&lt;/a&gt;&lt;/li&gt;
-              &lt;li class="justline"&gt;&lt;/li&gt;
-              &lt;li class="drop-submenu"&gt;
-                &lt;a href="#"&gt;&lt;i class="icon icon-setting3"&gt;&lt;/i&gt; 更多&lt;/a&gt;
-                &lt;ul class="drop-menu"&gt;
-                  &lt;li&gt;&lt;a href="#"&gt;&lt;i class="icon icon-edit"&gt;&lt;/i&gt; 编辑&lt;/a&gt;&lt;/li&gt;
-                  &lt;li&gt;&lt;a href="#"&gt;&lt;i class="icon icon-doc"&gt;&lt;/i&gt; 文档&lt;/a&gt;&lt;/li&gt;
-                  &lt;li&gt;&lt;a href="#"&gt;&lt;i class="icon icon-bell"&gt;&lt;/i&gt; 消息提醒&lt;/a&gt;&lt;/li&gt;
-                  &lt;li class="justline"&gt;&lt;/li&gt;
-                  &lt;li&gt;&lt;a href="#"&gt;&lt;i class="icon icon-markright"&gt;&lt;/i&gt; 返回首页&lt;/a&gt;&lt;/li&gt;
-                  &lt;li&gt;&lt;a href="#"&gt;&lt;i class="icon icon-exit"&gt;&lt;/i&gt; 退出&lt;/a&gt;&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/div&gt;
-    </pre>
-
-  </div>
-  </div>
-
-
-  <h2 class="h2-api">bg</h2>
-  <div class="exbox"><div class="htmlbox">
-    <div class="row">
-      <div class="p4 bg-grey h60 lh60 center fs20">bg-grey</div>
-      <div class="p4 bg-primary h60 lh60 center fs20">bg-primary</div>
-      <div class="p4 bg-info h60 lh60 center fs20">bg-info</div>
-
-    </div>
-    <div class="row pad-t10">
-      <div class="p4 bg-success h60 lh60 center fs20">bg-success</div>
-      <div class="p4 bg-danger h60 lh60 center fs20">bg-danger</div>
-      <div class="p4 bg-inverse h60 lh60 center fs20">bg-inverse</div>
-    </div>
-
-</div>
-<div class="codebox">
-    <pre class="brush:html">
-      &lt;div class="row"&gt;
-        &lt;div class="p2 h60 lh60 center fs20 bg-grey"&gt;bg-grey&lt;/div&gt;
-        &lt;div class="p2 h60 lh60 center fs20 bg-primary"&gt;bg-primary&lt;/div&gt;
-        &lt;div class="p2 h60 lh60 center fs20 bg-info"&gt;bg-info&lt;/div&gt;
-        &lt;div class="p2 h60 lh60 center fs20 bg-success"&gt;bg-success&lt;/div&gt;
-        &lt;div class="p2 h60 lh60 center fs20 bg-danger"&gt;bg-danger&lt;/div&gt;
-        &lt;div class="p2 h60 lh60 center fs20 bg-inverse"&gt;bg-inverse&lt;/div&gt;
-      &lt;/div&gt;
-    </pre>
-
-  </div>
-  </div>
-
-
-  <h2 class="h2-api">dot badge</h2>
-  <div class="exbox"><div class="htmlbox">
-    <h4 class="h4-api">dot圆点</h4>
-    <div class="row">
-      <span class="dot"></span>
-      <span class="dot bg-primary"></span>
-      <span class="dot bg-info"></span>
-      <span class="dot bg-success"></span>
-      <span class="dot bg-warning"></span>
-      <span class="dot bg-danger"></span>
-      <span class="dot bg-inverse"></span>
-    </div>
-
-    <h4 class="h4-api pad-t30">badge 徽章</h4>
-    <div class="row">
-      <span class="badge">6</span>
-      <span class="badge">99</span>
-      <span class="badge">61728</span>
-      <span class="badge">赤</span>
-      <span class="badge bg-primary">蓝</span>
-      <span class="badge bg-info">兰</span>
-      <span class="badge bg-success">绿</span>
-      <span class="badge bg-warning">黄</span>
-      <span class="badge bg-danger">红</span>
-      <span class="badge bg-inverse">灰</span>
-    </div>
-
-    <div class="row pad-t50">
-      <ul class="nav-tabs">
-        <li class="now"><a href="#">首页</a></li>
-        <li><a href="#">概要 <em class="dot bg-info"></em></a></li>
-        <li><a href="#">留言 <em class="badge">99+</em></a></li>
-      </ul>
-    </div>
-
-</div>
-<div class="codebox">
-
-    <pre class="brush:html">
-    &lt;div class="row"&gt;
-      &lt;span class="dot"&gt;&lt;/span&gt;
-      &lt;span class="dot bg-primary"&gt;&lt;/span&gt;
-      &lt;span class="dot bg-info"&gt;&lt;/span&gt;
-      &lt;span class="dot bg-success"&gt;&lt;/span&gt;
-      &lt;span class="dot bg-warning"&gt;&lt;/span&gt;
-      &lt;span class="dot bg-danger"&gt;&lt;/span&gt;
-      &lt;span class="dot bg-inverse"&gt;&lt;/span&gt;
-    &lt;/div&gt;
-
-    &lt;div class="row"&gt;
-      &lt;span class="badge"&gt;6&lt;/span&gt;
-      &lt;span class="badge"&gt;99&lt;/span&gt;
-      &lt;span class="badge"&gt;61728&lt;/span&gt;
-      &lt;span class="badge"&gt;赤&lt;/span&gt;
-      &lt;span class="badge bg-primary"&gt;蓝&lt;/span&gt;
-      &lt;span class="badge bg-info"&gt;兰&lt;/span&gt;
-      &lt;span class="badge bg-success"&gt;绿&lt;/span&gt;
-      &lt;span class="badge bg-warning"&gt;黄&lt;/span&gt;
-      &lt;span class="badge bg-danger"&gt;红&lt;/span&gt;
-      &lt;span class="badge bg-inverse"&gt;灰&lt;/span&gt;
-    &lt;/div&gt;
-
-      &lt;ul class="nav-tabs"&gt;
-        &lt;li class="now"&gt;&lt;a href="#"&gt;首页&lt;/a&gt;&lt;/li&gt;
-        &lt;li&gt;&lt;a href="#"&gt;概要 &lt;em class="dot bg-info"&gt;&lt;/em&gt;&lt;/a&gt;&lt;/li&gt;
-        &lt;li&gt;&lt;a href="#"&gt;留言 &lt;em class="badge"&gt;99+&lt;/em&gt;&lt;/a&gt;&lt;/li&gt;
-      &lt;/ul&gt;
-    </pre>
-
-  </div>
-  </div>
-
-  <h2 class="h2-api">btn group</h2>
-  <div class="exbox"><div class="htmlbox">
-    <h4 class="h4-api">large</h4>
-    <div class="row">
-      <button class="btn btn-large">default</button>
-      <button class="btn btn-large btn-primary">primary</button>
-      <button class="btn btn-large btn-info">info</button>
-      <button class="btn btn-large btn-success">success</button>
-      <button class="btn btn-large btn-warning">warning</button>
-      <button class="btn btn-large btn-danger">danger</button>
-      <button class="btn btn-large btn-inverse">inverse</button>
-      <button class="btn btn-large btn-link">link</button>
-    </div> <br>
-
-    <h4 class="h4-api">default</h4>
-    <div class="row">
-      <button class="btn">default</button>
-      <button class="btn btn-primary">primary</button>
-      <button class="btn btn-success">success</button>
-      <button class="btn btn-warning">warning</button>
-      <button class="btn btn-danger">danger</button>
-      <button class="btn btn-inverse">inverse</button>
-      <button class="btn btn-link">link</button>
-    </div> <br>
-
-    <h4 class="h4-api">small</h4>
-    <div class="row">
-      <button class="btn btn-small">default</button>
-      <button class="btn btn-small btn-primary">primary</button>
-      <button class="btn btn-small btn-success">success</button>
-      <button class="btn btn-small btn-warning">warning</button>
-      <button class="btn btn-small btn-danger">danger</button>
-      <button class="btn btn-small btn-inverse">inverse</button>
-      <button class="btn btn-small btn-link">link</button>
-    </div> <br>
-
-    <h4 class="h4-api">mini</h4>
-    <div class="row">
-      <button class="btn btn-mini">default</button>
-      <button class="btn btn-mini btn-primary">primary</button>
-      <button class="btn btn-mini btn-success">success</button>
-      <button class="btn btn-mini btn-warning">warning</button>
-      <button class="btn btn-mini btn-danger">danger</button>
-      <button class="btn btn-mini btn-inverse">inverse</button>
-      <button class="btn btn-mini btn-link">link</button>
-    </div> <br>
-
-    <div class="row">
-      <div class="item-group">
-        <a class="btn btn-primary" href="#"><i class="icon icon-edit2"></i> 编辑</a><a class="btn" href="#"><i class="icon icon-del"></i>删除</a>
-      </div>
-    </div><br>
-
-    <div class="row">
-      <div class="item-group">
-        <span class="item-on item-l"><i class="icon icon-edit"></i></span><input type="text"><input type="text"><span class="item-on item-r">@</span><button class="btn btn-small btn-primary" type="button">搜索</button><button class="btn btn-small" type="button">选项</button>
-      </div>
-    </div>
-
-    <div class="item-group pad-t20">
-        <a class="btn" href="#"><i class="icon icon-home"></i></a><a class="btn" href="#"><i class="icon icon-hospital"></i></a><a class="btn" href="#"><i class="icon icon-edit"></i></a><a class="btn" href="#"><i class="icon icon-my"></i></a>
-    </div>
-
-</div>
-<div class="codebox">
-    <pre class="brush:html">
-    &lt;div class="row"&gt;
-      &lt;button class="btn btn-large"&gt;default&lt;/button&gt;
-      &lt;button class="btn btn-large btn-primary"&gt;primary&lt;/button&gt;
-      &lt;button class="btn btn-large btn-success"&gt;success&lt;/button&gt;
-      &lt;button class="btn btn-large btn-warning"&gt;warning&lt;/button&gt;
-      &lt;button class="btn btn-large btn-danger"&gt;danger&lt;/button&gt;
-      &lt;button class="btn btn-large btn-inverse"&gt;inverse&lt;/button&gt;
-      &lt;button class="btn btn-large btn-link"&gt;link&lt;/button&gt;
-    &lt;/div&gt;
-
-    &lt;div class="row"&gt;&lt;a class="btn btn-primary" href="#"&gt;&lt;i class="icon icon-exit"&gt;&lt;/i&gt; 编辑&lt;/a&gt;&lt;/div&gt;
-
-
-    &lt;div class="item-group"&gt;
-      &lt;a class="btn btn-primary" href="#"&gt;&lt;i class="icon icon-edit2"&gt;&lt;/i&gt; 编辑&lt;/a&gt;&lt;a class="btn" href="#"&gt;&lt;i class="icon icon-del"&gt;&lt;/i&gt;删除&lt;/a&gt;
-    &lt;/div&gt;
-
-    &lt;div class="item-group"&gt;
-      &lt;span class="item-on item-l"&gt;&lt;i class="icon icon-edit"&gt;&lt;/i&gt;&lt;/span&gt;&lt;input type="text"&gt;&lt;input type="text"&gt;&lt;span class="item-on item-r"&gt;@&lt;/span&gt;&lt;button class="btn btn-small btn-primary" type="button"&gt;搜索&lt;/button&gt;&lt;button class="btn btn-small" type="button"&gt;选项&lt;/button&gt;
-    &lt;/div&gt;
-
-    &lt;div class="item-group"&gt;
-        &lt;a class="btn" href="#"&gt;&lt;i class="icon icon-home"&gt;&lt;/i&gt;&lt;/a&gt;&lt;a class="btn" href="#"&gt;&lt;i class="icon icon-hospital"&gt;&lt;/i&gt;&lt;/a&gt;&lt;a class="btn" href="#"&gt;&lt;i class="icon icon-edit"&gt;&lt;/i&gt;&lt;/a&gt;&lt;a class="btn" href="#"&gt;&lt;i class="icon icon-my"&gt;&lt;/i&gt;&lt;/a&gt;
-    &lt;/div&gt;
-    </pre>
-  </div>
-  </div>
-
-
-
-
-
-
-</div>
-<br /><br /><br />
 <script src="js/require.js" data-main="js/main.un"></script>
 </body>
 

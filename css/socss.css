@@ -36,16 +36,16 @@ blockquote {padding: 0 0 0 15px;margin: 0 0 20px;border-left: 5px solid #eee;}
 blockquote p {line-height: 25px;}
 blockquote small {display: block;line-height: 20px; color: #999;}
 
-
-@font-face {
-  font-family: 'iconfont';  /* project id 416297 */
+ /* project id 416297 */
+/*@font-face {
+  font-family: 'iconfont';
   src: url('//at.alicdn.com/t/font_416297_dtcg2noys0639pb9.eot');
   src: url('//at.alicdn.com/t/font_416297_dtcg2noys0639pb9.eot?#iefix') format('embedded-opentype'),
   url('//at.alicdn.com/t/font_416297_dtcg2noys0639pb9.woff') format('woff'),
   url('//at.alicdn.com/t/font_416297_dtcg2noys0639pb9.ttf') format('truetype'),
   url('//at.alicdn.com/t/font_416297_dtcg2noys0639pb9.svg#iconfont') format('svg');
 }
-/*.icon{
+.icon{
 display: -moz-inline-stack;display:inline-block;*display:inline;*zoom:1;
 font-family:'iconfont';
 position: relative;
@@ -406,7 +406,7 @@ box-shadow:0 0 0 #fff;-webkit-box-shadow:0 0 0 #fff;-moz-box-shadow:0 0 0 #fff;
 .solab-ld .lab-item{width:222px;}
 
 /* required inputmark */
-input.validatebox-invalid{border:1px solid #ef9696;background-color:#fff;}
+select.validatebox-invalid,textarea.validatebox-invalid,input.validatebox-invalid{border:1px solid #ef9696;background-color:#fff;}
 input.validatebox-invalid:focus{
   border-color: #ed7c7b;
   background-color: #fff;
