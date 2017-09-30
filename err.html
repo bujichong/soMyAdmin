@@ -5,17 +5,20 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
 <meta http-equiv="X-UA-Compatible" content="IE=9" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<title>500 服务器错误 - 爱尔医院筹建管理系统</title>
+<title>Error 服务器错误 - 爱尔医院筹建管理系统</title>
 <style type="text/css">
 body{
 font-size:0.75em;
 font-family:Helvetica Neue,Helvetica,PingFang SC,\5FAE\8F6F\96C5\9ED1,Tahoma,Arial,sans-serif,"Microsoft YaHei";
 color:#555;
 }
-.err-404{position: absolute;width:580px;height:280px;top:50%;left:50%;margin:-290px 0 0 -290px;}
-.errInfoCont{position: absolute;width:600px;height:280px;top:50%;left:50%;margin:-40px 0 0 -280px;border:1px dotted #ccc;overflow: auto;font-size: 12px;line-height:24px;padding:10px;font-family:Verdana;color:#3f4df3;background-color: #f6fbff;}
+.h2-err{font-size:28px;font-weight: normal;margin-bottom:10px;}
+.strong-title{color:#f0b301;font-weight: normal;font-size:32px;}
+.p-err{line-height: 1.8em;font-size:14px;}
+.err-404{position: absolute;width:360px;height:200px;padding:35px 0 0 280px;top:50%;left:50%;margin:-280px 0 0 -320px;background:url(images/err.png) no-repeat;}
+.errInfoCont{position: absolute;width:600px;height:280px;top:50%;left:50%;margin:-55px 0 0 -280px;border:1px dotted #ccc;overflow: auto;font-size: 12px;line-height:24px;padding:10px;font-family:Verdana;color:#3f4df3;background-color: #f6fbff;}
 #errInfoCont{display: none;}
-.p-btn{position: absolute;width:300px;height:40px;top:50%;left:50%;margin:-20px 0 0 -150px;text-align: center;}
+.p-btn{height:40px;}
 .btn {
 display: -moz-inline-stack;display:inline-block;*display:inline;*zoom:1;
 padding: 7px 16px;
@@ -111,11 +114,15 @@ filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
 </head>
 
 <body>
-<div class="err-404"><img src="images/500.png" height="288" width="622" alt="" /></div>
-<p class="p-btn">
-  <span id="showErrInfo" class="btn btn-warning">查看错误信息</span>
-  <span class="btn">返 回</span>
-</p>
+<div class="err-404">
+  <h2 class="h2-err"><strong class="strong-title">对不起！</strong>数据下标越界...</h2>
+  <p class="p-err">简单错误描述，简单错误描述简单错误描述简单错误描述简单错误描述简单错误描述</p>
+  <p class="p-btn">
+    <span id="showErrInfo" class="btn btn-warning">查看错误信息</span>
+    <span class="btn">返 回</span>
+  </p>
+</div>
+
 <div id="errInfoCont" class="errInfoCont">
 Visumination is helpful to the screening and treatment of the path high myopia <br />
 Visual f is helpful to the screening and treatmen with high myopia<br />
@@ -139,6 +146,7 @@ var $showbtn = document.getElementById('showErrInfo');
 var $infoCont = document.getElementById('errInfoCont');
 $showbtn.onclick= function(){
     $infoCont.style.display='block';
+    // this.style.display='none';
 }
 </script>
 </body>
