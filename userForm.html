@@ -37,7 +37,7 @@ background-color: #e3e3e3;
 
       <!-- <h3 class="h3-form"><span class="span-title">筹建医院-修改</span></h3> -->
       <!-- <form class="soForm pad-t15"> -->
-  <form class="soform form-validate form-enter pad-t15" role="form" method="post"  action="json/true.js" data-opt="{callback:'updateMenu||updateMenuComplete',params:{a:1,b:2,c:3}}">
+  <form class="soform form-validate form-enter pad-t15" role="form" method="post"  action="json/true.js">
       <fieldset>
       <div class="row">
           <div class="p6"><div class="item-one">
@@ -61,7 +61,7 @@ background-color: #e3e3e3;
 
         <div class="p3"><div class="item-one">
             <label class="lab-item">年龄：</label>
-            <input class="txt easyui-validatebox required" type="text" name="realName" value="" maxlength="20" placeholder="年龄" data-options="required:true" validType="isAge" missingMessage="请输入年龄" invalidMessage="年龄必须为数字并小于120" />
+            <input class="txt easyui-validatebox required" type="text" name="realName" value="" maxlength="20" placeholder="年龄" data-options="required:true" validType="age" missingMessage="请输入年龄" invalidMessage="年龄必须为数字并小于120" />
         </div></div>
         <div class="p3"><div class="item-one solab-sb">
             <label class="lab-item">生日：</label>
@@ -72,7 +72,7 @@ background-color: #e3e3e3;
       <div class="row">
         <div class="p6"><div class="item-one item-group">
             <label class="lab-item">头像：</label>
-             <input class="txt easyui-validatebox wp-75"  id="password" type="text" name="password" value="" maxlength="20" /><input type="button" class="btn btn-warning btn-small wp-25" name="btnCancel" value="上传" />
+             <input class="txt easyui-validatebox wp-75" type="text" name="userPhoto" value="" maxlength="20" /><input type="button" class="btn btn-warning btn-small wp-25" name="btnCancel" value="上传" />
         </div></div>
         <div class="p6"><div class="item-one">
             <label class="lab-item">描述：</label>
