@@ -133,6 +133,12 @@
         },
         message: "{0}"
     },
+    required3 : {
+      validator: function (value, param) {
+        return $.trim(value)!=='';
+      },
+      message: "{0}"
+    },
     minlength : {
       validator: function (value,param) {
         if(param[1]) $rules.minlength.message = param[1];

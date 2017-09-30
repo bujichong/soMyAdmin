@@ -995,17 +995,19 @@ var $ff = {
             })
         };
 
-        if ($('.required').length) {
-            $('.required').each(function () {
-                var _self = $(this);
-                if (_self.hasClass('so-time') || _self.hasClass('so-date')) {
-                    _self.addClass('txt-requireDate');
-                }
-                if (_self.hasClass('so-choice') || _self.hasClass('so-pop')) {
-                    _self.addClass('so-requirePop');
-                }
+        if ($(':input[noNull],.required').length) {
+            $(':input[noNull],.required').each(function () {
+              var _self = $(this);
+              if (_self.hasClass('so-time') || _self.hasClass('so-date')) {
+                  _self.addClass('txt-requireDate');
+              }
+              if (_self.hasClass('so-choice') || _self.hasClass('so-pop')) {
+                  _self.addClass('so-requirePop');
+              }
             });
         }
+
+
         if ($('.so-drop').length) {
             $('.so-drop').each(function () {
                 var _self = $(this);
