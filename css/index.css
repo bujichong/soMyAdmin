@@ -1,3 +1,4 @@
+@import "./soicon/style.css";
 /* yui reset.css version;2.5.2 */
 body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td,ul,li{margin:0;padding:0;}table{border-collapse:collapse;border-spacing:0;}fieldset,img{border:0;}address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal;}li{list-style:none;}caption,th{text-align:left;}h1,h2,h3,h4,h5,h6{font-size:100%;}q:before,q:after{content:'';}abbr,acronym{border:0;font-variant:normal;}sup{vertical-align:text-top;}sub{vertical-align:text-bottom;}input,textarea,select{font-family:inherit;font-size:inherit;font-weight:inherit;}input,textarea,select{*font-size:100%;}legend{color:#333;}.clear{height:0;font-size:0;line-height:0;clear:both;}
 iframe{display:block}
@@ -20,15 +21,6 @@ a:hover{color:#c00;}
 ::-webkit-scrollbar-thumb:hover {background-color: rgba(0,0,0,0.4);-webkit-box-shadow: inset 1px 1px 0 rgba(0,0,0,.1);}
 ::-webkit-scrollbar-thumb:active {background: rgba(0,0,0,0.6);}
 
-@font-face {
-  font-family: 'iconfont';  /* project id 178087 */
-  src: url('fonts/iconfont.eot');
-  src: url('fonts/iconfont?#iefix') format('embedded-opentype'),
-  url('fonts/iconfont.woff') format('woff'),
-  url('fonts/iconfont.ttf') format('truetype'),
-  url('fonts/iconfont.svg#iconfont') format('svg');
-}
-.em-icon{display: -moz-inline-stack;display:inline-block;*display:inline;*zoom:1;font-family: 'iconfont';font-size:1em;width: 1em;height:1em;margin:0 4px 0 0;}
 /* form now on */
 .header{position: absolute;top:0px;width: 100%;left:0px;height:58px;color:#fff;z-index: 7;background:#7dc9f0;}
 .header a{color:#fff;}
@@ -89,29 +81,14 @@ a.a-loginOut:hover{background-color:#209BD7;border-left:1px solid #209BD7;}
 
 .s-sidenav,.s-sidenav.s-subnav-now{display: block;line-height: 36px;background-color: #ededed;padding-left:20px;font-size:14px;cursor:hand;cursor:pointer;}
 .s-sidenav:hover{background-color:#00A0E9;color: #fff;}
-.s-sidenav .em-icon{color: #00A0E9;font-size: 15px;}
+.s-sidenav .em-icon{font-size: 15px;margin-right:4px;}
 .li-sidenav-now .s-sidenav .em-icon,.s-sidenav:hover .em-icon{color: #fff;}
 .li-sidenav-now .s-sidenav,.li-sidenav .s-sidenav-now{background-color:#00A0E9;color: #fff;}
-/*.li-sidenav-index .s-sidenav{background-image:url(../images/sidenav/index.png);}
-.li-sidenav-1 .s-sidenav{background-image:url(../images/sidenav/1.png);}
-.li-sidenav-2 .s-sidenav{background-image:url(../images/sidenav/2.png);}
-.li-sidenav-3 .s-sidenav{background-image:url(../images/sidenav/3.png);}
-.li-sidenav-4 .s-sidenav{background-image:url(../images/sidenav/4.png);}
-.li-sidenav-5 .s-sidenav{background-image:url(../images/sidenav/5.png);}
-.li-sidenav-6 .s-sidenav{background-image:url(../images/sidenav/6.png);}
-.li-sidenav-7 .s-sidenav{background-image:url(../images/sidenav/7.png);}*/
 .ul-subnav{/*background-color:#389BCF;*/display: none;}
 .ul-subnav-now,.ul-subnav-now .ul-subnav{display: block;}
 .s-subnav{display: block;line-height: 32px;padding-left: 39px;background:url(../images/sidenav/c-b.png) no-repeat 27px 14px;color:#004ea1;cursor:hand;cursor:pointer;/*border-top: 1px solid #fff;*/}
 .ul-subnav .ul-subnav .s-subnav{padding-left:57px;background:url(../images/sidenav/c-b.png) no-repeat 46px 14px;}
 .s-subnav:hover,.ul-subnav .ul-subnav .s-subnav:hover{background-color:#cbe6f3;}
-.s-subnav-now,.s-subnav-now:hover,.ul-subnav .ul-subnav .s-subnav-now,.ul-subnav .ul-subnav .s-subnav-now:hover{
-  background-color:#cbe6f3;
-}
+
 .li-sidenav-now .s-sidenav.s-subnav-now,.li-sidenav-now .s-sidenav.s-subnav-now:hover{background-color:#00A0E9;}
 /*.s-sidenav.s-subnav-now{background-color:#0E6390;}*/
-
-.tabs{height:32px!important;}
-.tabs li a.tabs-inner{height:31px!important;padding: 0 25px;}
-.tabs li a.tabs-close{margin-top: -12px;}
-.tabs li.tabs-selected a.tabs-inner{}

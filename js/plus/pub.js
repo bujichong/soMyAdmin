@@ -728,7 +728,7 @@ var $pop = {
           }
           $grid.newGrid('#' + gridId, gridCfg);
           $('.fnSearch', '#pop_' + gridId).click(function () {
-              var ps = $('#pop_' + gridId).find('.popGridHead').serializeObject();
+              var ps = $('#pop_' + gridId).find('.popGridHead').sovals();
               $grid.load('#' + gridId, ps);
           });
           if (muti) {
@@ -836,7 +836,7 @@ var $ff = {
                         if (formId != null && !$(formId).valid()) {
                             return;
                         }
-                        var scope = data.scope, param = $(scope).serializeObject(), gridId = data.grid;
+                        var scope = data.scope, param = $(scope).sovals(), gridId = data.grid;
                         if (data.tab) {
                             var sli = $('li.tabs-selected', data.tab), inx = $('.tabs li', data.tab).index(sli);
                             gridId += (inx + 1);
@@ -1268,7 +1268,7 @@ var $ff = {
                     if (data.beforeCallback) {//提交之前事件函数
                         callSumbit = window[data.beforeCallback](data);
                     };
-                    //$.applyIf(params, $(vform).serializeObject(data.dataToString));
+                    //$.applyIf(params, $(vform).sovals(data.dataToString));
                     params = $(vform).serialize();
                     var fn = function (rst) {
                         parent.window._refreshParent = true;

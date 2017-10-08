@@ -13,6 +13,7 @@ var eyeIndex = {
         me.loginOut();//退出登录
         me.switchCompany();//切换公司医院
         me.tabCloseEven();
+        $('.s-sidenav:first').trigger('click');
       },
       onlyOpenTitle: "系统首页",//不允许关闭的标签的标题
       exScreen : function () {
@@ -162,6 +163,7 @@ var eyeIndex = {
       },
       addTab : function(tabTitle,url){
         var me = this;
+        window.console&&console.log(url);
         if(!$('#tabs').tabs('exists',tabTitle)){
           $('#tabs').tabs('add',{
             title:tabTitle,
