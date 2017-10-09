@@ -27,8 +27,6 @@ define(['pinyin'],function () {
         };
       });
 
-
-
     }
   }
   return back;
