@@ -1,0 +1,183 @@
+
+<!DOCTYPE html>
+<html class="html_list">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>欢迎使用</title>
+<link rel="stylesheet" type="text/css" media="all" href="../js/lib/easyui/themes/gray/easyui.css" />
+<link type="text/css" rel="stylesheet" href="../css/easy-plus.css" />
+<link type="text/css" rel="stylesheet" href="../css/socss.css" />
+<link type="text/css" rel="stylesheet" href="../css/plugins.css" />
+<link type="text/css" rel="stylesheet" href="../css/base.css" />
+<body>
+<div class="wrapper">
+<link rel="stylesheet" type="text/css" href="vis/vis.min.css">
+<style type="text/css">
+.Wdate{width: 140px;}
+.searchCont{position: relative;overflow: hidden;zoom: 1;padding:6px 2px;}
+.searchHead .p-colorTip{float: left;padding-left:5px;line-height:28px;}
+.p-searchS{float: right;margin-right:114px;}
+
+.s-linetip{margin: 0 0 0 5px;font-weight: bold;}
+.em-linetip{color:#F97600;font-weight: bold;}
+</style>
+<h3 class="h2-tableTitle">工艺参数监控</h3>
+<div class="searchHead"  id="sbox">
+    <div class="searchCont">
+      <p class="p-item p-colorTip">
+        <span class="s-linetip">温馨提示：按住 <em class="em-linetip">ALT+滚动鼠标中键</em> 缩放时间周期</span>
+      </p>
+      <p class="p-item p-searchS"><label class="lab-item2">记录日期：</label>
+        <input class="txt Wdate" type="text" value="2017-10-08 15:44:17" id="startDate" name="startDate"/> --
+        <input class="txt Wdate" type="text" value="2017-10-09 15:44:17" id="endDate" name="endDate"/>
+      </p>
+    </div>
+    <input type="button" class="btn btn-submit btn-pos" value="查 询" />
+</div>
+<div id="mytimeline"></div>
+<script type="text/javascript" src="../js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="../js/lib/layer/layer.min.js"></script>
+<script type="text/javascript" src="../js/plus/jquery.extend.js"></script>
+<script type="text/javascript" src="vis/vis.js"></script>
+<script type="text/javascript">
+
+  $('#startDate').click(function () {
+    WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',readOnly:true,maxDate:'#F{$dp.$D(\'endDate\',{H:-12});}',isShowClear:false,onpicked : function () {
+      checkTime('startDate','endDate',15);
+    }});
+  });
+  $('#endDate').click(function () {
+    WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',readOnly:true,minDate:'#F{$dp.$D(\'startDate\',{H:12});}',isShowClear:false,onpicked : function () {
+      checkTime('endDate','startDate',-15);
+    }});
+  });
+
+
+    function checkTime(a,b,gap) {
+      var d = $dp.$D(a,{d:gap});
+      var newD = d.y+'-'+('0'+d.M).slice(-2)+'-'+('0'+d.d).slice(-2)+' '+('0'+d.H).slice(-2)+':'+('0'+d.m).slice(-2);
+      var newN = newD.replace(/\D/g,'');
+
+      var ed = $('#'+b).val();
+      var newE = ed.replace(/\D/g,'');
+
+      var p = gap>0?(newE-newN)>0:(newN-newE)>0;
+
+      p&&$('#'+b).val(newD);
+      $T.setCookie('tTime_'+$('#'+a).attr('name'),$('#'+a).val());//cookie选择的时间
+      p&& $T.setCookie('tTime_'+$('#'+b).attr('name'),newD);//cookie选择的时间
+    }
+
+var msg1="<p title='点击查看详情'><span>机器: <b class='b-no'>{machNo}</b></span><br/><span>修改了<b class='b-count'>{count}</b>次</span><span class='hide fn_msgInfo'>{msg}</span></p>";
+var msg="<p title='点击查看详情'><span>机器: <b class='b-no'>{machNo}</b></span><br/><span>{time}分钟内修改了<b class='b-count'>{count}</b>次</span><span class='hide fn_msgInfo'>{msg}</span></p>";
+var data,dh = $(window).height()-88;
+
+
+options = {
+    zoomMin:1000*60*60 * 50*12,
+    zoomMax:1000 * 60 * 60 * 24*2*8*32,
+    height: dh+"px",
+    max: new Date().getTime() + 12 * 3600 * 1000,
+    //height: "auto",
+    editable: false,   // enable dragging and editing items
+    // zoomable:false,
+    zoomKey : 'altKey',
+    showCurrentTime:false,
+    orientation: 'top'
+};
+
+var events={
+     oneclick : function () {
+        var $onebox = $('.vis-box');
+        $onebox.click(function() {
+            var _self = $(this);
+            var msg = _self.find('.fn_msgInfo').text();
+            var no = _self.find('.b-no').text();
+            var count = _self.find('.b-count').text();
+
+            var msgArr = msg.split(',');
+            // window.console && console.log(msgArr);
+            var msgHtmlArr = ['<ul class="ul-list-a">'];
+            var noNum = 0;
+            var len = msgArr.length;
+            $.each(msgArr, function(i,v) {
+              var valArr = v.split(':');
+              noNum++;
+              var n = noNum<10?'0'+noNum:noNum;
+              msgHtmlArr.push('<li class="li-list-a"><span class="s-list-a"><em class="em-num">'+n+'/</em> <em class="em-title">'+valArr[0]+'：</em><em class="em-info">'+valArr[1]+'</em><em class="em-info-date"> ('+new XDate(parseInt(valArr[2])).toString('HH:mm:ss')+')</em></span></li>');
+
+            });
+            msgHtmlArr.push('</ul>');
+            var msgHtml = msgHtmlArr.join('');
+            // var winH = $(window).height();
+            var msgW = len>60?992:(len>23?968:(len>2?648:328));
+            var  msgH = len>60?600:null;
+            $.sobox.pop({
+              cls : 'pop-msgInfo',
+              title : '机器'+no+' 修改详情 ('+count+'次)',
+              width : msgW,height:msgH,
+              type : 'content',
+              maskClick : true,
+              content : msgHtml,
+              onPop : function () {
+                len>60&&$('.ul-list-a').css({height:'560px',overflow:'auto'});
+              }
+            });
+
+        });
+     },
+     rangechanged : function(range) {
+     		console.log("rangechanged",range.start,range.end);
+     		$.post("/yf/param/getHtParamChgByDate.htm",{startDate:range.start.getTime(),endDate:range.end.getTime()},function(rst){
+     			if(rst.state){
+                        var items = new vis.DataSet();
+                        var cid = 1;
+		            $.each(rst.data,function(i,r){
+		            	$.each(r.data,function(j,x){
+		            		var tpl=(x.count==1||(x.end-x.start)==0)?msg1:msg;
+                                items.add({
+                                  id : cid,
+                                  start : new Date(x.start),
+                                  content : $util.format(tpl,{machNo:r.machNo,msg:x.msg,count:x.count,time:Math.ceil( 10*(x.end-x.start)/(1000*60))/10})
+                                });
+                                cid++;
+		            	});
+		            });
+                      timeline.setItems(items);
+                      events.oneclick();
+                // window.console && console.log($('.timeline-event-box').length);
+     			}
+     		});
+        },
+        setTimeDuring : function () {
+            var start=$('#startDate').val().replace(/-/g,'/');
+            var end=$('#endDate').val().replace(/-/g,'/');
+            var newStartDate = new Date(start);
+            var newEndDate   = new Date(end);
+            timeline.setWindow(newStartDate, newEndDate);
+            events.rangechanged({start:newStartDate,end:newEndDate});
+        }
+};
+
+
+
+var container = document.getElementById('mytimeline');
+var timeline = new vis.Timeline(container, null, options);
+
+
+
+  timeline.on('rangechanged',function (a) {//时间范围发生变化时触发
+    // window.console && console.log(a,'start:',a.start,'，end:',a.end);
+    events.rangechanged({start:a.start,end:a.end});
+  });
+
+events.setTimeDuring();
+
+$('.btn-submit').click(function () {
+  events.setTimeDuring();
+});
+
+    </script>
+</div>
+</body>
+</html>

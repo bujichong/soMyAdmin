@@ -1,0 +1,102 @@
+
+<!DOCTYPE html>
+<html class="html_list">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>欢迎使用</title>
+<link rel="stylesheet" type="text/css" media="all" href="../js/lib/easyui/themes/gray/easyui.css" />
+<link type="text/css" rel="stylesheet" href="../css/easy-plus.css" />
+<link type="text/css" rel="stylesheet" href="../css/socss.css" />
+<link type="text/css" rel="stylesheet" href="../css/plugins.css" />
+<link type="text/css" rel="stylesheet" href="../css/base.css" />
+<body>
+<div class="wrapper">
+<link rel="stylesheet" type="text/css" href="vis/vis.min.css">
+<style type="text/css">
+.s-linetip{margin: 0 0 0 5px;font-weight: bold;}
+.em-linetip{color:#F97600;font-weight: bold;}
+
+.vis-item.vis-range{-moz-border-radius:0;-webkit-border-radius:0;border-radius:0;}
+.vis-item{border-color: #80d1ff;background-color: #e8f7ff;}
+
+
+</style>
+<h3 class="h2-tableTitle">工艺参数监控</h3>
+<div id="mytimeline"></div>
+<script type="text/javascript" src="../js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="../js/lib/layer/layer.min.js"></script>
+<script type="text/javascript" src="../js/plus/jquery.extend.js"></script>
+<script type="text/javascript" src="vis/vis2.js"></script>
+<script type="text/javascript">
+
+var msg1="<p title='点击查看详情'><span>机器: <b class='b-no'>{machNo}</b></span><br/><span>修改了<b class='b-count'>{count}</b>次</span><span class='hide fn_msgInfo'>{msg}</span></p>";
+var msg="<p title='点击查看详情'><span>机器: <b class='b-no'>{machNo}</b></span><br/><span>{time}分钟内修改了<b class='b-count'>{count}</b>次</span><span class='hide fn_msgInfo'>{msg}</span></p>";
+var data,dh = $(window).height()-18;
+
+
+
+
+
+// create a dataset with items
+// we specify the type of the fields `start` and `end` here to be strings
+// containing an ISO date. The fields will be outputted as ISO dates
+// automatically getting data from the DataSet via items.get().
+var items = new vis.DataSet({
+    type: { start: 'ISODate', end: 'ISODate' }
+});
+var groups = new vis.DataSet([{
+    id: 'bar', content:'分组1', subgroupOrder: function (a,b) {return a.subgroupOrder - b.subgroupOrder;}
+},{
+    id: 'foo', content:'分组2', subgroupOrder: 'subgroupOrder' // this group has no subgroups but this would be the other method to do the sorting.
+}]);
+// add items to the DataSet
+items.add([
+    {id: 0, content: '一个人一路走', start: '2014-01-20', end: '2014-01-22',group:'foo'},
+
+    {id: 1, content: '我是第一个', start: '2014-01-23 18:00', end: '2014-01-26 12:00:00',group:'bar', subgroup:'sg_1', subgroupOrder:0},
+    {id: 2, content: '我是第二个', start: '2014-01-27', end: '2014-01-29',group:'bar', subgroup:'sg_2', subgroupOrder:1},
+    {id: 3, content: '我是第三个', start: '2014-01-28 0:00', end: '2014-02-02 0:00',group:'bar', subgroup:'sg_3', subgroupOrder:1}
+]);
+
+var container = document.getElementById('visualization');
+
+var options = {
+    zoomMin:1000*60*60 * 50*12,
+    zoomMax:1000 * 60 * 60 * 24*2*8*32,
+    height: dh+"px",
+    max: new Date().getTime() + 12 * 3600 * 1000,
+    //height: "auto",
+    editable: false,   // enable dragging and editing items
+    // zoomable:false,
+    zoomKey : 'altKey',
+    showCurrentTime:false,
+    orientation: 'top',
+    stack : false,
+    stackSubgroups: true
+};
+
+
+// var options = {
+//     // orientation:'top'
+//     start: '2014-01-10',
+//     end: '2014-02-10',
+//     // editable: true,
+//     stack: false,
+//     stackSubgroups: true
+// };
+
+var timeline = new vis.Timeline(mytimeline, items, groups, options);
+
+function toggleStackSubgroups() {
+    options.stackSubgroups = !options.stackSubgroups;
+    timeline.setOptions(options);
+}
+
+
+
+
+
+    </script>
+</div>
+</body>
+</html>
