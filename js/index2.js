@@ -163,6 +163,7 @@ var eyeIndex = {
       },
       addTab : function(tabTitle,url){
         var me = this;
+        window.console&&console.log(url);
         if(!$('#tabs').tabs('exists',tabTitle)){
           $('#tabs').tabs('add',{
             title:tabTitle,
