@@ -176,6 +176,11 @@ transform: scale(1, -1);
 .form-item img{vertical-align:top;}
 .item-one{overflow:hidden;zoom:1;padding:0 0 8px;line-height:26px;}
 
+/* crumb */
+.crumb .em-div{font-family:"宋体";}
+.crumb a,.crumb span{margin:0 5px;}
+.crumb .now{color:#999;}
+
 
 input[type="checkbox"],
 input[type="radio"] {

@@ -257,6 +257,84 @@ $.fn.extend({
             });
         };
         return o;
+    },
+    soSelect : function(o){
+      var defOpt = {//所有参数
+        muti: false,//是否多选
+        nullVal : true,//是否添加'请选择...'
+        appendMode : false,//html还是append到元素中，默认直接html替换
+        url : null,//远程请求地址
+        data : null,//请求附加数据
+        value : null,//被选中值，为字符串，多选用逗号隔开
+        success : null,//初始化完成后 function(val,_self,opt){}
+        change : null//change执行事件，字符串为全局函数，function为function(val,_self,opt){}函数
+      };
+      var mySelf = $(this);
+      mySelf.each(function () {
+          var _self = $(this);
+          var opt = $T.data(this) || {};
+          opt = $.extend(defOpt,opt,o||{});
+          window.console&&console.log(opt);
+          if (opt.value!==null) {
+            var val =opt.value.toString();
+            val = val.split(',');
+          }
+          var data = opt.data ||{};
+          var rstData = null;
+          if(opt.url){
+            $.ajax({
+              url :opt.url,
+              data : data,
+              type : 'post',
+              dataType : 'json',
+              async : false,
+              success : function(rstData){
+                // window.console&&console.log(rstData);
+                if(rstData&&rstData.length){
+                  var optHtml = (opt.nullVal)?'<option value="">请选择...</option>':'';
+                  $.each(rstData,function(i,v){
+                    if(v.selected||v.checked){val.push(v.value)};//json数据selected或checked为true也可以标示为选中
+                    optHtml += '<option value="'+v.value+'">'+v.text+'</option>';
+                  });
+                  _self[opt.appendMode?'append':'html'](optHtml);//添加dom
+                }else{
+                  window.console&&console.log('so-drop远程初始化失败或数据为空..');
+                }
+              }
+            });
+          }
+          if(opt.muti){
+            _self.attr('multiple','multiple');
+          }
+          if (val&&val.length) {//赋值
+            if(!opt.muti){
+              val=val.pop();
+              _self.find('option[value='+val+']').attr('selected',true);
+            }else{
+              $.each(val,function(i,v){
+                _self.find('option[value='+v+']').attr('selected',true);
+              })
+            }
+          }
+          if(opt.success){
+            if(typeof opt.success === 'string'){//字符串为函数名
+              window[opt.success](val,_self,opt);
+            }else{//函数
+              opt.success(val,_self,opt);
+            }
+          }
+          if(opt.change){
+            _self.change(function(){
+              val = _self.val();
+              if(typeof opt.change === 'string'){//字符串为函数名
+                window[opt.change](val,_self,opt);
+              }else{//函数
+                opt.change(val,_self,opt);
+              }
+            })
+          }
+      });
+      return mySelf;
     }
 });
 

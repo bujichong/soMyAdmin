@@ -959,75 +959,7 @@ var $ff = {
         };
         // 下拉框初始化
         if ($(".so-select").length) {
-          var defaultOpt = {//所有参数
-            muti: false,//是否多选
-            nullVal : true,//是否添加'请选择...'
-            appendMode : false,//html还是append到元素中，默认直接html替换
-            url : null,//远程请求地址
-            data : null,//请求附加数据
-            value : null,//被选中值，为字符串，多选用逗号隔开
-            success : null,//初始化完成后 function(_self,val,opt){}
-            chanage : null//change执行事件，字符串为全局函数，function为function(_self,val,opt){}函数
-          };
-          $(".so-select").each(function () {
-              var _self = $(this);
-              var opt = $T.data(this) || {};
-              opt = $.extend(defaultOpt,opt);
-              window.console&&console.log(opt);
-              if (opt.value!==null) {
-                var val =opt.value.toString();
-                val = val.split(',');
-              }
-              var data = opt.data ||{};
-              var rstData = null;
-              if(opt.url){
-                $.ajax({
-                  url :opt.url,
-                  data : data,
-                  dataType : 'json',
-                  async : false,
-                  success : function(rstData){
-                    // window.console&&console.log(rstData);
-                    if(rstData&&rstData.length){
-                      var optHtml = (opt.nullVal)?'<option>请选择...</option>':'';
-                      $.each(rstData,function(i,v){
-                        if(v.selected||v.checked){val.push(v.value)};//json数据selected或checked为true也可以标示为选中
-                        optHtml += '<option value="'+v.value+'">'+v.text+'</option>';
-                      });
-                      _self[opt.appendMode?'append':'html'](optHtml);//添加dom
-                    }else{
-                      window.console&&console.log('so-drop远程初始化失败或数据为空..');
-                    }
-                  }
-                });
-              }
-              if(opt.muti){
-                _self.attr('multiple','multiple');
-              }
-              if (val&&val.length) {//赋值
-                if(!opt.muti){val=val.pop().split('');}
-                $.each(val,function(i,v){
-                  _self.find('option[value='+v+']').attr('selected',true);
-                })
-              }
-              if(opt.success){
-                if(typeof opt.success === 'string'){//字符串为函数名
-                  window[opt.success](_self,val,opt);
-                }else{//函数
-                  opt.success(_self,val,opt);
-                }
-              }
-              if(opt.chanage){
-                _self.chanage(function(){
-                  if(typeof opt.chanage === 'string'){//字符串为函数名
-                    window[opt.chanage](_self,val,opt);
-                  }else{//函数
-                    opt.chanage(_self,val,opt);
-                  }
-                })
-              }
-
-          });
+          $(".so-select").soSelect();
         }
     },
     /**

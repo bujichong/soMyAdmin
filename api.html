@@ -41,7 +41,6 @@ background-color: #e3e3e3;
       <!-- <h3 class="h3-form"><span class="span-title">筹建医院-修改</span></h3> -->
       <!-- <form class="soForm pad-t15"> -->
   <form class="soform form-validate form-enter pad-t15" role="form" method="post"  action="json/true.js">
-
       <div class="row">
         <div class="p6"><div class="item-one">
             <label class="lab-item">用户名：</label>
@@ -61,7 +60,7 @@ background-color: #e3e3e3;
 
           <div class="p6"><div class="item-one">
             <label class="lab-item">证件类型：</label>
-            <select id="cardType" class="so-select txt-validate" name="cardType" noNull="请选择证件类型" data-opt="{url:'json/cardtype.js',data:{type:1},value:2,success:function(_self,val,opt){console.log(val,opt);}}">
+            <select id="cardType" class="so-select txt-validate" name="cardType" noNull="请选择证件类型" data-opt="{url:'json/cardtype.js',data:{type:1},value:1,success:function(val,_self,opt){console.log(val,opt);},change:function(val,_self,opt){console.log(val);}}">
               <!-- <option>请选择...</option>
               <option value="1">身份证</option>
               <option value="2">其他证件</option> -->
@@ -204,11 +203,8 @@ background-color: #e3e3e3;
 
                 &lt;div class="p6"&gt;&lt;div class="item-one"&gt;
                   &lt;label class="lab-item"&gt;证件类型：&lt;/label&gt;
-                  &lt;select id="cardType" class="drop txt-validate" name="cardType" noNull="请选择证件类型"&gt;
-                    &lt;option&gt;请选择...&lt;/option&gt;
-                    &lt;option value="1"&gt;身份证&lt;/option&gt;
-                    &lt;option value="2"&gt;其他证件&lt;/option&gt;
-                  &lt;/select&gt;
+                  &lt;select id="cardType" class="so-select txt-validate" name="cardType" noNull="请选择证件类型" data-opt="{url:'json/cardtype.js',data:{type:1},value:1,success:function(val,_self,opt){console.log(val,opt);},change:function(val,_self,opt){console.log(val);}}"&gt;
+                &lt;/select&gt;
                 &lt;/div&gt;&lt;/div&gt;
             &lt;/div&gt;
 
@@ -328,6 +324,19 @@ background-color: #e3e3e3;
 
   </div>
 
+
+<h2 class="h2-api">alert</h2>
+<div class="exbox">
+  <div class="htmlbox">
+    <div class="crumb">您所在的位置： <a href="#">首页</a><em class="em-div">&gt;</em><a href="#">用户管理</a><em class="em-div">&gt;</em><span class="now">用户详情</span></div>
+  </div>
+  <div class="codebox">
+    <pre class="brush:html">
+      &lt;div class="crumb"&gt;您所在的位置： &lt;a href="#"&gt;首页&lt;/a&gt;&lt;em class="em-div"&gt;-&lt;/em&gt;&lt;a href="#"&gt;用户管理&lt;/a&gt;&lt;em class="em-div"&gt;-&lt;/em&gt;&lt;span class="now"&gt;用户详情&lt;/span&gt;&lt;/div&gt;
+    </pre>
+  </div>
+
+</div>
 
     <h2 class="h2-api">alert</h2>
   <div class="exbox"><div class="htmlbox">
