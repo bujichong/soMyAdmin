@@ -61,10 +61,10 @@ background-color: #e3e3e3;
 
           <div class="p6"><div class="item-one">
             <label class="lab-item">证件类型：</label>
-            <select id="cardType" class="drop txt-validate" name="cardType" noNull="请选择证件类型">
-              <option>请选择...</option>
+            <select id="cardType" class="so-select txt-validate" name="cardType" noNull="请选择证件类型" data-opt="{url:'json/cardtype.js',data:{type:1},value:2,success:function(_self,val,opt){console.log(val,opt);}}">
+              <!-- <option>请选择...</option>
               <option value="1">身份证</option>
-              <option value="2">其他证件</option>
+              <option value="2">其他证件</option> -->
             </select>
           </div></div>
       </div>
