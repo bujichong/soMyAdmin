@@ -77,27 +77,20 @@ var $util = {
           area :['100%', '100%']
         },opt||{});
         if (grid) {
-            layerOpt.end = function (){
-                opt.end&&opt.end();
-                if (window._refreshParent){
-                    if(grid instanceof Array){
-                        $.each(grid,function (i,v) {
-                            $grid.reload(v);
-                        })
-                    }else{
-                        $grid.reload(grid);
-                    }
-                }
-            }
+          layerOpt.end = function (){
+              opt.end&&opt.end();
+              if (window._refreshParent){
+                  if(grid instanceof Array){
+                      $.each(grid,function (i,v) {
+                          $grid.reload(v);
+                      })
+                  }else{
+                      $grid.reload(grid);
+                  }
+              }
           }
-        var popIndex = layer.open(layerOpt);
-        // window.console && console.log(popIndex);
-        var str = layerOpt.content;
-        if (str.indexOf("/") != 0) {
-            str = location.pathname.replace(/\/[^/]*$/, "/") + layerOpt.content;
         }
-        window.console && console.log(str);
-        $pop[str] = popIndex;
+        var popIndex = layer.open(layerOpt);
     },
     closePop : function (opt) {
         var opt = $.extend({
@@ -112,9 +105,11 @@ var $util = {
             return;
         }else{//关闭父级pop
             var p = parent.window;
+
             if (opt.refreshGrid) {
                 p._refreshParent = true;
             };
+
             try {//试运行callback
                 opt.callback(p);
             } catch (e) {
@@ -122,12 +117,8 @@ var $util = {
             }
 
             try {//试关闭open
-                var tt = location.pathname + (location.search || '');
-                window.console && console.log(tt);
-                window.console && console.log(p.$pop[tt]);
-                // if (p.$pop[tt])p.$pop[tt].removePop();
-                if (p.$pop[tt])p.layer.close(p.$pop[tt]);
-
+              var index = parent.layer.getFrameIndex(window.name);
+              p.layer.close(index);
             } catch (e) {
                 window.console && console.log(e);
             }
@@ -174,14 +165,6 @@ var $util = {
                 }
             }
         };
-    },
-    id: function (prefix, n) {
-        if (n < 1)n = 3;
-        var rnd = "";
-        for (var i = 0; i < n; i++) {
-            rnd += Math.floor(Math.random() * 10);
-        }
-        return prefix + rnd;
     }
 };
 
@@ -498,7 +481,7 @@ var $grid = {
                   } else {
                       window._refreshParent = false;
                       var areaVal = o.popMax?['100%', '100%']:[(o.popWidth+'px') || '560px',(o.popHeight+'px') || '300px'];
-                      var popIndex = layer.open({//layer
+                      layer.open({//layer
                         type: 2,
                         title : o.title,
                         content:url,
@@ -510,13 +493,6 @@ var $grid = {
                             }
                         }
                       });
-                      // window.console && console.log(popIndex);
-                      var str = url;
-                      if (str.indexOf("/") != 0) {
-                          str = location.pathname.replace(/\/[^/]*$/, "/") + url;
-                          window.console && console.log(str);
-                      }
-                      $pop[str] = popIndex;
                       _self.blur();
                   }
               }else{
@@ -609,7 +585,7 @@ var $grid = {
                           opt.popWidth = opt.popWidth || 560;
                           opt.popHeight = opt.popHeight || 300;
                           var areaVal = opt.popMax?['100%', '100%']:[(opt.popWidth+'px'),(opt.popHeight+'px')];
-                          var popIndex = layer.open({//layer
+                          layer.open({//layer
                             type: 2,
                             title : opt.title,
                             content:url,
@@ -618,13 +594,6 @@ var $grid = {
                                 if (window._refreshParent)$grid.reload(grid);
                             }
                           });
-                          // window.console && console.log(popIndex);
-                          var str = url;
-                          if (str.indexOf("/") != 0) {
-                              str = location.pathname.replace(/\/[^/]*$/, "/") + url;
-                              window.console && console.log(str);
-                          }
-                          $pop[str] = popIndex;
                           _self.blur();
                       }
                   } else {
@@ -759,7 +728,7 @@ var $pop = {
           }
           $grid.newGrid('#' + gridId, gridCfg);
           $('.fnSearch', '#pop_' + gridId).click(function () {
-              var ps = $('#pop_' + gridId).find('.popGridHead').serializeObject();
+              var ps = $('#pop_' + gridId).find('.popGridHead').sovals();
               $grid.load('#' + gridId, ps);
           });
           if (muti) {
@@ -867,7 +836,7 @@ var $ff = {
                         if (formId != null && !$(formId).valid()) {
                             return;
                         }
-                        var scope = data.scope, param = $(scope).serializeObject(), gridId = data.grid;
+                        var scope = data.scope, param = $(scope).sovals(), gridId = data.grid;
                         if (data.tab) {
                             var sli = $('li.tabs-selected', data.tab), inx = $('.tabs li', data.tab).index(sli);
                             gridId += (inx + 1);
@@ -1299,7 +1268,7 @@ var $ff = {
                     if (data.beforeCallback) {//提交之前事件函数
                         callSumbit = window[data.beforeCallback](data);
                     };
-                    //$.applyIf(params, $(vform).serializeObject(data.dataToString));
+                    //$.applyIf(params, $(vform).sovals(data.dataToString));
                     params = $(vform).serialize();
                     var fn = function (rst) {
                         parent.window._refreshParent = true;

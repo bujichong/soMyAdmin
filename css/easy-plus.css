@@ -3,6 +3,23 @@
 .panel{border:0;}
 .panel-header, .panel-body{border:0;}
 
+.tabs li.tabs-selected a.tabs-inner,.tabs li.tabs-selected a.tabs-inner:hover{
+color: #fff;
+background: #00A0E9;
+border:0;
+border-bottom:1px solid #00A0E9;
+}
+.tabs{border-color: #00A0E9;}
+.tabs-p-tool a:hover,
+.tabs li a:hover.tabs-close,
+.tabs-scroller-over {
+  background-color: #e2e2e2;
+}
+.tabs{height:32px!important;}
+.tabs li a.tabs-inner{height:32px!important;padding: 0 25px;border-bottom:0;-moz-border-radius:0;-webkit-border-radius:0;border-radius:0;border:0;}
+.tabs li.tabs-selected a.tabs-inner{}
+.tabs li a.tabs-close{margin-top: -12px;}
+.tabs li.tabs-selected a.tabs-inner{}
 
 .ul-userTree .tree-file{background:url(../images/easyui/i-user.png) no-repeat center;}
 .ul-powerTree .tree-file{background:url(../images/easyui/i-key.png) no-repeat ;}

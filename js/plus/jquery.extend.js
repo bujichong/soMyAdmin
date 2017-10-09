@@ -352,7 +352,7 @@ var $T = {
         }
     },
     setCookie : function (key,value,co,root) {//增强版设置cookie
-        root = root==undefined?true:root;
+        root = root==undefined?true:root;//默认cookie都定义在root目录下，不到子目录下
         var co = co||'aso',$co = $.cookie(co);
         var coVal;
         if ($co!==null) {
