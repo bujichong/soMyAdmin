@@ -114,8 +114,8 @@ background: #07b0e4;
 
 <body>
 <div class="err-404">
-  <h2 class="h2-err"><strong class="strong-title">对不起！</strong>提交数据失败...</h2>
-  <p class="p-err">请检查网络或联系管理员请检查网络或联系管理员请检查网络或联系管理员..</p>
+  <h2 class="h2-err"><strong class="strong-title">对不起！</strong>数据连接失败...</h2>
+  <p class="p-err">请检查网络或联系系统管理员， <br />邮箱地址： <a class="a-mail" href="mailto:servicer@aierchina.com">servicer@aierchina.com</a></p>
   <p class="p-btn">
     <span id="showErrInfo" rel="0">查看错误信息</span>
     <span id="s-back" class="btn btn-primary">返 回</span>
@@ -146,6 +146,35 @@ Visual field examination icreening and treatment of the patients with high myopi
 
 
 var $ajax = {
+  	alertErr : function (rst,msg) {
+  		var errDatails = rst.details||'';
+  		//window.console&&console.log(errDatails);
+  		var msg = rst.msg || msg ||'信息提交失败';
+  		layer.open({
+  		  type: 1,
+  		  skin:'soerrPop',
+  		  icon: 2, title:false,
+  		  btnAlign: 'c',
+  		  area:['300px','auto'],
+  		  content: '<i class="layui-layer-ico layui-layer-ico2"></i><h2 class="h2-err">对不起！'+ msg +'</h2><p>请检查网络或联系系统管理员， <br />邮箱地址： <a class="a-mail" href="mailto:servicer@aierchina.com">servicer@aierchina.com</a></p><span class="s-errDetails">查看错误信息</span> <div class="errPopInfoBox"><div class="errPopInfo">'+errDatails+'</div></div>',
+  		  btn: ['确定'],
+  		  yes : function(index, layero){
+  			layer.close(index);
+  		  },
+  		  success : function(layero, index){
+  			var errHtml = layero.find('.errPopInfoBox').html();
+  			$('.s-errDetails').click(function(){
+  			  layer.open({
+  				title :'',
+  				type: 1,
+  				skin:'soerrPopInfo',
+  				area : ['99%','99%'],
+  				content: errHtml
+  			  });
+  			});
+  		  }
+  		});
+  	},
     post: function (url, data, tip) {
         var ajaxLoading = null, maskOpt = null, dtd = null;
         if (tip) {//提示
@@ -172,39 +201,19 @@ var $ajax = {
                       if (rst.state) {
                         layer.msg(msg,{icon:1});
                       } else {
-                        var errDatails = rst.details||'';
-                        window.console&&console.log(errDatails);
-                        layer.open({
-                          type: 1,
-                          skin:'soerrPop',
-                          icon: 2, title:false,
-                          btnAlign: 'c',
-                          area:['300px','auto'],
-                          content: '<i class="layui-layer-ico layui-layer-ico2"></i><h2 class="h2-err">对不起，提交数据失败！</h2>'+ msg +'<span class="s-errDetails">查看错误信息</span> <div class="errPopInfoBox"><div class="errPopInfo">'+errDatails+'</div></div>',
-                          btn: ['确定'],
-                          yes : function(index, layero){
-                            layer.close(index);
-                          },
-                          success : function(layero, index){
-                            var errHtml = layero.find('.errPopInfoBox').html();
-                            $('.s-errDetails').click(function() {
-                              layer.open({
-                                title :'',
-                                type: 1,
-                                skin:'soerrPopInfo',
-                                area : ['99%','99%'],
-                                content: errHtml
-                              });
-                            });
-                          }
-                        });
+                        $ajax.alertErr(rst);
                       }
                     }
                     dtd.resolve(rst);
                   },
-                  error: function (XMLHttpRequest, textStatus, errorThrown) {
+                  error: function (req, textStatus, errorThrown) {
                     layer.close(loadingIndex);
-                    layer.alert('<p class="red">对不起，提交数据失败！</p>请检查网络或联系管理员...',{icon: 2, title:false,btnAlign: 'c'});
+                    if(req.responseJSON&&req.responseJSON.msg){
+                      var rst = req.responseJSON;
+                      $ajax.alertErr(rst);
+                    }else{
+                      layer.alert('<p class="red">对不起，数据连接失败！</p>请检查网络或联系系统管理员， <br />邮箱地址： <a class="a-mail" href="mailto:servicer@aierchina.com">servicer@aierchina.com</a>',{icon: 2, title:false,btnAlign: 'c'});
+                    }
                     dtd.reject();
                   }
               });
@@ -227,38 +236,17 @@ var $ajax = {
               success: function (rst) {
                 layer.close(loadingIndex);
                 if(rst&&!rst.state){
-                  var msg = rst.tip == 1 ? rst.msg :"信息提交失败";
-                  var errDatails = rst.details||'';
-                  window.console&&console.log(rst,errDatails);
-                  layer.open({
-                    type: 1,
-                    skin:'soerrPop',
-                    icon: 2, title:false,
-                    btnAlign: 'c',
-                    area:['300px','auto'],
-                    content: '<i class="layui-layer-ico layui-layer-ico2"></i><h2 class="h2-err">对不起，提交数据失败！</h2>'+ msg +'<span class="s-errDetails">查看错误信息</span> <div class="errPopInfoBox"><div class="errPopInfo">'+errDatails+'</div></div>',
-                    btn: ['确定'],
-                    yes : function(index, layero){
-                      layer.close(index);
-                    },
-                    success : function(layero, index){
-                      var errHtml = layero.find('.errPopInfoBox').html();
-                      $('.s-errDetails').click(function() {
-                        layer.open({
-                          title :'',
-                          type: 1,
-                          skin:'soerrPopInfo',
-                          area : ['99%','99%'],
-                          content: errHtml
-                        });
-                      });
-                    }
-                  });
+                  $ajax.alertErr(rst,msg);
                 }
               },
-              error: function (XMLHttpRequest, textStatus, errorThrown) {
+              error: function (req, textStatus, errorThrown) {
                 layer.close(loadingIndex);
-                layer.alert('<p class="red">对不起，提交数据失败！</p>请检查网络或联系管理员...',{icon: 2, title:false,btnAlign: 'c'});
+                if(req.responseJSON&&req.responseJSON.msg){
+                  var rst = req.responseJSON;
+                  $ajax.alertErr(rst);
+                }else{
+                  layer.alert('<p class="red">对不起，数据连接失败！</p>请检查网络或联系系统管理员， <br />邮箱地址： <a class="a-mail" href="mailto:servicer@aierchina.com">servicer@aierchina.com</a>',{icon: 2, title:false,btnAlign: 'c'});
+                }
               }
             });
         }
@@ -274,33 +262,6 @@ var $infoCont = document.getElementById('errInfoC');
 document.getElementById('s-back').onclick = function (){
   window.history.back();
 };
-// document.getElementById('s-sync').onclick = function (){
-//   // layer.alert('<p class="red">对不起，提交数据失败！</p>请检查网络或联系管理员...',{icon: 2, title:false,btnAlign: 'c'});
-//   layer.open({
-//     type: 1,
-//     skin:'soerrPop',
-//     icon: 2, title:false,
-//     btnAlign: 'c',
-//     area:['300px','auto'],
-//     content: '<i class="layui-layer-ico layui-layer-ico2"></i><h2 class="h2-err">对不起，提交数据失败！</h2>请检查网络或联系管理员请检查网络或联系管理员请检查网络或联系管理员...<span class="s-errDetails">查看错误信息</span> <div class="errPopInfoBox"><div class="errPopInfo">Visual f is helpful to the screening and treatmen with high myopia Visual field examination icreening and treatment of the patients with high myopia<br />Visumination is helpful to the screening and treatment of the path high myopia Visual f is helpful to the screening and treatmen with high myopia<br />Visual field examination icreening and treatment of the patients with high myopia Visual f is helpful to the screening and treatmen with high myopia Visual field examination icreening and treatment of the patients with high myopia<br />Visumination is helpful to the screening and treatment of the path high myopia Visual f is helpful to the screening and treatmen with high myopia<br />Visual field examination icreening and treatment of the patients with high myopiaVisual f is helpful to the screening and treatmen with high myopia Visual field examination icreening and treatment of the patients with high myopia<br />Visumination is helpful to the screening and treatment of the path high myopia Visual f is helpful to the screening and treatmen with high myopia<br />Visual field examination icreening and treatment of the patients with high myopia Visual f is helpful to the screening and treatmen with high myopia Visual field examination icreening and treatment of the patients with high myopia<br />Visumination is helpful to the screening and treatment of the path high myopia Visual f is helpful to the screening and treatmen with high myopia<br />Visual field examination icreening and treatment of the patients with high myopia</div></div>',
-//     btn: ['确定'],
-//     yes : function(index, layero){
-//       layer.close(index);
-//     },
-//     success : function(layero, index){
-//       var errHtml = layero.find('.errPopInfoBox').html();
-//       $('.s-errDetails').click(function() {
-//         layer.open({
-//           title :'',
-//           type: 1,
-//           skin:'soerrPopInfo',
-//           area : ['99%','99%'],
-//           content: errHtml
-//         });
-//       });
-//     }
-//   });
-// };
 
 $('#s-sync').click(function() {
   $ajax.post('json/false.js');
