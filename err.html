@@ -11,11 +11,12 @@ body{
 font-size:0.75em;
 font-family:Helvetica Neue,Helvetica,PingFang SC,\5FAE\8F6F\96C5\9ED1,Tahoma,Arial,sans-serif,"Microsoft YaHei";
 color:#555;
+word-wrap:break-word;word-break:break-all;
 }
 .h2-err{font-size:28px;font-weight: normal;margin-bottom:10px;}
 .strong-title{color:#ff884d;font-weight: normal;font-size:32px;}
-.p-err{line-height: 1.8em;font-size:14px;}
-.err-404{position: absolute;width:360px;height:200px;padding:30px 0 0 280px;top:50%;left:50%;margin:-280px 0 0 -320px;background:url(images/err.png) no-repeat;}
+.p-err{line-height: 1.8em;font-size:14px;margin:1em 0;}
+.err-404{position: absolute;width:400px;height:200px;padding:30px 0 0 280px;top:50%;left:50%;margin:-280px 0 0 -340px;background:url(images/err.png) no-repeat;}
 .errInfoCont{position: absolute;left:10px;right:10px;top:10px;bottom:10px;border:1px dotted #ccc;overflow: auto;font-size: 12px;line-height:24px;padding:10px;font-family:Verdana;color:#3f4df3;background-color: #f6fbff;}
 #errInfoCont{display: none;}
 #showErrInfo{position: fixed;right:10px;bottom:10px;color:#999;z-index:10;cursor:hand;cursor:pointer;}
@@ -120,7 +121,7 @@ filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
   <p class="p-err">简单错误描述，简单错误描述简单错误描述简单错误描述简单错误描述简单错误描述</p>
   <p class="p-btn">
     <span id="showErrInfo" rel="0">查看错误信息</span>
-    <span class="btn btn-primary">返 回</span>
+    <span id="s-back" class="btn btn-primary">返 回</span>
   </p>
 </div>
 
@@ -145,6 +146,9 @@ Visual field examination icreening and treatment of the patients with high myopi
 <script type="text/javascript">
 var $showbtn = document.getElementById('showErrInfo');
 var $infoCont = document.getElementById('errInfoCont');
+document.getElementById('s-back').onclick = function (){
+  window.history.back();
+};
 $showbtn.onclick= function(){
     var state = this.getAttribute('rel');
     if(state==='1'){

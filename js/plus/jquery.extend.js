@@ -417,7 +417,7 @@ var $ajax = {
               },
               error: function (XMLHttpRequest, textStatus, errorThrown) {
                 layer.close(loadingIndex);
-                layer.alert('<p class="p-popError">对不起，提交数据失败！</p>请检查网络或联系管理员...');
+                layer.alert('<p class="red">对不起，提交数据失败！</p>请检查网络或联系管理员...',{icon: 2, title:false,btnAlign: 'c'});
               }
             });
         }
