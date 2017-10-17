@@ -110,9 +110,10 @@
                     if(!rule["validator"].call(this,value, ruleParam)){
                     // if(!rule["validator"](value, ruleParam,this)){
                         var message = rule["message"];
+                        window.console&&console.log(ruleParam,message);
                         if (ruleParam) {
                             for ( var i = 0; i < ruleParam.length; i++) {
-                              message = message.replace(new RegExp("\\{" + i + "\\}", "g"), ruleParam[i]);
+                              message = String(message).replace(new RegExp("\\{" + i + "\\}", "g"), ruleParam[i]);
                             }
                         }
                       //  $.fn.validatebox.defaults.rules.multipleValidType.message = message;

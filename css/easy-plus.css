@@ -1,5 +1,10 @@
 /* easyui repair */
 .textbox{border-radius:1px;}
+.textbox .textbox-text,.textbox .textbox-text:focus{
+height:26px!important;padding-right:0;
+background-color:#fff;border:0;
+box-shadow:0 0 0 #fff;-webkit-box-shadow:0 0 0 #fff;-moz-box-shadow:0 0 0 #fff;
+}
 .panel{border:0;}
 .panel-header, .panel-body{border:0;}
 
@@ -43,6 +48,11 @@ color: #000000!important;
 .datagrid-row-over,.tree-node-hover{background-color:#deeefb;color:#000;}
 .datagrid-row-selected,.tree-node-selected{background-color:#fff1d2;color:#000;}
 .pagination .pagination-num{padding:0;}
+
+.datagrid-view .datagrid-editable-input{height: 26px!important;}
+.datagrid-view .textbox{height: 24px!important;vertical-align:top;}
+.datagrid-view .textbox .textbox-text{height: 24px!important;}
+.datagrid-view input[type="checkbox"].datagrid-editable-input{height:16px!important;}
 
 .tree-expanded {background: url(../images/easyui/tree_icons.png) no-repeat -18px 0px;}
 .tree-folder {background: url(../images/easyui/tree_icons.png) no-repeat -208px 0;}

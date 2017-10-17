@@ -291,11 +291,7 @@ input[type="checkbox"], input[type="radio"],
 
 input.error{border:1px solid #f48164!important;}
 
-.textbox .textbox-text,.textbox .textbox-text:focus{
-height:26px!important;padding-right:0;
-background-color:#fff;border:0;
-box-shadow:0 0 0 #fff;-webkit-box-shadow:0 0 0 #fff;-moz-box-shadow:0 0 0 #fff;
-}
+
 
 
 .soform .txt, .soform .txta, .soform .drop{width:100%;vertical-align: top;}
