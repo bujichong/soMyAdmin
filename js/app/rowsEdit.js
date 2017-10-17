@@ -10,11 +10,15 @@ define(['easygridEdit'],function ($e) {
             $e.addNewRow('userName','#gridBox',{state:1});
           }}
           ,{iconCls:'pencil',btnCls:'warning',text:'修改',onlyOne:true,popHeight:400,popWidth:560,popMax:true,url:'userForm.html?id={id}',title:'用户信息-修改',notNull:'请选择你要修改的记录!'}
-          // ,{iconCls:'trash',btnCls:'danger',text:'删除',check:true,url:'json/true.js',post:'id=id',notNull:'请 <strong class="red">勾选</strong> 需要删除的一项或多项！', ajax:true,ajaxMsg:'你确定提交此删除操作吗？'}]
-          // ,[{iconCls:'repeat',btnCls:'warning',text:'重置密码',check:true,url:'json/true.js?id={id}',notNull:'请 <strong class="red">勾选</strong> 需要重置密码的一项或多项！', ajax:true,ajaxMsg:'你确定重置密码为 <strong class="orange">123456</strong> 吗？'}
+          ,{iconCls:'trash',btnCls:'danger',text:'删除',click:function (){
+            $e.delRows('#gridBox');
+          }}
           ,{iconCls:'refresh',btnCls:'warning',text:'获取变化',click:function (){
-            var rows = $e.getChanges('#gridBox');
+            var rows = $e.getChanges('#gridBox',true);
             window.console&&console.log(rows);
+          }}
+          ,{iconCls:'repeat',btnCls:'warning',text:'重置变化',click:function(){
+            $e.rejectChanges();
           }}
           // ,[{iconCls:'user_md',text:'分配角色',url:'userRole.html?id={id}',onlyOne:true,popHeight:440,popWidth:560,title:'用户信息-分配角色',notNull:'请选择你要分配角色的用户！'}
         ]],
@@ -49,7 +53,7 @@ define(['easygridEdit'],function ($e) {
           ,{title:'手机号',field:'mobile',width:120,editor:{type:'text'}}
           ,{title:'Email',field:'email',width:120,editor:{type:'validatebox',options:{validType:'many["email","maxlength[30,\'email超长\']"]'}}}
           // ,{title:'微信号',field:'weChat',width:140}
-          // ,{title:'最后登录时间',field:'lastLoginTime',width:150}
+          ,{title:'最后登录时间',field:'lastLoginTime',width:150,editor:{type:'datetimebox'}}
           // ,{title:'最后登录IP',field:'lastLoginIp',width:130}
             ,{title:'QQ',field:'QQ',width:140,editor:{type:'text'}}
           // ,{title:'创建日期',field:'createTime',width:150,format:'yyyy-MM-dd hh:mm:ss'}

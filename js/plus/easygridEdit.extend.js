@@ -19,6 +19,23 @@ define(['pub'],function(){
         return $(grid).datagrid('getChanges');
       }
     },
+    rejectChanges : function(grid){
+      var me = this;
+      var grid = grid || '#gridBox';//默认值 #gridBox
+      $(grid).datagrid('rejectChanges');
+    },
+    delRows : function(grid,checked){//checked : true|false => getChecked|getSelections
+      var me = this;
+      var grid = grid || '#gridBox';//默认值 #gridBox
+      // if (me.endEditing(grid)){
+        var rows = $(grid).datagrid(checked?"getSelections":"getChecked");
+        //window.console&&console.log(rows);
+        $.each(rows,function(){
+          var ix = $(grid).datagrid('getRowIndex',this)
+          $(grid).datagrid('deleteRow',ix);
+        })
+      // }
+    },
     addNewRow : function(focusField,grid,initData){//foucusField:默认focus的字段; grid: 对应的grid，默认为#gridBox ; initData:新增行初始化默认数据
       var me = this;
       var grid = grid || '#gridBox';//默认值 #gridBox

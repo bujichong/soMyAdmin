@@ -7,7 +7,8 @@ box-shadow:0 0 0 #fff;-webkit-box-shadow:0 0 0 #fff;-moz-box-shadow:0 0 0 #fff;
 }
 .panel{border:0;}
 .panel-header, .panel-body{border:0;}
-
+.calendar-menu-next{margin-left: 0;}
+.calendar-menu-prev{margin-right: 0;}
 .tabs li.tabs-selected a.tabs-inner,.tabs li.tabs-selected a.tabs-inner:hover{
 color: #fff;
 background: #00A0E9;
