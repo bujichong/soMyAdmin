@@ -1,19 +1,24 @@
+$.fn.hoverClass=function(b){var a=this;a.each(function(c){a.eq(c).mouseenter(function(){$(this).addClass(b)});a.eq(c).mouseleave(function(){$(this).removeClass(b)})});return a};
 var eyeIndex = {
       init : function () {
         var me = this;
         window.console && console.log('index js init');
+        $('.li-mainnav').hoverClass('li-mainnav-over');
         // me.exScreen();//全屏
         me.exSide();//收缩侧边栏
         me.exSideInOther();//调用方法可以在子页面收缩侧边栏
         me.setIframeH();//设置iframeH
         me.sideSlide();//侧边栏点击展开
+        me.mainnavClick();
         me.sideNavE();//侧边导航点击链接事件
         me.repairPass();//修改密码
         me.noInWindow();//不包含在iframe中
         me.loginOut();//退出登录
         me.switchCompany();//切换公司医院
         me.tabCloseEven();
-        $('.s-sidenav:first').trigger('click');
+        me.openAddRole();
+        me.menuClick();
+        me.rightmenu();
       },
       onlyOpenTitle: "系统首页",//不允许关闭的标签的标题
       exScreen : function () {
@@ -75,7 +80,7 @@ var eyeIndex = {
             type:2,
             content : url,
             title : '修改密码',
-            area : ['400px','240px']
+            area : ['400px','280px']
           });
           if (url.indexOf("/") != 0) {
               url = location.pathname.replace(/\/[^/]*$/, "/") + url;
@@ -95,31 +100,131 @@ var eyeIndex = {
 	          return false;
 	      });
       },
+      mainrel :'',
+      mainnavClick : function () {
+        var me = this;
+        $('.s-mainnav').click(function() {
+          var url = $(this).attr('url');
+          if (url) {
+            var rel = $(this).attr('rel');
+            if (me.mainrel != rel) {
+              me.mainrel = rel;
+              $('.s-mainnav-now').removeClass('s-mainnav-now');
+              $(this).addClass('s-mainnav-now');
+            $('.ul-qnav').hide();
+              var $ul = $('#qnav-'+rel).show();
+              var $s = $ul.find('.s-qnav');
+              $s.removeClass('s-qnav-now');
+              var  $span = $s.eq(0).addClass('s-qnav-now');
+              // window.console && console.log($span);
+              me._closeTab('closeall');
+              var pageUrl = $span.attr('rel');
+              var pageTitle = ($span.attr('title'))||($span.find('.em-nav').text());
+              me.addTab(pageTitle,pageUrl);
+              indexExSide();
+            };
+          };
+        });
+      },
+    openAddRole : function () {
+      var me = this;
+      $('.s-addnew').click(function () {
+        var _self = $(this);
+        $util.iframePop({
+          content:'rolelist.html',
+          title :'请选择需要快捷的项',
+          area : ['360px','380px'],
+          end : function () {
+            $('#qnav-'+me.mainrel).append('<li class="li-qnav"><span class="s-qnav" rel="summary.html"><em class="em-icon">&#xe6a8;</em><em class="em-nav">门诊复查</em></span></li>');
+          }
+        });
+      });
+
+      $('.s-bars').click(function () {
+        window.console && console.log(11);
+        var rel = $(this).attr('rel');
+        $('.s-bars').removeClass('s-bars-now');
+        $(this).addClass('s-bars-now');
+        $('.sidenav').removeClass('sidebar-icon').removeClass('sidebar-list').addClass('sidebar-'+rel);
+      });
+
+    },
+    menuTarget : null,
+      rightmenu : function () {
+        var me = this;
+        $(".s-qnav").bind('contextmenu',function(e){
+          $('#mm2').menu('show', {
+            left: e.pageX,
+            top: e.pageY
+          });
+          me.menuTarget = $(this).parent('li');
+          window.console && console.log(me.menuTarget);
+          e.preventDefault();
+          // window.console && console.log(this);
+          return false;
+        });
+      },
+      menuClick : function () {
+        var me = this;
+          $('#mm2').menu({
+              onClick: function (item) {
+                var $li = me.menuTarget;
+                window.console && console.log(me.menuTarget);
+                window.console && console.log(item.id);
+                switch (item.id) {
+                  case  'up':
+                    var $prev = $li.prev('li');
+                    window.console && console.log($prev);
+                    if ($prev) {
+                      $li.after($prev);
+                    };
+                    break;
+                  case  'down':
+                    var $next = $li.next('li');
+                    window.console && console.log($next);
+                    if ($next) {
+                      $li.before($next);
+                    };
+                    break;
+                  case  'first':
+                    var $ul = $li.parent();
+                    $ul.prepend($li);
+                    break;
+                  case  'last':
+                    var $ul = $li.parent();
+                    $ul.append($li);
+                    break;
+                  case  'del':
+                    $li.remove();
+                    break;
+
+                }
+              }
+          });
+      },
       exSideInOther: function () {
         window.indexInSide =  function () {
             $(".mainCont").animate({left:'0px'});
-            $(".sidebar").animate({marginLeft:'-188px'});
+            $(".sidebar").animate({marginLeft:'-100px'});
+            $('.s-extendSide').addClass('intendSide');
         }
         window.indexExSide=  function () {
-            $(".mainCont").animate({left:'188px'});
+            $(".mainCont").animate({left:'100px'});
             $(".sidebar").animate({marginLeft:'0px'});
-            $('.li-sidenav').removeClass('li-sidenav-now').eq(0).addClass('li-sidenav-now');
-            $('.s-sidenav').removeClass('s-sidenav-now');
-            $('.s-subnav').removeClass('s-subnav-now');
+            $('.s-extendSide').removeClass('intendSide');
         }
       },
-
       exSide : function () {
         $('.s-extendSide').click(function() {
           var _self = $(this);
           var showMenu=_self.hasClass('intendSide');
           if(showMenu){
-            $(".mainCont").animate({left:'176px'});
+            $(".mainCont").animate({left:'100px'});
             $(".sidebar").animate({marginLeft:'0px'});
             _self.removeClass('intendSide');
           }else{
             $(".mainCont").animate({left:'0px'});
-            $(".sidebar").animate({marginLeft:'-176px'});
+            $(".sidebar").animate({marginLeft:'-100px'});
             _self.addClass('intendSide');
           }
         });
@@ -147,15 +252,15 @@ var eyeIndex = {
       },
       sideNavE : function () {
         var me = this;
-        $('.s-subnav,.s-sidenav').click(function() {
+        $('.s-qnav,.s-sidenav').click(function() {
           var _self = $(this);
           var url = _self.attr('rel');
           if (url) {
-            $('.s-subnav-now').removeClass('s-subnav-now');
-            _self.addClass('s-subnav-now');
+            $('.s-qnav-now').removeClass('s-qnav-now');
+            _self.addClass('s-qnav-now');
 
             var tabTitle = _self.attr('title');
-            var tabTitle = tabTitle||_self.text();
+            var tabTitle = tabTitle||_self.find('.em-nav').text();
             me.addTab(tabTitle,url);
             // $('#mainIframe').attr('src',url);
           };
@@ -163,7 +268,7 @@ var eyeIndex = {
       },
       addTab : function(tabTitle,url){
         var me = this;
-        window.console&&console.log(url);
+        var $t = $('#tabs').tabs('tabs');
         if(!$('#tabs').tabs('exists',tabTitle)){
           $('#tabs').tabs('add',{
             title:tabTitle,
@@ -231,7 +336,9 @@ var eyeIndex = {
             break;
           case "close":
             var currtab_title = currentTab.panel('options').title;
-            $('#tabs').tabs('close', currtab_title);
+              if (currtab_title != me.onlyOpenTitle){
+                  $('#tabs').tabs('close', currtab_title);
+              }
             break;
           case "closeall":
             $.each(allTabtitle, function (i, n) {

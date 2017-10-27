@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
+<meta http-equiv="X-UA-Compatible" content="IE=9" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>角色管理 - 爱尔医院筹建管理系统</title>
+<link rel="stylesheet" type="text/css" media="all" href="js/lib/easyui/themes/gray/easyui.css" />
+<link type="text/css" rel="stylesheet" href="css/easy-plus.css" />
+<link type="text/css" rel="stylesheet" href="css/socss.css" />
+<link type="text/css" rel="stylesheet" href="css/plugins.css" />
+<link type="text/css" rel="stylesheet" href="css/base.css" />
+</head>
+<body data-js="sys:dictEdit">
+<div class="wrapper-popForm">
+    <form class="soform form-validate form-enter pad-t15 solab-ld" method="post" action="${base}/admin/security/setting/create">
+        <div class="row">
+             <div class="p6"><div class="item-one">
+                <label class="lab-item">系统名称：</label>
+                <input class="txt txt-validate" type="text" value="${(setting.siteName)!}" name="siteName" placeholder="系统名称" noNull="请输入系统名称"/>
+             </div></div>
+             <div class="p6"><div class="item-one">
+                <label class="lab-item">系统编码：</label>
+                <input class="txt txt-validate" type="text" value="${(setting.siteName)!}" name="siteCode" value="${(setting.siteCode)!}" placeholder="系统编码" maxlength="30" noNull="请输入系统编码" validType="remote['${base}/admin/security/setting/check_code?previousCode=${(setting.siteCode)!}','siteCode']" />
+                <!-- remote:'${base}/admin/security/setting/check_code?previousCode=${(setting.siteCode)!}',messages:{remote:'系统编码已存在'}} -->
+                   <!-- <input class="form-control required {remote:'${base}/admin/security/setting/check_code?previousCode=${(setting.siteCode)!}',messages:{remote:'系统编码已存在'}}" name="siteCode" value="${(setting.siteCode)!}" maxlength="30" placeholder="系统编码" /> -->
+              </div></div>
+          </div>
+
+        <div class="row">
+             <div class="p6"><div class="item-one">
+                <label class="lab-item">系统地址：</label>
+                 <input class="txt txt-validate" name="siteUrl" value="${(setting.siteUrl)!}" maxlength="200" placeholder="系统地址" noNull="请输入系统地址" />
+              </div></div>
+             <div class="p6"><div class="item-one">
+                <label class="lab-item">系统logo：</label>
+                <div class="item-group uploadS">
+                 <input class="txt wp-70 txt-validate" id="txt-uploadFlie-1" type="text" name="logo" value="${(setting.logo)!}" maxlength="20" placeholder="系统logo" readonly="readonly" noNull="logo必选" /><button id="btn-upload-1" data-url="${base}/admin/file/upload" class="btn btn-small btn-primary wp-30 btn-upload" type="button">点击上传</button>
+               </div>
+<!--                  <div class="input-group uploadS">
+                     <input class="form-control required" id="txt-uploadFlie-1" type="text" name="logo" value="${(setting.logo)!}" placeholder="系统logo" readonly="readonly" />
+                     <span class="input-group-btn">
+                     <button id="btn-upload-1" data-url="${base}/admin/file/upload" class="btn btn-default btn-upload" type="button">点击上传</button></span>
+                  </div> -->
+              </div></div>
+           </div>
+
+        <div class="row">
+             <div class="p6"><div class="item-one">
+                <label class="lab-item">系统初始化首页：</label>
+                  <input class="txt txt-validate" name="initIndexUrl" maxlength="255" value="" placeholder="系统登录后默认加载的首页" />
+              </div></div>
+             <div class="p6"><div class="item-one">
+                <label class="lab-item">系统初始化密码：</label>
+                <input class="txt txt-validate" name="initPassword" maxlength="50" value="123456" placeholder="系统默认用户登录密码" noNull="请输入初始化密码" />
+              </div></div>
+           </div>
+
+
+        <div class="row">
+             <div class="p6"><div class="item-one">
+                <label class="lab-item">网站关闭消息：</label>
+                 <input class="txt txt-validate" name="siteCloseMessage" value="" maxlength="200" placeholder="网站关闭消息" noNull="请输入网站关闭消息" />
+              </div></div>
+             <div class="p6"><div class="item-one">
+                <label class="lab-item">金额精确位数：</label>
+                <input class="txt txt-validate" name="priceScale" value="2" maxlength="2" placeholder="金额精确位数" noNull="请输入金额精确位数" validType="pInt['金额位数为正整数']" />
+              </div></div>
+           </div>
+
+        <div class="row">
+             <div class="p6"><div class="item-one">
+                <label class="lab-item">登录用户组织显示层级：</label>
+                  <input class="txt txt-validate" name="userOrgGrade" value="1" maxlength="2" placeholder="登录用户组织默认显示层级" noNull="请输入显示层级" validType="pInt['显示层级为正整数']" />
+              </div></div>
+             <div class="p6"><div class="item-one">
+                <label class="lab-item">禁用用户名(多个用逗号(,)分开)：</label>
+                 <input class="txt" name="disabledUsername" value="" maxlength="200" placeholder="禁用用户名（多个用逗号(,)分开）" />
+              </div></div>
+           </div>
+
+
+        <div class="row">
+             <div class="p6"><div class="item-one">
+                <label class="lab-item">自动解锁时间：</label>
+                  <input class="txt txt-validate" name="accountLockTime" value="${(setting.accountLockTime)!}" maxlength="10" placeholder="自动解锁时间" noNull="请输入自动解锁时间" validType="pInt['自动解锁时间为正整数']" />
+              </div></div>
+             <div class="p6"><div class="item-one">
+                <label class="lab-item">安全密匙有效时间：</label>
+                  <input class="txt txt-validate" name="safeKeyExpiryTime" value="${(setting.safeKeyExpiryTime)!}" maxlength="10" placeholder="安全密匙有效时间" noNull="请输入安全密匙有效时间" validType="pInt['安全密匙有效时间为正整数']" />
+              </div></div>
+           </div>
+
+        <div class="row">
+             <div class="p6"><div class="item-one">
+                <label class="lab-item">上传文件最大限制：</label>
+                  <input class="txt txt-validate" name="uploadMaxSize" value="${(setting.uploadMaxSize)!}" maxlength="10" placeholder="上传文件最大限制" noNull="请输入上传文件最大限制" validType="pInt['上传文件最大限制为正整数']" />
+              </div></div>
+             <div class="p6"><div class="item-one">
+                <label class="lab-item">连续登录失败最大次数：</label>
+                  <input class="txt txt-validate" name="accountLockCount" value="${(setting.accountLockCount)!}" maxlength="2" placeholder="连续登录失败最大次数" noNull="请输入最大次数" validType="pInt['最大次数为正整数']" />
+              </div></div>
+           </div>
+
+        <div class="row">
+             <div class="p12"><div class="item-one">
+                <label class="lab-item">上传图片扩展名(多个用逗号(,)分开)：</label>
+                  <input class="txt txt-validate" name="uploadImageExtension" value="${(setting.uploadImageExtension)!}" maxlength="200" placeholder="允许上传图片扩展名" noNull="请输入图片扩展名" />
+              </div></div>
+           </div>
+
+        <div class="row">
+             <div class="p12"><div class="item-one">
+                <label class="lab-item">图片上传路径：</label>
+                  <input class="txt txt-validate" name="imageUploadPath" value="${(setting.imageUploadPath)!}" maxlength="200" placeholder="允许上传图片扩展名" noNull="请输入允许上传图片扩展名" />
+              </div></div>
+           </div>
+
+        <div class="row">
+             <div class="p12"><div class="item-one">
+                <label class="lab-item">上传文件扩展名（多个用逗号(,)分开）：</label>
+                  <input class="txt txt-validate" name="uploadFileExtension" value="${(setting.uploadFileExtension)!}" maxlength="200" placeholder="允许上传文件扩展名" noNull="请输入允许上传文件扩展名" />
+              </div></div>
+           </div>
+
+        <div class="row">
+             <div class="p12"><div class="item-one">
+                <label class="lab-item">文件上传根目录：</label>
+                  <input class="txt txt-validate" name="fileUploadRootPath" value="${(setting.uploadFileExtension)!}" maxlength="200" placeholder="文件上传根目录" noNull="请输入文件上传根目录" />
+              </div></div>
+        </div>
+        <div class="row">
+             <div class="p12"><div class="item-one">
+                <label class="lab-item">文件上传路径：</label>
+                  <input class="txt txt-validate" name="fileUploadPath" value="${(setting.fileUploadPath)!}" maxlength="200" placeholder="文件上传路径" noNull="请输入文件上传路径"  />
+              </div></div>
+           </div>
+
+        <div class="row">
+             <div class="p12"><div class="item-one">
+                <label class="lab-item">FR报表SSO地址：</label>
+                 <input class="txt" name="frSsoUrl" maxlength="255"  value="" placeholder="备注：帆软报表SSO请求接口"/>
+              </div></div>
+           </div>
+
+        <div class="row">
+             <div class="p6"><div class="item-one">
+                <label class="lab-item">FR报表SSO账户：</label>
+                 <input class="txt" name="frUsername" maxlength="50" value="" placeholder="备注：请预先在帆软中建立专有权限报表账户" />
+              </div></div>
+             <div class="p6"><div class="item-one">
+                <label class="lab-item">FR报表SSO账户密码：</label>
+                 <input class="txt" name="frPassword" maxlength="50" type="password" value="" />
+              </div></div>
+           </div>
+
+        <div class="row">
+             <div class="p6"><div class="item-one">
+                <label class="lab-item">Cookie路径：</label>
+                 <input class="txt txt-validate" name="cookiePath" value="${(setting.cookiePath)!}" maxlength="20" placeholder="Cookie路径" noNull="请输入Cookie路径" />
+              </div></div>
+             <div class="p6"><div class="item-one">
+                <label class="lab-item">Cookie作用域：</label>
+                 <input class="txt txt-validate" name="cookieDomain" value="${(setting.cookieDomain)!}" maxlength="20" placeholder="Cookie作用域" noNull="请输入Cookie作用域" />
+              </div></div>
+           </div>
+
+        <div class="row">
+             <div class="p6"><div class="item-one">
+                <label class="lab-item">是否开启网站：</label>
+                  <label class="lab-val"><input type="radio" class="rad" name="isSiteEnabled" value="true" checked="checked"/>是</label>
+                  <label class="lab-val"><input type="radio" class="rad" name="isSiteEnabled" value="false" />否</label>
+              </div></div>
+             <div class="p6"><div class="item-one">
+                <label class="lab-item">是否开放注册：</label>
+                  <label class="lab-val"><input type="radio" class="rad" name="isRegisterEnabled" value="true" checked="checked" />是</label>
+                  <label class="lab-val"><input type="radio" class="rad" name="isRegisterEnabled" value="false" />否</label>
+              </div></div>
+           </div>
+
+        <div class="row">
+             <div class="p6"><div class="item-one">
+                <label class="lab-item">必须修改初始化密码：</label>
+                  <label class="lab-val"><input type="radio" class="rad" name="ischangePword" value="true" checked="checked" />是</label>
+                  <label class="lab-val"><input type="radio" class="rad" name="ischangePword" value="false" />否</label>
+              </div></div>
+             <div class="p6"><div class="item-one">
+                <label class="lab-item">允许E-mail重复注册：</label>
+                  <label class="lab-val"><input type="radio" class="rad" name="isDuplicateEmail" value="true" />是</label>
+                  <label class="lab-val"><input type="radio" class="rad" name="isDuplicateEmail" value="false" checked="checked"/>否</label>
+              </div></div>
+           </div>
+
+        <div class="row">
+             <div class="p6"><div class="item-one">
+                <label class="lab-item">开启登录验证码：</label>
+                  <label class="lab-val"><input type="radio" class="rad" name="isUseCaptchaEnabled" value="true" checked="checked"/>是</label>
+                  <label class="lab-val"><input type="radio" class="rad" name="isUseCaptchaEnabled" value="false" />否</label>
+              </div></div>
+             <div class="p6"><div class="item-one">
+                <label class="lab-item">工作台多页签：</label>
+                  <label class="lab-val"><input type="radio" class="rad required" name="isMutiTabs" value="true" checked="checked"/>是</label>
+                  <label class="lab-val"><input type="radio" class="rad required" name="isMutiTabs" value="false" />否</label>
+              </div></div>
+           </div>
+
+        <div class="row">
+             <div class="p6"><div class="item-one">
+                <label class="lab-item">允许E-mail登录：</label>
+                  <label class="lab-val"><input type="radio" class="rad" name="isEmailLogin" value="true" checked="checked" />是</label>
+                  <label class="lab-val"><input type="radio" class="rad" name="isEmailLogin" value="false" />否</label>
+              </div></div>
+
+             <div class="p6"><div class="item-one">
+                <label class="lab-item">开启开发模式：</label>
+                  <label class="lab-val"><input type="radio" class="rad" name="isDevelopmentEnabled" value="true" checked="checked"/>是</label>
+                  <label class="lab-val"><input type="radio" class="rad" name="isDevelopmentEnabled" value="false" />否</label>
+              </div></div>
+           </div>
+
+
+      <p class="row-btn center">
+        <input type="button" class="btn btn-primary btn-easyFormSubmit" lay-submit name="btnSubmit" value="保 存" />
+      </p>
+
+    </form>
+
+</div>
+</div>
+<script src="js/require.js" data-main="js/main.un"></script>
+</body>
+
+</html>

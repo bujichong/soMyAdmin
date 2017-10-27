@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>爱尔眼科基础平台管理系统</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
+<meta http-equiv="X-UA-Compatible" content="IE=9" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="icon" href="images/logo.ico" type="image/x-icon" />
+<link rel="stylesheet" type="text/css" media="all" href="js/lib/easyui/themes/gray/easyui.css" />
+<link rel="stylesheet" type="text/css" media="all" href="css/index3.css" />
+<link type="text/css" rel="stylesheet" href="css/easy-plus.css" />
+</head>
+<body data-js="index:init">
+<div class="wrapper">
+  <!-- header -->
+  <div class="header">
+    <h1 class="h1-logo"><img src="images/index2/logo.png" height="36" width="390" alt="爱尔眼科基础平台管理系统" /></h1>
+    <div class="allCompanyNav">
+      <div class="nowCompany">北京远程视觉科技有限公视光眼科门诊部</div>
+      <ul class="ul-companyList" rel="index.html">
+            <li class="li-list"><span class="s-c" rel="122">许昌爱尔眼科医院</span></li>
+            <li class="li-list"><span class="s-c" rel="123">玉林爱尔眼科医院</span></li>
+            <li class="li-list"><span class="s-c" rel="145">十堰爱尔眼科医院</span></li>
+            <li class="li-list"><span class="s-c" rel="128">银川爱尔眼科医院</span></li>
+            <li class="li-list"><span class="s-c" rel="245">延吉汇锋爱尔眼科医院</span></li>
+            <li class="li-list"><span class="s-c" rel="987">武汉爱尔眼科汉阳医院</span></li>
+            <li class="li-list"><span class="s-c" rel="352">江门爱尔眼科医院</span></li>
+            <li class="li-list"><span class="s-c" rel="225">唐山爱尔眼科医院</span></li>
+            <li class="li-list"><span class="s-c" rel="268">宁远爱尔眼科医院</span></li>
+            <li class="li-list li-list-now"><span class="s-c" rel="974">北京远程视觉科技有限公视光眼科门诊部</span></li>
+            <li class="li-list"><span class="s-c" rel="687">安庆施汉彬爱尔眼科医院</span></li>
+            <li class="li-list"><span class="s-c" rel="941">红河爱尔眼科医院</span></li>
+        </ul>
+    </div>
+
+<!--     <div class="userInfo">
+       <span class="s-welcome">欢迎你，<em class="em-userName">系统管理员</em>！</span><span class="s-date">2016-11-22</span>
+       <span class="s-updataPass" rel="repairPass.html">修改密码</span>
+       <a class="a-loginOut" href="/login.html">退出</a>
+      </div> -->
+
+    <div class="userInfo">
+       <span class="s-date">2016-11-22</span>
+       <div class="userInfoBox"><div class="div-userInfo" title="系统管理员">系统管理员</div>
+          <ul class="ul-userquick">
+              <li class="li-userquick"><span class="s-userquick s-userSet">用户设置</span></li>
+              <li class="li-userquick"><span class="s-userquick s-repairPass">修改密码</span></li>
+              <li class="li-userquick"><span class="s-userquick a-loginOut" rel="/login.html">退出系统</span></li>
+          </ul>
+       </div>
+      </div>
+
+  </div>
+
+
+  <!-- sidebar -->
+  <div class="sidebar"><!-- 左侧菜单导航 -->
+    <h2 class="h2-sideHead"><span class="s-title">管理菜单</span><!-- <a href="manage.html" class="a-sideto a-side-toManage">系统管理</a> --></h2><span class="s-extendSide">折叠</span>
+    <div class="sidenav">
+      <ul class="ul-sidenav">
+        <li class="li-sidenav li-sidenav-now"><span class="s-sidenav" rel="home.html"><em class="em-icon icon-home"></em>系统首页</span></li>
+        <li class="li-sidenav"><span class="s-sidenav"><em class="em-icon icon-equalizer"></em>系统管理</span>
+            <ul class="ul-subnav">
+              <li class="li-subnav"><span class="s-subnav" rel="baseset.html">基础设置</span></li>
+              <li class="li-subnav"><span class="s-subnav" rel="upload.html">上传文件</span></li>
+              <li class="li-subnav"><span class="s-subnav" rel="users.html">用户管理</span></li>
+              <li class="li-subnav"><span class="s-subnav" rel="userSet.html">用户设置</span></li>
+              <li class="li-subnav"><span class="s-subnav" rel="role.html">角色管理</span></li>
+              <li class="li-subnav"><span class="s-subnav" rel="group.html">组织管理</span></li>
+              <li class="li-subnav"><span class="s-subnav" rel="module.html">模块管理</span></li>
+              <!-- <li class="li-subnav"><span class="s-subnav" rel="/powers.html">权限管理</span></li> -->
+              <li class="li-subnav"><span class="s-subnav" rel="dictionary.html">数据字典</span></li>
+              <li class="li-subnav"><span class="s-subnav" rel="log.html">日志管理</span></li>
+              <li class="li-subnav"><span class="s-subnav" rel="iconset.html">图标管理</span></li>
+              <li class="li-subnav"><span class="s-subnav" rel="table.html">普通表格</span></li>
+              <li class="li-subnav"><span class="s-subnav" rel="403.html">403</span></li>
+              <li class="li-subnav"><span class="s-subnav" rel="404.html">404</span></li>
+              <li class="li-subnav"><span class="s-subnav" rel="500.html">500</span></li>
+            </ul>
+        </li>
+        <li class="li-sidenav"><span class="s-sidenav"><em class="em-icon icon-hospital2"></em>医院管理</span>
+            <ul class="ul-subnav">
+              <li class="li-subnav"><span class="s-subnav" rel="404.html">医院信息</span></li>
+              <li class="li-subnav"><span class="s-subnav" rel="404.html">备忘录</span></li>
+            </ul>
+        </li>
+        <li class="li-sidenav"><span class="s-sidenav"><em class="em-icon icon-stats-bars"></em>统计管理</span>
+            <ul class="ul-subnav">
+              <li class="li-subnav"><span class="s-subnav" rel="404.html">医院统计</span></li>
+              <li class="li-subnav"><span class="s-subnav" rel="404.html">工作统计</span></li>
+            </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- <div class="extendSide"></div> -->
+  <div class="mainCont"><!-- 右侧正文区域 -->
+    <!-- <div class="iframeBox"><iframe id="mainIframe" src="home.html" frameborder="0" height="100%" width="100%" scrolling="auto"></iframe></div> -->
+    <div id="tabs" class="easyui-tabs" fit="true" border="false" plain="true" width="100%">
+        <!-- <div title="系统首页" class="content-doc">
+          <iframe id="mainIframe" src="home.html" frameborder="0" height="100%" width="100%" scrolling="auto"></iframe>
+        </div> -->
+    </div>
+  </div>
+</div>
+
+
+<!-- mainTab rightMenu -->
+<div id="mm" class="easyui-menu" style="width:150px;">
+  <div id="refresh">刷新</div>
+  <div class="menu-sep"></div>
+  <div id="close">关闭</div>
+  <div id="closeall">全部关闭</div>
+  <div id="closeother">除此之外全部关闭</div>
+<!--   <div class="menu-sep"></div>
+  <div id="closeright">当前页右侧全部关闭</div>
+  <div id="closeleft">当前页左侧全部关闭</div>
+  <div class="menu-sep"></div>
+  <div id="exit">退出</div> -->
+</div>
+
+<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="js/lib/easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="js/lib/layer/layer.min.js"></script>
+<script type="text/javascript" src="js/index4.js"></script>
+</body>
+</html>
