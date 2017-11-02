@@ -1,7 +1,7 @@
 var CreatedOKLodop7766=null;
 var $print={
     tip:function (msg) {
-        $.sobox.alert("提示",msg);
+        layer.alert(msg);
     },
     needCLodop:function () {
         try{

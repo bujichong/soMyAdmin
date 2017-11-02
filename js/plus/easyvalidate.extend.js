@@ -496,7 +496,7 @@ function isIdCardNo(code,opt){
       }
   }
   window.console && console.log(pass,tip);
-  // if(!pass) alert(tip);
+
   if (opt) {
       var optArr = opt.split(',');
       var $bir = $('#'+optArr[0]);
@@ -522,7 +522,7 @@ function GetBirthday(psidno,$age){
       birthdaytemp=psidno.substring(6,12)
       birthdayno="19"+birthdaytemp
   }else{
-      alert("错误的身份证号码，请核对！")
+      window.console&&console.log("错误的身份证号码，请核对！")
       return false
   }
   var birY = birthdayno.substring(0,4);
@@ -546,7 +546,7 @@ function Getsex(psidno){
   }else if(psidno.length==15){
       sexno=psidno.substring(14,15)
   }else{
-      alert("错误的身份证号码，请核对！")
+	window.console&&console.log("错误的身份证号码，请核对！")
       return false
   }
   var tempid=sexno%2;

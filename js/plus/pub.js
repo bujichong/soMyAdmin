@@ -205,7 +205,7 @@ var $grid = {
     },
     newGrid: function (grid, cfg) {
         if (!$(grid).length) {
-            alert("页面不存在" + grid);
+            layer.alert("页面不存在" + grid);
             return;
         }
         var top = $(grid).position().top || 36;
@@ -579,11 +579,11 @@ var $pop = {
   popGrid: function (opt,target) {
       opt = opt || {};
       if (!opt.url && !opt.code) {
-          alert("请配置表格数据源参数url或者code");
+          layer.alert("请配置表格数据源参数url或者code");
           return;
       }
       if (!opt.code && !opt.gridId) {
-          alert("请配置表格数据参数gridId");
+          layer.alert("请配置表格数据参数gridId");
           return;
       }
       var data = opt || {};
@@ -594,7 +594,7 @@ var $pop = {
           data.gridCfg.singleSelect = data.gridCfg.singleSelect  || !data.muti;
       var muti = !data.gridCfg.singleSelect;
           window.console && console.log(muti);
-      if (init && $('#pop_' + gridId).length == 0) alert("请另外指定gridId," + gridId + "已存在!");
+      if (init && $('#pop_' + gridId).length == 0) layer.alert("请另外指定gridId," + gridId + "已存在!");
       if (!init) {
           var searchName = data.searchName || 'searchValue';
           var searchLabel = data.searchLabel || '';
@@ -634,13 +634,13 @@ var $pop = {
           if (!gridCfg.columns && data.code) {
               var cType = data.code.replace(/[\^@]/g, '');
               if (!$cols[cType]) {
-                  alert('请在param.js里面定义' + cType + '表格列信息!');
+                  layer.alert('请在param.js里面定义' + cType + '表格列信息!');
                   return;
               }
               gridCfg.columns = $cols[cType];
           }
           if (!gridCfg.columns) {
-              alert("请配置表格列信息!");
+              layer.alert("请配置表格列信息!");
               return;
           }
           gridCfg.fitColumns = (opt.fitCol?opt.fitCol:true);
@@ -879,19 +879,77 @@ var $ff = {
                 var _self = $(this);
                 var rdm = Math.floor(Math.random()*1000000);
                 var myOpt = $T.data(_self);
-                if (myOpt.type =='grid') {
-                     _self.click(function() {
-                        myOpt.textId = myOpt.textId || this.name;
-                        $pop.popGrid(myOpt,this);
-                    });
+
+                if (myOpt.type=='tree') {
+                    var pData = $.extend({
+                        // type: null,//'tree'
+                        url : null,//json url
+                        valueId : null,
+                        valuePid : null,
+                         selectedId : null,
+                        width:'400px',height:'300px',
+                        title : '请双击选择',
+                        value:'text',
+                        justLeaf: false,
+                        data : null,
+                        flatData : true,
+                        onDblClick : function (node) {}
+                    },myOpt||{});
+
+                $('body').append('<div id="popTreeP-'+rdm+'" class="pad15 none"><ul id="ul-Tree-'+rdm+'"></ul></div>');
+                var alreadyRenderTree = false,treePop= null;
+                  _self.click(function() {
+                    treePop = layer.open({
+                        type: 1,
+                        content: $('#popTreeP-'+rdm),
+                        area : [pData.width,pData.height],
+                        title :pData.title,
+                        btn:null
+                      });
+
+                        var treeOpt = {
+                            animate : true,
+                            lines : true,
+                            url : pData.url,
+                            data : pData.data,
+                            flatData: pData.flatData,
+                            onDblClick : function (node) {
+                                window.console && console.log(node);
+                                if (pData.justLeaf&&node.children!=null) {return false;};
+                                  _self.val(node[pData.value]);
+                                   pData.selectedId = node.id;
+                                  if (pData.valueId) {$('#'+pData.valueId).val(node.id)};
+                                  if (pData.valuePid&&node.pid) {$('#'+pData.valuePid).val(node.pid)};
+                                  layer.close(treePop);
+                                  pData.onDblClick(node);
+                            },
+                            onLoadSuccess : function (node,data) {
+                                pData.data = data;
+                            }
+                      }
+
+                        if (!alreadyRenderTree) {
+                            $('#ul-Tree-'+rdm).tree(treeOpt);
+                            alreadyRenderTree = true;
+                        }
+
+                  });
+
                 };
 
-            });
-        };
-        // 下拉框初始化
-        if ($(".so-select").length) {
-          $(".so-select").soSelect();
-        }
+            if (myOpt.type =='grid') {
+                 _self.click(function() {
+                    myOpt.textId = myOpt.textId || this.name;
+                    $pop.popGrid(myOpt,this);
+                });
+            };
+
+          });
+      };
+      // 下拉框初始化
+      if ($(".so-select").length) {
+        $(".so-select").soSelect();
+      }
     },
     /**
      * 页面表单验证

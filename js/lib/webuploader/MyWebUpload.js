@@ -190,7 +190,7 @@
             var fullName = $("#hiddenInput" + $(item)[0].id + file.id).val();
             if (fullName!=null) {
                 $.post(webuploaderoptions.deleteServer, { fullName: fullName }, function (data) {
-                    alert(data.message);
+                    window.console&&console.log(data.message);
                 })
             }
             $("#"+ $(item)[0].id + file.id).remove();
