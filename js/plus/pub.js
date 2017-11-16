@@ -1,5 +1,5 @@
 var $util = {
-    down: function (url, param, method) {
+    down: function (url, param, method) {//下载方法
         var inputs = [];
         if (!method) {
             method = !param ? "get" : "post";
@@ -18,7 +18,7 @@ var $util = {
         }
         $("#_exportBox form").submit();
     },
-    excel: function (url, titles, fields, param) {
+    excel: function (url, titles, fields, param) {//导出excel，需要后台对应配置
         param = param || {};
         $.applyIf(param, {
             _start: 0,
@@ -65,7 +65,7 @@ var $util = {
             }
         });
     },
-    iframePop : function (opt,grid) {
+    iframePop : function (opt,grid) {//pop的方式打开iframePop
         window._refreshParent = false;
         if (typeof(opt)=='string') {
             opt = {content:opt};
@@ -92,7 +92,7 @@ var $util = {
         }
         var popIndex = layer.open(layerOpt);
     },
-    closePop : function (opt) {
+    closePop : function (opt) {//统一的关闭pop方法
         var opt = $.extend({
             popIndex : null,
             callback : function () {},
@@ -124,7 +124,14 @@ var $util = {
             }
         };
     },
-    gridMergeCols : function (grid,data,aStr,bStr) {//grid,数据,值相同的字段,需要合并的字段(不设置，则使用aStr)
+/*
+合并列方法
+grid,
+data:数据,
+aStr:值相同的字段,
+bStr:需要合并的字段(不设置，则使用aStr)
+ */
+    gridMergeCols : function (grid,data,aStr,bStr) {
         if (data&&data.rows.length) {
         var bStr = bStr?bStr:aStr;
         var merges =[{index:0}];
@@ -169,10 +176,10 @@ var $util = {
 };
 
 var $grid = {
-    getRows: function (grid) {
+    getRows: function (grid) {//获取rows
         return $(grid).datagrid("getData").rows;
     },
-    load: function (grid, param) {
+    load: function (grid, param) {//grid 更新参数后load，返回第一页
         param = param || {};
         var ui = $(grid).attr("data-ui");
         if (ui == 'treegrid') {
@@ -183,7 +190,7 @@ var $grid = {
             $(grid).datagrid("load", param);
         }
     },
-    reload: function (grid, param) {
+    reload: function (grid, param) {//grid 更新参数后reload，保留在刷新前的页码
         var ui = $(grid).attr("data-ui");
         if (ui == 'treegrid') {
             $(grid).treegrid("reload", param);
@@ -191,10 +198,10 @@ var $grid = {
             $(grid).datagrid("reload", param);
         }
     },
-    clear: function (grid) {
+    clear: function (grid) {//grid 清空数据
         $(grid).datagrid("loadData", []);
     },
-    deleteSelected: function (grid) {
+    deleteSelected: function (grid) {//grid 删除选择行
         //指定idField
         var rows = $(grid).datagrid("getSelections");
         for (var i = 0; i < rows.length; i++) {
@@ -203,7 +210,7 @@ var $grid = {
         }
         $(grid).datagrid("clearSelections");
     },
-    newGrid: function (grid, cfg) {
+    newGrid: function (grid, cfg) {//二次封装的grid方法，cfg参数相当于easyui的参数对象，具体方法请参考api手册
         if (!$(grid).length) {
             layer.alert("页面不存在" + grid);
             return;
@@ -439,7 +446,7 @@ var $grid = {
        });
       // return $par;
     },
-    initTools : function (grid,cfg) {
+    initTools : function (grid,cfg) {//newGrid的分支方法，初始化工具栏
       var me = this;
       var randomId = 'tool-'+Math.ceil(Math.random()*100000000);
       var $wrap = $('<div id="'+randomId+'" class="baseToobar"></div>');
@@ -459,7 +466,7 @@ var $grid = {
       $('body').append($none);
       return randomId;
     },
-    initToolBar: function (grid, cfg) {
+    initToolBar: function (grid, cfg) {//newGrid的分支方法，初始化工具栏方式2
       $.each(cfg, function (i, opt) {
           if (opt == '-')return;
           if (!opt.handler) {
@@ -542,7 +549,7 @@ var $grid = {
 };
 
 var $pop = {
-  popForm : function (opt) {
+  popForm : function (opt) {//pop form, opt是所有参数
       var opt =$.extend({
           target : null,//需要弹出的对象class或者id
           refreshGrid : true,//是否刷新grid
@@ -576,7 +583,7 @@ var $pop = {
       });
       return temPop;//返回layer的序列
   },
-  popGrid: function (opt,target) {
+  popGrid: function (opt,target) {//弹窗grid
       opt = opt || {};
       if (!opt.url && !opt.code) {
           layer.alert("请配置表格数据源参数url或者code");
@@ -697,7 +704,7 @@ var $pop = {
 
 var $ff = {
     /**
-     * 页面表格查询功能绑定
+     * 页面表格查询功能绑定，主要用在列表的搜索栏
      */
     search: function (btnCls) {
         var cls = btnCls || '.so-search';
@@ -729,10 +736,7 @@ var $ff = {
             });
         }
     },
-    /**
-     * 页面控件初始化
-     */
-    formAEnterFun : function(callback,formCls){
+    formAEnterFun : function(callback,formCls){//表单输入框回车事件支持
       setTimeout(function () {
           var $form = $(formCls?formCls:'.form-enter');
           var $input = $form.find(':input').filter(':visible');
@@ -750,7 +754,7 @@ var $ff = {
           callback&&callback();
       },400);
     },
-    formAEnterFunB : function (callback,formCls) {
+    formAEnterFunB : function (callback,formCls) {//表单输入框回车事件支持，部分特殊输入框的处理
 
       setTimeout(function () {//重置输入框回车事件
 
@@ -786,9 +790,15 @@ var $ff = {
           callback&&callback();
       },500);
     },
+    /**
+     * 页面控件初始化集合
+     */
     someMix: function () {
         var me = this;
-        if ($('.so-time').length) {
+
+        $T.placeHolder.init();//对低版本浏览器placeholder属性的兼容
+
+        if ($('.so-time').length) {//时间控件初始化
             $('.so-time').addClass('Wdate').each(function () {
                 var _self = $(this);
                 if (_self.hasClass('inline')) {_self.css('width', 150)};
@@ -800,7 +810,7 @@ var $ff = {
             });
         }
 
-        if ($('.so-date').length) {
+        if ($('.so-date').length) {//日期控件初始化
             $('.so-date').addClass('Wdate').each(function () {
                 var _self = $(this);
                 if (_self.hasClass('inline')) {_self.css('width', 100)};
@@ -816,30 +826,29 @@ var $ff = {
         //         $util.closePop();
         //     });
         // }
-        if ($(".form-validate .btn-cancel").length) {
+        if ($(".form-validate .btn-cancel").length) {//表单里的关闭按钮，关闭事件
             $(".form-validate .btn-cancel").click(function () {
                 $util.closePop();
             });
         }
-        if ($(".form-validate .btn-closePop").length) {
+        if ($(".form-validate .btn-closePop").length) {//表单里的关闭按钮，关闭事件
             $(".form-validate .btn-closePop").click(function () {
                 $util.closePop();
             });
-
         }
         if ($('.form-enter').length) {//回车替代tab事件
           me.formAEnterFun();
           me.formAEnterFunB();
         };
 
-        if ($('.drop').length) {
+        if ($('.drop').length) {//drop通过rel来初始化选择值
             $('.drop').each(function () {
                 var v = $(this).attr('rel');
                 if (v) {$(this).val(v);};
             })
         };
 
-        if ($(':input[noNull],.required').length) {
+        if ($(':input[noNull],.required').length) {//时间和选择控件对应的必填输入框添加必填小三角样式
             $(':input[noNull],.required').each(function () {
               var _self = $(this);
               if (_self.hasClass('so-time') || _self.hasClass('so-date')) {
@@ -851,8 +860,7 @@ var $ff = {
             });
         }
 
-
-        if ($('.so-drop').length) {
+        if ($('.so-drop').length) {//简单的easyui下拉控件初始化
             $('.so-drop').each(function () {
                 var _self = $(this);
                 var url = _self.attr('url');
@@ -874,7 +882,7 @@ var $ff = {
             });
         };
 
-        if ($('.so-pop').length) {
+        if ($('.so-pop').length) {//sopop控件初始化，慢慢被easyui的comb控件替换，保留是为了兼容一些旧的事件
             $('.so-pop').each(function () {
                 var _self = $(this);
                 var rdm = Math.floor(Math.random()*1000000);
@@ -937,7 +945,7 @@ var $ff = {
 
                 };
 
-            if (myOpt.type =='grid') {
+            if (myOpt.type =='grid') {//初始化popGrid
                  _self.click(function() {
                     myOpt.textId = myOpt.textId || this.name;
                     $pop.popGrid(myOpt,this);
@@ -947,12 +955,12 @@ var $ff = {
           });
       };
       // 下拉框初始化
-      if ($(".so-select").length) {
+      if ($(".so-select").length) {//初始化soSelect
         $(".so-select").soSelect();
       }
     },
     /**
-     * 页面表单验证
+     * 统一的表单验证
      */
      validate : function () {
        var me = this;
@@ -1042,24 +1050,6 @@ var $ff = {
            }
        };
      },
-    popGrid: function (cls) {
-        cls = cls || '.so-popGrid';
-        if ($(cls).length) {
-            $(cls).click(function () {
-                var data = $T.data(this);
-                data.textId = data.textId || this.name;
-                $pop.popGrid(data,this);
-            });
-        }
-    },
-    popTree: function (cls) {
-        cls = cls || '.so-popTree';
-        $(cls).click(function () {
-            var data = $T.data(this);
-            data.textId = data.textId || this.name;
-            $pop.popTree(data);
-        });
-    },
     wdDate: function (cls) {//日期范围选择组件
         cls = cls || '.wd_date';
         if (!$(cls).length) {
@@ -1097,44 +1087,9 @@ var $ff = {
     }
 };
 
-
-var JPlaceHolder = {
-    init : function(){//初始化
-        if(!this._check()){
-            this.fix();
-        }
-    },
-    _check : function(){//检测
-        return 'placeholder' in document.createElement('input');
-    },
-    fix : function(){//修复
-        $(':input[placeholder]').each(function(index, element) {
-            var self = $(this), txt = self.attr('placeholder');
-            self.wrap($('<span></span>').css({position:'relative', zoom:'1', border:'none', background:'none', padding:'none', margin:'none'}));
-            var pos = self.position(), h = self.outerHeight(true), paddingleft = self.css('padding-left');
-            var holder = $('<span class="s-placeholder"></span>').text(txt).css({position:'absolute', left:(pos.left+8), top:(pos.top+1), height:h, lineHeight:h+'px', paddingLeft:paddingleft, color:'#aaa'}).appendTo(self.parent());
-            if (self.val()) {holder.hide();};
-            self.focusin(function(e) {
-                holder.hide();
-            }).focusout(function(e) {
-                if(!self.val()){
-                    holder.show();
-                }
-            });
-            holder.click(function(e) {
-                holder.hide();
-                self.focus();
-            });
-        });
-    }
-};
-
 $(function () {
     $ff.someMix();//存放比较零碎的
     $ff.validate();
     $ff.search();
-    $ff.popGrid();
-    $ff.popTree();
-    $ff.wdDate();
-    JPlaceHolder.init();
+    // $ff.wdDate();
 });

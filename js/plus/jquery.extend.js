@@ -29,6 +29,24 @@ jQuery.cookie=function(a,b,c){var d,e,f,g,h,i,j,k,l;if("undefined"==typeof b){if
 (function(d){d.each(["backgroundColor","borderBottomColor","borderLeftColor","borderRightColor","borderTopColor","color","outlineColor"],function(f,e){d.fx.step[e]=function(g){if(!g.colorInit){g.start=c(g.elem,e);g.end=b(g.end);g.colorInit=true}g.elem.style[e]="rgb("+[Math.max(Math.min(parseInt((g.pos*(g.end[0]-g.start[0]))+g.start[0]),255),0),Math.max(Math.min(parseInt((g.pos*(g.end[1]-g.start[1]))+g.start[1]),255),0),Math.max(Math.min(parseInt((g.pos*(g.end[2]-g.start[2]))+g.start[2]),255),0)].join(",")+")"}});function b(f){var e;if(f&&f.constructor==Array&&f.length==3){return f}if(e=/rgb\(\s*([0-9]{1,3})\s*,\s*([0-9]{1,3})\s*,\s*([0-9]{1,3})\s*\)/.exec(f)){return[parseInt(e[1]),parseInt(e[2]),parseInt(e[3])]}if(e=/rgb\(\s*([0-9]+(?:\.[0-9]+)?)\%\s*,\s*([0-9]+(?:\.[0-9]+)?)\%\s*,\s*([0-9]+(?:\.[0-9]+)?)\%\s*\)/.exec(f)){return[parseFloat(e[1])*2.55,parseFloat(e[2])*2.55,parseFloat(e[3])*2.55]}if(e=/#([a-fA-F0-9]{2})([a-fA-F0-9]{2})([a-fA-F0-9]{2})/.exec(f)){return[parseInt(e[1],16),parseInt(e[2],16),parseInt(e[3],16)]}if(e=/#([a-fA-F0-9])([a-fA-F0-9])([a-fA-F0-9])/.exec(f)){return[parseInt(e[1]+e[1],16),parseInt(e[2]+e[2],16),parseInt(e[3]+e[3],16)]}if(e=/rgba\(0, 0, 0, 0\)/.exec(f)){return a.transparent}return a[d.trim(f).toLowerCase()]}function c(g,e){var f;do{f=d.css(g,e);if(f!=""&&f!="transparent"||d.nodeName(g,"body")){break}e="backgroundColor"}while(g=g.parentNode);return b(f)}var a={aqua:[0,255,255],azure:[240,255,255],beige:[245,245,220],black:[0,0,0],blue:[0,0,255],brown:[165,42,42],cyan:[0,255,255],darkblue:[0,0,139],darkcyan:[0,139,139],darkgrey:[169,169,169],darkgreen:[0,100,0],darkkhaki:[189,183,107],darkmagenta:[139,0,139],darkolivegreen:[85,107,47],darkorange:[255,140,0],darkorchid:[153,50,204],darkred:[139,0,0],darksalmon:[233,150,122],darkviolet:[148,0,211],fuchsia:[255,0,255],gold:[255,215,0],green:[0,128,0],indigo:[75,0,130],khaki:[240,230,140],lightblue:[173,216,230],lightcyan:[224,255,255],lightgreen:[144,238,144],lightgrey:[211,211,211],lightpink:[255,182,193],lightyellow:[255,255,224],lime:[0,255,0],magenta:[255,0,255],maroon:[128,0,0],navy:[0,0,128],olive:[128,128,0],orange:[255,165,0],pink:[255,192,203],purple:[128,0,128],violet:[128,0,128],red:[255,0,0],silver:[192,192,192],white:[255,255,255],yellow:[255,255,0],transparent:[255,255,255]}})(jQuery);
 
 /* soChange 1.6.2 - simple object change with jQuery */
+/* 使用方法参考：http://sojs.bujichong.com/soChange/index.html */
+/*
+$(obj).soChange({
+    thumbObj:null, // 导航对象，默认为空
+    btnPrev:null, // 按钮上一个，默认为空
+    btnNext:null, // 按钮下一个。默认为空
+    changeType:'fade', // 切换方式，可选：fade,slide，默认为fade，1.6版新增方法，详见例3-定义对象切换方式为slide
+    thumbNowClass:'now', // 导航对象当前的class,默认为now
+    thumbOverEvent:true, // 鼠标经过thumbObj时是否切换对象，默认为true，为false时，只有鼠标点击thumbObj才切换对象
+    slideTime:1000, // 平滑过渡时间，默认为1000ms，为0或负值时，忽略changeType方式，切换效果为直接显示隐藏
+    autoChange:true, // 是否自动切换，默认为true
+    clickFalse:true, // 导航对象点击是否链接无效，默认是return false链接无效，当thumbOverEvent为false时，此项必须为true，否则鼠标点击事件冲突
+    overStop:true, // 鼠标经过切换对象时，是否停止切换，并于鼠标离开后重启自动切换，前提是已开启自动切换
+    changeTime:5000, // 对象自动切换时间，默认为5000ms，即5秒
+    delayTime:300 // 鼠标经过时对象切换迟滞时间，推荐值为300ms
+    callback:function(prev,now){} // 切换返回函数，内部提供2个参数:切换前 index值 prev,当前 index值 now 1.6版新增方法
+});
+ */
 (function(a){a.fn.extend({soChange:function(b){b=a.extend({thumbObj:null,btnPrev:null,btnNext:null,changeType:"fade",thumbNowClass:"now",thumbOverEvent:true,slideTime:1000,autoChange:true,clickFalse:true,overStop:true,changeTime:5000,delayTime:300,callback:function(){}},b||{});var h=a(this);var i;var k=h.size();var e=0;var g;var c;var f;function d(){if(e!=g){if(b.thumbObj){a(b.thumbObj).removeClass(b.thumbNowClass).eq(g).addClass(b.thumbNowClass)}if(b.slideTime<=0){h.eq(e).hide();h.eq(g).show()}else{if(b.changeType=="fade"){h.eq(e).fadeOut(b.slideTime);h.eq(g).fadeIn(b.slideTime)}else{h.eq(e).slideUp(b.slideTime);h.eq(g).slideDown(b.slideTime)}}if(b.callback){b.callback(e,g)}e=g}}function j(){g=(e+1)%k;d()}h.hide().eq(0).show();if(b.thumbObj){i=a(b.thumbObj);i.removeClass(b.thumbNowClass).eq(0).addClass(b.thumbNowClass);i.click(function(){g=i.index(a(this));d();if(b.clickFalse){return false}});if(b.thumbOverEvent){i.hover(function(){g=i.index(a(this));f=setTimeout(d,b.delayTime)},function(){clearTimeout(f)})}}if(b.btnNext){a(b.btnNext).click(function(){if(h.queue().length<1){j()}return false})}if(b.btnPrev){a(b.btnPrev).click(function(){if(h.queue().length<1){g=(e+k-1)%k;d()}return false})}if(b.autoChange){c=setInterval(j,b.changeTime);if(b.overStop){h.hover(function(){clearInterval(c)},function(){c=setInterval(j,b.changeTime)})}}}})})(jQuery);
 
 $.extend({
@@ -62,6 +80,12 @@ $.extend({
         }
         return o;
     },
+    /**
+     * 格式化日期函数
+     * @param format 格式化规则，如 "YYYY-MM-dd HH:mm:ss"
+     * @param date 日期对象，可是是Date类型，也可以是时间戳字符串
+     * @returns 对应的日期格式字符串
+     */
     fmtDate: function (format, date) {
         date = date || new Date();
         if (typeof(date) == 'number') {
@@ -100,6 +124,12 @@ $.extend({
         }
         return format;
     },
+    /**
+     * 格式化日期函数
+     * @param date 格式化规则，如 "YYYY-MM-dd HH:mm:ss"
+     * @param type  null("long")/"short"，为short只返回年月日，否则返回完整时间
+     * @returns 对应的日期格式字符串
+     */
     getFullDate : function (date,type) {// Date,'long/short'
         var that = this;
         if (!(date instanceof Date)) {
@@ -124,18 +154,18 @@ $.extend({
             return year+'-'+month+'-'+day+' '+hh+':'+mm;
         }
     },
-    getLocalTime :function (nS) {// 转时间戳为本地时间
+    getLocalTime :function (nS) {// 转时间戳为本地时间，nS为时间戳字符串，错误格式无法返回
         return new Date(nS*1).toLocaleString().replace(/年|月/g, "-").replace(/日/g," ");
     },
-    toHour: function (v) {
+    toHour: function (v) {//转换成小时，返回整数小时
         v = v * 1 || 0;
         return Math.ceil((v * 100) / (1000 * 60 * 60)) / 100;
     },
-    toDay: function (v) {
+    toDay: function (v) {//转换成天，返回整数小时
         v = v * 1 || 0;
         return Math.ceil((v * 100) / (1000 * 60 * 60 * 24)) / 100;
     },
-    getTimeLong : function (s) {
+    getTimeLong : function (s) {//将秒转化成倒计时的时分秒
         var h = Math.floor(s/3600);
         h = h>9?h:('0'+h);
         var m = Math.floor(s%3600/60);
@@ -144,7 +174,7 @@ $.extend({
         s = s>9?s:('0'+s);
         return h==0?(m+':'+s):(h+':'+m+':'+s);
     },
-    arrHasVal : function (arr,val) {
+    arrHasVal : function (arr,val) {//数组是否有某个值
         var l = arr.length;
         for (i = 0; i < l; i++) {
             if (arr[i] === val) {
@@ -153,19 +183,16 @@ $.extend({
         }
         return -1;
     },
-    fullscreen : function (tofull) {
+    fullscreen : function (tofull) {//全屏辅助函数
       if(tofull){
         var docElm = document.documentElement;
         if (docElm.requestFullscreen) {
-          window.console && console.log(11);
           docElm.requestFullscreen();
         }
         else if (docElm.mozRequestFullScreen) {
-          window.console && console.log(12);
           docElm.mozRequestFullScreen();
         }
         else if (docElm.webkitRequestFullScreen) {
-          window.console && console.log(13);
           docElm.webkitRequestFullScreen();
         }
       }else{
@@ -189,6 +216,7 @@ $.extend({
  * 扩充方法
  */
 $.fn.extend({
+    //hoverClass $() 如： $(".ul_nav li").hoverClass("over");
     hoverClass:function(b){var a=this;a.each(function(c){a.eq(c).mouseenter(function(){$(this).addClass(b)});a.eq(c).mouseleave(function(){$(this).removeClass(b)})});return a},
     focusChangeStyle : function(b){var a=this;var b=(b==null)?"txt_focus":b;a.focus(function(){$(this).addClass(b)});a.blur(function(){$(this).removeClass(b)});return a},
     tabChange:function (o) {
@@ -222,7 +250,7 @@ $.fn.extend({
             }
         });
     },
-    switchShow:function(cls,scope){
+    switchShow:function(cls,scope){//对象切换简易版，切换对象为cls dom对象组，只有对象的data-value 值vl，结合 cls+"_"+vl 显示
         $(this).click(function(){
             var $scope=scope?$(scope):$("body");
             $scope.find(cls).hide();
@@ -236,7 +264,7 @@ $.fn.extend({
     //     if (data)
     //         $(this).vals(data);
     // },
-    sovals : function(dataToString) {
+    sovals : function(dataToString) {//返回表单的序列，dataToString为true，将多选框的值以字符串的方式返回
         var o = {};
         var a = this.serializeArray();
         $.each(a, function() {
@@ -258,7 +286,7 @@ $.fn.extend({
         };
         return o;
     },
-    soSelect : function(o){
+    soSelect : function(o){//简易下拉框，使用系统的select来初始化
       var defOpt = {//所有参数
         muti: false,//是否多选
         nullVal : true,//是否添加'请选择...'
@@ -358,7 +386,36 @@ var $event = {
     }
 };
 
-var $ajax = {
+
+var $ajax = {//统一的异步post请求
+    alertErr : function (rst,msg) {
+    	var errDatails = rst.detail ||'';
+    	var msg = rst.msg || msg ||'信息提交失败';
+    	layer.open({
+    	  type: 1,
+    	  skin:'soerrPop',
+    	  icon: 2, title:false,
+    	  btnAlign: 'c',
+    	  area:['300px','auto'],
+    	  content: '<i class="layui-layer-ico layui-layer-ico2"></i><h2 class="h2-err">对不起！'+ msg +'</h2><p>请检查网络或发送邮件到管理员邮箱 <br /><a class="a-mail" href="mailto:servicer@aierchina.com">servicer@aierchina.com</a></p><span class="s-errDetails">查看错误信息</span> <div class="errPopInfoBox"><div class="errPopInfo">'+errDatails+'</div></div>',
+    	  btn: ['确定'],
+    	  yes : function(index, layero){
+    		layer.close(index);
+    	  },
+    	  success : function(layero, index){
+            	var errHtml = layero.find('.errPopInfoBox').html();
+            	$('.s-errDetails').click(function(){
+            	  layer.open({
+            		title :'',
+            		type: 1,
+            		skin:'soerrPopInfo',
+            		area : ['80%','80%'],
+            		content: errHtml
+            	  });
+            	});
+    	  }
+    	});
+    },
     post: function (url, data, tip) {
         var ajaxLoading = null, maskOpt = null, dtd = null;
         var canAjax = true;//用来过滤异步可能造成的多次提交
@@ -371,36 +428,42 @@ var $ajax = {
                 $layer.find('.layui-layer-btn0').focus();//提交按钮获取焦点
             }}, function(index){
               if(canAjax){
-                  canAjax = false;
-                  $.ajax({
-                    url: url, type: 'post', data: data, dataType: 'json',
-                    beforeSend: function (jqXHR, settings) {
-                        layer.close(index);
-                        loadingIndex = layer.load(0, {shade: false});
-                    },
-                    complete: function (jqXHR, textStatus) {
+                canAjax = false;
+                $.ajax({
+                  url: url, type: 'post', data: data, dataType: 'json',
+                  beforeSend: function (jqXHR, settings) {
+                    layer.close(index);
+                    loadingIndex = layer.load(0, {shade: false});
+                  },
+                  complete: function (jqXHR, textStatus) {
                       canAjax = true;
-                        //根据textStatus修改提示
-                        //2秒后去掉提示
-                    },
-                    success: function (rst) {
-                      layer.close(loadingIndex);
-                      if (rst) {
-                        var msg = (rst.tip == 1 ? rst.msg : (rst.state?"信息提交成功":"信息提交失败"));
-                        if (rst.state) {
-                          layer.msg(msg,{icon:1});
-                        } else {
-                          layer.alert('<p class="red">对不起，提交数据失败！</p>' + msg,{icon: 2, title:false,btnAlign: 'c'});
-                        }
+                      //根据textStatus修改提示
+                      //2秒后去掉提示
+                  },
+                  success: function (rst) {
+                    layer.close(loadingIndex);
+                    if (rst) {
+                      var msg = (rst.tip == 1 ? rst.msg : (rst.state?"信息提交成功":"信息提交失败"));
+                      if (rst.state) {
+                        layer.msg(msg,{icon:1});
+                      } else {
+                        $ajax.alertErr(rst);
                       }
-                      dtd.resolve(rst);
-                    },
-                    error: function (XMLHttpRequest, textStatus, errorThrown) {
-                      layer.close(loadingIndex);
-                      layer.alert('<p class="red">对不起，提交数据失败！</p>请检查网络或联系管理员...',{icon: 2, title:false,btnAlign: 'c'});
-                      dtd.reject();
                     }
-                  });
+                    dtd.resolve(rst);
+                  },
+                  error: function (req, textStatus, errorThrown) {
+                    layer.close(loadingIndex);
+                    if(req.responseJSON&&req.responseJSON.msg){
+                        var rst = req.responseJSON;
+                        $ajax.alertErr(rst);
+                    }else{
+                        layer.alert('<p class="red">对不起，数据连接失败！</p>请检查网络或发送邮件到管理员邮箱 <br /><a class="a-mail" href="mailto:servicer@aierchina.com">servicer@aierchina.com</a>',{icon: 2, title:false,btnAlign: 'c'});
+                    }
+                    dtd.reject();
+                  }
+              });
+
               }
             });
             return dtd.promise();
@@ -410,25 +473,33 @@ var $ajax = {
             var loadingIndex = null;
             if(canAjax){
               canAjax = false;
-              dtd = $.ajax({
-                url: url, type: 'post', data: data, dataType: 'json',
-                beforeSend: function (jqXHR, settings) {
-                  maskOpt = $.extend({shade: false}, maskOpt || {});
-                  loadingIndex = layer.load(0, maskOpt);
-                },
-                complete: function (jqXHR, textStatus) {
+            dtd = $.ajax({
+              url: url, type: 'post', data: data, dataType: 'json',
+              beforeSend: function (jqXHR, settings) {
+                maskOpt = $.extend({shade: false}, maskOpt || {});
+                loadingIndex = layer.load(0, maskOpt);
+              },
+              complete: function (jqXHR, textStatus) {
                   canAjax = true;
-                    //根据textStatus修改提示
-                    //2秒后去掉提示
-                },
-                success: function (rst) {
-                  layer.close(loadingIndex);
-                },
-                error: function (XMLHttpRequest, textStatus, errorThrown) {
-                  layer.close(loadingIndex);
-                  layer.alert('<p class="red">对不起，提交数据失败！</p>请检查网络或联系管理员...',{icon: 2, title:false,btnAlign: 'c'});
+                  //根据textStatus修改提示
+                  //2秒后去掉提示
+              },
+              success: function (rst) {
+                layer.close(loadingIndex);
+                if(rst&&!rst.state){
+                  $ajax.alertErr(rst,msg);
                 }
-              });
+              },
+              error: function (req, textStatus, errorThrown) {
+                layer.close(loadingIndex);
+                if(req.responseJSON&&req.responseJSON.msg){
+                  var rst = req.responseJSON;
+                  $ajax.alertErr(rst);
+                }else{
+                  layer.alert('<p class="red">对不起，数据连接失败！</p>请检查网络或发送邮件到管理员邮箱 <br /><a class="a-mail" href="mailto:servicer@aierchina.com">servicer@aierchina.com</a>',{icon: 2, title:false,btnAlign: 'c'});
+                }
+              }
+            });
             }
         }
         return dtd;
@@ -534,14 +605,14 @@ var $T = {
         }
         window.console && console.log('cooke中 '+co+'更新为 " '+$.cookie(co)+' " ');
     },
-    data: function (el, attrName) {
+    data: function (el, attrName) {//获取对象数据，支持非标准json格式写法，数据放在 data-opt中
         attrName = attrName || 'data-opt';
         var data = $(el).attr(attrName), m = /({.*})/.exec(data);
         if (m)data = m[1];
         data = data ? eval("(" + data + ")") : {};
         return data;
     },
-    format: function (tpl, params) {
+    format: function (tpl, params) {//简单的模板格式方法
         if (arguments.length > 2 && params.constructor != Array) {
             params = $.makeArray(arguments).slice(1);
         }
@@ -578,5 +649,36 @@ var $T = {
             return false;
         }
         return true;
+    },
+    placeHolder : {//对低版本浏览器placeholder属性的兼容
+        init : function(){//初始化
+            if(!this._check()){
+                this.fix();
+            }
+        },
+        _check : function(){//检测
+            return 'placeholder' in document.createElement('input');
+        },
+        fix : function(){//修复
+            $(':input[placeholder]').each(function(index, element) {
+                var self = $(this), txt = self.attr('placeholder');
+                self.wrap($('<span></span>').css({position:'relative', zoom:'1', border:'none', background:'none', padding:'none', margin:'none'}));
+                var pos = self.position(), h = self.outerHeight(true), paddingleft = self.css('padding-left');
+                var holder = $('<span class="s-placeholder"></span>').text(txt).css({position:'absolute', left:(pos.left+8), top:(pos.top+1), height:h, lineHeight:h+'px', paddingLeft:paddingleft, color:'#aaa'}).appendTo(self.parent());
+                if (self.val()) {holder.hide();};
+                self.focusin(function(e) {
+                    holder.hide();
+                }).focusout(function(e) {
+                    if(!self.val()){
+                        holder.show();
+                    }
+                });
+                holder.click(function(e) {
+                    holder.hide();
+                    self.focus();
+                });
+            });
+        }
     }
+
 }

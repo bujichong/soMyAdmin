@@ -32,7 +32,10 @@
     });
     return thisRules;
   }
-
+//临时添加验证规则
+//例如：
+//var idcardRule = 'idCardNo["birthday,sex,age"]';
+//$cardNo.validatebox('addRule',idcardRule);
   function addRule(target, rs) {
     var currentRules = [];
     if ($.type(rs)=="string") { currentRules.push(rs); }
@@ -55,7 +58,10 @@
     opts.validType = _validType;
     t.validatebox("validate");
   };
-
+//临时移除验证规则
+//例如：
+//var idcardRule = 'idCardNo["birthday,sex,age"]';
+//$cardNo.validatebox('removeRule',idcardRule);
   function removeRule(target, rs) {
     var currentRules = [];
     if ($.type(rs)=="string") { currentRules.push(rs); }
@@ -86,11 +92,17 @@
       //   1、String类型：表示一个要动态添加的规则；
       //   2、Array类型：表示一组要动态添加的规则；
       //  返回值：返回表示当前 easyui-validatebox 控件的 jQuery 链式对象。
+//例如：
+//var idcardRule = 'idCardNo["birthday,sex,age"]';
+//$cardNo.validatebox('addRule',idcardRule);
       addRule: function (jq, rules) { return jq.each(function () { addRule(this, rules); }); },
       //   rules:表示要动态移除的规则，该参数可以是如下类型
       //   1、String类型：表示一个要动态移除的规则；
       //   2、Array类型：表示一组要动态移除的规则；
       //  返回值：返回表示当前 easyui-validatebox 控件的 jQuery 链式对象。
+//例如：
+//var idcardRule = 'idCardNo["birthday,sex,age"]';
+//$cardNo.validatebox('removeRule',idcardRule);
       removeRule: function (jq, rules) { return jq.each(function () { removeRule(this, rules); }); }
   });
 
@@ -134,8 +146,9 @@
         },
         message: "{0}"
     },
-    required3 : {
+    required3 : {//自定义必填
       validator: function (value, param) {
+        if(param) $rules.required3.message = param[0];//自定义提示
         return $.trim(value)!=='';
       },
       message: "{0}"
@@ -546,7 +559,7 @@ function Getsex(psidno){
   }else if(psidno.length==15){
       sexno=psidno.substring(14,15)
   }else{
-	window.console&&console.log("错误的身份证号码，请核对！")
+      window.console&&console.log("错误的身份证号码，请核对！")
       return false
   }
   var tempid=sexno%2;

@@ -1,7 +1,7 @@
 define(['pub'],function(){
   var edit = {
     eIndex : undefined,
-    endEditing : function(grid){
+    endEditing : function(grid){//结束编辑
       var me = this;
       if (me.eIndex == undefined){return true}
       if ($(grid).datagrid('validateRow', me.eIndex)){
@@ -12,19 +12,19 @@ define(['pub'],function(){
         return false;
       }
     },
-    getChanges : function(grid){
+    getChanges : function(grid){//获取grid edit的变化
       var me = this;
       var grid = grid || '#gridBox';//默认值 #gridBox
       if (me.endEditing(grid)){
         return $(grid).datagrid('getChanges');
       }
     },
-    rejectChanges : function(grid){
+    rejectChanges : function(grid){//放弃编辑
       var me = this;
       var grid = grid || '#gridBox';//默认值 #gridBox
       $(grid).datagrid('rejectChanges');
     },
-    delRows : function(grid,checked){//checked : true|false => getChecked|getSelections
+    delRows : function(grid,checked){//删除row，checked : true|false => getChecked|getSelections
       var me = this;
       var grid = grid || '#gridBox';//默认值 #gridBox
       // if (me.endEditing(grid)){
@@ -36,7 +36,7 @@ define(['pub'],function(){
         })
       // }
     },
-    addNewRow : function(focusField,grid,initData){//foucusField:默认focus的字段; grid: 对应的grid，默认为#gridBox ; initData:新增行初始化默认数据
+    addNewRow : function(focusField,grid,initData){//增加新的行，foucusField:默认focus的字段; grid: 对应的grid，默认为#gridBox ; initData:新增行初始化默认数据
       var me = this;
       var grid = grid || '#gridBox';//默认值 #gridBox
       var initData = initData || {};
@@ -46,7 +46,7 @@ define(['pub'],function(){
         me.editRow(ix,focusField,grid);
       }
     },
-    editRow : function(index,focusField,grid,initData){//index:行index; foucusField:默认focus的字段; grid: 对应的grid，默认为#gridBox ; initData:新增行初始化默认数据
+    editRow : function(index,focusField,grid,initData){//编辑行，index:行index; foucusField:默认focus的字段; grid: 对应的grid，默认为#gridBox ; initData:新增行初始化默认数据
       var me = this;
       // window.console&&console.log(me.eIndex,index);
       var grid = grid || '#gridBox';//默认值 #gridBox
