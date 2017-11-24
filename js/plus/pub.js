@@ -799,26 +799,31 @@ var $ff = {
         $T.placeHolder.init();//对低版本浏览器placeholder属性的兼容
 
         if ($('.so-time').length) {//时间控件初始化
-            $('.so-time').addClass('Wdate').each(function () {
-                var _self = $(this);
-                if (_self.hasClass('inline')) {_self.css('width', 150)};
-                _self.click(function () {
-                    var data = $T.data(this) || {};
-                    $.applyIf(data, {dateFmt: 'yyyy-MM-dd HH:mm', readOnly: true});
-                    WdatePicker(data);
-                });
+            // $('.so-time').addClass('Wdate').each(function () {
+            //     var _self = $(this);
+            //     if (_self.hasClass('inline')) {_self.css('width', 150)};
+            //     _self.click(function () {
+            //         var data = $T.data(this) || {};
+            //         $.applyIf(data, {dateFmt: 'yyyy-MM-dd HH:mm', readOnly: true});
+            //         WdatePicker(data);
+            //     });
+            // });
+
+            $('.so-time').each(function () {
+              var _self  = $(this);
+              var data = $T.data(this) || {};
+              _self.css('width', _self.hasClass('inline')?'150px':'100%');
+              _self.datetimebox(data);
             });
+
         }
 
         if ($('.so-date').length) {//日期控件初始化
-            $('.so-date').addClass('Wdate').each(function () {
-                var _self = $(this);
-                if (_self.hasClass('inline')) {_self.css('width', 100)};
-                _self.click(function () {
-                    var data = $T.data(this) || {};
-                    $.applyIf(data, {dateFmt: 'yyyy-MM-dd', readOnly: true});
-                    WdatePicker(data);
-                });
+            $('.so-date').each(function () {
+              var _self  = $(this);
+              var data = $T.data(this) || {};
+              _self.css('width', _self.hasClass('inline')?'100px':'100%');
+              _self.datebox(data);
             });
         }
         // if ($(".so-form .btn-cancel").length) {
@@ -851,9 +856,9 @@ var $ff = {
         if ($(':input[noNull],.required').length) {//时间和选择控件对应的必填输入框添加必填小三角样式
             $(':input[noNull],.required').each(function () {
               var _self = $(this);
-              if (_self.hasClass('so-time') || _self.hasClass('so-date')) {
-                  _self.addClass('txt-requireDate');
-              }
+              // if (_self.hasClass('so-time') || _self.hasClass('so-date')) {
+              //     _self.addClass('txt-requireDate');
+              // }
               if (_self.hasClass('so-choice') || _self.hasClass('so-pop')) {
                   _self.addClass('so-requirePop');
               }

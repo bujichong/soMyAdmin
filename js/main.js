@@ -2,10 +2,10 @@
  * 存放页面公用变量
  */
 var $p = {
-	// treeUrl : '/cmn/tree.htm',
-	// comboUrl : '/cmn/combo.htm',
-	// selectUrl : '/cmn/select.htm',
-	// gridUrl : '/cmn/grid.htm',
+	treeUrl : '/cmn/tree.htm',
+	comboUrl : '/cmn/combo.htm',
+	selectUrl : '/cmn/select.htm',
+	gridUrl : '/cmn/grid.htm',
 	cmp:'爱尔',
 	submitTip : '您确定要提交吗?',
 	exportMax : 6000
@@ -13,11 +13,100 @@ var $p = {
 
 //公共表格列定义
 var $cols={
-	// userSite : [[
-	// {title:'id',field:'id',hidden:true},
-	// {title:'网站名称',field:'name',width:120},
-	// {title:'网站地址',field:'url',width:240}
-	// ]]
+	GridOrg:[[
+		{title:'公司名称',field:'text',width:80},
+		{title:'联系人',field:'linkman',width:80},
+		{title:'联系方式',field:'linkway',width:100}
+	]],
+	userSite : [[
+	{title:'id',field:'id',hidden:true},
+	{title:'网站名称',field:'name',width:120},
+	{title:'网站地址',field:'url',width:240}
+	]],
+    GridGoods:[[
+         {checkbox:true,field:'chk'}
+        ,{title:'商品名称',field:'text'}
+        ,{title:'商品分类',field:'classifyName'}
+        ,{title:'商品编码',field:'goodsCode'}
+        ,{title:'商品海关编码',field:'hsCode'}
+        ,{title:'电子帐册项号',field:'eno'}
+        ,{title:'品牌',field:'brandName'}
+        ,{title:'规格型号',field:'spec'}
+        ,{title:'计量单位',field:'unit'}
+    ]],
+	Goods:[[
+		{title:'商品名称',field:'goodsName'}
+		,{title:'商品分类',field:'classifyName'}
+		,{title:'商品编码',field:'goodsCode'}
+		,{title:'商品海关编码',field:'hsCode'}
+		,{title:'电子帐册项号',field:'eno'}
+		,{title:'品牌',field:'brandName'}
+		,{title:'规格型号',field:'spec'}
+		,{title:'计量单位',field:'unitName'}
+	]],
+	funcGrid:[[
+		 {title:'功能名称',field:'text',width:150}
+		,{title:'功能简称',field:'shortName',width:100}
+		,{title:'功能编码',field:'resCode',align:'left'}
+	]],
+    BrandGrid:[[
+         {title:'品牌名称',field:'text'}
+        ,{title:'厂家',field:'companyName'}
+        ,{title:'备注',field:'remark'}
+    ]],
+	GridSupplier:[[
+		 {title:'企业编码',field:'text'}
+		,{title:'企业名称',field:'supplier_name'}
+		,{title:'地址',field:'addr'}
+		,{title:'国家',field:'nation'}
+		,{title:'备注',field:'remark'}
+	]],
+	BuyGoods:[[
+		 {title:'商品名称',field:'goodsName',width:250}
+		,{title:'商品分类',field:'classifyName',width:200}
+		,{title:'商品编码',field:'goodsCode'}
+		,{title:'商品海关编码',field:'hsCode',width:100}
+		,{title:'电子帐册项号',field:'eno'}
+		,{title:'品牌',field:'brandName'}
+		,{title:'规格型号',field:'spec'}
+		,{title:'计量单位',field:'unit'}
+		,{title:'备注',field:'remark'}
+	]],
+	Customer:[[
+		{title:'企业编码',field:'customer_code'}
+		,{title:'企业名称',field:'customer_name'}
+		,{title:'地址',field:'addr'}
+		,{title:'备注',field:'remark'}
+	]],
+	SaleGoods:[[
+		{title:'商品名称',field:'goodsName',width:250}
+		,{title:'商品分类',field:'classifyName',width:200}
+		,{title:'商品编码',field:'goodsCode'}
+		,{title:'商品海关编码',field:'hsCode',width:100}
+		,{title:'电子帐册项号',field:'eno'}
+		,{title:'品牌',field:'brandName'}
+		,{title:'规格型号',field:'spec'}
+		,{title:'计量单位',field:'unit'}
+		,{title:'备注',field:'remark'}
+	]],
+	StockForSale:[[
+		{title: '货物自然序号', field: 'batchNo',width:110}
+		, {title: '供货企业', field: 'supplierName',width:150}
+		, {title: '商品名称', field: 'goodsName'}
+		, {title: '规格型号', field: 'spec'}
+		, {title: '数量', field: 'total', align: 'right'}
+		, {title: '计量单位', field: 'unitName'}
+		//, {title: '单价', field: 'price', align: 'right'}
+		, {title: '总价(元)', field: 'amount', align: 'right'}
+		, {title: '件数', field: 'totalPkg', align: 'right'}
+		//, {title: '报关单号', field: 'hsBill'}
+		//, {title: '电子帐册项号', field: 'eno'}
+		//, {title: '商品海关编码', field: 'hsCode'}
+		, {title: '原产国', field: 'originPlace'}
+		, {title: '仓库', field: 'storeName'}
+		, {title: '货位', field: 'storeLocName'}
+		, {title: '进仓日期', field: 'billDate', width: 125, format: 'yyyy-MM-dd hh:mm'}
+	]]
 };
 define("param", function(){});
 
@@ -111,24 +200,6 @@ jQuery.cookie=function(a,b,c){var d,e,f,g,h,i,j,k,l;if("undefined"==typeof b){if
 (function(d){d.each(["backgroundColor","borderBottomColor","borderLeftColor","borderRightColor","borderTopColor","color","outlineColor"],function(f,e){d.fx.step[e]=function(g){if(!g.colorInit){g.start=c(g.elem,e);g.end=b(g.end);g.colorInit=true}g.elem.style[e]="rgb("+[Math.max(Math.min(parseInt((g.pos*(g.end[0]-g.start[0]))+g.start[0]),255),0),Math.max(Math.min(parseInt((g.pos*(g.end[1]-g.start[1]))+g.start[1]),255),0),Math.max(Math.min(parseInt((g.pos*(g.end[2]-g.start[2]))+g.start[2]),255),0)].join(",")+")"}});function b(f){var e;if(f&&f.constructor==Array&&f.length==3){return f}if(e=/rgb\(\s*([0-9]{1,3})\s*,\s*([0-9]{1,3})\s*,\s*([0-9]{1,3})\s*\)/.exec(f)){return[parseInt(e[1]),parseInt(e[2]),parseInt(e[3])]}if(e=/rgb\(\s*([0-9]+(?:\.[0-9]+)?)\%\s*,\s*([0-9]+(?:\.[0-9]+)?)\%\s*,\s*([0-9]+(?:\.[0-9]+)?)\%\s*\)/.exec(f)){return[parseFloat(e[1])*2.55,parseFloat(e[2])*2.55,parseFloat(e[3])*2.55]}if(e=/#([a-fA-F0-9]{2})([a-fA-F0-9]{2})([a-fA-F0-9]{2})/.exec(f)){return[parseInt(e[1],16),parseInt(e[2],16),parseInt(e[3],16)]}if(e=/#([a-fA-F0-9])([a-fA-F0-9])([a-fA-F0-9])/.exec(f)){return[parseInt(e[1]+e[1],16),parseInt(e[2]+e[2],16),parseInt(e[3]+e[3],16)]}if(e=/rgba\(0, 0, 0, 0\)/.exec(f)){return a.transparent}return a[d.trim(f).toLowerCase()]}function c(g,e){var f;do{f=d.css(g,e);if(f!=""&&f!="transparent"||d.nodeName(g,"body")){break}e="backgroundColor"}while(g=g.parentNode);return b(f)}var a={aqua:[0,255,255],azure:[240,255,255],beige:[245,245,220],black:[0,0,0],blue:[0,0,255],brown:[165,42,42],cyan:[0,255,255],darkblue:[0,0,139],darkcyan:[0,139,139],darkgrey:[169,169,169],darkgreen:[0,100,0],darkkhaki:[189,183,107],darkmagenta:[139,0,139],darkolivegreen:[85,107,47],darkorange:[255,140,0],darkorchid:[153,50,204],darkred:[139,0,0],darksalmon:[233,150,122],darkviolet:[148,0,211],fuchsia:[255,0,255],gold:[255,215,0],green:[0,128,0],indigo:[75,0,130],khaki:[240,230,140],lightblue:[173,216,230],lightcyan:[224,255,255],lightgreen:[144,238,144],lightgrey:[211,211,211],lightpink:[255,182,193],lightyellow:[255,255,224],lime:[0,255,0],magenta:[255,0,255],maroon:[128,0,0],navy:[0,0,128],olive:[128,128,0],orange:[255,165,0],pink:[255,192,203],purple:[128,0,128],violet:[128,0,128],red:[255,0,0],silver:[192,192,192],white:[255,255,255],yellow:[255,255,0],transparent:[255,255,255]}})(jQuery);
 
 /* soChange 1.6.2 - simple object change with jQuery */
-/* 使用方法参考：http://sojs.bujichong.com/soChange/index.html */
-/*
-$(obj).soChange({
-    thumbObj:null, // 导航对象，默认为空
-    btnPrev:null, // 按钮上一个，默认为空
-    btnNext:null, // 按钮下一个。默认为空
-    changeType:'fade', // 切换方式，可选：fade,slide，默认为fade，1.6版新增方法，详见例3-定义对象切换方式为slide
-    thumbNowClass:'now', // 导航对象当前的class,默认为now
-    thumbOverEvent:true, // 鼠标经过thumbObj时是否切换对象，默认为true，为false时，只有鼠标点击thumbObj才切换对象
-    slideTime:1000, // 平滑过渡时间，默认为1000ms，为0或负值时，忽略changeType方式，切换效果为直接显示隐藏
-    autoChange:true, // 是否自动切换，默认为true
-    clickFalse:true, // 导航对象点击是否链接无效，默认是return false链接无效，当thumbOverEvent为false时，此项必须为true，否则鼠标点击事件冲突
-    overStop:true, // 鼠标经过切换对象时，是否停止切换，并于鼠标离开后重启自动切换，前提是已开启自动切换
-    changeTime:5000, // 对象自动切换时间，默认为5000ms，即5秒
-    delayTime:300 // 鼠标经过时对象切换迟滞时间，推荐值为300ms
-    callback:function(prev,now){} // 切换返回函数，内部提供2个参数:切换前 index值 prev,当前 index值 now 1.6版新增方法
-});
- */
 (function(a){a.fn.extend({soChange:function(b){b=a.extend({thumbObj:null,btnPrev:null,btnNext:null,changeType:"fade",thumbNowClass:"now",thumbOverEvent:true,slideTime:1000,autoChange:true,clickFalse:true,overStop:true,changeTime:5000,delayTime:300,callback:function(){}},b||{});var h=a(this);var i;var k=h.size();var e=0;var g;var c;var f;function d(){if(e!=g){if(b.thumbObj){a(b.thumbObj).removeClass(b.thumbNowClass).eq(g).addClass(b.thumbNowClass)}if(b.slideTime<=0){h.eq(e).hide();h.eq(g).show()}else{if(b.changeType=="fade"){h.eq(e).fadeOut(b.slideTime);h.eq(g).fadeIn(b.slideTime)}else{h.eq(e).slideUp(b.slideTime);h.eq(g).slideDown(b.slideTime)}}if(b.callback){b.callback(e,g)}e=g}}function j(){g=(e+1)%k;d()}h.hide().eq(0).show();if(b.thumbObj){i=a(b.thumbObj);i.removeClass(b.thumbNowClass).eq(0).addClass(b.thumbNowClass);i.click(function(){g=i.index(a(this));d();if(b.clickFalse){return false}});if(b.thumbOverEvent){i.hover(function(){g=i.index(a(this));f=setTimeout(d,b.delayTime)},function(){clearTimeout(f)})}}if(b.btnNext){a(b.btnNext).click(function(){if(h.queue().length<1){j()}return false})}if(b.btnPrev){a(b.btnPrev).click(function(){if(h.queue().length<1){g=(e+k-1)%k;d()}return false})}if(b.autoChange){c=setInterval(j,b.changeTime);if(b.overStop){h.hover(function(){clearInterval(c)},function(){c=setInterval(j,b.changeTime)})}}}})})(jQuery);
 
 $.extend({
@@ -162,12 +233,6 @@ $.extend({
         }
         return o;
     },
-    /**
-     * 格式化日期函数
-     * @param format 格式化规则，如 "YYYY-MM-dd HH:mm:ss"
-     * @param date 日期对象，可是是Date类型，也可以是时间戳字符串
-     * @returns 对应的日期格式字符串
-     */
     fmtDate: function (format, date) {
         date = date || new Date();
         if (typeof(date) == 'number') {
@@ -206,12 +271,6 @@ $.extend({
         }
         return format;
     },
-    /**
-     * 格式化日期函数
-     * @param date 格式化规则，如 "YYYY-MM-dd HH:mm:ss"
-     * @param type  null("long")/"short"，为short只返回年月日，否则返回完整时间
-     * @returns 对应的日期格式字符串
-     */
     getFullDate : function (date,type) {// Date,'long/short'
         var that = this;
         if (!(date instanceof Date)) {
@@ -236,18 +295,18 @@ $.extend({
             return year+'-'+month+'-'+day+' '+hh+':'+mm;
         }
     },
-    getLocalTime :function (nS) {// 转时间戳为本地时间，nS为时间戳字符串，错误格式无法返回
+    getLocalTime :function (nS) {// 转时间戳为本地时间
         return new Date(nS*1).toLocaleString().replace(/年|月/g, "-").replace(/日/g," ");
     },
-    toHour: function (v) {//转换成小时，返回整数小时
+    toHour: function (v) {
         v = v * 1 || 0;
         return Math.ceil((v * 100) / (1000 * 60 * 60)) / 100;
     },
-    toDay: function (v) {//转换成天，返回整数小时
+    toDay: function (v) {
         v = v * 1 || 0;
         return Math.ceil((v * 100) / (1000 * 60 * 60 * 24)) / 100;
     },
-    getTimeLong : function (s) {//将秒转化成倒计时的时分秒
+    getTimeLong : function (s) {
         var h = Math.floor(s/3600);
         h = h>9?h:('0'+h);
         var m = Math.floor(s%3600/60);
@@ -256,7 +315,7 @@ $.extend({
         s = s>9?s:('0'+s);
         return h==0?(m+':'+s):(h+':'+m+':'+s);
     },
-    arrHasVal : function (arr,val) {//数组是否有某个值
+    arrHasVal : function (arr,val) {
         var l = arr.length;
         for (i = 0; i < l; i++) {
             if (arr[i] === val) {
@@ -265,16 +324,19 @@ $.extend({
         }
         return -1;
     },
-    fullscreen : function (tofull) {//全屏辅助函数
+    fullscreen : function (tofull) {
       if(tofull){
         var docElm = document.documentElement;
         if (docElm.requestFullscreen) {
+          window.console && console.log(11);
           docElm.requestFullscreen();
         }
         else if (docElm.mozRequestFullScreen) {
+          window.console && console.log(12);
           docElm.mozRequestFullScreen();
         }
         else if (docElm.webkitRequestFullScreen) {
+          window.console && console.log(13);
           docElm.webkitRequestFullScreen();
         }
       }else{
@@ -298,7 +360,6 @@ $.extend({
  * 扩充方法
  */
 $.fn.extend({
-    //hoverClass $() 如： $(".ul_nav li").hoverClass("over");
     hoverClass:function(b){var a=this;a.each(function(c){a.eq(c).mouseenter(function(){$(this).addClass(b)});a.eq(c).mouseleave(function(){$(this).removeClass(b)})});return a},
     focusChangeStyle : function(b){var a=this;var b=(b==null)?"txt_focus":b;a.focus(function(){$(this).addClass(b)});a.blur(function(){$(this).removeClass(b)});return a},
     tabChange:function (o) {
@@ -332,7 +393,7 @@ $.fn.extend({
             }
         });
     },
-    switchShow:function(cls,scope){//对象切换简易版，切换对象为cls dom对象组，只有对象的data-value 值vl，结合 cls+"_"+vl 显示
+    switchShow:function(cls,scope){
         $(this).click(function(){
             var $scope=scope?$(scope):$("body");
             $scope.find(cls).hide();
@@ -346,7 +407,7 @@ $.fn.extend({
     //     if (data)
     //         $(this).vals(data);
     // },
-    sovals : function(dataToString) {//返回表单的序列，dataToString为true，将多选框的值以字符串的方式返回
+    sovals : function(dataToString) {
         var o = {};
         var a = this.serializeArray();
         $.each(a, function() {
@@ -367,84 +428,6 @@ $.fn.extend({
             });
         };
         return o;
-    },
-    soSelect : function(o){//简易下拉框，使用系统的select来初始化
-      var defOpt = {//所有参数
-        muti: false,//是否多选
-        nullVal : true,//是否添加'请选择...'
-        appendMode : false,//html还是append到元素中，默认直接html替换
-        url : null,//远程请求地址
-        data : null,//请求附加数据
-        value : null,//被选中值，为字符串，多选用逗号隔开
-        success : null,//初始化完成后 function(val,_self,opt){}
-        change : null//change执行事件，字符串为全局函数，function为function(val,_self,opt){}函数
-      };
-      var opt = $T.data(this) || {};
-      opt = $.extend(defOpt,opt,o||{});
-
-      var mySelf = $(this);
-      mySelf.each(function () {
-        var _self = $(this);
-        if (opt.value!==null) {
-          var val =opt.value.toString();
-          val = val.split(',');
-        }
-        var data = opt.data ||{};
-        var rstData = null;
-        if(opt.url){
-          $.ajax({
-            url :opt.url,
-            data : data,
-            type : 'post',
-            dataType : 'json',
-            async : false,
-            success : function(rstData){
-              // window.console&&console.log(rstData);
-              if(rstData&&rstData.length){
-                var optHtml = (opt.nullVal)?'<option value="">请选择...</option>':'';
-                $.each(rstData,function(i,v){
-                  if(v.selected||v.checked){val.push(v.value)};//json数据selected或checked为true也可以标示为选中
-                  optHtml += '<option value="'+v.value+'">'+v.text+'</option>';
-                });
-                _self[opt.appendMode?'append':'html'](optHtml);//添加dom
-              }else{
-                window.console&&console.log('so-drop远程初始化失败或数据为空..');
-              }
-            }
-          });
-        }
-        if(opt.muti){
-          _self.attr('multiple','multiple');
-        }
-        if (val&&val.length) {//赋值
-          if(!opt.muti){
-            val=val.pop();
-            _self.find('option[value='+val+']').attr('selected',true);
-          }else{
-            $.each(val,function(i,v){
-              _self.find('option[value='+v+']').attr('selected',true);
-            })
-          }
-        }
-        if(opt.success){
-          if(typeof opt.success === 'string'){//字符串为函数名
-            window[opt.success](val,_self,opt);
-          }else{//函数
-            opt.success(val,_self,opt);
-          }
-        }
-        if(opt.change){
-          _self.change(function(){
-            val = _self.val();
-            if(typeof opt.change === 'string'){//字符串为函数名
-              window[opt.change](val,_self,opt);
-            }else{//函数
-              opt.change(val,_self,opt);
-            }
-          })
-        }
-      });
-      return mySelf;
     }
 });
 
@@ -465,126 +448,6 @@ var $event = {
         window.event.returnValue = false;
       }
       return false;
-    }
-};
-
-
-var $ajax = {//统一的异步post请求
-    alertErr : function (rst,msg) {
-    	var errDatails = rst.detail ||'';
-    	var msg = rst.msg || msg ||'信息提交失败';
-    	layer.open({
-    	  type: 1,
-    	  skin:'soerrPop',
-    	  icon: 2, title:false,
-    	  btnAlign: 'c',
-    	  area:['300px','auto'],
-    	  content: '<i class="layui-layer-ico layui-layer-ico2"></i><h2 class="h2-err">对不起！'+ msg +'</h2><p>请检查网络或发送邮件到管理员邮箱 <br /><a class="a-mail" href="mailto:servicer@aierchina.com">servicer@aierchina.com</a></p><span class="s-errDetails">查看错误信息</span> <div class="errPopInfoBox"><div class="errPopInfo">'+errDatails+'</div></div>',
-    	  btn: ['确定'],
-    	  yes : function(index, layero){
-    		layer.close(index);
-    	  },
-    	  success : function(layero, index){
-            	var errHtml = layero.find('.errPopInfoBox').html();
-            	$('.s-errDetails').click(function(){
-            	  layer.open({
-            		title :'',
-            		type: 1,
-            		skin:'soerrPopInfo',
-            		area : ['80%','80%'],
-            		content: errHtml
-            	  });
-            	});
-    	  }
-    	});
-    },
-    post: function (url, data, tip) {
-        var ajaxLoading = null, maskOpt = null, dtd = null;
-        var canAjax = true;//用来过滤异步可能造成的多次提交
-        if (tip) {//提示
-          var msg = (tip === true ? $p.submitTip : tip);
-          dtd = $.Deferred();
-          var event = function (dtd) {
-            var loadingIndex = null;
-            layer.confirm(msg, {icon: 0, title:false,btnAlign: 'c',success: function ($layer) {
-                $layer.find('.layui-layer-btn0').focus();//提交按钮获取焦点
-            }}, function(index){
-              if(canAjax){
-                canAjax = false;
-                $.ajax({
-                  url: url, type: 'post', data: data, dataType: 'json',
-                  beforeSend: function (jqXHR, settings) {
-                    layer.close(index);
-                    loadingIndex = layer.load(0, {shade: false});
-                  },
-                  complete: function (jqXHR, textStatus) {
-                      canAjax = true;
-                      //根据textStatus修改提示
-                      //2秒后去掉提示
-                  },
-                  success: function (rst) {
-                    layer.close(loadingIndex);
-                    if (rst) {
-                      var msg = (rst.tip == 1 ? rst.msg : (rst.state?"信息提交成功":"信息提交失败"));
-                      if (rst.state) {
-                        layer.msg(msg,{icon:1});
-                      } else {
-                        $ajax.alertErr(rst);
-                      }
-                    }
-                    dtd.resolve(rst);
-                  },
-                  error: function (req, textStatus, errorThrown) {
-                    layer.close(loadingIndex);
-                    if(req.responseJSON&&req.responseJSON.msg){
-                        var rst = req.responseJSON;
-                        $ajax.alertErr(rst);
-                    }else{
-                        layer.alert('<p class="red">对不起，数据连接失败！</p>请检查网络或发送邮件到管理员邮箱 <br /><a class="a-mail" href="mailto:servicer@aierchina.com">servicer@aierchina.com</a>',{icon: 2, title:false,btnAlign: 'c'});
-                    }
-                    dtd.reject();
-                  }
-              });
-
-              }
-            });
-            return dtd.promise();
-          }
-          return $.when(event(dtd));
-        } else {
-            var loadingIndex = null;
-            if(canAjax){
-              canAjax = false;
-            dtd = $.ajax({
-              url: url, type: 'post', data: data, dataType: 'json',
-              beforeSend: function (jqXHR, settings) {
-                maskOpt = $.extend({shade: false}, maskOpt || {});
-                loadingIndex = layer.load(0, maskOpt);
-              },
-              complete: function (jqXHR, textStatus) {
-                  canAjax = true;
-                  //根据textStatus修改提示
-                  //2秒后去掉提示
-              },
-              success: function (rst) {
-                layer.close(loadingIndex);
-                if(rst&&!rst.state){
-                  $ajax.alertErr(rst,msg);
-                }
-              },
-              error: function (req, textStatus, errorThrown) {
-                layer.close(loadingIndex);
-                if(req.responseJSON&&req.responseJSON.msg){
-                  var rst = req.responseJSON;
-                  $ajax.alertErr(rst);
-                }else{
-                  layer.alert('<p class="red">对不起，数据连接失败！</p>请检查网络或发送邮件到管理员邮箱 <br /><a class="a-mail" href="mailto:servicer@aierchina.com">servicer@aierchina.com</a>',{icon: 2, title:false,btnAlign: 'c'});
-                }
-              }
-            });
-            }
-        }
-        return dtd;
     }
 };
 
@@ -660,7 +523,7 @@ var $T = {
         }
     },
     setCookie : function (key,value,co,root) {//增强版设置cookie
-        root = root==undefined?true:root;//默认cookie都定义在root目录下，不到子目录下
+        root = root==undefined?true:root;
         var co = co||'aso',$co = $.cookie(co);
         var coVal;
         if ($co!==null) {
@@ -687,14 +550,14 @@ var $T = {
         }
         window.console && console.log('cooke中 '+co+'更新为 " '+$.cookie(co)+' " ');
     },
-    data: function (el, attrName) {//获取对象数据，支持非标准json格式写法，数据放在 data-opt中
+    data: function (el, attrName) {
         attrName = attrName || 'data-opt';
         var data = $(el).attr(attrName), m = /({.*})/.exec(data);
         if (m)data = m[1];
         data = data ? eval("(" + data + ")") : {};
         return data;
     },
-    format: function (tpl, params) {//简单的模板格式方法
+    format: function (tpl, params) {
         if (arguments.length > 2 && params.constructor != Array) {
             params = $.makeArray(arguments).slice(1);
         }
@@ -731,38 +594,7 @@ var $T = {
             return false;
         }
         return true;
-    },
-    placeHolder : {//对低版本浏览器placeholder属性的兼容
-        init : function(){//初始化
-            if(!this._check()){
-                this.fix();
-            }
-        },
-        _check : function(){//检测
-            return 'placeholder' in document.createElement('input');
-        },
-        fix : function(){//修复
-            $(':input[placeholder]').each(function(index, element) {
-                var self = $(this), txt = self.attr('placeholder');
-                self.wrap($('<span></span>').css({position:'relative', zoom:'1', border:'none', background:'none', padding:'none', margin:'none'}));
-                var pos = self.position(), h = self.outerHeight(true), paddingleft = self.css('padding-left');
-                var holder = $('<span class="s-placeholder"></span>').text(txt).css({position:'absolute', left:(pos.left+8), top:(pos.top+1), height:h, lineHeight:h+'px', paddingLeft:paddingleft, color:'#aaa'}).appendTo(self.parent());
-                if (self.val()) {holder.hide();};
-                self.focusin(function(e) {
-                    holder.hide();
-                }).focusout(function(e) {
-                    if(!self.val()){
-                        holder.show();
-                    }
-                });
-                holder.click(function(e) {
-                    holder.hide();
-                    self.focus();
-                });
-            });
-        }
     }
-
 }
 ;
 define("jquery.extend", ["param","layer.min","my97"], function(){});
@@ -837,9 +669,6 @@ var aa=[];
 for(var i=0;i<$.parser.plugins.length;i++){
 var _d=$.parser.plugins[i];
 var r=$(".easyui-"+_d,_c);
-if(_d=='validatebox'){
-r = $(".easyui-"+_d+",.txt-validate",_c);
-}
 if(r.length){
 if(r[_d]){
 r.each(function(){
@@ -7402,14 +7231,6 @@ function _4d0(_4d1){
 var _4d2=$.data(_4d1,"validatebox");
 var opts=_4d2.options;
 var box=$(_4d1);
-
-var needMsg = $(_4d1).attr('noNull');
-if(needMsg){
-$(_4d1).addClass('required');
-opts.required = true;
-opts.missingMessage = needMsg;
-}
-
 opts.onBeforeValidate.call(_4d1);
 var _4d3=_4d4();
 _4d3?box.removeClass("validatebox-invalid"):box.addClass("validatebox-invalid");
@@ -17082,557 +16903,442 @@ define("easyui.extend", ["easyui"], function(){});
 */
 (function () {
 
-  //从规则集合中获取“存在于现有validatebox规则集合”中的那部分规则
-  function getEffectValidType(rs) {
-    var thisRules = [];
-    var allRules = $.fn.validatebox.defaults.rules;
-    rs.forEach(function (validType) {
-        var types = /([a-zA-Z_]+)(.*)/.exec(validType);
-        var tempRules = allRules[types[1]];
-        //var validParams = eval(types[2]);
-        if (tempRules != undefined) { thisRules.push(validType); }
-    });
-    return thisRules;
-  }
-//临时添加验证规则
-//例如：
-//var idcardRule = 'idCardNo["birthday,sex,age"]';
-//$cardNo.validatebox('addRule',idcardRule);
-  function addRule(target, rs) {
-    var currentRules = [];
-    if ($.type(rs)=="string") { currentRules.push(rs); }
-    else if ($.isArray(rs)) { currentRules = rs; }
-    else { return; }
-    if (currentRules.length == 0) { return; }
-
-    var thisRules = getEffectValidType(currentRules);
-    if (thisRules.length == 0) { return; }
-
-    var t = $(target), opts = t.validatebox("options");
-    var _validType = opts.validType ? ($.type(opts.validType)=="string"?[opts.validType]:opts.validType) : [];
-    if (_validType.length && _validType.length >= 0) {
-      $.each(thisRule,function(k,rule){
-        _validType.push(rule);
-      });
-    }else {
-        _validType = thisRules;
-    }
-    opts.validType = _validType;
-    t.validatebox("validate");
-  };
-//临时移除验证规则
-//例如：
-//var idcardRule = 'idCardNo["birthday,sex,age"]';
-//$cardNo.validatebox('removeRule',idcardRule);
-  function removeRule(target, rs) {
-    var currentRules = [];
-    if ($.type(rs)=="string") { currentRules.push(rs); }
-    else if ($.isArray(rs)) { currentRules = rs; }
-    else { return; }
-    if (currentRules.length == 0) { return; }
-
-    var thisRules = getEffectValidType(currentRules);
-    if (thisRules.length == 0) { return; }
-
-    var t = $(target), opts = t.validatebox("options");
-    var _validType = opts.validType;
-    if (_validType&&_validType.length && _validType.length > 0) {
-        $.each(thisRules,function (k,rule) {
-          var index = _validType.indexOf(rule);
-          if (index > -1) {
-            _validType.splice(index, 1);
+    $.extend($.fn.validatebox.defaults.rules, {
+      // multipleValidType :{//多个校验的使用
+      many :{//多个校验的使用
+          validator: function(value, param){
+              var options = $.fn.validatebox.defaults;//获取校验属性
+              var returnFlag = true;
+              for(var i = 0 ; i < param.length ; i++){
+                  var result = /([a-zA-Z_0-9]+)(.*)/.exec(param[i]); //匹配校验方法
+                  var rule = options.rules[result[1]];  //获取校验方法
+                  if(value && rule){
+                      var ruleParam = eval(result[2]);  //获取校验参数
+                      if(!rule["validator"].call(this,value, ruleParam)){
+                      // if(!rule["validator"](value, ruleParam,this)){
+                          var message = rule["message"];
+                          if (ruleParam) {
+                              for ( var i = 0; i < ruleParam.length; i++) {
+                                message = message.replace(new RegExp("\\{" + i + "\\}", "g"), ruleParam[i]);
+                              }
+                          }
+                        //  $.fn.validatebox.defaults.rules.multipleValidType.message = message;
+                         $.fn.validatebox.defaults.rules.many.message = message;
+                         returnFlag = false;
+                         break;
+                      }
+                  }
+              }
+              return returnFlag;
+          },
+          message:""
+      },
+      minlength : {
+        validator: function (value,param) {
+            return getLength($.trim(value), $(this)) >= param[0];
+        },
+        message: '最小长度{0}'
+      },
+      maxlength : {
+        validator: function (value,param) {
+            return getLength($.trim(value), $(this)) <= param[0];
+        },
+        message: '最大长度{0}'
+      },
+      rangelength : {
+        validator: function (value,param) {
+          var length = getLength($.trim(value), element);
+    			return length >= param[0] && length <= param[1];
+        },
+        message: '最小长度{0}，最大长度{1}'
+      },
+      min : {
+        validator: function (value,param) {
+            return value >= param[0];
+        },
+        message: '数字最小为{0}'
+      },
+      max : {
+        validator: function (value,param) {
+            return value <= param[0];
+        },
+        message: '数字最大为{0}'
+      },
+      range : {
+        validator: function (value,param) {
+            return  value >= param[0] && value <= param[1];
+        },
+        message: '数字只能在{0}与{1}之间'
+      },
+      //  只允许输入英文字母或数字
+      username : {
+        validator: function (value) {
+            return /^[0-9a-zA-Z_]{1,}$/.test(value);
+        },
+        message: '请输入字母、数字或下划线'
+      },
+      normalPass : {
+        validator: function (value) {
+            return /^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\d).*$/.test(value);
+        },
+        message: '须含大小写字母及数字'
+      },
+      complexPass : {
+        validator: function (value) {
+            return /^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\d)(?=.*?[-`=\\\[\];',./~!@#$%^&*()_+|{}:"<>?]).*$/.test(value);
+        },
+        message: '须含大小写字母、数字及特殊字符'
+      },
+      cn : {
+        validator: function (value) {
+            return /^[\u0391-\uFFE5]+$/.test(value);
+        },
+        message: '请输入中文'
+      },
+      ip : {
+        validator: function (value) {
+            return /^[0-2]?[0-9]?[0-9]\.[0-2]?[0-9]?[0-9]\.[0-2]?[0-9]?[0-9]\.[0-2]?[0-9]?[0-9]$/.test(value);
+        },
+        message: '请输入合法的IP'
+      },
+      pNumber : {
+        validator: function (value) {
+            return /^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/.test(value);
+        },
+        message: '请输入一个正数'
+      },
+      pInt : {
+        validator: function (value) {
+            return /^(0|[1-9]\d*)$/.test(value);
+        },
+        message: '请输入一个正整数'
+      },
+      int : {
+        validator: function (value) {
+            return /^-?\d+$/.test(value);
+        },
+        message: '请输入一个整数'
+      },
+      diymonth : {
+        validator: function (value) {
+            return /^[0-9]+(\.[0-9]{1})?$/.test(value);
+        },
+        message: '月数为正整数或一位小数'
+      },
+      normalDate : {
+        validator: function (value) {
+            return /^((?:19|20)\d\d)-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$/.test(value);
+        },
+        message: '日期格式如：1980-01-01'
+      },
+      isFloatGteZero : {
+        validator: function (value) {
+            return /^\d+(\.\d+)?$/.test(value);
+        },
+        message: '浮点数必须大于或等于0'
+      },
+      pFloatFix : {
+        validator: function (value,opt) {
+          var state = /^\d+(\.\d+)?$/.test(value);
+          if(value&&state){
+            var _self = $(this);
+            if(_self instanceof Array){_self = _self[0]};
+            var opt = opt || 2;
+            _self.blur(function () {
+             _self.val(new Number(value).toFixed(opt)).unbind('blur');
+            });
           }
-        });
-        opts.validType = _validType;
-        t.validatebox("validate");
-    }
-  }
-
-
-  $.extend($.fn.validatebox.methods,{
-      //   rules:表示要动态添加的规则，该参数可以是如下类型
-      //   1、String类型：表示一个要动态添加的规则；
-      //   2、Array类型：表示一组要动态添加的规则；
-      //  返回值：返回表示当前 easyui-validatebox 控件的 jQuery 链式对象。
-//例如：
-//var idcardRule = 'idCardNo["birthday,sex,age"]';
-//$cardNo.validatebox('addRule',idcardRule);
-      addRule: function (jq, rules) { return jq.each(function () { addRule(this, rules); }); },
-      //   rules:表示要动态移除的规则，该参数可以是如下类型
-      //   1、String类型：表示一个要动态移除的规则；
-      //   2、Array类型：表示一组要动态移除的规则；
-      //  返回值：返回表示当前 easyui-validatebox 控件的 jQuery 链式对象。
-//例如：
-//var idcardRule = 'idCardNo["birthday,sex,age"]';
-//$cardNo.validatebox('removeRule',idcardRule);
-      removeRule: function (jq, rules) { return jq.each(function () { removeRule(this, rules); }); }
-  });
-
-
-  var $rules = $.fn.validatebox.defaults.rules;
-  $.extend($rules, {
-    // multipleValidType :{//多个校验的使用
-    many :{//多个校验的使用,ep: validType= "many['pFloatFix','range[0,20]']"
-        validator: function(value, param){
-            var options = $.fn.validatebox.defaults;//获取校验属性
-            var returnFlag = true;
-            for(var i = 0 ; i < param.length ; i++){
-                var result = /([a-zA-Z_0-9]+)(.*)/.exec(param[i]); //匹配校验方法
-                var rule = options.rules[result[1]];  //获取校验方法
-                if(value && rule){
-                    var ruleParam = eval(result[2]);  //获取校验参数
-                    if(!rule["validator"].call(this,value, ruleParam)){
-                    // if(!rule["validator"](value, ruleParam,this)){
-                        var message = rule["message"];
-                        window.console&&console.log(ruleParam,message);
-                        if (ruleParam) {
-                            for ( var i = 0; i < ruleParam.length; i++) {
-                              message = String(message).replace(new RegExp("\\{" + i + "\\}", "g"), ruleParam[i]);
-                            }
-                        }
-                      //  $.fn.validatebox.defaults.rules.multipleValidType.message = message;
-                       $.fn.validatebox.defaults.rules.many.message = message;
-                       returnFlag = false;
-                       break;
-                    }
-                }
-            }
-            return returnFlag;
+          return state;
         },
-        message:""
-    },
-    forceValidFail: {//强行验证失败
-        validator: function (value, param) {
-            var result = param[1];
-            return result;
+        message: '请填写正确的正数'
+      },
+      isFloatNEqZero : {// 判断浮点数value是否不等于0
+        validator: function (value) {
+          var value = parseFloat(value);
+          return value!=0;
         },
-        message: "{0}"
-    },
-    required3 : {//自定义必填
-      validator: function (value, param) {
-        if(param) $rules.required3.message = param[0];//自定义提示
-        return $.trim(value)!=='';
+        message: '浮点数不可以等于0'
       },
-      message: "{0}"
-    },
-    minlength : {
-      validator: function (value,param) {
-        if(param[1]) $rules.minlength.message = param[1];
-        var len = value.length;
-        return len >= param[0];
-      },
-      message: '最小长度{0}'
-    },
-    maxlength : {
-      validator: function (value,param) {
-        if(param[1]) $rules.maxlength.message = param[1];
-        var len = value.length;
-        return len <= param[0];
-      },
-      message: '最大长度{0}'
-    },
-    rangelength : {
-      validator: function (value,param) {
-        if(param[2]) $rules.rangelength.message = param[2];
-        var len = value.length;
-  			return len >= param[0] && len <= param[1];
-      },
-      message: '最小长度{0}，最大长度{1}'
-    },
-    min : {
-      validator: function (value,param) {
-        if(param[1]) $rules.min.message = param[1];
-        return value >= param[0];
-      },
-      message: '数字最小为{0}'
-    },
-    max : {
-      validator: function (value,param) {
-        if(param[1]) $rules.max.message = param[1];
-        return value <= param[0];
-      },
-      message: '数字最大为{0}'
-    },
-    range : {
-      validator: function (value,param) {
-        if(param[2]) $rules.range.message = param[2];
-        return  value >= param[0] && value <= param[1];
-      },
-      message: '数字只能在{0}与{1}之间'
-    },
-    //  只允许输入英文字母或数字
-    username : {
-      validator: function (value,param) {
-        if(param) $rules.username.message = param[0];
-        return /^[0-9a-zA-Z_]{1,}$/.test(value);
-      },
-      message: '请输入字母、数字或下划线'
-    },
-    normalPass : {
-      validator: function (value,param) {
-          if(param) $rules.normalPass.message = param[0];
-          return /^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\d).*$/.test(value);
-      },
-      message: '须含大小写字母及数字'
-    },
-    complexPass : {
-      validator: function (value,param) {
-          if(param) $rules.complexPass.message = param[0];
-          return /^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\d)(?=.*?[-`=\\\[\];',./~!@#$%^&*()_+|{}:"<>?]).*$/.test(value);
-      },
-      message: '须含大小写字母、数字及特殊字符'
-    },
-    cn : {
-      validator: function (value,param) {
-          if(param) $rules.cn.message = param[0];
-          return /^[\u0391-\uFFE5]+$/.test(value);
-      },
-      message: '请输入中文'
-    },
-    en : {// 判断英文字符
-      validator: function (value,param) {
-        if(param&&param[0]) $rules.isEnglish.message = param[0];
-        return /^[A-Za-z]+$/.test(value);
-      },
-      message: '只能包含英文字符'
-    },
-    engNum: {
+      isFloatLtZero : {
+       validator: function (value) {
+         var value = parseFloat(value);
+         return value<0;
+       },
+       message: '浮点数必须小于0'
+     },
+     isFloatLteZero : { // 判断浮点数value是否小于或等于0
       validator: function (value) {
-          return /^[0-9a-zA-Z]*$/.test(value);
+        var value = parseFloat(value);
+        return value<=0;
       },
-      message: '请输入英文字母或数字'
+      message: '浮点数必须小于或等于0'
     },
-    //  只允许汉字、英文字母或数字
-    chsEngNum: {
-      validator: function (value, param) {
-          return /^([\u4E00-\uFA29]|[\uE7C7-\uE7F3]|[a-zA-Z0-9])*$/.test(value);
+    isFloat : {// 判断浮点型
+      validator: function (value) {
+        return /^[-\+]?\d+(\.\d+)?$/.test(value);
       },
-      message: '只允许汉字、英文字母或数字。'
+      message: '只能包含数字、小数点等字符'
     },
-    number : {// 匹配数值类型，包括整数和浮点数
-      validator: function (value,param) {
-        if(param&&param[0]) $rules.number.message = param[0];
+    isInteger : {// 判断浮点型
+      validator: function (value) {
+        return /^[-\+]?\d+$/.test(value) && parseInt(value)>=0;
+      },
+      message: '匹配integer'
+    },
+    isAge : {
+      validator: function (value) {
+        return /^[-\+]?\d+$/.test(value) && parseInt(value)>0&&parseInt(value)<120;
+      },
+      message: '请输入正确的年龄'
+    },
+    isNumber : {// 匹配数值类型，包括整数和浮点数
+      validator: function (value) {
         return /^[-\+]?\d+$/.test(value) || /^[-\+]?\d+(\.\d+)?$/.test(value);
       },
       message: '请输入正确的数字'
     },
-    pNumber : {
-      validator: function (value,param) {
-          if(param) $rules.pNumber.message = param[0];
-          return /^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/.test(value);
+    isDigits : {// 只能输入[0-9]数字
+      validator: function (value) {
+        return /^\d+$/.test(value);
       },
-      message: '请输入一个正数'
+      message: '只能输入0-9数字'
     },
-    pInt : {
-      validator: function (value,param) {
-          if(param) $rules.pInt.message = param[0];
-          return /^(0|[1-9]\d*)$/.test(value);
+    isChinese : {// 判断中文字符
+      validator: function (value) {
+        return /^[\u0391-\uFFE5]+$/.test(value);
       },
-      message: '请输入一个正整数'
+      message: '只能包含中文字符'
     },
-    int : {
-      validator: function (value,param) {
-          if(param) $rules.int.message = param[0];
-          return /^-?\d+$/.test(value);
+    isEnglish : {// 判断英文字符
+      validator: function (value) {
+        return /^[A-Za-z]+$/.test(value);
       },
-      message: '请输入一个整数'
+      message: '只能包含英文字符'
     },
-    float : {// 判断浮点型
-      validator: function (value,param) {
-        if(param&&param[0]) $rules.float.message = param[0];
-        return /^[-\+]?\d+(\.\d+)?$/.test(value);
+    isMobile : {// 判断英文字符
+      validator: function (value) {
+        return length == 11 && /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/.test(value);
       },
-      message: '请输入正确的小数'
+      message: '请填写正确的手机号码'
     },
-    floatNEqZero : {// 判断浮点数value是否不等于0
-      validator: function (value,param) {
-        if(param&&param[0]) $rules.floatNEqZero.message = param[0];
-        var value = parseFloat(value);
-        return value!=0;
+    isPhone : {// 电话号码验证
+      validator: function (value) {
+        var tel = /^(\d{3,4}-?)?\d{7,9}$/g;
+        return tel.test(value);
       },
-      message: '浮点数不可以等于0'
+      message: '请填写正确的电话号码'
     },
-    floatLtZero : {
-     validator: function (value,param) {
-       if(param&&param[0]) $rules.floatLtZero.message = param[0];
-       var value = parseFloat(value);
-       return value<0;
-     },
-     message: '浮点数必须小于0'
-   },
-   floatLteZero : { // 判断浮点数value是否小于或等于0
-    validator: function (value,param) {
-      if(param&&param[0]) $rules.floatLteZero.message = param[0];
-      var value = parseFloat(value);
-      return value<=0;
+    isPhoneArea : {
+      validator: function (value) {
+        var tel = /^[08]\d{2,3}$/g;
+        return tel.test(value);
+      },
+      message: '请填写正确的区号'
     },
-    message: '浮点数必须小于或等于0'
-  },
-  isFloatGteZero : {
-    validator: function (value,param) {
-        if(param) $rules.isFloatGteZero.message = param[0];
-        return /^\d+(\.\d+)?$/.test(value);
+    isPhoneNumber : {
+      validator: function (value) {
+        var tel = /^\d{7,9}$/g;
+        return tel.test(value);
+      },
+      message: '请填写正确的电话号码'
     },
-    message: '浮点数必须大于或等于0'
-  },
-  pFloatFix : {
-    validator: function (value,param) {
-      if(param&&param[1]) $rules.pFloatFix.message = param[1];
-      var state = /^\d+(\.\d+)?$/.test(value);
-      if(value&&state){
-        var _self = $(this);
-        if(_self instanceof Array){_self = _self[0]};
-        var opt = param[0] || 2;
-        _self.blur(function () {
-         _self.val(new Number(value).toFixed(opt)).unbind('blur');
-        });
+    isTel : {// 联系电话(手机/电话皆可)验证
+      validator: function (value) {
+        var length = value.length;
+        var mobile = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
+        var tel = /^(\d{3,4}-?)?\d{7,9}$/g;
+        return tel.test(value) || (length==11 && mobile.test(value));
+      },
+      message: '请填写正确的联系方式'
+    },
+    isQq : {//匹配qq
+      validator: function (value) {
+        return /^[1-9]\d{4,12}$/.test(value);
+      },
+      message: '请填写正确的QQ号码'
+    },
+    isZipCode : {//邮政编码验证
+      validator: function (value) {
+        var zip = /^[0-9]{6}$/;
+        return zip.test(value);
+      },
+      message: '请填写正确的邮政编码'
+    },
+    isPwd : {//匹配密码，以字母开头，长度在6-12之间，只能包含字符、数字和下划线
+      validator: function (value) {
+        return /^[a-zA-Z]\\w{6,12}$/.test(value);
+      },
+      message: '以字母开头，长度在6-12之间，只能包含字符、数字和下划线'
+    },
+    isIdCardNo : {//身份证号码验证
+      validator: function (value) {
+        return isIdCardNo(value,opt);
+      },
+      message: '请填写正确的身份证号码'
+    },
+    stringCheck : {//字符验证，只能包含中文、英文、数字、下划线等字符。
+      validator: function (value) {
+        return /^[a-zA-Z0-9\u4e00-\u9fa5-_]+$/.test(value);
+      },
+      message: '只能包含中文、英文、数字、下划线等字符'
+    },
+    isContainsSpecialChar : {//判断是否包含中英文特殊字符，除英文"-_"字符外
+      validator: function (value) {
+        var reg = RegExp(/[(\ )(\`)(\~)(\!)(\@)(\#)(\$)(\%)(\^)(\&)(\*)(\()(\))(\+)(\=)(\|)(\{)(\})(\')(\:)(\;)(\')(',)(\[)(\])(\.)(\<)(\>)(\/)(\?)(\~)(\！)(\@)(\#)(\￥)(\%)(\…)(\&)(\*)(\（)(\）)(\—)(\+)(\|)(\{)(\})(\【)(\】)(\‘)(\；)(\：)(\”)(\“)(\’)(\。)(\，)(\、)(\？)]+/);
+        return reg.test(value);
+      },
+      message: '含有中英文特殊字符'
+    },
+      engNum: {
+          validator: function (value) {
+              return /^[0-9a-zA-Z]*$/.test(value);
+          },
+          message: '请输入英文字母或数字'
+      },
+      //  只允许汉字、英文字母或数字
+      chsEngNum: {
+          validator: function (value, param) {
+              return /^([\u4E00-\uFA29]|[\uE7C7-\uE7F3]|[a-zA-Z0-9])*$/.test(value);
+          },
+          message: '只允许汉字、英文字母或数字。'
+      },
+      //  只允许汉字、英文字母、数字及下划线
+      code: {
+          validator: function (value, param) {
+              return /^[\u0391-\uFFE5\w]+$/.test(value);
+          },
+          message: '只允许汉字、英文字母、数字及下划线.'
+      },
+      //  输入的字符必须是指定的内容相同
+      equals: {
+          validator: function (value, param) {
+            // console.log(param);
+              return value == $(param[0]).val();
+          },
+          message: "输入的内容不匹配."
       }
-      return state;
-    },
-    message: '请填写正确的正数'
-  },
-  floatFix : {
-    validator: function (value,param) {
-      if(param&&param[1]) $rules.floatFix.message = param[1];
-      var state = /^[-\+]?\d+(\.\d+)?$/.test(value);
-      if(value&&state){
-        var _self = $(this);
-        if(_self instanceof Array){_self = _self[0]};
-        var opt = param[0] || 2;
-        _self.blur(function () {
-         _self.val(new Number(value).toFixed(opt)).unbind('blur');
-        });
-      }
-      return state;
-    },
-    message: '请填写正确的正数'
-  },
-  diymonth : {
-    validator: function (value,param) {
-        if(param) $rules.diymonth.message = param[0];
-        return /^[0-9]+(\.[0-9]{1})?$/.test(value);
-    },
-    message: '月数为正整数或一位小数'
-  },
-  normalDate : {
-    validator: function (value,param) {
-        if(param) $rules.normalDate.message = param[0];
-        return /^((?:19|20)\d\d)-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$/.test(value);
-    },
-    message: '日期格式如：1980-01-01'
-  },
-  age : {
-    validator: function (value,param) {
-      if(param&&param[0]) $rules.age.message = param[0];
-      return /^[-\+]?\d+$/.test(value) && parseInt(value)>0&&parseInt(value)<120;
-    },
-    message: '请输入正确的年龄'
-  },
-  digits : {// 只能输入[0-9]数字
-    validator: function (value,param) {
-      if(param&&param[0]) $rules.digits.message = param[0];
-      return /^\d+$/.test(value);
-    },
-    message: '只能输入0-9数字'
-  },
-  mobile : {// 判断英文字符
-    validator: function (value) {
-      return length == 11 && /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/.test(value);
-    },
-    message: '请填写正确的手机号码'
-  },
-  phone : {// 电话号码验证
-    validator: function (value) {
-      var tel = /^(\d{3,4}-?)?\d{7,9}$/g;
-      return tel.test(value);
-    },
-    message: '请填写正确的电话号码'
-  },
-  phoneArea : {
-    validator: function (value) {
-      var tel = /^[08]\d{2,3}$/g;
-      return tel.test(value);
-    },
-    message: '请填写正确的区号'
-  },
-  phoneNumber : {
-    validator: function (value) {
-      var tel = /^\d{7,9}$/g;
-      return tel.test(value);
-    },
-    message: '请填写正确的电话号码'
-  },
-  tel : {// 联系电话(手机/电话皆可)验证
-    validator: function (value) {
-      var length = value.length;
-      var mobile = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
-      var tel = /^(\d{3,4}-?)?\d{7,9}$/g;
-      return tel.test(value) || (length==11 && mobile.test(value));
-    },
-    message: '请填写正确的联系方式'
-  },
-  qq : {//匹配qq
-    validator: function (value,param) {
-      if(param&&param[0]) $rules.qq.message = param[0];
-      return /^[1-9]\d{4,12}$/.test(value);
-    },
-    message: '请填写正确的QQ号码'
-  },
-  zipCode : {//邮政编码验证
-    validator: function (value,param) {
-      if(param&&param[0]) $rules.zipCode.message = param[0];
-      var zip = /^[0-9]{6}$/;
-      return zip.test(value);
-    },
-    message: '请填写正确的邮政编码'
-  },
-  ip : {
-    validator: function (value,param) {
-        if(param) $rules.ip.message = param[0];
-        return /^[0-2]?[0-9]?[0-9]\.[0-2]?[0-9]?[0-9]\.[0-2]?[0-9]?[0-9]\.[0-2]?[0-9]?[0-9]$/.test(value);
-    },
-    message: '请输入合法的IP'
-  },
-  idCardNo : {//身份证号码验证
-    validator: function (value,param) {
-      if(param&&param[1]) $rules.idCardNo.message = param[1];
-      return isIdCardNo(value,param[0]);
-    },
-    message: '请填写正确的身份证号码'
-  },
-  containsSpecialChar : {//判断是否包含中英文特殊字符，除英文"-_"字符外
-    validator: function (value,param) {
-      if(param&&param[0]) $rules.containsSpecialChar.message = param[0];
-      var reg = RegExp(/[(\ )(\`)(\~)(\!)(\@)(\#)(\$)(\%)(\^)(\&)(\*)(\()(\))(\+)(\=)(\|)(\{)(\})(\')(\:)(\;)(\')(',)(\[)(\])(\.)(\<)(\>)(\/)(\?)(\~)(\！)(\@)(\#)(\￥)(\%)(\…)(\&)(\*)(\（)(\）)(\—)(\+)(\|)(\{)(\})(\【)(\】)(\‘)(\；)(\：)(\”)(\“)(\’)(\。)(\，)(\、)(\？)]+/);
-      return reg.test(value);
-    },
-    message: '含有中英文特殊字符'
-  },
-  //  只允许汉字、英文字母、数字及下划线
-  code: {
-    validator: function (value, param) {
-        return /^[\u0391-\uFFE5\w]+$/.test(value);
-    },
-    message: '只允许汉字、英文字母、数字及下划线.'
-  },
-  //  输入的字符必须是指定的内容相同
-  equals: {
-    validator: function (value, param) {
-      if(param[1]) $rules.equals.message = param[1];
-      return value == $(param[0]).val();
-    },
-    message: "输入的内容不匹配."
-  }
-});
+    });
 
 })(jQuery);
 
 
+function getLength(value, element) {
+  switch( element.nodeName.toLowerCase() ) {
+  case 'select':
+    return $("option:selected", element).length;
+  case 'input':
+    if( this.checkable( element) )
+      return this.findByName(element.name).filter(':checked').length;
+  }
+  return value.length;
+};
+
+
 //身份证号码的验证规则
 function isIdCardNo(code,opt){
-  var city={11:"北京",12:"天津",13:"河北",14:"山西",15:"内蒙古",21:"辽宁",22:"吉林",23:"黑龙江 ",31:"上海",32:"江苏",33:"浙江",34:"安徽",35:"福建",36:"江西",37:"山东",41:"河南",42:"湖北 ",43:"湖南",44:"广东",45:"广西",46:"海南",50:"重庆",51:"四川",52:"贵州",53:"云南",54:"西藏 ",61:"陕西",62:"甘肃",63:"青海",64:"宁夏",65:"新疆",71:"台湾",81:"香港",82:"澳门",91:"国外 "};
-  var tip = "";
-  var pass= true;
+    var city={11:"北京",12:"天津",13:"河北",14:"山西",15:"内蒙古",21:"辽宁",22:"吉林",23:"黑龙江 ",31:"上海",32:"江苏",33:"浙江",34:"安徽",35:"福建",36:"江西",37:"山东",41:"河南",42:"湖北 ",43:"湖南",44:"广东",45:"广西",46:"海南",50:"重庆",51:"四川",52:"贵州",53:"云南",54:"西藏 ",61:"陕西",62:"甘肃",63:"青海",64:"宁夏",65:"新疆",71:"台湾",81:"香港",82:"澳门",91:"国外 "};
+    var tip = "";
+    var pass= true;
 
-  // if(!code || !/^\d{6}(18|19|20)?\d{2}(0[1-9]|1[12])(0[1-9]|[12]\d|3[01])\d{3}(\d|X)$/i.test(code)){
-    // if (!code || !/^[1-9][0-9]{5}(19[0-9]{2}|200[0-9]|2010)(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01])[0-9]{3}[0-9xX]$/i.test(code)) {
-    if (!code || !/^[1-9]\d{5}((1[89]|20)\d{2})(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])\d{3}[\dx]$/i.test(code)) {
-      tip = "身份证号格式错误";
-      pass = false;
-  }
+    // if(!code || !/^\d{6}(18|19|20)?\d{2}(0[1-9]|1[12])(0[1-9]|[12]\d|3[01])\d{3}(\d|X)$/i.test(code)){
+      // if (!code || !/^[1-9][0-9]{5}(19[0-9]{2}|200[0-9]|2010)(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01])[0-9]{3}[0-9xX]$/i.test(code)) {
+      if (!code || !/^[1-9]\d{5}((1[89]|20)\d{2})(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])\d{3}[\dx]$/i.test(code)) {
+        tip = "身份证号格式错误";
+        pass = false;
+    }
 
-  else if(!city[code.substr(0,2)]){
-      tip = "地址编码错误";
-      pass = false;
-  }
-  else{
-      //18位身份证需要验证最后一位校验位
-      if(code.length == 18){
-          codeArr = code.split('');
-          //∑(ai×Wi)(mod 11)
-          //加权因子
-          var factor = [ 7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2 ];
-          //校验位
-          var parity = [ 1, 0, 'X', 9, 8, 7, 6, 5, 4, 3, 2 ];
-          var sum = 0;
-          var ai = 0;
-          var wi = 0;
-          for (var i = 0; i < 17; i++)
-          {
-              ai = codeArr[i];
-              wi = factor[i];
-              sum += ai * wi;
-          }
-          var last = parity[sum % 11];
-          if(parity[sum % 11] != codeArr[17].toUpperCase()){
-              tip = "校验位错误";
-              pass =false;
-          }
-      }
-  }
-  window.console && console.log(pass,tip);
-
-  if (opt) {
-      var optArr = opt.split(',');
-      var $bir = $('#'+optArr[0]);
-      var $sex = $('#'+optArr[1]);
-      var $age = $('#'+optArr[2]);
-      if (pass) {
-      $bir.val(GetBirthday(code,$age));
-      $sex.val(Getsex(code));
-  }else{
-      $bir.val('');
-      $sex.val('');
-      $age.val('');
-  };
-  };
-  return pass;
+    else if(!city[code.substr(0,2)]){
+        tip = "地址编码错误";
+        pass = false;
+    }
+    else{
+        //18位身份证需要验证最后一位校验位
+        if(code.length == 18){
+            codeArr = code.split('');
+            //∑(ai×Wi)(mod 11)
+            //加权因子
+            var factor = [ 7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2 ];
+            //校验位
+            var parity = [ 1, 0, 'X', 9, 8, 7, 6, 5, 4, 3, 2 ];
+            var sum = 0;
+            var ai = 0;
+            var wi = 0;
+            for (var i = 0; i < 17; i++)
+            {
+                ai = codeArr[i];
+                wi = factor[i];
+                sum += ai * wi;
+            }
+            var last = parity[sum % 11];
+            if(parity[sum % 11] != codeArr[17].toUpperCase()){
+                tip = "校验位错误";
+                pass =false;
+            }
+        }
+    }
+    window.console && console.log(pass,tip);
+    // if(!pass) alert(tip);
+    if (opt) {
+        var optArr = opt.split(',');
+        var $bir = $('#'+optArr[0]);
+        var $sex = $('#'+optArr[1]);
+        var $age = $('#'+optArr[2]);
+        if (pass) {
+        $bir.val(GetBirthday(code,$age));
+        $sex.val(Getsex(code));
+    }else{
+        $bir.val('');
+        $sex.val('');
+        $age.val('');
+    };
+    };
+    return pass;
 }
 
 function GetBirthday(psidno,$age){
-  var birthdayno,birthdaytemp;
-  if(psidno.length==18){
-      birthdayno=psidno.substring(6,14)
-  }else if(psidno.length==15){
-      birthdaytemp=psidno.substring(6,12)
-      birthdayno="19"+birthdaytemp
-  }else{
-      window.console&&console.log("错误的身份证号码，请核对！")
-      return false
-  }
-  var birY = birthdayno.substring(0,4);
-  var birM = birthdayno.substring(4,6);
-  var birD = birthdayno.substring(6,8);
-  var birthday=birY+"-"+birM+"-"+birD;
+    var birthdayno,birthdaytemp;
+    if(psidno.length==18){
+        birthdayno=psidno.substring(6,14)
+    }else if(psidno.length==15){
+        birthdaytemp=psidno.substring(6,12)
+        birthdayno="19"+birthdaytemp
+    }else{
+        alert("错误的身份证号码，请核对！")
+        return false
+    }
+    var birY = birthdayno.substring(0,4);
+    var birM = birthdayno.substring(4,6);
+    var birD = birthdayno.substring(6,8);
+    var birthday=birY+"-"+birM+"-"+birD;
 
-  var now = new Date();
-  now =  $.getFullDate(now);
-  window.console && console.log(now);
-  now = now.split(' ')[0].split('-');
-  var age = (now[0]-birY)*100+(now[1]-birM)/12*10*10+(now[2]-birD)/30*10;
-  $age.val(Math.floor(age/100));
-  return birthday;
+    var now = new Date();
+    now =  $.getFullDate(now);
+    window.console && console.log(now);
+    now = now.split(' ')[0].split('-');
+    var age = (now[0]-birY)*100+(now[1]-birM)/12*10*10+(now[2]-birD)/30*10;
+    $age.val(Math.floor(age/100));
+    return birthday;
 }
 
 function Getsex(psidno){
-  var sexno,sex;
-  if(psidno.length==18){
-      sexno=psidno.substring(16,17)
-  }else if(psidno.length==15){
-      sexno=psidno.substring(14,15)
-  }else{
-      window.console&&console.log("错误的身份证号码，请核对！")
-      return false
-  }
-  var tempid=sexno%2;
-  sex = (tempid==0)?'2':'1';
-  return sex;
+    var sexno,sex;
+    if(psidno.length==18){
+        sexno=psidno.substring(16,17)
+    }else if(psidno.length==15){
+        sexno=psidno.substring(14,15)
+    }else{
+        alert("错误的身份证号码，请核对！")
+        return false
+    }
+    var tempid=sexno%2;
+    sex = (tempid==0)?'2':'1';
+    return sex;
 }
 ;
 define("easyvalidate.extend", ["easyui"], function(){});
 
 var $util = {
-    down: function (url, param, method) {//下载方法
+    down: function (url, param, method) {
         var inputs = [];
         if (!method) {
             method = !param ? "get" : "post";
@@ -17651,7 +17357,7 @@ var $util = {
         }
         $("#_exportBox form").submit();
     },
-    excel: function (url, titles, fields, param) {//导出excel，需要后台对应配置
+    excel: function (url, titles, fields, param) {
         param = param || {};
         $.applyIf(param, {
             _start: 0,
@@ -17698,7 +17404,7 @@ var $util = {
             }
         });
     },
-    iframePop : function (opt,grid) {//pop的方式打开iframePop
+    iframePop : function (opt,grid) {
         window._refreshParent = false;
         if (typeof(opt)=='string') {
             opt = {content:opt};
@@ -17710,22 +17416,29 @@ var $util = {
           area :['100%', '100%']
         },opt||{});
         if (grid) {
-          layerOpt.end = function (){
-              opt.end&&opt.end();
-              if (window._refreshParent){
-                  if(grid instanceof Array){
-                      $.each(grid,function (i,v) {
-                          $grid.reload(v);
-                      })
-                  }else{
-                      $grid.reload(grid);
-                  }
-              }
+            layerOpt.end = function (){
+                opt.end&&opt.end();
+                if (window._refreshParent){
+                    if(grid instanceof Array){
+                        $.each(grid,function (i,v) {
+                            $grid.reload(v);
+                        })
+                    }else{
+                        $grid.reload(grid);
+                    }
+                }
+            }
           }
-        }
         var popIndex = layer.open(layerOpt);
+        // window.console && console.log(popIndex);
+        var str = layerOpt.content;
+        if (str.indexOf("/") != 0) {
+            str = location.pathname.replace(/\/[^/]*$/, "/") + layerOpt.content;
+        }
+        window.console && console.log(str);
+        $pop[str] = popIndex;
     },
-    closePop : function (opt) {//统一的关闭pop方法
+    closePop : function (opt) {
         var opt = $.extend({
             popIndex : null,
             callback : function () {},
@@ -17738,11 +17451,9 @@ var $util = {
             return;
         }else{//关闭父级pop
             var p = parent.window;
-
             if (opt.refreshGrid) {
                 p._refreshParent = true;
             };
-
             try {//试运行callback
                 opt.callback(p);
             } catch (e) {
@@ -17750,21 +17461,18 @@ var $util = {
             }
 
             try {//试关闭open
-              var index = parent.layer.getFrameIndex(window.name);
-              p.layer.close(index);
+                var tt = location.pathname + (location.search || '');
+                window.console && console.log(tt);
+                window.console && console.log(p.$pop[tt]);
+                // if (p.$pop[tt])p.$pop[tt].removePop();
+                if (p.$pop[tt])p.layer.close(p.$pop[tt]);
+
             } catch (e) {
                 window.console && console.log(e);
             }
         };
     },
-/*
-合并列方法
-grid,
-data:数据,
-aStr:值相同的字段,
-bStr:需要合并的字段(不设置，则使用aStr)
- */
-    gridMergeCols : function (grid,data,aStr,bStr) {
+    gridMergeCols : function (grid,data,aStr,bStr) {//grid,数据,值相同的字段,需要合并的字段(不设置，则使用aStr)
         if (data&&data.rows.length) {
         var bStr = bStr?bStr:aStr;
         var merges =[{index:0}];
@@ -17805,14 +17513,91 @@ bStr:需要合并的字段(不设置，则使用aStr)
                 }
             }
         };
+    },
+    id: function (prefix, n) {
+        if (n < 1)n = 3;
+        var rnd = "";
+        for (var i = 0; i < n; i++) {
+            rnd += Math.floor(Math.random() * 10);
+        }
+        return prefix + rnd;
     }
 };
 
+var $ajax = {
+    post: function (url, data, tip) {
+        var ajaxLoading = null, maskOpt = null, dtd = null;
+        if (tip) {//提示
+          var msg = (tip === true ? $p.submitTip : tip);
+          dtd = $.Deferred();
+          var event = function (dtd) {
+            var loadingIndex = null;
+            layer.confirm(msg, {icon: 0, title:false,btnAlign: 'c',success: function ($layer) {
+                $layer.find('.layui-layer-btn0').focus();//提交按钮获取焦点
+            }}, function(){
+                $.ajax({
+                  url: url, type: 'post', data: data, dataType: 'json',
+                  beforeSend: function (jqXHR, settings) {
+                      loadingIndex = layer.load(0, {shade: false});
+                  },
+                  complete: function (jqXHR, textStatus) {
+                      //根据textStatus修改提示
+                      //2秒后去掉提示
+                  },
+                  success: function (rst) {
+                    layer.close(loadingIndex);
+                    if (rst) {
+                      var msg = (rst.tip == 1 ? rst.msg : (rst.state?"信息提交成功":"信息提交失败"));
+                      if (rst.state) {
+                        layer.msg(msg,{icon:1});
+                      } else {
+                        layer.alert('<p class="red">对不起，提交数据失败！</p>' + msg,{icon: 2, title:false,btnAlign: 'c'});
+                      }
+                    }
+                    dtd.resolve(rst);
+                  },
+                  error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    layer.close(loadingIndex);
+                    layer.alert('<p class="red">对不起，提交数据失败！</p>请检查网络或联系管理员...',{icon: 2, title:false,btnAlign: 'c'});
+                    dtd.reject();
+                  }
+              });
+            });
+            return dtd.promise();
+          }
+          return $.when(event(dtd));
+        } else {
+            var loadingIndex = null;
+            dtd = $.ajax({
+              url: url, type: 'post', data: data, dataType: 'json',
+              beforeSend: function (jqXHR, settings) {
+                maskOpt = $.extend({shade: false}, maskOpt || {});
+                loadingIndex = layer.load(0, maskOpt);
+              },
+              complete: function (jqXHR, textStatus) {
+                  //根据textStatus修改提示
+                  //2秒后去掉提示
+              },
+              success: function (rst) {
+                layer.close(loadingIndex);
+              },
+              error: function (XMLHttpRequest, textStatus, errorThrown) {
+                layer.close(loadingIndex);
+                layer.alert('<p class="p-popError">对不起，提交数据失败！</p>请检查网络或联系管理员...');
+              }
+            });
+        }
+        return dtd;
+    }
+};
+
+
+
 var $grid = {
-    getRows: function (grid) {//获取rows
+    getRows: function (grid) {
         return $(grid).datagrid("getData").rows;
     },
-    load: function (grid, param) {//grid 更新参数后load，返回第一页
+    load: function (grid, param) {
         param = param || {};
         var ui = $(grid).attr("data-ui");
         if (ui == 'treegrid') {
@@ -17823,7 +17608,7 @@ var $grid = {
             $(grid).datagrid("load", param);
         }
     },
-    reload: function (grid, param) {//grid 更新参数后reload，保留在刷新前的页码
+    reload: function (grid, param) {
         var ui = $(grid).attr("data-ui");
         if (ui == 'treegrid') {
             $(grid).treegrid("reload", param);
@@ -17831,10 +17616,10 @@ var $grid = {
             $(grid).datagrid("reload", param);
         }
     },
-    clear: function (grid) {//grid 清空数据
+    clear: function (grid) {
         $(grid).datagrid("loadData", []);
     },
-    deleteSelected: function (grid) {//grid 删除选择行
+    deleteSelected: function (grid) {
         //指定idField
         var rows = $(grid).datagrid("getSelections");
         for (var i = 0; i < rows.length; i++) {
@@ -17843,9 +17628,9 @@ var $grid = {
         }
         $(grid).datagrid("clearSelections");
     },
-    newGrid: function (grid, cfg) {//二次封装的grid方法，cfg参数相当于easyui的参数对象，具体方法请参考api手册
+    newGrid: function (grid, cfg) {
         if (!$(grid).length) {
-            layer.alert("页面不存在" + grid);
+            alert("页面不存在" + grid);
             return;
         }
         var top = $(grid).position().top || 36;
@@ -18052,7 +17837,7 @@ var $grid = {
                   } else {
                       window._refreshParent = false;
                       var areaVal = o.popMax?['100%', '100%']:[(o.popWidth+'px') || '560px',(o.popHeight+'px') || '300px'];
-                      layer.open({//layer
+                      var popIndex = layer.open({//layer
                         type: 2,
                         title : o.title,
                         content:url,
@@ -18064,6 +17849,13 @@ var $grid = {
                             }
                         }
                       });
+                      // window.console && console.log(popIndex);
+                      var str = url;
+                      if (str.indexOf("/") != 0) {
+                          str = location.pathname.replace(/\/[^/]*$/, "/") + url;
+                          window.console && console.log(str);
+                      }
+                      $pop[str] = popIndex;
                       _self.blur();
                   }
               }else{
@@ -18079,7 +17871,7 @@ var $grid = {
        });
       // return $par;
     },
-    initTools : function (grid,cfg) {//newGrid的分支方法，初始化工具栏
+    initTools : function (grid,cfg) {
       var me = this;
       var randomId = 'tool-'+Math.ceil(Math.random()*100000000);
       var $wrap = $('<div id="'+randomId+'" class="baseToobar"></div>');
@@ -18099,7 +17891,7 @@ var $grid = {
       $('body').append($none);
       return randomId;
     },
-    initToolBar: function (grid, cfg) {//newGrid的分支方法，初始化工具栏方式2
+    initToolBar: function (grid, cfg) {
       $.each(cfg, function (i, opt) {
           if (opt == '-')return;
           if (!opt.handler) {
@@ -18156,7 +17948,7 @@ var $grid = {
                           opt.popWidth = opt.popWidth || 560;
                           opt.popHeight = opt.popHeight || 300;
                           var areaVal = opt.popMax?['100%', '100%']:[(opt.popWidth+'px'),(opt.popHeight+'px')];
-                          layer.open({//layer
+                          var popIndex = layer.open({//layer
                             type: 2,
                             title : opt.title,
                             content:url,
@@ -18165,6 +17957,13 @@ var $grid = {
                                 if (window._refreshParent)$grid.reload(grid);
                             }
                           });
+                          // window.console && console.log(popIndex);
+                          var str = url;
+                          if (str.indexOf("/") != 0) {
+                              str = location.pathname.replace(/\/[^/]*$/, "/") + url;
+                              window.console && console.log(str);
+                          }
+                          $pop[str] = popIndex;
                           _self.blur();
                       }
                   } else {
@@ -18182,7 +17981,7 @@ var $grid = {
 };
 
 var $pop = {
-  popForm : function (opt) {//pop form, opt是所有参数
+  popForm : function (opt) {
       var opt =$.extend({
           target : null,//需要弹出的对象class或者id
           refreshGrid : true,//是否刷新grid
@@ -18216,14 +18015,14 @@ var $pop = {
       });
       return temPop;//返回layer的序列
   },
-  popGrid: function (opt,target) {//弹窗grid
+  popGrid: function (opt,target) {
       opt = opt || {};
       if (!opt.url && !opt.code) {
-          layer.alert("请配置表格数据源参数url或者code");
+          alert("请配置表格数据源参数url或者code");
           return;
       }
       if (!opt.code && !opt.gridId) {
-          layer.alert("请配置表格数据参数gridId");
+          alert("请配置表格数据参数gridId");
           return;
       }
       var data = opt || {};
@@ -18234,7 +18033,7 @@ var $pop = {
           data.gridCfg.singleSelect = data.gridCfg.singleSelect  || !data.muti;
       var muti = !data.gridCfg.singleSelect;
           window.console && console.log(muti);
-      if (init && $('#pop_' + gridId).length == 0) layer.alert("请另外指定gridId," + gridId + "已存在!");
+      if (init && $('#pop_' + gridId).length == 0) alert("请另外指定gridId," + gridId + "已存在!");
       if (!init) {
           var searchName = data.searchName || 'searchValue';
           var searchLabel = data.searchLabel || '';
@@ -18274,16 +18073,16 @@ var $pop = {
           if (!gridCfg.columns && data.code) {
               var cType = data.code.replace(/[\^@]/g, '');
               if (!$cols[cType]) {
-                  layer.alert('请在param.js里面定义' + cType + '表格列信息!');
+                  alert('请在param.js里面定义' + cType + '表格列信息!');
                   return;
               }
               gridCfg.columns = $cols[cType];
           }
           if (!gridCfg.columns) {
-              layer.alert("请配置表格列信息!");
+              alert("请配置表格列信息!");
               return;
           }
-          gridCfg.fitColumns = (opt.fitCol?opt.fitCol:true);
+    gridCfg.fitColumns = (opt.fitCol?opt.fitCol:true);
           gridCfg.onDblClickRow = function (index, row) {
               window.console && console.log(textId,valueId,row);
               if (valueId)$('#' + valueId).val(row[valueVal]);
@@ -18299,7 +18098,7 @@ var $pop = {
           }
           $grid.newGrid('#' + gridId, gridCfg);
           $('.fnSearch', '#pop_' + gridId).click(function () {
-              var ps = $('#pop_' + gridId).find('.popGridHead').sovals();
+              var ps = $('#pop_' + gridId).find('.popGridHead').serializeObject();
               $grid.load('#' + gridId, ps);
           });
           if (muti) {
@@ -18332,12 +18131,68 @@ var $pop = {
       params.$url = url;
       if (urlParams) {params.$url = params.$url+urlParams};
       $grid.load('#' + gridId, params);
+  },
+  popTree: function (opt) {
+      if (opt == null || (!opt.treeId && !opt.code)) alert("请配置treeId或者code");
+      var data = opt || {}
+          , treeId = (data.treeId || ('tree-' + data.code)).replace(/@|\^/, '')
+          , valueId = data.valueId, textId = data.textId, init = $('#' + treeId).length > 0
+          , muti = data.treeCfg && data.treeCfg.checkbox;
+      if (!init) {
+          $('body').append("<div id='" + treeId + "' style='display:none'></div>");
+          var treeCfg = {checkbox: false, url: "/sys/widget/tree.htm?_code=" + encodeURIComponent(data.code)};
+          $.extend(true, treeCfg, data.treeCfg);
+          //单选双击默认
+          if (!muti) {
+              if (!treeCfg.onDblClick) {
+                  treeCfg.onDblClick = function (node) {
+                      if (valueId)$('#' + valueId).val(node.id);
+                      if (textId) $('#' + textId).val(node.text);
+                      $pop[treeId].removePop();
+                  };
+              } else {
+                  var tmp = treeCfg.onDblClick;
+                  treeCfg.onDblClick = function (node) {
+                      var rst = tmp(node);
+                      if (rst !== false) {
+                          if (valueId)$('#' + valueId).val(node.id);
+                          if (textId) $('#' + textId).val(node.text);
+                          $pop[treeId].removePop();
+                      }
+                  }
+              }
+          }
+          $('#' + treeId).tree(treeCfg);
+          console.log("初始化树", treeCfg);
+      }
+      var boxOpt = {title: '请选择', type: 'target', target: '#' + treeId, width: 300/*,height:400*/};
+      $.extend(true, boxOpt, data.boxOpt || {});
+      if (muti) {
+          boxOpt.btn = [{
+              text: '确定', callback: function () {
+                  var nodes = muti ? ($('#' + treeId).tree("getChecked") || []) : [$('#' + treeId).tree("getSelected")];
+                  if (boxOpt.onOk) {
+                      var rst = boxOpt.onOk(nodes);
+                  } else {
+                      var id = [], text = [];
+                      for (var i = 0; i < nodes.length; i++) {
+                          var node = nodes[i];
+                          id.push(node.id);
+                          text.push(node.text);
+                      }
+                      if (valueId)$('#' + valueId).val(id.join(','));
+                      if (textId)$('#' + textId).val(text.join(','));
+                  }
+              }
+          }];
+      }
+      $pop[treeId] = $.sobox.pop(boxOpt);
   }
 };
 
 var $ff = {
     /**
-     * 页面表格查询功能绑定，主要用在列表的搜索栏
+     * 页面表格查询功能绑定
      */
     search: function (btnCls) {
         var cls = btnCls || '.so-search';
@@ -18351,7 +18206,7 @@ var $ff = {
                         if (formId != null && !$(formId).valid()) {
                             return;
                         }
-                        var scope = data.scope, param = $(scope).sovals(), gridId = data.grid;
+                        var scope = data.scope, param = $(scope).serializeObject(), gridId = data.grid;
                         if (data.tab) {
                             var sli = $('li.tabs-selected', data.tab), inx = $('.tabs li', data.tab).index(sli);
                             gridId += (inx + 1);
@@ -18369,7 +18224,10 @@ var $ff = {
             });
         }
     },
-    formAEnterFun : function(callback,formCls){//表单输入框回车事件支持
+    /**
+     * 页面控件初始化
+     */
+    formAEnterFun : function(callback,formCls){
       setTimeout(function () {
           var $form = $(formCls?formCls:'.form-enter');
           var $input = $form.find(':input').filter(':visible');
@@ -18387,7 +18245,7 @@ var $ff = {
           callback&&callback();
       },400);
     },
-    formAEnterFunB : function (callback,formCls) {//表单输入框回车事件支持，部分特殊输入框的处理
+    formAEnterFunB : function (callback,formCls) {
 
       setTimeout(function () {//重置输入框回车事件
 
@@ -18423,15 +18281,9 @@ var $ff = {
           callback&&callback();
       },500);
     },
-    /**
-     * 页面控件初始化集合
-     */
     someMix: function () {
         var me = this;
-
-        $T.placeHolder.init();//对低版本浏览器placeholder属性的兼容
-
-        if ($('.so-time').length) {//时间控件初始化
+        if ($('.so-time').length) {
             $('.so-time').addClass('Wdate').each(function () {
                 var _self = $(this);
                 if (_self.hasClass('inline')) {_self.css('width', 150)};
@@ -18443,7 +18295,7 @@ var $ff = {
             });
         }
 
-        if ($('.so-date').length) {//日期控件初始化
+        if ($('.so-date').length) {
             $('.so-date').addClass('Wdate').each(function () {
                 var _self = $(this);
                 if (_self.hasClass('inline')) {_self.css('width', 100)};
@@ -18459,41 +18311,41 @@ var $ff = {
         //         $util.closePop();
         //     });
         // }
-        if ($(".form-validate .btn-cancel").length) {//表单里的关闭按钮，关闭事件
+        if ($(".form-validate .btn-cancel").length) {
             $(".form-validate .btn-cancel").click(function () {
                 $util.closePop();
             });
         }
-        if ($(".form-validate .btn-closePop").length) {//表单里的关闭按钮，关闭事件
+        if ($(".form-validate .btn-closePop").length) {
             $(".form-validate .btn-closePop").click(function () {
                 $util.closePop();
             });
+
         }
         if ($('.form-enter').length) {//回车替代tab事件
           me.formAEnterFun();
           me.formAEnterFunB();
         };
 
-        if ($('.drop').length) {//drop通过rel来初始化选择值
+        if ($('.drop').length) {
             $('.drop').each(function () {
                 var v = $(this).attr('rel');
                 if (v) {$(this).val(v);};
             })
         };
 
-        if ($(':input[noNull],.required').length) {//时间和选择控件对应的必填输入框添加必填小三角样式
-            $(':input[noNull],.required').each(function () {
-              var _self = $(this);
-              if (_self.hasClass('so-time') || _self.hasClass('so-date')) {
-                  _self.addClass('txt-requireDate');
-              }
-              if (_self.hasClass('so-choice') || _self.hasClass('so-pop')) {
-                  _self.addClass('so-requirePop');
-              }
+        if ($('.required').length) {
+            $('.required').each(function () {
+                var _self = $(this);
+                if (_self.hasClass('so-time') || _self.hasClass('so-date')) {
+                    _self.addClass('txt-requireDate');
+                }
+                if (_self.hasClass('so-choice') || _self.hasClass('so-pop')) {
+                    _self.addClass('so-requirePop');
+                }
             });
         }
-
-        if ($('.so-drop').length) {//简单的easyui下拉控件初始化
+        if ($('.so-drop').length) {
             $('.so-drop').each(function () {
                 var _self = $(this);
                 var url = _self.attr('url');
@@ -18515,12 +18367,11 @@ var $ff = {
             });
         };
 
-        if ($('.so-pop').length) {//sopop控件初始化，慢慢被easyui的comb控件替换，保留是为了兼容一些旧的事件
+        if ($('.so-pop').length) {
             $('.so-pop').each(function () {
                 var _self = $(this);
                 var rdm = Math.floor(Math.random()*1000000);
                 var myOpt = $T.data(_self);
-
                 if (myOpt.type=='tree') {
                     var pData = $.extend({
                         // type: null,//'tree'
@@ -18577,23 +18428,71 @@ var $ff = {
                   });
 
                 };
+                if (myOpt.type =='grid') {
+                     _self.click(function() {
+                        myOpt.textId = myOpt.textId || this.name;
+                        $pop.popGrid(myOpt,this);
+                    });
+                };
 
-            if (myOpt.type =='grid') {//初始化popGrid
-                 _self.click(function() {
-                    myOpt.textId = myOpt.textId || this.name;
-                    $pop.popGrid(myOpt,this);
-                });
-            };
-
-          });
-      };
-      // 下拉框初始化
-      if ($(".so-select").length) {//初始化soSelect
-        $(".so-select").soSelect();
-      }
+            });
+        };
+        // 下拉框初始化
+        if ($("select.so-select").length) {
+            var codes = [], params = {muti: true};
+            var ss = $("select.so-select");
+            ss.each(function () {
+                var data = $T.data(this) || {};
+                if (data.textTo) {
+                    $(this).change(
+                        data.textTo,
+                        function (e) {
+                            $("#" + e.data + ",[name=" + e.data + "]").val(
+                                $("option:checked", this).text());
+                        });
+                }
+                if (data.params) {
+                    $.extend(params, data.params);
+                }
+                if (data.head) {
+                    if (typeof data.head == 'string') {
+                        this.options[this.length] = new Option(data.head, "");
+                    } else {
+                        this.options[this.length] = new Option(data.head[1], data.head[0]);
+                    }
+                }
+                codes.push(data.code);
+            });
+            params._code = codes.join(',');
+            $ajax.post("/sys/widget/select.htm", params).done(function (rst) {
+                if (rst.state) {
+                    var data = rst.data;
+                    ss.each(function () {
+                        var mData = $T.data(this);
+                        var list = data[mData.code];
+                        if (!list) {
+                            alert("未配置下拉框数据源" + mData.code);
+                            return;
+                        }
+                        for (var i = 0; i < list.length; i++) {
+                            var d = list[i];
+                            var opt = new Option(d.text, d.id);
+                            if ((d.id + '') === mData.initValue)
+                                opt.selected = true;
+                            $.each(d, function (k, v) {
+                                $(opt).attr('data-' + k, v);
+                            });
+                            this.options[this.length] = opt;
+                        }
+                    });
+                } else {
+                    alert("未配置下拉框[" + _code + "]数据源!");
+                }
+            });
+        }
     },
     /**
-     * 统一的表单验证
+     * 页面表单验证
      */
      validate : function () {
        var me = this;
@@ -18683,6 +18582,130 @@ var $ff = {
            }
        };
      },
+    validate2: function (formCls) {
+        formCls = formCls || ".hk_form";
+        if ($(formCls).length > 0) {
+            var $form = $(formCls).validate({
+                // focusInvalid: true,
+                // debug : true,
+                // onkeyup: true,
+                // onfocusout: false,
+                errorPlacement: function (lable, element) {
+                    if (element.data('errpos')==1) {
+                        lable.insertAfter(element);
+                    }else{
+                        $(element).tooltip({content: lable.html(), position: 'right', hideDelay: 0}).tooltip("show");
+                    };
+                    // window.console && console.log(lable,lable[0].innerHTML);
+                },
+                success: function (lable, element) {
+                    $(element).tooltip("destroy");
+                },
+                submitHandler: function (vform) {
+                    var msg = $(this.submitButton).attr("tip") || $p.submitTip;
+                    var action = $(this.submitButton).attr("action") || vform.action;
+                    $(".hk_form .txta,:input").tooltip("destroy");
+                    var data = $T.data(vform), params;
+                    window.console && console.log(data);
+                    if (typeof (data.params) == 'function') {
+                        params = data.params();
+                    } else {
+                        params = data.params || {};
+                    }
+                    var paramsHtml = '';
+                    $.each(params,function (k,v) {
+                        paramsHtml += '<input type="hidden" name="'+k+'" value="'+v+'">';
+                    });
+                    $(vform).append(paramsHtml);
+                    if ($('.hk_editor_required').length) {//富编辑框必填验证
+                        var state = true;
+                      $('.hk_editor_required').each(function () {
+                        var ueName = $(this).attr('class').match(/editorkey_.+/g)||['editorkey_eyeUe'];
+                        ueName = ueName[0].split(/ |_/)[1];
+                        // window.console && console.log(ueName,window[ueName].hasContents());
+                        if (window[ueName].hasContents()) {
+                            $('.editorkey_'+ueName).tooltip("destroy");
+                        }else{
+                            $('.editorkey_'+ueName).tooltip({content: '内容为必填！', position: 'right', hideDelay: 0});
+                            state =false;
+                        };
+                      });
+                      if (!state) { return false;};
+                    };
+                    var callSumbit = true;
+                    if (data.beforeCallback) {//提交之前事件函数
+                        callSumbit = window[data.beforeCallback](data);
+                    };
+                    //$.applyIf(params, $(vform).serializeObject(data.dataToString));
+                    params = $(vform).serialize();
+                    var fn = function (rst) {
+                        parent.window._refreshParent = true;
+                        //window.console && console.log(data.callback);
+                        if (data.callback){
+                            var callName = data.callback.split('||');
+                            $.each(callName,function (i,v) {
+                                window[v]&&window[v](rst,data);
+                            });
+                        }
+                        if (rst.state) {$util.closePop();};
+
+                        if (data.submitClear)$(data.submitClear).val("");
+                    }
+                    if (callSumbit) {
+                    $ajax.post(action, params, msg).done(fn);
+                    };
+                    return false;
+                }
+            });
+            return $form;
+        }
+    },
+    easyValidate3: function (formCls) {
+        formCls = formCls || ".easy-form";
+        if ($(formCls).length) {
+            $(formCls).form({
+                onSubmit: function () {
+                    var fm = $(this), url = fm.attr("action"), data = $T.data(this);
+                    var rst = fm.form("validate");
+                    if (rst) {
+                        $ajax.post(url, $(this).vals(), true).done(function (rst) {
+                            if (rst.state) {
+                                if (data.callback) data.callback(rst);
+                                $page.markRefreshParent();
+                                if (data.submitClear) $(data.submitClear).val("");
+                                if (fm.find(".chk_close").is(":checked")) {
+                                    var pLayer = parent.layer, wName = window.name;
+                                    setTimeout(function () {
+                                        var index = pLayer.getFrameIndex(wName);
+                                        pLayer.close(index);
+                                    }, 1000);
+                                }
+                            }
+                        });
+                    }
+                    return false;
+                }
+            });
+        };
+    },
+    popGrid: function (cls) {
+        cls = cls || '.so-popGrid';
+        if ($(cls).length) {
+            $(cls).click(function () {
+                var data = $T.data(this);
+                data.textId = data.textId || this.name;
+                $pop.popGrid(data,this);
+            });
+        }
+    },
+    popTree: function (cls) {
+        cls = cls || '.so-popTree';
+        $(cls).click(function () {
+            var data = $T.data(this);
+            data.textId = data.textId || this.name;
+            $pop.popTree(data);
+        });
+    },
     wdDate: function (cls) {//日期范围选择组件
         cls = cls || '.wd_date';
         if (!$(cls).length) {
@@ -18720,19 +18743,97 @@ var $ff = {
     }
 };
 
+
+var JPlaceHolder = {
+    init : function(){//初始化
+        if(!this._check()){
+            this.fix();
+        }
+    },
+    _check : function(){//检测
+        return 'placeholder' in document.createElement('input');
+    },
+    fix : function(){//修复
+        $(':input[placeholder]').each(function(index, element) {
+            var self = $(this), txt = self.attr('placeholder');
+            self.wrap($('<span></span>').css({position:'relative', zoom:'1', border:'none', background:'none', padding:'none', margin:'none'}));
+            var pos = self.position(), h = self.outerHeight(true), paddingleft = self.css('padding-left');
+            var holder = $('<span class="s-placeholder"></span>').text(txt).css({position:'absolute', left:(pos.left+8), top:(pos.top+1), height:h, lineHeight:h+'px', paddingLeft:paddingleft, color:'#aaa'}).appendTo(self.parent());
+            if (self.val()) {holder.hide();};
+            self.focusin(function(e) {
+                holder.hide();
+            }).focusout(function(e) {
+                if(!self.val()){
+                    holder.show();
+                }
+            });
+            holder.click(function(e) {
+                holder.hide();
+                self.focus();
+            });
+        });
+    }
+};
+
 $(function () {
     $ff.someMix();//存放比较零碎的
     $ff.validate();
     $ff.search();
-    // $ff.wdDate();
+    $ff.popGrid();
+    $ff.popTree();
+    $ff.wdDate();
+    JPlaceHolder.init();
 });
 
 define("pub", ["jquery.extend","easyui.extend","easyvalidate.extend"], function(){});
 
-/**console.log **/
-(function(){var method;var noop=function(){};var methods=["assert","clear","count","debug","dir","dirxml","error","exception","group","groupCollapsed","groupEnd","info","log","markTimeline","profile","profileEnd","table","time","timeEnd","timeStamp","trace","warn"];var length=methods.length;var console=(window.console=window.console||{});while(length--){method=methods[length];if(!console[method]){console[method]=noop}}}());//兼容浏览器console
+/**
+ * SyntaxHighlighter
+ * http://alexgorbatchev.com/
+ *
+ * SyntaxHighlighter is donationware. If you are using it, please donate.
+ * http://alexgorbatchev.com/wiki/SyntaxHighlighter:Donate
+ *
+ * @version
+ * 2.1.382 (June 24 2010)
+ *
+ * @copyright
+ * Copyright (C) 2004-2009 Alex Gorbatchev.
+ *
+ * @license
+ * This file is part of SyntaxHighlighter.
+ *
+ * SyntaxHighlighter is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * SyntaxHighlighter is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with SyntaxHighlighter.  If not, see <http://www.gnu.org/copyleft/lesser.html>.
+ */
+if(!window.SyntaxHighlighter){var SyntaxHighlighter=function(){var a={defaults:{"class-name":"","first-line":1,"pad-line-numbers":true,"highlight":null,"smart-tabs":true,"tab-size":4,"gutter":true,"toolbar":true,"collapse":false,"auto-links":true,"light":false,"wrap-lines":true,"html-script":false},config:{useScriptTags:true,clipboardSwf:null,toolbarItemWidth:16,toolbarItemHeight:16,bloggerMode:false,stripBrs:false,tagName:"pre",strings:{expandSource:"show source",viewSource:"view source",copyToClipboard:"copy to clipboard",copyToClipboardConfirmation:"The code is in your clipboard now",print:"print",help:"?",alert:"SyntaxHighlighter\n\n",noBrush:"Can't find brush for: ",brushNotHtmlScript:"Brush wasn't configured for html-script option: ",aboutDialog:'<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>About SyntaxHighlighter</title></head><body style="font-family:Geneva,Arial,Helvetica,sans-serif;background-color:#fff;color:#000;font-size:1em;text-align:center;"><div style="text-align:center;margin-top:3em;"><div style="font-size:xx-large;">SyntaxHighlighter</div><div style="font-size:.75em;margin-bottom:4em;"><div>version 2.1.382 (June 24 2010)</div><div><a href="http://alexgorbatchev.com" target="_blank" style="color:#0099FF;text-decoration:none;">http://alexgorbatchev.com</a></div><div>If you like this script, please <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=2930402" style="color:#0099FF;text-decoration:none;">donate</a> to keep development active!</div></div><div>JavaScript code syntax highlighter.</div><div>Copyright 2004-2009 Alex Gorbatchev.</div></div></body></html>'},debug:false},vars:{discoveredBrushes:null,spaceWidth:null,printFrame:null,highlighters:{}},brushes:{},regexLib:{multiLineCComments:/\/\*[\s\S]*?\*\//gm,singleLineCComments:/\/\/.*$/gm,singleLinePerlComments:/#.*$/gm,doubleQuotedString:/"([^\\"\n]|\\.)*"/g,singleQuotedString:/'([^\\'\n]|\\.)*'/g,multiLineDoubleQuotedString:/"([^\\"]|\\.)*"/g,multiLineSingleQuotedString:/'([^\\']|\\.)*'/g,xmlComments:/(&lt;|<)!--[\s\S]*?--(&gt;|>)/gm,url:/&lt;\w+:\/\/[\w-.\/?%&=@:;]*&gt;|\w+:\/\/[\w-.\/?%&=@:;]*/g,phpScriptTags:{left:/(&lt;|<)\?=?/g,right:/\?(&gt;|>)/g},aspScriptTags:{left:/(&lt;|<)%=?/g,right:/%(&gt;|>)/g},scriptScriptTags:{left:/(&lt;|<)\s*script.*?(&gt;|>)/gi,right:/(&lt;|<)\/\s*script\s*(&gt;|>)/gi}},toolbar:{create:function(d){var h=document.createElement("DIV"),b=a.toolbar.items;h.className="toolbar";for(var c in b){var f=b[c],g=new f(d),e=g.create();d.toolbarCommands[c]=g;if(e==null){continue}if(typeof(e)=="string"){e=a.toolbar.createButton(e,d.id,c)}e.className+="item "+c;h.appendChild(e)}return h},createButton:function(f,c,g){var d=document.createElement("a"),i=d.style,e=a.config,h=e.toolbarItemWidth,b=e.toolbarItemHeight;d.href="#"+g;d.title=f;d.highlighterId=c;d.commandName=g;d.innerHTML=f;if(isNaN(h)==false){i.width=h+"px"}if(isNaN(b)==false){i.height=b+"px"}d.onclick=function(j){try{a.toolbar.executeCommand(this,j||window.event,this.highlighterId,this.commandName)}catch(j){a.utils.alert(j.message)}return false};return d},executeCommand:function(f,g,b,e,d){var c=a.vars.highlighters[b],h;if(c==null||(h=c.toolbarCommands[e])==null){return null}return h.execute(f,g,d)},items:{expandSource:function(b){this.create=function(){if(b.getParam("collapse")!=true){return}return a.config.strings.expandSource};this.execute=function(d,e,c){var f=b.div;d.parentNode.removeChild(d);f.className=f.className.replace("collapsed","")}},viewSource:function(b){this.create=function(){return a.config.strings.viewSource};this.execute=function(d,g,c){var f=a.utils.fixInputString(b.originalCode).replace(/</g,"&lt;"),e=a.utils.popup("","_blank",750,400,"location=0, resizable=1, menubar=0, scrollbars=1");f=a.utils.unindent(f);e.document.write("<pre>"+f+"</pre>");e.document.close()}},copyToClipboard:function(d){var e,c,b=d.id;this.create=function(){var g=a.config;if(g.clipboardSwf==null){return null}function l(o){var m="";for(var n in o){m+="<param name='"+n+"' value='"+o[n]+"'/>"}return m}function f(o){var m="";for(var n in o){m+=" "+n+"='"+o[n]+"'"}return m}var k={width:g.toolbarItemWidth,height:g.toolbarItemHeight,id:b+"_clipboard",type:"application/x-shockwave-flash",title:a.config.strings.copyToClipboard},j={allowScriptAccess:"always",wmode:"transparent",flashVars:"highlighterId="+b,menu:"false"},i=g.clipboardSwf,h;if(/msie/i.test(navigator.userAgent)){h="<object"+f({classid:"clsid:d27cdb6e-ae6d-11cf-96b8-444553540000",codebase:"http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,0,0"})+f(k)+">"+l(j)+l({movie:i})+"</object>"}else{h="<embed"+f(k)+f(j)+f({src:i})+"/>"}e=document.createElement("div");e.innerHTML=h;return e};this.execute=function(g,i,f){var j=f.command;switch(j){case"get":var h=a.utils.unindent(a.utils.fixInputString(d.originalCode).replace(/&lt;/g,"<").replace(/&gt;/g,">").replace(/&amp;/g,"&"));
+    if(window.clipboardData){window.clipboardData.setData("text",h)}else{return a.utils.unindent(h)}case"ok":a.utils.alert(a.config.strings.copyToClipboardConfirmation);break;case"error":a.utils.alert(f.message);break}}},printSource:function(b){this.create=function(){return a.config.strings.print};this.execute=function(e,g,d){var f=document.createElement("IFRAME"),h=null;if(a.vars.printFrame!=null){document.body.removeChild(a.vars.printFrame)}a.vars.printFrame=f;f.style.cssText="position:absolute;width:0px;height:0px;left:-500px;top:-500px;";document.body.appendChild(f);h=f.contentWindow.document;c(h,window.document);h.write('<div class="'+b.div.className.replace("collapsed","")+' printing">'+b.div.innerHTML+"</div>");h.close();f.contentWindow.focus();f.contentWindow.print();function c(j,m){var k=m.getElementsByTagName("link");for(var l=0;l<k.length;l++){if(k[l].rel.toLowerCase()=="stylesheet"&&/shCore\.css$/.test(k[l].href)){j.write('<link type="text/css" rel="stylesheet" href="'+k[l].href+'"></link>')}}}}},about:function(b){this.create=function(){return a.config.strings.help};this.execute=function(c,e){var d=a.utils.popup("","_blank",500,250,"scrollbars=0"),f=d.document;f.write(a.config.strings.aboutDialog);f.close();d.focus()}}}},utils:{indexOf:function(e,b,d){d=Math.max(d||0,0);for(var c=d;c<e.length;c++){if(e[c]==b){return c}}return -1},guid:function(b){return b+Math.round(Math.random()*1000000).toString()},merge:function(e,d){var b={},c;for(c in e){b[c]=e[c]}for(c in d){b[c]=d[c]}return b},toBoolean:function(b){switch(b){case"true":return true;case"false":return false}return b},popup:function(f,e,g,c,d){var b=(screen.width-g)/2,i=(screen.height-c)/2;d+=", left="+b+", top="+i+", width="+g+", height="+c;d=d.replace(/^,/,"");var h=window.open(f,e,d);h.focus();return h},addEvent:function(d,b,c){if(d.attachEvent){d["e"+b+c]=c;d[b+c]=function(){d["e"+b+c](window.event)};d.attachEvent("on"+b,d[b+c])}else{d.addEventListener(b,c,false)}},alert:function(b){alert(a.config.strings.alert+b)},findBrush:function(f,h){var g=a.vars.discoveredBrushes,b=null;if(g==null){g={};for(var d in a.brushes){var c=a.brushes[d].aliases;if(c==null){continue}a.brushes[d].name=d.toLowerCase();for(var e=0;e<c.length;e++){g[c[e]]=d}}a.vars.discoveredBrushes=g}b=a.brushes[g[f]];if(b==null&&h!=false){a.utils.alert(a.config.strings.noBrush+f)}return b},eachLine:function(d,e){var b=d.split("\n");for(var c=0;c<b.length;c++){b[c]=e(b[c])}return b.join("\n")},trimFirstAndLastLines:function(b){return b.replace(/^[ ]*[\n]+|[\n]*[ ]*$/g,"")},parseParams:function(h){var d,c={},e=new XRegExp("^\\[(?<values>(.*?))\\]$"),f=new XRegExp("(?<name>[\\w-]+)"+"\\s*:\\s*"+"(?<value>"+"[\\w-%#]+|"+"\\[.*?\\]|"+'".*?"|'+"'.*?'"+")\\s*;?","g");while((d=f.exec(h))!=null){var g=d.value.replace(/^['"]|['"]$/g,"");if(g!=null&&e.test(g)){var b=e.exec(g);g=b.values.length>0?b.values.split(/\s*,\s*/):[]}c[d.name]=g}return c},decorate:function(c,b){if(c==null||c.length==0||c=="\n"){return c}c=c.replace(/</g,"&lt;");c=c.replace(/ {2,}/g,function(d){var e="";for(var f=0;f<d.length-1;f++){e+="&nbsp;"}return e+" "});if(b!=null){c=a.utils.eachLine(c,function(d){if(d.length==0){return""}var e="";d=d.replace(/^(&nbsp;| )+/,function(f){e=f;return""});if(d.length==0){return e}return e+'<code class="'+b+'">'+d+"</code>"})}return c},padNumber:function(d,c){var b=d.toString();while(b.length<c){b="0"+b}return b},measureSpace:function(){var c=document.createElement("div"),h,j=0,f=document.body,d=a.utils.guid("measureSpace"),i='<div class="',g="</div>",e="</span>";c.innerHTML=i+'syntaxhighlighter">'+i+'lines">'+i+'line">'+i+"content"+'"><span class="block"><span id="'+d+'">&nbsp;'+e+e+g+g+g+g;f.appendChild(c);h=document.getElementById(d);if(/opera/i.test(navigator.userAgent)){var b=window.getComputedStyle(h,null);j=parseInt(b.getPropertyValue("width"))}else{j=h.offsetWidth}f.removeChild(c);return j},processTabs:function(d,e){var c="";for(var b=0;b<e;b++){c+=" "}return d.replace(/\t/g,c)},processSmartTabs:function(f,g){var b=f.split("\n"),e="\t",c="";for(var d=0;d<50;d++){c+="                    "}function h(i,k,j){return i.substr(0,k)+c.substr(0,j)+i.substr(k+1,i.length)}f=a.utils.eachLine(f,function(i){if(i.indexOf(e)==-1){return i}var k=0;while((k=i.indexOf(e))!=-1){var j=g-k%g;i=h(i,k,j)}return i});return f},fixInputString:function(c){var b=/<br\s*\/?>|&lt;br\s*\/?&gt;/gi;if(a.config.bloggerMode==true){c=c.replace(b,"\n")}if(a.config.stripBrs==true){c=c.replace(b,"")}return c},trim:function(b){return b.replace(/^\s+|\s+$/g,"")},unindent:function(j){var c=a.utils.fixInputString(j).split("\n"),h=new Array(),f=/^\s*/,e=1000;for(var d=0;d<c.length&&e>0;d++){var b=c[d];if(a.utils.trim(b).length==0){continue}var g=f.exec(b);if(g==null){return j}e=Math.min(g[0].length,e)}if(e>0){for(var d=0;d<c.length;d++){c[d]=c[d].substr(e)}}return c.join("\n")},matchesSortCallback:function(c,b){if(c.index<b.index){return -1}else{if(c.index>b.index){return 1}else{if(c.length<b.length){return -1}else{if(c.length>b.length){return 1
+}}}}return 0},getMatches:function(f,g){function h(i,j){return[new a.Match(i[0],i.index,j.css)]}var d=0,c=null,b=[],e=g.func?g.func:h;while((c=g.regex.exec(f))!=null){b=b.concat(e(c,g))}return b},processUrls:function(d){var b="&lt;",c="&gt;";return d.replace(a.regexLib.url,function(e){var g="",f="";if(e.indexOf(b)==0){f=b;e=e.substring(b.length)}if(e.indexOf(c)==e.length-c.length){e=e.substring(0,e.length-c.length);g=c}return f+'<a href="'+e+'">'+e+"</a>"+g})},getSyntaxHighlighterScriptTags:function(){var c=document.getElementsByTagName("script"),b=[];for(var d=0;d<c.length;d++){if(c[d].type=="syntaxhighlighter"){b.push(c[d])}}return b},stripCData:function(c){var d="<![CDATA[",b="]]>",f=a.utils.trim(c),e=false;if(f.indexOf(d)==0){f=f.substring(d.length);e=true}if(f.indexOf(b)==f.length-b.length){f=f.substring(0,f.length-b.length);e=true}return e?f:c}},highlight:function(h,f){function e(s){var q=[];for(var r=0;r<s.length;r++){q.push(s[r])}return q}var b=f?[f]:e(document.getElementsByTagName(a.config.tagName)),j="innerHTML",n=null,l=a.config;if(l.useScriptTags){b=b.concat(a.utils.getSyntaxHighlighterScriptTags())}if(b.length===0){return}for(var g=0;g<b.length;g++){var k=b[g],d=a.utils.parseParams(k.className),o,c,p;d=a.utils.merge(h,d);o=d["brush"];if(o==null){continue}if(d["html-script"]=="true"||a.defaults["html-script"]==true){n=new a.HtmlScript(o);o="htmlscript"}else{var m=a.utils.findBrush(o);if(m){o=m.name;n=new m()}else{continue}}c=k[j];if(l.useScriptTags){c=a.utils.stripCData(c)}d["brush-name"]=o;n.highlight(c,d);p=n.div;if(a.config.debug){p=document.createElement("textarea");p.value=n.div.innerHTML;p.style.width="70em";p.style.height="30em"}k.parentNode.replaceChild(p,k)}},all:function(b){a.utils.addEvent(window,"load",function(){a.highlight(b)})}};a.Match=function(d,b,c){this.value=d;this.index=b;this.length=d.length;this.css=c;this.brushName=null};a.Match.prototype.toString=function(){return this.value};a.HtmlScript=function(b){var d=a.utils.findBrush(b),c,h=new a.brushes.Xml(),g=null;if(d==null){return}c=new d();this.xmlBrush=h;if(c.htmlScript==null){a.utils.alert(a.config.strings.brushNotHtmlScript+b);return}h.regexList.push({regex:c.htmlScript.code,func:f});function e(k,l){for(var i=0;i<k.length;i++){k[i].index+=l}}function f(r,l){var k=r.code,q=[],p=c.regexList,n=r.index+r.left.length,s=c.htmlScript,t;for(var o=0;o<p.length;o++){t=a.utils.getMatches(k,p[o]);e(t,n);q=q.concat(t)}if(s.left!=null&&r.left!=null){t=a.utils.getMatches(r.left,s.left);e(t,r.index);q=q.concat(t)}if(s.right!=null&&r.right!=null){t=a.utils.getMatches(r.right,s.right);e(t,r.index+r[0].lastIndexOf(r.right));q=q.concat(t)}for(var m=0;m<q.length;m++){q[m].brushName=d.name}return q}};a.HtmlScript.prototype.highlight=function(b,c){this.xmlBrush.highlight(b,c);this.div=this.xmlBrush.div};a.Highlighter=function(){};a.Highlighter.prototype={getParam:function(d,c){var b=this.params[d];return a.utils.toBoolean(b==null?c:b)},create:function(b){return document.createElement(b)},findMatches:function(e,d){var b=[];if(e!=null){for(var c=0;c<e.length;c++){if(typeof(e[c])=="object"){b=b.concat(a.utils.getMatches(d,e[c]))}}}return b.sort(a.utils.matchesSortCallback)},removeNestedMatches:function(){var f=this.matches;for(var e=0;e<f.length;e++){if(f[e]===null){continue}var b=f[e],d=b.index+b.length;for(var c=e+1;c<f.length&&f[e]!==null;c++){var g=f[c];if(g===null){continue}else{if(g.index>d){break}else{if(g.index==b.index&&g.length>b.length){this.matches[e]=null}else{if(g.index>=b.index&&g.index<d){this.matches[c]=null}}}}}}},createDisplayLines:function(b){var n=b.split("\n"),l=parseInt(this.getParam("first-line")),h=this.getParam("pad-line-numbers"),m=this.getParam("highlight",[]),f=this.getParam("gutter");b="";if(h==true){h=(l+n.length-1).toString().length}else{if(isNaN(h)==true){h=0}}for(var g=0;g<n.length;g++){var o=n[g],c=/^(&nbsp;|\s)+/.exec(o),k="alt"+(g%2==0?1:2),d=a.utils.padNumber(l+g,h),e=a.utils.indexOf(m,(l+g).toString())!=-1,j=null;if(c!=null){j=c[0].toString();o=o.substr(j.length)}o=a.utils.trim(o);if(o.length==0){o="&nbsp;"}if(e){k+=" highlighted"}b+='<div class="line '+k+'">'+"<table>"+"<tr>"+(f?'<td class="number"><code>'+d+"</code></td>":"")+'<td class="content">'+(j!=null?'<code class="spaces">'+j.replace(" ","&nbsp;")+"</code>":"")+o+"</td>"+"</tr>"+"</table>"+"</div>"}return b},processMatches:function(b,h){var j=0,l="",c=a.utils.decorate,k=this.getParam("brush-name","");function e(m){var i=m?(m.brushName||k):k;return i?i+" ":""}for(var f=0;f<h.length;f++){var g=h[f],d;if(g===null||g.length===0){continue}d=e(g);l+=c(b.substr(j,g.index-j),d+"plain")+c(g.value,d+g.css);j=g.index+g.length}l+=c(b.substr(j),e()+"plain");return l},highlight:function(c,e){var j=a.config,k=a.vars,b,g,h,d="important";this.params={};this.div=null;this.lines=null;this.code=null;this.bar=null;this.toolbarCommands={};this.id=a.utils.guid("highlighter_");k.highlighters[this.id]=this;if(c===null){c=""}this.params=a.utils.merge(a.defaults,e||{});if(this.getParam("light")==true){this.params.toolbar=this.params.gutter=false
+}this.div=b=this.create("DIV");this.lines=this.create("DIV");this.lines.className="lines";className="syntaxhighlighter";b.id=this.id;if(this.getParam("collapse")){className+=" collapsed"}if(this.getParam("gutter")==false){className+=" nogutter"}if(this.getParam("wrap-lines")==false){this.lines.className+=" no-wrap"}className+=" "+this.getParam("class-name");className+=" "+this.getParam("brush-name");b.className=className;this.originalCode=c;this.code=a.utils.trimFirstAndLastLines(c).replace(/\r/g," ");h=this.getParam("tab-size");this.code=this.getParam("smart-tabs")==true?a.utils.processSmartTabs(this.code,h):a.utils.processTabs(this.code,h);this.code=a.utils.unindent(this.code);if(this.getParam("toolbar")){this.bar=this.create("DIV");this.bar.className="bar";this.bar.appendChild(a.toolbar.create(this));b.appendChild(this.bar);var i=this.bar;function f(){i.className="bar"}b.onmouseover=function(){f();i.className="bar show"};b.onmouseout=function(){f()}}b.appendChild(this.lines);this.matches=this.findMatches(this.regexList,this.code);this.removeNestedMatches();c=this.processMatches(this.code,this.matches);c=this.createDisplayLines(a.utils.trim(c));if(this.getParam("auto-links")){c=a.utils.processUrls(c)}this.lines.innerHTML=c},getKeywords:function(b){b=b.replace(/^\s+|\s+$/g,"").replace(/\s+/g,"|");return"\\b(?:"+b+")\\b"},forHtmlScript:function(b){this.htmlScript={left:{regex:b.left,css:"script"},right:{regex:b.right,css:"script"},code:new XRegExp("(?<left>"+b.left.source+")"+"(?<code>.*?)"+"(?<right>"+b.right.source+")","sgi")}}};return a}()}if(!window.XRegExp){(function(){var e={exec:RegExp.prototype.exec,match:String.prototype.match,replace:String.prototype.replace,split:String.prototype.split},d={part:/(?:[^\\([#\s.]+|\\(?!k<[\w$]+>|[pP]{[^}]+})[\S\s]?|\((?=\?(?!#|<[\w$]+>)))+|(\()(?:\?(?:(#)[^)]*\)|<([$\w]+)>))?|\\(?:k<([\w$]+)>|[pP]{([^}]+)})|(\[\^?)|([\S\s])/g,replaceVar:/(?:[^$]+|\$(?![1-9$&`']|{[$\w]+}))+|\$(?:([1-9]\d*|[$&`'])|{([$\w]+)})/g,extended:/^(?:\s+|#.*)+/,quantifier:/^(?:[?*+]|{\d+(?:,\d*)?})/,classLeft:/&&\[\^?/g,classRight:/]/g},b=function(j,g,h){for(var f=h||0;f<j.length;f++){if(j[f]===g){return f}}return -1},c=/()??/.exec("")[1]!==undefined,a={};XRegExp=function(o,i){if(o instanceof RegExp){if(i!==undefined){throw TypeError("can't supply flags when constructing one RegExp from another")}return o.addFlags()}var i=i||"",f=i.indexOf("s")>-1,k=i.indexOf("x")>-1,p=false,r=[],h=[],g=d.part,l,j,n,m,q;g.lastIndex=0;while(l=e.exec.call(g,o)){if(l[2]){if(!d.quantifier.test(o.slice(g.lastIndex))){h.push("(?:)")}}else{if(l[1]){r.push(l[3]||null);if(l[3]){p=true}h.push("(")}else{if(l[4]){m=b(r,l[4]);h.push(m>-1?"\\"+(m+1)+(isNaN(o.charAt(g.lastIndex))?"":"(?:)"):l[0])}else{if(l[5]){h.push(a.unicode?a.unicode.get(l[5],l[0].charAt(1)==="P"):l[0])}else{if(l[6]){if(o.charAt(g.lastIndex)==="]"){h.push(l[6]==="["?"(?!)":"[\\S\\s]");g.lastIndex++}else{j=XRegExp.matchRecursive("&&"+o.slice(l.index),d.classLeft,d.classRight,"",{escapeChar:"\\"})[0];h.push(l[6]+j+"]");g.lastIndex+=j.length+1}}else{if(l[7]){if(f&&l[7]==="."){h.push("[\\S\\s]")}else{if(k&&d.extended.test(l[7])){n=e.exec.call(d.extended,o.slice(g.lastIndex-1))[0].length;if(!d.quantifier.test(o.slice(g.lastIndex-1+n))){h.push("(?:)")}g.lastIndex+=n-1}else{h.push(l[7])}}}else{h.push(l[0])}}}}}}}q=RegExp(h.join(""),e.replace.call(i,/[sx]+/g,""));q._x={source:o,captureNames:p?r:null};return q};XRegExp.addPlugin=function(f,g){a[f]=g};RegExp.prototype.exec=function(k){var h=e.exec.call(this,k),g,j,f;if(h){if(c&&h.length>1){f=new RegExp("^"+this.source+"$(?!\\s)",this.getNativeFlags());e.replace.call(h[0],f,function(){for(j=1;j<arguments.length-2;j++){if(arguments[j]===undefined){h[j]=undefined}}})}if(this._x&&this._x.captureNames){for(j=1;j<h.length;j++){g=this._x.captureNames[j-1];if(g){h[g]=h[j]}}}if(this.global&&this.lastIndex>(h.index+h[0].length)){this.lastIndex--}}return h}})()}RegExp.prototype.getNativeFlags=function(){return(this.global?"g":"")+(this.ignoreCase?"i":"")+(this.multiline?"m":"")+(this.extended?"x":"")+(this.sticky?"y":"")};RegExp.prototype.addFlags=function(a){var b=new XRegExp(this.source,(a||"")+this.getNativeFlags());if(this._x){b._x={source:this._x.source,captureNames:this._x.captureNames?this._x.captureNames.slice(0):null}}return b};RegExp.prototype.call=function(a,b){return this.exec(b)};RegExp.prototype.apply=function(b,a){return this.exec(a[0])};XRegExp.cache=function(c,a){var b="/"+c+"/"+(a||"");return XRegExp.cache[b]||(XRegExp.cache[b]=new XRegExp(c,a))};XRegExp.escape=function(a){return a.replace(/[-[\]{}()*+?.\\^$|,#\s]/g,"\\$&")};XRegExp.matchRecursive=function(p,d,s,f,b){var b=b||{},v=b.escapeChar,k=b.valueNames,f=f||"",q=f.indexOf("g")>-1,c=f.indexOf("i")>-1,h=f.indexOf("m")>-1,u=f.indexOf("y")>-1,f=f.replace(/y/g,""),d=d instanceof RegExp?(d.global?d:d.addFlags("g")):new XRegExp(d,"g"+f),s=s instanceof RegExp?(s.global?s:s.addFlags("g")):new XRegExp(s,"g"+f),i=[],a=0,j=0,n=0,l=0,m,e,o,r,g,t;if(v){if(v.length>1){throw SyntaxError("can't supply more than one escape character")
+}if(h){throw TypeError("can't supply escape character when using the multiline flag")}g=XRegExp.escape(v);t=new RegExp("^(?:"+g+"[\\S\\s]|(?:(?!"+d.source+"|"+s.source+")[^"+g+"])+)+",c?"i":"")}while(true){d.lastIndex=s.lastIndex=n+(v?(t.exec(p.slice(n))||[""])[0].length:0);o=d.exec(p);r=s.exec(p);if(o&&r){if(o.index<=r.index){r=null}else{o=null}}if(o||r){j=(o||r).index;n=(o?d:s).lastIndex}else{if(!a){break}}if(u&&!a&&j>l){break}if(o){if(!a++){m=j;e=n}}else{if(r&&a){if(!--a){if(k){if(k[0]&&m>l){i.push([k[0],p.slice(l,m),l,m])}if(k[1]){i.push([k[1],p.slice(m,e),m,e])}if(k[2]){i.push([k[2],p.slice(e,j),e,j])}if(k[3]){i.push([k[3],p.slice(j,n),j,n])}}else{i.push(p.slice(e,j))}l=n;if(!q){break}}}else{d.lastIndex=s.lastIndex=0;throw Error("subject data contains unbalanced delimiters")}}if(j===n){n++}}if(q&&!u&&k&&k[0]&&p.length>l){i.push([k[0],p.slice(l),l,p.length])}d.lastIndex=s.lastIndex=0;return i};SyntaxHighlighter.brushes.AS3=function(){var b="class interface function package";var a="-Infinity ...rest Array as AS3 Boolean break case catch const continue Date decodeURI "+"decodeURIComponent default delete do dynamic each else encodeURI encodeURIComponent escape "+"extends false final finally flash_proxy for get if implements import in include Infinity "+"instanceof int internal is isFinite isNaN isXMLName label namespace NaN native new null "+"Null Number Object object_proxy override parseFloat parseInt private protected public "+"return set static String super switch this throw true try typeof uint undefined unescape "+"use void while with";this.regexList=[{regex:SyntaxHighlighter.regexLib.singleLineCComments,css:"comments"},{regex:SyntaxHighlighter.regexLib.multiLineCComments,css:"comments"},{regex:SyntaxHighlighter.regexLib.doubleQuotedString,css:"string"},{regex:SyntaxHighlighter.regexLib.singleQuotedString,css:"string"},{regex:/\b([\d]+(\.[\d]+)?|0x[a-f0-9]+)\b/gi,css:"value"},{regex:new RegExp(this.getKeywords(b),"gm"),css:"color3"},{regex:new RegExp(this.getKeywords(a),"gm"),css:"keyword"},{regex:new RegExp("var","gm"),css:"variable"},{regex:new RegExp("trace","gm"),css:"color1"}];this.forHtmlScript(SyntaxHighlighter.regexLib.scriptScriptTags)};SyntaxHighlighter.brushes.AS3.prototype=new SyntaxHighlighter.Highlighter();SyntaxHighlighter.brushes.AS3.aliases=["actionscript3","as3"];SyntaxHighlighter.brushes.Bash=function(){var b="if fi then elif else for do done until while break continue case function return in eq ne gt lt ge le";var a="alias apropos awk basename bash bc bg builtin bzip2 cal cat cd cfdisk chgrp chmod chown chroot"+"cksum clear cmp comm command cp cron crontab csplit cut date dc dd ddrescue declare df "+"diff diff3 dig dir dircolors dirname dirs du echo egrep eject enable env ethtool eval "+"exec exit expand export expr false fdformat fdisk fg fgrep file find fmt fold format "+"free fsck ftp gawk getopts grep groups gzip hash head history hostname id ifconfig "+"import install join kill less let ln local locate logname logout look lpc lpr lprint "+"lprintd lprintq lprm ls lsof make man mkdir mkfifo mkisofs mknod more mount mtools "+"mv netstat nice nl nohup nslookup open op passwd paste pathchk ping popd pr printcap "+"printenv printf ps pushd pwd quota quotacheck quotactl ram rcp read readonly renice "+"remsync rm rmdir rsync screen scp sdiff sed select seq set sftp shift shopt shutdown "+"sleep sort source split ssh strace su sudo sum symlink sync tail tar tee test time "+"times touch top traceroute trap tr true tsort tty type ulimit umask umount unalias "+"uname unexpand uniq units unset unshar useradd usermod users uuencode uudecode v vdir "+"vi watch wc whereis which who whoami Wget xargs yes";this.findMatches=function(d,c){c=c.replace(/&gt;/g,">").replace(/&lt;/g,"<");this.code=c;return SyntaxHighlighter.Highlighter.prototype.findMatches.apply(this,[d,c])};this.regexList=[{regex:SyntaxHighlighter.regexLib.singleLinePerlComments,css:"comments"},{regex:SyntaxHighlighter.regexLib.doubleQuotedString,css:"string"},{regex:SyntaxHighlighter.regexLib.singleQuotedString,css:"string"},{regex:new RegExp(this.getKeywords(b),"gm"),css:"keyword"},{regex:new RegExp(this.getKeywords(a),"gm"),css:"functions"}]};SyntaxHighlighter.brushes.Bash.prototype=new SyntaxHighlighter.Highlighter();SyntaxHighlighter.brushes.Bash.aliases=["bash","shell"];SyntaxHighlighter.brushes.ColdFusion=function(){var b="Abs ACos AddSOAPRequestHeader AddSOAPResponseHeader AjaxLink AjaxOnLoad ArrayAppend ArrayAvg ArrayClear ArrayDeleteAt "+"ArrayInsertAt ArrayIsDefined ArrayIsEmpty ArrayLen ArrayMax ArrayMin ArraySet ArraySort ArraySum ArraySwap ArrayToList "+"Asc ASin Atn BinaryDecode BinaryEncode BitAnd BitMaskClear BitMaskRead BitMaskSet BitNot BitOr BitSHLN BitSHRN BitXor "+"Ceiling CharsetDecode CharsetEncode Chr CJustify Compare CompareNoCase Cos CreateDate CreateDateTime CreateObject "+"CreateODBCDate CreateODBCDateTime CreateODBCTime CreateTime CreateTimeSpan CreateUUID DateAdd DateCompare DateConvert "+"DateDiff DateFormat DatePart Day DayOfWeek DayOfWeekAsString DayOfYear DaysInMonth DaysInYear DE DecimalFormat DecrementValue "+"Decrypt DecryptBinary DeleteClientVariable DeserializeJSON DirectoryExists DollarFormat DotNetToCFType Duplicate Encrypt "+"EncryptBinary Evaluate Exp ExpandPath FileClose FileCopy FileDelete FileExists FileIsEOF FileMove FileOpen FileRead "+"FileReadBinary FileReadLine FileSetAccessMode FileSetAttribute FileSetLastModified FileWrite Find FindNoCase FindOneOf "+"FirstDayOfMonth Fix FormatBaseN GenerateSecretKey GetAuthUser GetBaseTagData GetBaseTagList GetBaseTemplatePath "+"GetClientVariablesList GetComponentMetaData GetContextRoot GetCurrentTemplatePath GetDirectoryFromPath GetEncoding "+"GetException GetFileFromPath GetFileInfo GetFunctionList GetGatewayHelper GetHttpRequestData GetHttpTimeString "+"GetK2ServerDocCount GetK2ServerDocCountLimit GetLocale GetLocaleDisplayName GetLocalHostIP GetMetaData GetMetricData "+"GetPageContext GetPrinterInfo GetProfileSections GetProfileString GetReadableImageFormats GetSOAPRequest GetSOAPRequestHeader "+"GetSOAPResponse GetSOAPResponseHeader GetTempDirectory GetTempFile GetTemplatePath GetTickCount GetTimeZoneInfo GetToken "+"GetUserRoles GetWriteableImageFormats Hash Hour HTMLCodeFormat HTMLEditFormat IIf ImageAddBorder ImageBlur ImageClearRect "+"ImageCopy ImageCrop ImageDrawArc ImageDrawBeveledRect ImageDrawCubicCurve ImageDrawLine ImageDrawLines ImageDrawOval "+"ImageDrawPoint ImageDrawQuadraticCurve ImageDrawRect ImageDrawRoundRect ImageDrawText ImageFlip ImageGetBlob ImageGetBufferedImage "+"ImageGetEXIFTag ImageGetHeight ImageGetIPTCTag ImageGetWidth ImageGrayscale ImageInfo ImageNegative ImageNew ImageOverlay ImagePaste "+"ImageRead ImageReadBase64 ImageResize ImageRotate ImageRotateDrawingAxis ImageScaleToFit ImageSetAntialiasing ImageSetBackgroundColor "+"ImageSetDrawingColor ImageSetDrawingStroke ImageSetDrawingTransparency ImageSharpen ImageShear ImageShearDrawingAxis ImageTranslate "+"ImageTranslateDrawingAxis ImageWrite ImageWriteBase64 ImageXORDrawingMode IncrementValue InputBaseN Insert Int IsArray IsBinary "+"IsBoolean IsCustomFunction IsDate IsDDX IsDebugMode IsDefined IsImage IsImageFile IsInstanceOf IsJSON IsLeapYear IsLocalHost "+"IsNumeric IsNumericDate IsObject IsPDFFile IsPDFObject IsQuery IsSimpleValue IsSOAPRequest IsStruct IsUserInAnyRole IsUserInRole "+"IsUserLoggedIn IsValid IsWDDX IsXML IsXmlAttribute IsXmlDoc IsXmlElem IsXmlNode IsXmlRoot JavaCast JSStringFormat LCase Left Len "+"ListAppend ListChangeDelims ListContains ListContainsNoCase ListDeleteAt ListFind ListFindNoCase ListFirst ListGetAt ListInsertAt "+"ListLast ListLen ListPrepend ListQualify ListRest ListSetAt ListSort ListToArray ListValueCount ListValueCountNoCase LJustify Log "+"Log10 LSCurrencyFormat LSDateFormat LSEuroCurrencyFormat LSIsCurrency LSIsDate LSIsNumeric LSNumberFormat LSParseCurrency LSParseDateTime "+"LSParseEuroCurrency LSParseNumber LSTimeFormat LTrim Max Mid Min Minute Month MonthAsString Now NumberFormat ParagraphFormat ParseDateTime "+"Pi PrecisionEvaluate PreserveSingleQuotes Quarter QueryAddColumn QueryAddRow QueryConvertForGrid QueryNew QuerySetCell QuotedValueList Rand "+"Randomize RandRange REFind REFindNoCase ReleaseComObject REMatch REMatchNoCase RemoveChars RepeatString Replace ReplaceList ReplaceNoCase "+"REReplace REReplaceNoCase Reverse Right RJustify Round RTrim Second SendGatewayMessage SerializeJSON SetEncoding SetLocale SetProfileString "+"SetVariable Sgn Sin Sleep SpanExcluding SpanIncluding Sqr StripCR StructAppend StructClear StructCopy StructCount StructDelete StructFind "+"StructFindKey StructFindValue StructGet StructInsert StructIsEmpty StructKeyArray StructKeyExists StructKeyList StructKeyList StructNew "+"StructSort StructUpdate Tan TimeFormat ToBase64 ToBinary ToScript ToString Trim UCase URLDecode URLEncodedFormat URLSessionFormat Val "+"ValueList VerifyClient Week Wrap Wrap WriteOutput XmlChildPos XmlElemNew XmlFormat XmlGetNodeType XmlNew XmlParse XmlSearch XmlTransform "+"XmlValidate Year YesNoFormat";
+    var c="cfabort cfajaximport cfajaxproxy cfapplet cfapplication cfargument cfassociate cfbreak cfcache cfcalendar "+"cfcase cfcatch cfchart cfchartdata cfchartseries cfcol cfcollection cfcomponent cfcontent cfcookie cfdbinfo "+"cfdefaultcase cfdirectory cfdiv cfdocument cfdocumentitem cfdocumentsection cfdump cfelse cfelseif cferror "+"cfexchangecalendar cfexchangeconnection cfexchangecontact cfexchangefilter cfexchangemail cfexchangetask "+"cfexecute cfexit cffeed cffile cfflush cfform cfformgroup cfformitem cfftp cffunction cfgrid cfgridcolumn "+"cfgridrow cfgridupdate cfheader cfhtmlhead cfhttp cfhttpparam cfif cfimage cfimport cfinclude cfindex "+"cfinput cfinsert cfinterface cfinvoke cfinvokeargument cflayout cflayoutarea cfldap cflocation cflock cflog "+"cflogin cfloginuser cflogout cfloop cfmail cfmailparam cfmailpart cfmenu cfmenuitem cfmodule cfNTauthenticate "+"cfobject cfobjectcache cfoutput cfparam cfpdf cfpdfform cfpdfformparam cfpdfparam cfpdfsubform cfpod cfpop "+"cfpresentation cfpresentationslide cfpresenter cfprint cfprocessingdirective cfprocparam cfprocresult "+"cfproperty cfquery cfqueryparam cfregistry cfreport cfreportparam cfrethrow cfreturn cfsavecontent cfschedule "+"cfscript cfsearch cfselect cfset cfsetting cfsilent cfslider cfsprydataset cfstoredproc cfswitch cftable "+"cftextarea cfthread cfthrow cftimer cftooltip cftrace cftransaction cftree cftreeitem cftry cfupdate cfwddx "+"cfwindow cfxml cfzip cfzipparam";var a="all and any between cross in join like not null or outer some";this.regexList=[{regex:new RegExp("--(.*)$","gm"),css:"comments"},{regex:SyntaxHighlighter.regexLib.xmlComments,css:"comments"},{regex:SyntaxHighlighter.regexLib.doubleQuotedString,css:"string"},{regex:SyntaxHighlighter.regexLib.singleQuotedString,css:"string"},{regex:new RegExp(this.getKeywords(b),"gmi"),css:"functions"},{regex:new RegExp(this.getKeywords(a),"gmi"),css:"color1"},{regex:new RegExp(this.getKeywords(c),"gmi"),css:"keyword"}]};SyntaxHighlighter.brushes.ColdFusion.prototype=new SyntaxHighlighter.Highlighter();SyntaxHighlighter.brushes.ColdFusion.aliases=["coldfusion","cf"];SyntaxHighlighter.brushes.Cpp=function(){var c="ATOM BOOL BOOLEAN BYTE CHAR COLORREF DWORD DWORDLONG DWORD_PTR "+"DWORD32 DWORD64 FLOAT HACCEL HALF_PTR HANDLE HBITMAP HBRUSH "+"HCOLORSPACE HCONV HCONVLIST HCURSOR HDC HDDEDATA HDESK HDROP HDWP "+"HENHMETAFILE HFILE HFONT HGDIOBJ HGLOBAL HHOOK HICON HINSTANCE HKEY "+"HKL HLOCAL HMENU HMETAFILE HMODULE HMONITOR HPALETTE HPEN HRESULT "+"HRGN HRSRC HSZ HWINSTA HWND INT INT_PTR INT32 INT64 LANGID LCID LCTYPE "+"LGRPID LONG LONGLONG LONG_PTR LONG32 LONG64 LPARAM LPBOOL LPBYTE LPCOLORREF "+"LPCSTR LPCTSTR LPCVOID LPCWSTR LPDWORD LPHANDLE LPINT LPLONG LPSTR LPTSTR "+"LPVOID LPWORD LPWSTR LRESULT PBOOL PBOOLEAN PBYTE PCHAR PCSTR PCTSTR PCWSTR "+"PDWORDLONG PDWORD_PTR PDWORD32 PDWORD64 PFLOAT PHALF_PTR PHANDLE PHKEY PINT "+"PINT_PTR PINT32 PINT64 PLCID PLONG PLONGLONG PLONG_PTR PLONG32 PLONG64 POINTER_32 "+"POINTER_64 PSHORT PSIZE_T PSSIZE_T PSTR PTBYTE PTCHAR PTSTR PUCHAR PUHALF_PTR "+"PUINT PUINT_PTR PUINT32 PUINT64 PULONG PULONGLONG PULONG_PTR PULONG32 PULONG64 "+"PUSHORT PVOID PWCHAR PWORD PWSTR SC_HANDLE SC_LOCK SERVICE_STATUS_HANDLE SHORT "+"SIZE_T SSIZE_T TBYTE TCHAR UCHAR UHALF_PTR UINT UINT_PTR UINT32 UINT64 ULONG "+"ULONGLONG ULONG_PTR ULONG32 ULONG64 USHORT USN VOID WCHAR WORD WPARAM WPARAM WPARAM "+"char bool short int __int32 __int64 __int8 __int16 long float double __wchar_t "+"clock_t _complex _dev_t _diskfree_t div_t ldiv_t _exception _EXCEPTION_POINTERS "+"FILE _finddata_t _finddatai64_t _wfinddata_t _wfinddatai64_t __finddata64_t "+"__wfinddata64_t _FPIEEE_RECORD fpos_t _HEAPINFO _HFILE lconv intptr_t "+"jmp_buf mbstate_t _off_t _onexit_t _PNH ptrdiff_t _purecall_handler "+"sig_atomic_t size_t _stat __stat64 _stati64 terminate_function "+"time_t __time64_t _timeb __timeb64 tm uintptr_t _utimbuf "+"va_list wchar_t wctrans_t wctype_t wint_t signed";var a="break case catch class const __finally __exception __try "+"const_cast continue private public protected __declspec "+"default delete deprecated dllexport dllimport do dynamic_cast "+"else enum explicit extern if for friend goto inline "+"mutable naked namespace new noinline noreturn nothrow "+"register reinterpret_cast return selectany "+"sizeof static static_cast struct switch template this "+"thread throw true false try typedef typeid typename union "+"using uuid virtual void volatile whcar_t while";var b="assert isalnum isalpha iscntrl isdigit isgraph islower isprint"+"ispunct isspace isupper isxdigit tolower toupper errno localeconv "+"setlocale acos asin atan atan2 ceil cos cosh exp fabs floor fmod "+"frexp ldexp log log10 modf pow sin sinh sqrt tan tanh jmp_buf "+"longjmp setjmp raise signal sig_atomic_t va_arg va_end va_start "+"clearerr fclose feof ferror fflush fgetc fgetpos fgets fopen "+"fprintf fputc fputs fread freopen fscanf fseek fsetpos ftell "+"fwrite getc getchar gets perror printf putc putchar puts remove "+"rename rewind scanf setbuf setvbuf sprintf sscanf tmpfile tmpnam "+"ungetc vfprintf vprintf vsprintf abort abs atexit atof atoi atol "+"bsearch calloc div exit free getenv labs ldiv malloc mblen mbstowcs "+"mbtowc qsort rand realloc srand strtod strtol strtoul system "+"wcstombs wctomb memchr memcmp memcpy memmove memset strcat strchr "+"strcmp strcoll strcpy strcspn strerror strlen strncat strncmp "+"strncpy strpbrk strrchr strspn strstr strtok strxfrm asctime "+"clock ctime difftime gmtime localtime mktime strftime time";
+    this.regexList=[{regex:SyntaxHighlighter.regexLib.singleLineCComments,css:"comments"},{regex:SyntaxHighlighter.regexLib.multiLineCComments,css:"comments"},{regex:SyntaxHighlighter.regexLib.doubleQuotedString,css:"string"},{regex:SyntaxHighlighter.regexLib.singleQuotedString,css:"string"},{regex:/^ *#.*/gm,css:"preprocessor"},{regex:new RegExp(this.getKeywords(c),"gm"),css:"color1 bold"},{regex:new RegExp(this.getKeywords(b),"gm"),css:"functions bold"},{regex:new RegExp(this.getKeywords(a),"gm"),css:"keyword bold"}]};SyntaxHighlighter.brushes.Cpp.prototype=new SyntaxHighlighter.Highlighter();SyntaxHighlighter.brushes.Cpp.aliases=["cpp","c"];SyntaxHighlighter.brushes.CSharp=function(){var b="abstract as base bool break byte case catch char checked class const "+"continue decimal default delegate do double else enum event explicit "+"extern false finally fixed float for foreach get goto if implicit in int "+"interface internal is lock long namespace new null object operator out "+"override params private protected public readonly ref return sbyte sealed set "+"short sizeof stackalloc static string struct switch this throw true try "+"typeof uint ulong unchecked unsafe ushort using virtual void while";function a(c,e){var d=(c[0].indexOf("///")==0)?"color1":"comments";return[new SyntaxHighlighter.Match(c[0],c.index,d)]}this.regexList=[{regex:SyntaxHighlighter.regexLib.singleLineCComments,func:a},{regex:SyntaxHighlighter.regexLib.multiLineCComments,css:"comments"},{regex:/@"(?:[^"]|"")*"/g,css:"string"},{regex:SyntaxHighlighter.regexLib.doubleQuotedString,css:"string"},{regex:SyntaxHighlighter.regexLib.singleQuotedString,css:"string"},{regex:/^\s*#.*/gm,css:"preprocessor"},{regex:new RegExp(this.getKeywords(b),"gm"),css:"keyword"},{regex:/\bpartial(?=\s+(?:class|interface|struct)\b)/g,css:"keyword"},{regex:/\byield(?=\s+(?:return|break)\b)/g,css:"keyword"}];this.forHtmlScript(SyntaxHighlighter.regexLib.aspScriptTags)};SyntaxHighlighter.brushes.CSharp.prototype=new SyntaxHighlighter.Highlighter();SyntaxHighlighter.brushes.CSharp.aliases=["c#","c-sharp","csharp"];SyntaxHighlighter.brushes.CSS=function(){function a(f){return"\\b([a-z_]|)"+f.replace(/ /g,"(?=:)\\b|\\b([a-z_\\*]|\\*|)")+"(?=:)\\b"}function c(f){return"\\b"+f.replace(/ /g,"(?!-)(?!:)\\b|\\b()")+":\\b"}var d="ascent azimuth background-attachment background-color background-image background-position "+"background-repeat background baseline bbox border-collapse border-color border-spacing border-style border-top "+"border-right border-bottom border-left border-top-color border-right-color border-bottom-color border-left-color "+"border-top-style border-right-style border-bottom-style border-left-style border-top-width border-right-width "+"border-bottom-width border-left-width border-width border bottom cap-height caption-side centerline clear clip color "+"content counter-increment counter-reset cue-after cue-before cue cursor definition-src descent direction display "+"elevation empty-cells float font-size-adjust font-family font-size font-stretch font-style font-variant font-weight font "+"height left letter-spacing line-height list-style-image list-style-position list-style-type list-style margin-top "+"margin-right margin-bottom margin-left margin marker-offset marks mathline max-height max-width min-height min-width orphans "+"outline-color outline-style outline-width outline overflow padding-top padding-right padding-bottom padding-left padding page "+"page-break-after page-break-before page-break-inside pause pause-after pause-before pitch pitch-range play-during position "+"quotes right richness size slope src speak-header speak-numeral speak-punctuation speak speech-rate stemh stemv stress "+"table-layout text-align top text-decoration text-indent text-shadow text-transform unicode-bidi unicode-range units-per-em "+"vertical-align visibility voice-family volume white-space widows width widths word-spacing x-height z-index";var b="above absolute all always aqua armenian attr aural auto avoid baseline behind below bidi-override black blink block blue bold bolder "+"both bottom braille capitalize caption center center-left center-right circle close-quote code collapse compact condensed "+"continuous counter counters crop cross crosshair cursive dashed decimal decimal-leading-zero default digits disc dotted double "+"embed embossed e-resize expanded extra-condensed extra-expanded fantasy far-left far-right fast faster fixed format fuchsia "+"gray green groove handheld hebrew help hidden hide high higher icon inline-table inline inset inside invert italic "+"justify landscape large larger left-side left leftwards level lighter lime line-through list-item local loud lower-alpha "+"lowercase lower-greek lower-latin lower-roman lower low ltr marker maroon medium message-box middle mix move narrower "+"navy ne-resize no-close-quote none no-open-quote no-repeat normal nowrap n-resize nw-resize oblique olive once open-quote outset "+"outside overline pointer portrait pre print projection purple red relative repeat repeat-x repeat-y rgb ridge right right-side "+"rightwards rtl run-in screen scroll semi-condensed semi-expanded separate se-resize show silent silver slower slow "+"small small-caps small-caption smaller soft solid speech spell-out square s-resize static status-bar sub super sw-resize "+"table-caption table-cell table-column table-column-group table-footer-group table-header-group table-row table-row-group teal "+"text-bottom text-top thick thin top transparent tty tv ultra-condensed ultra-expanded underline upper-alpha uppercase upper-latin "+"upper-roman url visible wait white wider w-resize x-fast x-high x-large x-loud x-low x-slow x-small x-soft xx-large xx-small yellow";
+    var e="[mM]onospace [tT]ahoma [vV]erdana [aA]rial [hH]elvetica [sS]ans-serif [sS]erif [cC]ourier mono sans serif";this.regexList=[{regex:SyntaxHighlighter.regexLib.multiLineCComments,css:"comments"},{regex:SyntaxHighlighter.regexLib.doubleQuotedString,css:"string"},{regex:SyntaxHighlighter.regexLib.singleQuotedString,css:"string"},{regex:/\#[a-fA-F0-9]{3,6}/g,css:"value"},{regex:/(-?\d+)(\.\d+)?(px|em|pt|\:|\%|)/g,css:"value"},{regex:/!important/g,css:"color3"},{regex:new RegExp(a(d),"gm"),css:"keyword"},{regex:new RegExp(c(b),"g"),css:"value"},{regex:new RegExp(this.getKeywords(e),"g"),css:"color1"}];this.forHtmlScript({left:/(&lt;|<)\s*style.*?(&gt;|>)/gi,right:/(&lt;|<)\/\s*style\s*(&gt;|>)/gi})};SyntaxHighlighter.brushes.CSS.prototype=new SyntaxHighlighter.Highlighter();SyntaxHighlighter.brushes.CSS.aliases=["css"];SyntaxHighlighter.brushes.Delphi=function(){var a="abs addr and ansichar ansistring array as asm begin boolean byte cardinal "+"case char class comp const constructor currency destructor div do double "+"downto else end except exports extended false file finalization finally "+"for function goto if implementation in inherited int64 initialization "+"integer interface is label library longint longword mod nil not object "+"of on or packed pansichar pansistring pchar pcurrency pdatetime pextended "+"pint64 pointer private procedure program property pshortstring pstring "+"pvariant pwidechar pwidestring protected public published raise real real48 "+"record repeat set shl shortint shortstring shr single smallint string then "+"threadvar to true try type unit until uses val var varirnt while widechar "+"widestring with word write writeln xor";this.regexList=[{regex:/\(\*[\s\S]*?\*\)/gm,css:"comments"},{regex:/{(?!\$)[\s\S]*?}/gm,css:"comments"},{regex:SyntaxHighlighter.regexLib.singleLineCComments,css:"comments"},{regex:SyntaxHighlighter.regexLib.singleQuotedString,css:"string"},{regex:/\{\$[a-zA-Z]+ .+\}/g,css:"color1"},{regex:/\b[\d\.]+\b/g,css:"value"},{regex:/\$[a-zA-Z0-9]+\b/g,css:"value"},{regex:new RegExp(this.getKeywords(a),"gmi"),css:"keyword"}]};SyntaxHighlighter.brushes.Delphi.prototype=new SyntaxHighlighter.Highlighter();SyntaxHighlighter.brushes.Delphi.aliases=["delphi","pascal","pas"];SyntaxHighlighter.brushes.Erlang=function(){var a="after and andalso band begin bnot bor bsl bsr bxor "+"case catch cond div end fun if let not of or orelse "+"query receive rem try when xor"+" module export import define";this.regexList=[{regex:new RegExp("[A-Z][A-Za-z0-9_]+","g"),css:"constants"},{regex:new RegExp("\\%.+","gm"),css:"comments"},{regex:new RegExp("\\?[A-Za-z0-9_]+","g"),css:"preprocessor"},{regex:new RegExp("[a-z0-9_]+:[a-z0-9_]+","g"),css:"functions"},{regex:SyntaxHighlighter.regexLib.doubleQuotedString,css:"string"},{regex:SyntaxHighlighter.regexLib.singleQuotedString,css:"string"},{regex:new RegExp(this.getKeywords(a),"gm"),css:"keyword"}]};SyntaxHighlighter.brushes.Erlang.prototype=new SyntaxHighlighter.Highlighter();SyntaxHighlighter.brushes.Erlang.aliases=["erl","erlang"];SyntaxHighlighter.brushes.Groovy=function(){var d="as assert break case catch class continue def default do else extends finally "+"if in implements import instanceof interface new package property return switch "+"throw throws try while public protected private static";var c="void boolean byte char short int long float double";var b="null";var a="allProperties count get size "+"collect each eachProperty eachPropertyName eachWithIndex find findAll "+"findIndexOf grep inject max min reverseEach sort "+"asImmutable asSynchronized flatten intersect join pop reverse subMap toList "+"padRight padLeft contains eachMatch toCharacter toLong toUrl tokenize "+"eachFile eachFileRecurse eachB yte eachLine readBytes readLine getText "+"splitEachLine withReader append encodeBase64 decodeBase64 filterLine "+"transformChar transformLine withOutputStream withPrintWriter withStream "+"withStreams withWriter withWriterAppend write writeLine "+"dump inspect invokeMethod print println step times upto use waitForOrKill "+"getText";this.regexList=[{regex:SyntaxHighlighter.regexLib.singleLineCComments,css:"comments"},{regex:SyntaxHighlighter.regexLib.multiLineCComments,css:"comments"},{regex:SyntaxHighlighter.regexLib.doubleQuotedString,css:"string"},{regex:SyntaxHighlighter.regexLib.singleQuotedString,css:"string"},{regex:/""".*"""/g,css:"string"},{regex:new RegExp("\\b([\\d]+(\\.[\\d]+)?|0x[a-f0-9]+)\\b","gi"),css:"value"},{regex:new RegExp(this.getKeywords(d),"gm"),css:"keyword"},{regex:new RegExp(this.getKeywords(c),"gm"),css:"color1"},{regex:new RegExp(this.getKeywords(b),"gm"),css:"constants"},{regex:new RegExp(this.getKeywords(a),"gm"),css:"functions"}];this.forHtmlScript(SyntaxHighlighter.regexLib.aspScriptTags)};SyntaxHighlighter.brushes.Groovy.prototype=new SyntaxHighlighter.Highlighter();SyntaxHighlighter.brushes.Groovy.aliases=["groovy"];SyntaxHighlighter.brushes.Java=function(){var a="abstract assert boolean break byte case catch char class const "+"continue default do double else enum extends "+"false final finally float for goto if implements import "+"instanceof int interface long native new null "+"package private protected public return "+"short static strictfp super switch synchronized this throw throws true "+"transient try void volatile while";
+    this.regexList=[{regex:SyntaxHighlighter.regexLib.singleLineCComments,css:"comments"},{regex:/\/\*([^\*][\s\S]*)?\*\//gm,css:"comments"},{regex:/\/\*(?!\*\/)\*[\s\S]*?\*\//gm,css:"preprocessor"},{regex:SyntaxHighlighter.regexLib.doubleQuotedString,css:"string"},{regex:SyntaxHighlighter.regexLib.singleQuotedString,css:"string"},{regex:/\b([\d]+(\.[\d]+)?|0x[a-f0-9]+)\b/gi,css:"value"},{regex:/(?!\@interface\b)\@[\$\w]+\b/g,css:"color1"},{regex:/\@interface\b/g,css:"color2"},{regex:new RegExp(this.getKeywords(a),"gm"),css:"keyword"}];this.forHtmlScript({left:/(&lt;|<)%[@!=]?/g,right:/%(&gt;|>)/g})};SyntaxHighlighter.brushes.Java.prototype=new SyntaxHighlighter.Highlighter();SyntaxHighlighter.brushes.Java.aliases=["java"];SyntaxHighlighter.brushes.JavaFX=function(){var b="Boolean Byte Character Double Duration "+"Float Integer Long Number Short String Void";var a="abstract after and as assert at before bind bound break catch class "+"continue def delete else exclusive extends false finally first for from "+"function if import in indexof init insert instanceof into inverse last "+"lazy mixin mod nativearray new not null on or override package postinit "+"protected public public-init public-read replace return reverse sizeof "+"step super then this throw true try tween typeof var where while with "+"attribute let private readonly static trigger";this.regexList=[{regex:SyntaxHighlighter.regexLib.singleLineCComments,css:"comments"},{regex:SyntaxHighlighter.regexLib.multiLineCComments,css:"comments"},{regex:SyntaxHighlighter.regexLib.singleQuotedString,css:"string"},{regex:SyntaxHighlighter.regexLib.doubleQuotedString,css:"string"},{regex:/(-?\.?)(\b(\d*\.?\d+|\d+\.?\d*)(e[+-]?\d+)?|0x[a-f\d]+)\b\.?/gi,css:"color2"},{regex:new RegExp(this.getKeywords(b),"gm"),css:"variable"},{regex:new RegExp(this.getKeywords(a),"gm"),css:"keyword"}];this.forHtmlScript(SyntaxHighlighter.regexLib.aspScriptTags)};SyntaxHighlighter.brushes.JavaFX.prototype=new SyntaxHighlighter.Highlighter();SyntaxHighlighter.brushes.JavaFX.aliases=["jfx","javafx"];SyntaxHighlighter.brushes.JScript=function(){var a="break case catch continue "+"default delete do else false  "+"for function if in instanceof "+"new null return super switch "+"this throw true try typeof var while with";this.regexList=[{regex:SyntaxHighlighter.regexLib.singleLineCComments,css:"comments"},{regex:SyntaxHighlighter.regexLib.multiLineCComments,css:"comments"},{regex:SyntaxHighlighter.regexLib.doubleQuotedString,css:"string"},{regex:SyntaxHighlighter.regexLib.singleQuotedString,css:"string"},{regex:/\s*#.*/gm,css:"preprocessor"},{regex:new RegExp(this.getKeywords(a),"gm"),css:"keyword"}];this.forHtmlScript(SyntaxHighlighter.regexLib.scriptScriptTags)};SyntaxHighlighter.brushes.JScript.prototype=new SyntaxHighlighter.Highlighter();SyntaxHighlighter.brushes.JScript.aliases=["js","jscript","javascript"];SyntaxHighlighter.brushes.Perl=function(){var a="abs accept alarm atan2 bind binmode chdir chmod chomp chop chown chr "+"chroot close closedir connect cos crypt defined delete each endgrent "+"endhostent endnetent endprotoent endpwent endservent eof exec exists "+"exp fcntl fileno flock fork format formline getc getgrent getgrgid "+"getgrnam gethostbyaddr gethostbyname gethostent getlogin getnetbyaddr "+"getnetbyname getnetent getpeername getpgrp getppid getpriority "+"getprotobyname getprotobynumber getprotoent getpwent getpwnam getpwuid "+"getservbyname getservbyport getservent getsockname getsockopt glob "+"gmtime grep hex index int ioctl join keys kill lc lcfirst length link "+"listen localtime lock log lstat map mkdir msgctl msgget msgrcv msgsnd "+"oct open opendir ord pack pipe pop pos print printf prototype push "+"quotemeta rand read readdir readline readlink readpipe recv rename "+"reset reverse rewinddir rindex rmdir scalar seek seekdir select semctl "+"semget semop send setgrent sethostent setnetent setpgrp setpriority "+"setprotoent setpwent setservent setsockopt shift shmctl shmget shmread "+"shmwrite shutdown sin sleep socket socketpair sort splice split sprintf "+"sqrt srand stat study substr symlink syscall sysopen sysread sysseek "+"system syswrite tell telldir time times tr truncate uc ucfirst umask "+"undef unlink unpack unshift utime values vec wait waitpid warn write";var b="bless caller continue dbmclose dbmopen die do dump else elsif eval exit "+"for foreach goto if import last local my next no our package redo ref "+"require return sub tie tied unless untie until use wantarray while";this.regexList=[{regex:new RegExp("#[^!].*$","gm"),css:"comments"},{regex:new RegExp("^\\s*#!.*$","gm"),css:"preprocessor"},{regex:SyntaxHighlighter.regexLib.doubleQuotedString,css:"string"},{regex:SyntaxHighlighter.regexLib.singleQuotedString,css:"string"},{regex:new RegExp("(\\$|@|%)\\w+","g"),css:"variable"},{regex:new RegExp(this.getKeywords(a),"gmi"),css:"functions"},{regex:new RegExp(this.getKeywords(b),"gm"),css:"keyword"}];this.forHtmlScript(SyntaxHighlighter.regexLib.phpScriptTags)
+};SyntaxHighlighter.brushes.Perl.prototype=new SyntaxHighlighter.Highlighter();SyntaxHighlighter.brushes.Perl.aliases=["perl","Perl","pl"];SyntaxHighlighter.brushes.Php=function(){var a="abs acos acosh addcslashes addslashes "+"array_change_key_case array_chunk array_combine array_count_values array_diff "+"array_diff_assoc array_diff_key array_diff_uassoc array_diff_ukey array_fill "+"array_filter array_flip array_intersect array_intersect_assoc array_intersect_key "+"array_intersect_uassoc array_intersect_ukey array_key_exists array_keys array_map "+"array_merge array_merge_recursive array_multisort array_pad array_pop array_product "+"array_push array_rand array_reduce array_reverse array_search array_shift "+"array_slice array_splice array_sum array_udiff array_udiff_assoc "+"array_udiff_uassoc array_uintersect array_uintersect_assoc "+"array_uintersect_uassoc array_unique array_unshift array_values array_walk "+"array_walk_recursive atan atan2 atanh base64_decode base64_encode base_convert "+"basename bcadd bccomp bcdiv bcmod bcmul bindec bindtextdomain bzclose bzcompress "+"bzdecompress bzerrno bzerror bzerrstr bzflush bzopen bzread bzwrite ceil chdir "+"checkdate checkdnsrr chgrp chmod chop chown chr chroot chunk_split class_exists "+"closedir closelog copy cos cosh count count_chars date decbin dechex decoct "+"deg2rad delete ebcdic2ascii echo empty end ereg ereg_replace eregi eregi_replace error_log "+"error_reporting escapeshellarg escapeshellcmd eval exec exit exp explode extension_loaded "+"feof fflush fgetc fgetcsv fgets fgetss file_exists file_get_contents file_put_contents "+"fileatime filectime filegroup fileinode filemtime fileowner fileperms filesize filetype "+"floatval flock floor flush fmod fnmatch fopen fpassthru fprintf fputcsv fputs fread fscanf "+"fseek fsockopen fstat ftell ftok getallheaders getcwd getdate getenv gethostbyaddr gethostbyname "+"gethostbynamel getimagesize getlastmod getmxrr getmygid getmyinode getmypid getmyuid getopt "+"getprotobyname getprotobynumber getrandmax getrusage getservbyname getservbyport gettext "+"gettimeofday gettype glob gmdate gmmktime ini_alter ini_get ini_get_all ini_restore ini_set "+"interface_exists intval ip2long is_a is_array is_bool is_callable is_dir is_double "+"is_executable is_file is_finite is_float is_infinite is_int is_integer is_link is_long "+"is_nan is_null is_numeric is_object is_readable is_real is_resource is_scalar is_soap_fault "+"is_string is_subclass_of is_uploaded_file is_writable is_writeable mkdir mktime nl2br "+"parse_ini_file parse_str parse_url passthru pathinfo readlink realpath rewind rewinddir rmdir "+"round str_ireplace str_pad str_repeat str_replace str_rot13 str_shuffle str_split "+"str_word_count strcasecmp strchr strcmp strcoll strcspn strftime strip_tags stripcslashes "+"stripos stripslashes stristr strlen strnatcasecmp strnatcmp strncasecmp strncmp strpbrk "+"strpos strptime strrchr strrev strripos strrpos strspn strstr strtok strtolower strtotime "+"strtoupper strtr strval substr substr_compare";var c="and or xor array as break case "+"cfunction class const continue declare default die do else "+"elseif enddeclare endfor endforeach endif endswitch endwhile "+"extends for foreach function include include_once global if "+"new old_function return static switch use require require_once "+"var while abstract interface public implements extends private protected throw";var b="__FILE__ __LINE__ __METHOD__ __FUNCTION__ __CLASS__";this.regexList=[{regex:SyntaxHighlighter.regexLib.singleLineCComments,css:"comments"},{regex:SyntaxHighlighter.regexLib.multiLineCComments,css:"comments"},{regex:SyntaxHighlighter.regexLib.doubleQuotedString,css:"string"},{regex:SyntaxHighlighter.regexLib.singleQuotedString,css:"string"},{regex:/\$\w+/g,css:"variable"},{regex:new RegExp(this.getKeywords(a),"gmi"),css:"functions"},{regex:new RegExp(this.getKeywords(b),"gmi"),css:"constants"},{regex:new RegExp(this.getKeywords(c),"gm"),css:"keyword"}];this.forHtmlScript(SyntaxHighlighter.regexLib.phpScriptTags)};SyntaxHighlighter.brushes.Php.prototype=new SyntaxHighlighter.Highlighter();SyntaxHighlighter.brushes.Php.aliases=["php"];SyntaxHighlighter.brushes.Plain=function(){};SyntaxHighlighter.brushes.Plain.prototype=new SyntaxHighlighter.Highlighter();SyntaxHighlighter.brushes.Plain.aliases=["text","plain"];SyntaxHighlighter.brushes.Python=function(){var c="and assert break class continue def del elif else "+"except exec finally for from global if import in is "+"lambda not or pass print raise return try yield while";var a="__import__ abs all any apply basestring bin bool buffer callable "+"chr classmethod cmp coerce compile complex delattr dict dir "+"divmod enumerate eval execfile file filter float format frozenset "+"getattr globals hasattr hash help hex id input int intern "+"isinstance issubclass iter len list locals long map max min next "+"object oct open ord pow print property range raw_input reduce "+"reload repr reversed round set setattr slice sorted staticmethod "+"str sum super tuple type type unichr unicode vars xrange zip";
+    var b="None True False self cls class_";this.regexList=[{regex:SyntaxHighlighter.regexLib.singleLinePerlComments,css:"comments"},{regex:/^\s*@\w+/gm,css:"decorator"},{regex:/(['\"]{3})([^\1])*?\1/gm,css:"comments"},{regex:/"(?!")(?:\.|\\\"|[^\""\n])*"/gm,css:"string"},{regex:/'(?!')(?:\.|(\\\')|[^\''\n])*'/gm,css:"string"},{regex:/\+|\-|\*|\/|\%|=|==/gm,css:"keyword"},{regex:/\b\d+\.?\w*/g,css:"value"},{regex:new RegExp(this.getKeywords(a),"gmi"),css:"functions"},{regex:new RegExp(this.getKeywords(c),"gm"),css:"keyword"},{regex:new RegExp(this.getKeywords(b),"gm"),css:"color1"}];this.forHtmlScript(SyntaxHighlighter.regexLib.aspScriptTags)};SyntaxHighlighter.brushes.Python.prototype=new SyntaxHighlighter.Highlighter();SyntaxHighlighter.brushes.Python.aliases=["py","python"];SyntaxHighlighter.brushes.Ruby=function(){var a="alias and BEGIN begin break case class def define_method defined do each else elsif "+"END end ensure false for if in module new next nil not or raise redo rescue retry return "+"self super then throw true undef unless until when while yield";var b="Array Bignum Binding Class Continuation Dir Exception FalseClass File::Stat File Fixnum Fload "+"Hash Integer IO MatchData Method Module NilClass Numeric Object Proc Range Regexp String Struct::TMS Symbol "+"ThreadGroup Thread Time TrueClass";this.regexList=[{regex:SyntaxHighlighter.regexLib.singleLinePerlComments,css:"comments"},{regex:SyntaxHighlighter.regexLib.doubleQuotedString,css:"string"},{regex:SyntaxHighlighter.regexLib.singleQuotedString,css:"string"},{regex:/\b[A-Z0-9_]+\b/g,css:"constants"},{regex:/:[a-z][A-Za-z0-9_]*/g,css:"color2"},{regex:/(\$|@@|@)\w+/g,css:"variable bold"},{regex:new RegExp(this.getKeywords(a),"gm"),css:"keyword"},{regex:new RegExp(this.getKeywords(b),"gm"),css:"color1"}];this.forHtmlScript(SyntaxHighlighter.regexLib.aspScriptTags)};SyntaxHighlighter.brushes.Ruby.prototype=new SyntaxHighlighter.Highlighter();SyntaxHighlighter.brushes.Ruby.aliases=["ruby","rails","ror","rb"];SyntaxHighlighter.brushes.Scala=function(){var b="val sealed case def true trait implicit forSome import match object null finally super "+"override try lazy for var catch throw type extends class while with new final yield abstract "+"else do if return protected private this package false";var a="[_:=><%#@]+";this.regexList=[{regex:SyntaxHighlighter.regexLib.singleLineCComments,css:"comments"},{regex:SyntaxHighlighter.regexLib.multiLineCComments,css:"comments"},{regex:SyntaxHighlighter.regexLib.multiLineSingleQuotedString,css:"string"},{regex:SyntaxHighlighter.regexLib.multiLineDoubleQuotedString,css:"string"},{regex:SyntaxHighlighter.regexLib.singleQuotedString,css:"string"},{regex:/0x[a-f0-9]+|\d+(\.\d+)?/gi,css:"value"},{regex:new RegExp(this.getKeywords(b),"gm"),css:"keyword"},{regex:new RegExp(a,"gm"),css:"keyword"}]};SyntaxHighlighter.brushes.Scala.prototype=new SyntaxHighlighter.Highlighter();SyntaxHighlighter.brushes.Scala.aliases=["scala"];SyntaxHighlighter.brushes.Sql=function(){var b="abs avg case cast coalesce convert count current_timestamp "+"current_user day isnull left lower month nullif replace right "+"session_user space substring sum system_user upper user year";var c="absolute action add after alter as asc at authorization begin bigint "+"binary bit by cascade char character check checkpoint close collate "+"column commit committed connect connection constraint contains continue "+"create cube current current_date current_time cursor database date "+"deallocate dec decimal declare default delete desc distinct double drop "+"dynamic else end end-exec escape except exec execute false fetch first "+"float for force foreign forward free from full function global goto grant "+"group grouping having hour ignore index inner insensitive insert instead "+"int integer intersect into is isolation key last level load local max min "+"minute modify move name national nchar next no numeric of off on only "+"open option order out output partial password precision prepare primary "+"prior privileges procedure public read real references relative repeatable "+"restrict return returns revoke rollback rollup rows rule schema scroll "+"second section select sequence serializable set size smallint static "+"statistics table temp temporary then time timestamp to top transaction "+"translation trigger true truncate uncommitted union unique update values "+"varchar varying view when where with work";var a="all and any between cross in join like not null or outer some";this.regexList=[{regex:/--(.*)$/gm,css:"comments"},{regex:SyntaxHighlighter.regexLib.multiLineDoubleQuotedString,css:"string"},{regex:SyntaxHighlighter.regexLib.multiLineSingleQuotedString,css:"string"},{regex:new RegExp(this.getKeywords(b),"gmi"),css:"color2"},{regex:new RegExp(this.getKeywords(a),"gmi"),css:"color1"},{regex:new RegExp(this.getKeywords(c),"gmi"),css:"keyword"}]};SyntaxHighlighter.brushes.Sql.prototype=new SyntaxHighlighter.Highlighter();SyntaxHighlighter.brushes.Sql.aliases=["sql"];
+SyntaxHighlighter.brushes.Vb=function(){var a="AddHandler AddressOf AndAlso Alias And Ansi As Assembly Auto "+"Boolean ByRef Byte ByVal Call Case Catch CBool CByte CChar CDate "+"CDec CDbl Char CInt Class CLng CObj Const CShort CSng CStr CType "+"Date Decimal Declare Default Delegate Dim DirectCast Do Double Each "+"Else ElseIf End Enum Erase Error Event Exit False Finally For Friend "+"Function Get GetType GoSub GoTo Handles If Implements Imports In "+"Inherits Integer Interface Is Let Lib Like Long Loop Me Mod Module "+"MustInherit MustOverride MyBase MyClass Namespace New Next Not Nothing "+"NotInheritable NotOverridable Object On Option Optional Or OrElse "+"Overloads Overridable Overrides ParamArray Preserve Private Property "+"Protected Public RaiseEvent ReadOnly ReDim REM RemoveHandler Resume "+"Return Select Set Shadows Shared Short Single Static Step Stop String "+"Structure Sub SyncLock Then Throw To True Try TypeOf Unicode Until "+"Variant When While With WithEvents WriteOnly Xor";this.regexList=[{regex:/'.*$/gm,css:"comments"},{regex:SyntaxHighlighter.regexLib.doubleQuotedString,css:"string"},{regex:/^\s*#.*$/gm,css:"preprocessor"},{regex:new RegExp(this.getKeywords(a),"gm"),css:"keyword"}];this.forHtmlScript(SyntaxHighlighter.regexLib.aspScriptTags)};SyntaxHighlighter.brushes.Vb.prototype=new SyntaxHighlighter.Highlighter();SyntaxHighlighter.brushes.Vb.aliases=["vb","vbnet"];SyntaxHighlighter.brushes.Lua=function(){var a="and break do else elseif end false for function if in "+"local nil not or repeat return then true until while";var b="_G _VERSION assert collectgarbage dofile error getfenv "+"getmetatable ipairs load module next pairs pcall print "+" rawequal rawget rawset require select setfenv setmetatable "+"tonumber tostring type unpack xpcall "+"coroutine.create coroutine.resume coroutine.running "+"coroutine.status coroutine.wrap coroutine.yield "+"debug.debug debug.getfenv debug.gethook debug.getinfo "+"debug.getlocal debug.getmetatable debug.getregistry "+"debug.getupvalue debug.setfenv debug.sethook debug.setlocal "+"debug.setmetatable debug.setupvalue debug.traceback "+"file:close file:flush file:lines file:read file:seek "+"file:setvbuf file:write"+"io.close io.flush io.input io.lines io.open io.output "+"io.popen io.read io.stderr io.stdin io.stdout io.tmpfile "+"io.type io.write "+"math.abs math.acos math.asin math.atan math.atan2 math.ceil "+"math.cos math.cosh math.deg math.exp math.floor math.fmod "+"math.frexp math.huge math.ldexp math.log math.log10 math.max "+"math.min math.modf math.pi math.pow math.rad math.random "+"math.randomseed math.sin math.sinh math.sqrt math.tan math.tanh "+"os.clock os.date os.difftime os.execute os.exit os.getenv os.remove "+"os.rename os.setlocale os.time os.tmpname "+"package.cpath package.loaded package.loaders package.loadlib "+"package.path package.preload package.seeall "+"string.byte string.char string.dump string.find string.format "+"string.gmatch string.gsub string.len string.lower string.match "+"string.rep string.reverse string.sub string.upper table.concat "+"table.insert table.maxn table.remove table.sort";this.regexList=[{regex:/--.*/gm,css:"comments"},{regex:/--\[\[[\S\s]*\]\]/gm,css:"comments"},{regex:SyntaxHighlighter.regexLib.doubleQuotedString,css:"string"},{regex:SyntaxHighlighter.regexLib.singleQuotedString,css:"string"},{regex:SyntaxHighlighter.regexLib.multiLineDoubleQuotedString,css:"string"},{regex:SyntaxHighlighter.regexLib.multiLineSingleQuotedString,css:"string"},{regex:new RegExp(this.getKeywords(a),"gm"),css:"keyword"},{regex:new RegExp(this.getKeywords(b),"gm"),css:"functions"}]};SyntaxHighlighter.brushes.Lua.prototype=new SyntaxHighlighter.Highlighter();SyntaxHighlighter.brushes.Lua.aliases=["lua"];SyntaxHighlighter.brushes.Xml=function(){function a(e,i){var f=SyntaxHighlighter.Match,h=e[0],c=new XRegExp("(&lt;|<)[\\s\\/\\?]*(?<name>[:\\w-\\.]+)","xg").exec(h),b=[];if(e.attributes!=null){var d,g=new XRegExp("(?<name> [\\w:\\-\\.]+)"+"\\s*=\\s*"+"(?<value> \".*?\"|'.*?'|\\w+)","xg");while((d=g.exec(h))!=null){b.push(new f(d.name,e.index+d.index,"color1"));b.push(new f(d.value,e.index+d.index+d[0].indexOf(d.value),"string"))}}if(c!=null){b.push(new f(c.name,e.index+c[0].indexOf(c.name),"keyword"))}return b}this.regexList=[{regex:new XRegExp("(\\&lt;|<)\\!\\[[\\w\\s]*?\\[(.|\\s)*?\\]\\](\\&gt;|>)","gm"),css:"color2"},{regex:SyntaxHighlighter.regexLib.xmlComments,css:"comments"},{regex:new XRegExp("(&lt;|<)[\\s\\/\\?]*(\\w+)(?<attributes>.*?)[\\s\\/\\?]*(&gt;|>)","sg"),func:a}]};SyntaxHighlighter.brushes.Xml.prototype=new SyntaxHighlighter.Highlighter();SyntaxHighlighter.brushes.Xml.aliases=["xml","xhtml","xslt","html"];
+define("hightlight", ["jquery"], function(){});
 
-var v=".js?v="+(new Date()).getTime();//获取时间戳
+/**console.log **/
+(function(){var method;var noop=function(){};var methods=["assert","clear","count","debug","dir","dirxml","error","exception","group","groupCollapsed","groupEnd","info","log","markTimeline","profile","profileEnd","table","time","timeEnd","timeStamp","trace","warn"];var length=methods.length;var console=(window.console=window.console||{});while(length--){method=methods[length];if(!console[method]){console[method]=noop}}}());
+
+var v=".js?v="+(new Date()).getTime();
 var airBaseRoot = '/';
 require.config({
     // baseUrl : '/js/',
@@ -18740,71 +18841,65 @@ require.config({
         "*": {"css": "css.min"}
     },
     paths: {
-        "my97":"lib/my97/WdatePicker",//日历控件
-        "jquery": "jquery-1.11.3.min",//jquery
-        "easyui":"lib/easyui/jquery.easyui.min",//easyui ，细节有修改
-        "easyui.extend":"lib/easyui/jquery.easyui.base.extend",//基础扩展，包括语言包、官方gridedit、扁平树扩展 和requirejs结合修正
-        "md5":"lib/md5",//md5加密脚本，仅供参考
+        "my97":"lib/my97/WdatePicker",
+        "jquery": "jquery-1.11.3.min",
+        "easyui":"lib/easyui/jquery.easyui.min",
+        // "jquery.jdirk": "lib/easyui/jquery.jdirk",
+        "easyui.extend":"lib/easyui/jquery.easyui.base.extend",
+        "md5":"lib/md5",
         // "jquery.validate": "plus/jquery.validate",
-        "jquery.extend": "plus/jquery.extend",//jquery基础扩展
-        "easyvalidate.extend": "plus/easyvalidate.extend",//easyui验证扩展，包括各种验证规则
-        "easygridEdit": "plus/easygridEdit.extend",//easyui gridedit方法扩展
-        "param":"plus/param", //全局公用变量
-        "pub":"plus/pub"+v,//基于基础扩展写的公共处理脚本库
-        // "print":"plus/print",
-        "layer.min":"lib/layer/layer.min",//layer弹窗控件
-        "pinyin_dict":"lib/pinyinjs/dict/pinyin_dict",//拼音库
-        "pinyin":"lib/pinyinjs/pinyinUtil",//拼音库支持工具
-        "template":"lib/template",//art template
-        "hotkeys" : "lib/hotkeys",//快捷键注册库
-        "echarts":"lib/echarts/echarts",//echarts完整库
-        "echartsMap":"lib/echarts/echarts-map",//echarts扩展地图
-        "chinaMap":"lib/echarts/china",//echarts中国地图
-        // "WebUploader":"lib/webuploader/webuploader.min",//百度上传控件
-        "myupload":"lib/webuploader/MyAmdWebUpload",//上传控件扩展amd版，上传require此文件
-        "fancybox":"lib/fancybox/jquery.fancybox-1.3.4.pack",//fancybox弹窗控件
-        "baidueditor": "lib/ueditor1.4.3.3-utf8-jsp/myue",//ue编辑器
-        "bdlang": "lib/ueditor1.4.3.3-utf8-jsp/lang/zh-cn/zh-cn",//ue编辑器
-        "zeroclipboard": "lib/ueditor1.4.3.3-utf8-jsp/third-party/zeroclipboard/ZeroClipboard.min"//ue编辑器
-        // "hightlight": "lib/SyntaxHighlighter/brush"//代码高亮
+        "jquery.extend": "plus/jquery.extend",
+        "easyvalidate.extend": "plus/easyvalidate.extend",
+        "param":"plus/param",
+        "pub":"plus/pub"+v,
+        "print":"plus/print",
+        "layer.min":"lib/layer/layer.min",
+        "pinyin_dict":"lib/pinyinjs/dict/pinyin_dict",
+        "pinyin":"lib/pinyinjs/pinyinUtil",
+        "template":"lib/template",
+        "hotkeys" : "lib/hotkeys",
+        "echarts":"lib/echarts/echarts",
+        "echartsMap":"lib/echarts/echarts-map",
+        "chinaMap":"lib/echarts/china",
+        "WebUploader":"lib/webuploader/webuploader.min",
+        "fancybox":"lib/fancybox/jquery.fancybox-1.3.4.pack",
+        "myupload":"lib/webuploader/MyAmdWebUpload",
+        "baidueditor": "lib/ueditor1.4.3.3-utf8-jsp/myue",
+        "bdlang": "lib/ueditor1.4.3.3-utf8-jsp/lang/zh-cn/zh-cn",
+        "zeroclipboard": "lib/ueditor1.4.3.3-utf8-jsp/third-party/zeroclipboard/ZeroClipboard.min",
+        "hightlight": "lib/SyntaxHighlighter/brush"
     },
     shim:{
         "jquery.validate":["jquery"],
         "layer.min":["jquery"],
         "fancybox":["jquery"],
         "hightlight":["jquery"],
-        "jquery.extend":["param","layer.min","my97"],//依赖这些基础配置
+        "jquery.extend":["param","layer.min","my97"],
         "easyui":["jquery"],
         // "jquery.jdirk":["jquery"],
         "easyui.extend":["easyui"],
         "easyvalidate.extend":["easyui"],
-        "easygridEdit":["easyui"],
         "bootstrap":["jquery"],
         "pinyin": ["pinyin_dict"],
         // "template": {exports: "template"},
         "chinaMap":["echarts","echartsMap"],
-        "pub":["jquery.extend","easyui.extend","easyvalidate.extend"],//依赖
+        "pub":["jquery.extend","easyui.extend","easyvalidate.extend"],
         "baidueditor": {deps: ["lib/ueditor1.4.3.3-utf8-jsp/ueditor.config", "css!lib/ueditor1.4.3.3-utf8-jsp/themes/default/css/ueditor"]},
         "bdlang":{deps: ["baidueditor"]}
     }
 });
 
-require(["pub"],function(){//默认只引入pub及相关依赖的所有文件，个体文件需要依赖，文件内require
+require(["pub","hightlight"],function(){
+    SyntaxHighlighter.config.clipboardSwf = 'js/lib/SyntaxHighlighter/clipboard.swf';
+    SyntaxHighlighter.highlight();
 
-// require(["pub","hightlight"],function(){
-    // SyntaxHighlighter.config.clipboardSwf = 'js/lib/SyntaxHighlighter/clipboard.swf';//代码高亮
-    // SyntaxHighlighter.highlight();
-
-    //通过body上的 data-js来寻找执行文件及对应函数格式： data-js="文件名:函数名"，文件统一放置在js/app 扁平目录下，如：<body data-js="sys:group">
-    //需要执行多个函数用 || 隔开，如：<body data-js="sys:group||api:init">
-    //如果是init函数可直接省略冒号及函数名，如：<body data-js="api:init">可简写为<body data-js="api">
     var crumb=$('body').attr("data-js");
     if(crumb){
         var crumbArr = crumb.split('||');
         $.each(crumbArr,function(i,v){
             var vArr = v.split(":");
             var modId = vArr[0] , funcId = vArr[1]||'init';
-            window.console && console.log('page执行 app/'+modId+'.js中的'+funcId+'方法');//打开页面时，注意看控制台提示执行的是哪个页面的哪个方法
+            window.console && console.log('page执行 app/'+modId+'.js中的'+funcId+'方法');
             // require(['/js/app/'+modId+v],function(mod){
             require(['app/'+modId],function(mod){
                 if(mod){
@@ -18812,7 +18907,7 @@ require(["pub"],function(){//默认只引入pub及相关依赖的所有文件，
                     if(init&&$.isFunction(init)){
                         mod[funcId](window);
                     }else{
-                        window.console && console.log("请在"+modId+".js文件中定义"+funcId+"方法");//不存在提示
+                        window.console && console.log("请在"+modId+".js文件中定义"+funcId+"方法");
                     }
                 }
             });

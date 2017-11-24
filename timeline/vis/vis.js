@@ -21434,15 +21434,17 @@ return /******/ (function(modules) { // webpackBootstrap
 
       case 'day':
         var day = current.date();
+        var year = current._d.getFullYear();
         var month = current.format('MMMM').toLowerCase();
-        return 'vis-day' + day + ' vis-' + month + currentMonth(current) + even(day - 1);
+        var newDay = day<10?('0'+day):day;
+        return 'myvis-day myvis__'+year+'-'+month+'-'+newDay+'__ vis-day' + day + ' vis-' + month + currentMonth(current) + even(day - 1);
 
       case 'month':
-        return 'vis-' + current.format('MMMM').toLowerCase() + currentMonth(current) + even(current.month());
+        return 'myvis-month vis-' + current.format('MMMM').toLowerCase() + currentMonth(current) + even(current.month());
 
       case 'year':
         var year = current.year();
-        return 'vis-year' + year + currentYear(current) + even(year);
+        return 'myvis-year vis-year' + year + currentYear(current) + even(year);
 
       default:
         return '';

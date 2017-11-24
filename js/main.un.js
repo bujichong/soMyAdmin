@@ -9,7 +9,7 @@ require.config({
         "*": {"css": "css.min"}
     },
     paths: {
-        "my97":"lib/my97/WdatePicker",//日历控件
+        // "my97":"lib/my97/WdatePicker",//日历控件
         "jquery": "jquery-1.11.3.min",//jquery
         "easyui":"lib/easyui/jquery.easyui.min",//easyui ，细节有修改
         "easyui.extend":"lib/easyui/jquery.easyui.base.extend",//基础扩展，包括语言包、官方gridedit、扁平树扩展 和requirejs结合修正
@@ -41,8 +41,9 @@ require.config({
         "jquery.validate":["jquery"],
         "layer.min":["jquery"],
         "fancybox":["jquery"],
-        "hightlight":["jquery"],
-        "jquery.extend":["param","layer.min","my97"],//依赖这些基础配置
+        // "hightlight":["jquery"],
+        // "jquery.extend":["param","layer.min","my97"],//依赖这些基础配置
+        "jquery.extend":["param","layer.min"],//依赖这些基础配置
         "easyui":["jquery"],
         // "jquery.jdirk":["jquery"],
         "easyui.extend":["easyui"],

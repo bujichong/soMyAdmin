@@ -95,7 +95,7 @@ background-color: #e3e3e3;
         </div></div>
         <div class="p6"><div class="item-one">
             <label class="lab-item">生日：</label>
-            <input id="birthday" class="txt txt-validate so-date" type="text" name="birthday" placeholder="生日" noNull="请填写生日" />
+            <input id="birthday" class="txt so-date required" data-opt="{required:true}" type="text" name="birthday" placeholder="生日" />
         </div></div>
       </div>
 
@@ -890,6 +890,11 @@ background-color: #e3e3e3;
 </div>
 <br /><br /><br />
 <script src="js/require.js" data-main="js/main.un"></script>
+<script type="text/javascript" src="js/lib/SyntaxHighlighter/brush.js"></script>
+<script type="text/javascript">
+  SyntaxHighlighter.config.clipboardSwf = 'js/lib/SyntaxHighlighter/clipboard.swf';
+  SyntaxHighlighter.all();
+</script>
 </body>
 
 </html>

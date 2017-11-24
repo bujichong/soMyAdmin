@@ -392,7 +392,7 @@ var eyeIndex = {
             var tabIndex = $('#tabs').tabs('getTabIndex', currentTab);
 
             if (tabIndex == alltabs.length - 1){
-              //alert('亲，后边没有啦 ^@^!!');
+              window.console&&console.log('亲，后边没有啦 ^@^!!');
               return false;
             }
             $.each(allTabtitle, function (i, n) {
@@ -407,7 +407,7 @@ var eyeIndex = {
           case "closeleft":
             var tabIndex = $('#tabs').tabs('getTabIndex', currentTab);
             if (tabIndex == 1) {
-              //alert('亲，前边那个上头有人，咱惹不起哦。 ^@^!!');
+              window.console&&console.log('亲，前边那个上头有人，咱惹不起哦。 ^@^!!');
               return false;
             }
             $.each(allTabtitle, function (i, n) {

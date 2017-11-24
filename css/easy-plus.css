@@ -59,3 +59,18 @@ color: #000000!important;
 .tree-folder {background: url(../images/easyui/tree_icons.png) no-repeat -208px 0;}
 .tree-folder-open {background:url(../images/easyui/tree_icons.png) no-repeat -224px 0;}
 .tree-file {background:url(../images/easyui/tree_icons.png) no-repeat -240px 0;}
+
+/* datebox */
+.datebox .combo-arrow{background:url(../images/icon/inputmark.png) no-repeat -26px 0;width:23px!important;}
+.calendar{font-family:Verdana,Arial,"Microsoft YaHei","SimSun";}
+.calendar-title span{-moz-border-radius:0;-webkit-border-radius:0;border-radius:0;}
+.calendar-menu-month{-moz-border-radius:2px;-webkit-border-radius:2px;border-radius:2px;}
+.calendar-header{background-color:#e2f1ff;border-bottom: 1px solid #fff;}
+.calendar-saturday{color:#ee0077;}
+.calendar-day{-moz-border-radius:2px;-webkit-border-radius:2px;border-radius:2px;border:0;}
+.calendar-selected{background-color:#f98e52;font-weight: bold;border:0;}
+.calendar-nav-hover{font-weight: bold;}
+.panel-htop{box-shadow:1px 1px 2px #eee;-webkit-box-shadow:1px 1px 2px #eee;-moz-box-shadow:1px 1px 2px #eee;-moz-border-radius: 0 0 4px 4px;-webkit-border-radius:0 0 4px 4px;border-radius:0 0 4px 4px;overflow: hidden;}
+.panel-htop .combo-panel{-moz-border-radius:0 0 4px 4px;-webkit-border-radius:0 0 4px 4px;border-radius:0 0 4px 4px;overflow: hidden;}
+.calendar-other-month{filter:alpha(opacity=40);opacity:0.4;}
+.datebox-button a{font-weight: normal;}
