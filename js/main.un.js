@@ -29,7 +29,7 @@ require.config({
         "echarts":"lib/echarts/echarts",//echarts完整库
         "echartsMap":"lib/echarts/echarts-map",//echarts扩展地图
         "chinaMap":"lib/echarts/china",//echarts中国地图
-        // "WebUploader":"lib/webuploader/webuploader.min",//百度上传控件
+        "WebUploader":"lib/webuploader/webuploader.min",//百度上传控件
         "myupload":"lib/webuploader/MyAmdWebUpload",//上传控件扩展amd版，上传require此文件
         "fancybox":"lib/fancybox/jquery.fancybox-1.3.4.pack",//fancybox弹窗控件
         "baidueditor": "lib/ueditor1.4.3.3-utf8-jsp/myue",//ue编辑器
