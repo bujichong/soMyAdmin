@@ -812,7 +812,7 @@ var $ff = {
             $('.so-time').each(function () {
               var _self  = $(this);
               var data = $T.data(this) || {};
-              _self.css('width', _self.hasClass('inline')?'150px':'100%');
+              _self.css('width', _self.hasClass('inline')?'160px':'100%');
               _self.datetimebox(data);
             });
 
