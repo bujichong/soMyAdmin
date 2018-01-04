@@ -1,7 +1,7 @@
 /* easyui repair */
-.textbox{border-radius:1px;}
+.textbox{border-radius:1px;vertical-align: top;}
 .textbox .textbox-text,.textbox .textbox-text:focus{
-height:26px!important;padding-right:0;
+height:24px!important;padding-right:0;
 background-color:#fff;border:0;
 box-shadow:0 0 0 #fff;-webkit-box-shadow:0 0 0 #fff;-moz-box-shadow:0 0 0 #fff;
 }
@@ -70,7 +70,7 @@ color: #000000!important;
 .calendar-day{-moz-border-radius:2px;-webkit-border-radius:2px;border-radius:2px;border:0;}
 .calendar-selected{background-color:#f98e52;font-weight: bold;border:0;}
 .calendar-nav-hover{font-weight: bold;}
-.panel-htop{box-shadow:1px 1px 2px #eee;-webkit-box-shadow:1px 1px 2px #eee;-moz-box-shadow:1px 1px 2px #eee;-moz-border-radius: 0 0 4px 4px;-webkit-border-radius:0 0 4px 4px;border-radius:0 0 4px 4px;overflow: hidden;}
+.panel-htop{-moz-border-radius: 0 0 4px 4px;-webkit-border-radius:0 0 4px 4px;border-radius:0 0 4px 4px;overflow: hidden;}
 .panel-htop .combo-panel{-moz-border-radius:0 0 4px 4px;-webkit-border-radius:0 0 4px 4px;border-radius:0 0 4px 4px;overflow: hidden;}
 .calendar-other-month{filter:alpha(opacity=40);opacity:0.4;}
 .datebox-button a{font-weight: normal;}

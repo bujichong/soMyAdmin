@@ -64,11 +64,11 @@ var items = new vis.DataSet({
     type: { start: 'ISODate', end: 'ISODate' }
 });
 var groups = new vis.DataSet([{
-    id: 'foo', content:'分组1', subgroupOrder: 'subgroupOrder' // this group has no subgroups but this would be the other method to do the sorting.
+    id: 'foo', content:'电梯工程', subgroupOrder: 'subgroupOrder' // this group has no subgroups but this would be the other method to do the sorting.
 },{
-    id: 'bar', content:'<span style="color:blue">分组2分组2分组2分组2</span>', subgroupOrder: function (a,b) {return a.subgroupOrder - b.subgroupOrder;}
+    id: 'bar', content:'<span style="color:blue">内外装饰装修工程</span>', subgroupOrder: function (a,b) {return a.subgroupOrder - b.subgroupOrder;}
 },{
-    id: 'tree', content:'分组3', subgroupOrder: 'subgroupOrder' // this group has no subgroups but this would be the other method to do the sorting.
+    id: 'tree', content:'钢结构（防水、防雷)', subgroupOrder: 'subgroupOrder' // this group has no subgroups but this would be the other method to do the sorting.
 }]);
 // add items to the DataSet
 items.add([

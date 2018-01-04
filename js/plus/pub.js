@@ -607,8 +607,7 @@ var $pop = {
           var searchLabel = data.searchLabel || '';
           var boxTpl = "<div id='pop_{gridId}' style='display:none'>"+
           "<form class='form-inline popGridHead pad10'>"+
-          "<div class='form-group'><input type='text' class='form-control' name='"+searchName+"' placeholder='"+searchLabel+"'> </div>"+
-          " <button type='button' class='btn btn-info fnSearch'>查 询</button>"+
+          "<div class='form-group'><input type='text' class='form-control' name='"+searchName+"' placeholder='"+searchLabel+"'><button type='button' class='btn btn-small btn-primary fnSearch'>查 询</button> </div>"+
           "<button type='button' class='btn btn-warning fnSure"+(muti?'':' none')+"'>确 定</button>"+
               // "<span><input type='button' class='btn btn-submit fnSearch' value='查 询' /></span>"+
               // "<input type='button' class='btn btn-submit fnSure' value='确 定' />"+
