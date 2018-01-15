@@ -21,8 +21,10 @@ height:35px;line-height: 35px;padding:0 0 0 40px;margin:0;font-size: 14px;font-w
 .mainContBox .searchHead{margin-top:10px;}
 .searchHead .drop{min-width:90px;}
 /* baseToobar */
-.baseToobar{padding:0 0 9px;/*background-color: #f3f3f3;margin: 0 10px 1px;*/background-color: #fff;border:0;overflow: hidden;}
-.baseToobar .toolGroup,.baseToobar .s-tool-singer{float: left;}
+.baseToobar{padding:5px 0 5px;/*background-color: #f3f3f3;margin: 0 10px 1px;*/background-color: #ebf6fd;border:0;overflow: hidden;}
+.baseToobar .toolGroup,.baseToobar .s-tool-singer{float: left;margin-left:0;}
+.baseToobar .s-tool{display: -moz-inline-stack;display:inline-block;*display:inline;*zoom:1;padding:6px 12px;vertical-align: middle;cursor:hand;cursor:pointer;}
+.baseToobar .s-tool:hover{color:#fff;background-color: #00A0E9;-moz-border-radius:2px;-webkit-border-radius:2px;border-radius:2px;}
 /* gridWrap */
 .gridWrap{padding:0 10px;}
 

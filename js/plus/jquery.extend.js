@@ -386,7 +386,6 @@ var $event = {
     }
 };
 
-
 var $ajax = {//统一的异步post请求
     alertErr : function (rst,msg) {
     	var errDatails = rst.detail ||'';

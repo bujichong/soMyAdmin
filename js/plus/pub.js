@@ -65,65 +65,6 @@ var $util = {
             }
         });
     },
-    iframePop : function (opt,grid) {//pop的方式打开iframePop
-        window._refreshParent = false;
-        if (typeof(opt)=='string') {
-            opt = {content:opt};
-        };
-        var layerOpt = $.extend({//layer
-          type: 2,
-          title :'提示',
-          // content:url,
-          area :['100%', '100%']
-        },opt||{});
-        if (grid) {
-          layerOpt.end = function (){
-              opt.end&&opt.end();
-              if (window._refreshParent){
-                  if(grid instanceof Array){
-                      $.each(grid,function (i,v) {
-                          $grid.reload(v);
-                      })
-                  }else{
-                      $grid.reload(grid);
-                  }
-              }
-          }
-        }
-        var popIndex = layer.open(layerOpt);
-    },
-    closePop : function (opt) {//统一的关闭pop方法
-        var opt = $.extend({
-            popIndex : null,
-            callback : function () {},
-            refreshGrid : false
-        },opt||{});
-
-        if (opt.popIndex) {//如果关闭当前window下的pop
-            opt.callback();
-            layer.close(opt.popIndex);
-            return;
-        }else{//关闭父级pop
-            var p = parent.window;
-
-            if (opt.refreshGrid) {
-                p._refreshParent = true;
-            };
-
-            try {//试运行callback
-                opt.callback(p);
-            } catch (e) {
-                window.console && console.log(e);
-            }
-
-            try {//试关闭open
-              var index = parent.layer.getFrameIndex(window.name);
-              p.layer.close(index);
-            } catch (e) {
-                window.console && console.log(e);
-            }
-        };
-    },
 /*
 合并列方法
 grid,
@@ -173,6 +114,260 @@ bStr:需要合并的字段(不设置，则使用aStr)
             }
         };
     }
+};
+
+var $pop = {
+  alert : function (msg,yes,opt) {//icon: {0:'叹号',1:'对勾',2:'叉叉',3:'问号'}
+      var opt = $.extend({icon: 0, title:false,btnAlign: 'c'},opt||{});
+      return layer.alert(msg,opt,function (index) {
+          if (yes) {
+              if (yes(index)) {
+                  layer.close(index);
+              };
+          }else{
+              layer.close(index);
+          };
+      });
+  },
+  confirm : function (msg,yes,cancel,opt) {//icon: {0:'叹号',1:'对勾',2:'叉叉',3:'问号'}
+      var msg = msg || '你确定此操作吗？';
+      var opt = $.extend({icon: 0, title:false,btnAlign: 'c'},opt||{});
+      return layer.confirm(msg , opt , function(index){
+          if (yes) {
+              if (yes(index)) {
+                  layer.close(index);
+              };
+          }else{
+              layer.close(index);
+          };
+      },function (index) {
+          if (cancel) {
+              if (cancel(index)) {
+                  layer.close(index);
+              };
+          }else{
+              layer.close(index);
+          };
+      });
+  },
+  msg : function (msg,end,opt) {//icon: {0:'叹号',1:'对勾',2:'叉叉',3:'问号'}
+      var opt = $.extend({icon: 0, time:2000},opt||{});
+      return layer.msg(msg , opt , function(){
+        end&&end();
+      })
+  },
+  newTabWindow : function (tabTitle,url,unselected) {
+    window.parent&&window.parent.eyeIndex&&window.parent.eyeIndex.addTab(tabTitle,url,unselected);
+  },
+  iframePop : function (opt,grid) {//pop的方式打开iframePop
+      window._refreshParent = false;
+      if (typeof(opt)=='string') {
+          opt = {content:opt};
+      };
+      var layerOpt = $.extend({//layer
+        type: 2,
+        title :'提示',
+        // content:url,
+        area :['100%', '100%']
+      },opt||{});
+      if (grid) {
+        layerOpt.end = function (){
+            opt.end&&opt.end();
+            if (window._refreshParent){
+                if(grid instanceof Array){
+                    $.each(grid,function (i,v) {
+                        $grid.reload(v);
+                    })
+                }else{
+                    $grid.reload(grid);
+                }
+            }
+        }
+      }
+      var popIndex = layer.open(layerOpt);
+  },
+  closePop : function (opt) {//统一的关闭pop方法
+      var opt = $.extend({
+          popIndex : null,
+          callback : function () {},
+          refreshGrid : false
+      },opt||{});
+
+      if (opt.popIndex) {//如果关闭当前window下的pop
+          opt.callback();
+          layer.close(opt.popIndex);
+          return;
+      }else{//关闭父级pop
+          var p = parent.window;
+
+          if (opt.refreshGrid) {
+              p._refreshParent = true;
+          };
+
+          try {//试运行callback
+              opt.callback(p);
+          } catch (e) {
+              window.console && console.log(e);
+          }
+
+          try {//试关闭open
+            var index = parent.layer.getFrameIndex(window.name);
+            p.layer.close(index);
+          } catch (e) {
+              window.console && console.log(e);
+          }
+      };
+  },
+  popForm : function (opt) {//pop form, opt是所有参数
+      var opt =$.extend({
+          target : null,//需要弹出的对象class或者id
+          refreshGrid : true,//是否刷新grid
+          gridId : 'gridBox',//需要刷新grid的id
+          width : 400,height:300,//pop宽高
+          beforePop : function ($formBox) {},//弹窗之前的事情
+          afterSubmit : function (rst,$formBox) {}//提交之后的事件
+      },opt||{});
+      var temPop;
+      var $formBox = $(opt.target);
+      $formBox.find('.form-validate').attr("data-opt","{'callback':'submitPopForm'}");
+      window.submitPopForm = function (rst) {
+          if (rst.state) {
+              layer.close(temPop);
+              if (opt.refreshGrid) {$grid.reload(opt.grid);};
+              opt.afterSubmit(rst,$formBox);
+          };
+      }
+      opt.beforePop($formBox);
+      temPop = layer.open({
+          type:1,
+          title : opt.title,
+          area:[opt.width+'px',opt.height+'px'],
+          content : $formBox,
+          end: function () {
+              $formBox.clear();
+          }
+      });
+      $formBox.find('.btn-closePop').click(function () {
+          layer.close(temPop);
+      });
+      return temPop;//返回layer的序列
+  },
+  popGrid: function (opt,target) {//弹窗grid
+      opt = opt || {};
+      if (!opt.url && !opt.code) {
+          layer.alert("请配置表格数据源参数url或者code");
+          return;
+      }
+      if (!opt.code && !opt.gridId) {
+          layer.alert("请配置表格数据参数gridId");
+          return;
+      }
+      var data = opt || {};
+      data.gridCfg = data.gridCfg ||{};
+      var gridId = data.gridId || 'grid_' + data.code.replace(/[\^@]/g, '')
+          , url = data.url || "/sys/widget/grid.htm?_code=" + encodeURIComponent(data.code)
+          , init = $('#' + gridId).length > 0;
+          data.gridCfg.singleSelect = data.gridCfg.singleSelect  || !data.muti;
+      var muti = !data.gridCfg.singleSelect;
+          window.console && console.log(muti);
+      if (init && $('#pop_' + gridId).length == 0) layer.alert("请另外指定gridId," + gridId + "已存在!");
+      if (!init) {
+          var searchName = data.searchName || 'searchValue';
+          var searchLabel = data.searchLabel || '';
+          var boxTpl = "<div id='pop_{gridId}' style='display:none'>"+
+          "<form class='form-inline popGridHead pad10'>"+
+          "<div class='form-group'><input type='text' class='form-control' name='"+searchName+"' placeholder='"+searchLabel+"'><button type='button' class='btn btn-small btn-primary fnSearch'>查 询</button> </div>"+
+          "<button type='button' class='btn btn-warning fnSure"+(muti?'':' none')+"'>确 定</button>"+
+              // "<span><input type='button' class='btn btn-submit fnSearch' value='查 询' /></span>"+
+              // "<input type='button' class='btn btn-submit fnSure' value='确 定' />"+
+          "</form>"+
+          "<div class='pad-l10 pad-r10 pad-b5'><div id='{gridId}'></div></div></div>";
+          $('body').append($T.format(boxTpl, {gridId: gridId}));
+      }
+
+      var boxOpt = {
+          type :1,
+          title: muti?'选择后点击确定按钮':'请双击选择行',
+    area : ['500px','494px'],
+          content: $('#pop_' + gridId)
+      };
+      $.extend(true, boxOpt, data.boxOpt || {});
+      if (data.boxOpt.width) {boxOpt.area[0] = data.boxOpt.width+'px'};
+      if (data.boxOpt.height) {boxOpt.area[1] = data.boxOpt.height+'px'};
+      //清除验证的tooltip
+      // var $form = $(target).parents('.form-validate');
+      // if ($form) {
+      //     $form.find(".form-validate .txta,:input").tooltip("destroy");
+      // };
+      $pop[gridId] = layer.open(boxOpt);
+      if (!init) {
+          var valueId = data.valueId, textId = data.textId
+          ,valueVal = data.valueVal||'id', textVal = data.textVal||'text'
+              , gridCfg = {height: (boxOpt.height - 85), width: '100%'};
+          $.extend(true, gridCfg, data.gridCfg || {});
+          gridCfg.columns = gridCfg.columns || data.cols;
+          if (!gridCfg.columns && data.code) {
+              var cType = data.code.replace(/[\^@]/g, '');
+              if (!$cols[cType]) {
+                  layer.alert('请在param.js里面定义' + cType + '表格列信息!');
+                  return;
+              }
+              gridCfg.columns = $cols[cType];
+          }
+          if (!gridCfg.columns) {
+              layer.alert("请配置表格列信息!");
+              return;
+          }
+          gridCfg.fitColumns = (opt.fitCol?opt.fitCol:true);
+          gridCfg.onDblClickRow = function (index, row) {
+              window.console && console.log(textId,valueId,row);
+              if (valueId)$('#' + valueId).val(row[valueVal]);
+              if (textId)$('#' + textId).val(row[textVal]);
+              if (boxOpt.onOk)boxOpt.onOk([row]);
+              layer.close($pop[gridId]);
+              if(data.values){
+                  $.each(data.values,function (key,val) {
+                      $('#'+key).val(row[val]);
+                  });
+              }
+              // $pop[gridId].removePop();
+          }
+          $grid.newGrid('#' + gridId, gridCfg);
+          $('.fnSearch', '#pop_' + gridId).click(function () {
+              var ps = $('#pop_' + gridId).find('.popGridHead').sovals();
+              $grid.load('#' + gridId, ps);
+          });
+          if (muti) {
+              $('.fnSure', '#pop_' + gridId).show().click(function () {
+                  console.log("点击确定按钮!");
+                  var rows = muti ? ($('#' + gridId).datagrid("getChecked") || []) : [$('#' + gridId).datagrid("getSelected")];
+                  var id = [], text = [];
+                  for (var i = 0; i < rows.length; i++) {
+                      var row = rows[i];
+                      id.push(row[valueVal]);
+                      text.push(row[textVal]);
+                  }
+                  if (valueId)$('#' + valueId).val(id.join(','));
+                  if (textId)$('#' + textId).val(text.join(','));
+                  if (boxOpt.onOk)boxOpt.onOk(rows);
+                  layer.close($pop[gridId]);
+              });
+          };
+
+      }
+      var params = data.gridParams || data.params || {};
+      if (typeof(params) == "function") {
+          params = params();
+      }
+      var urlParams = data.urlParams || '';
+      if (typeof(urlParams) == "function") {
+          urlParams = urlParams();
+      }
+      // urlParams = $T.parseParam(urlParams);
+      params.$url = url;
+      if (urlParams) {params.$url = params.$url+urlParams};
+      $grid.load('#' + gridId, params);
+  }
 };
 
 var $grid = {
@@ -339,7 +534,8 @@ var $grid = {
               ajaxBack : function (data) {},
               click : function () {}
           },opt||{});
-          var $btn = $('<span class="btn s-tool'+(singerMode?" s-tool-singer":"")+' btn-default"><b class="icon icon-'+o.iconCls+'"></b> '+o.text+'</span>');
+          // var $btn = $('<span class="btn s-tool'+(singerMode?" s-tool-singer":"")+' btn-default"><b class="icon icon-'+o.iconCls+'"></b> '+o.text+'</span>');
+          var $btn = $('<span class="s-tool'+(singerMode?" s-tool-singer":"")+'"><b class="icon icon-'+o.iconCls+'"></b> '+o.text+'</span>');
           $btn.click(function () {
               var _self = $(this);
               var rows = $gridO.datagrid(o.check?"getChecked":"getSelections");
@@ -548,158 +744,6 @@ var $grid = {
     }
 };
 
-var $pop = {
-  popForm : function (opt) {//pop form, opt是所有参数
-      var opt =$.extend({
-          target : null,//需要弹出的对象class或者id
-          refreshGrid : true,//是否刷新grid
-          gridId : 'gridBox',//需要刷新grid的id
-          width : 400,height:300,//pop宽高
-          beforePop : function ($formBox) {},//弹窗之前的事情
-          afterSubmit : function (rst,$formBox) {}//提交之后的事件
-      },opt||{});
-      var temPop;
-      var $formBox = $(opt.target);
-      $formBox.find('.form-validate').attr("data-opt","{'callback':'submitPopForm'}");
-      window.submitPopForm = function (rst) {
-          if (rst.state) {
-              layer.close(temPop);
-              if (opt.refreshGrid) {$grid.reload(opt.grid);};
-              opt.afterSubmit(rst,$formBox);
-          };
-      }
-      opt.beforePop($formBox);
-      temPop = layer.open({
-          type:1,
-          title : opt.title,
-          area:[opt.width+'px',opt.height+'px'],
-          content : $formBox,
-          end: function () {
-              $formBox.clear();
-          }
-      });
-      $formBox.find('.btn-closePop').click(function () {
-          layer.close(temPop);
-      });
-      return temPop;//返回layer的序列
-  },
-  popGrid: function (opt,target) {//弹窗grid
-      opt = opt || {};
-      if (!opt.url && !opt.code) {
-          layer.alert("请配置表格数据源参数url或者code");
-          return;
-      }
-      if (!opt.code && !opt.gridId) {
-          layer.alert("请配置表格数据参数gridId");
-          return;
-      }
-      var data = opt || {};
-      data.gridCfg = data.gridCfg ||{};
-      var gridId = data.gridId || 'grid_' + data.code.replace(/[\^@]/g, '')
-          , url = data.url || "/sys/widget/grid.htm?_code=" + encodeURIComponent(data.code)
-          , init = $('#' + gridId).length > 0;
-          data.gridCfg.singleSelect = data.gridCfg.singleSelect  || !data.muti;
-      var muti = !data.gridCfg.singleSelect;
-          window.console && console.log(muti);
-      if (init && $('#pop_' + gridId).length == 0) layer.alert("请另外指定gridId," + gridId + "已存在!");
-      if (!init) {
-          var searchName = data.searchName || 'searchValue';
-          var searchLabel = data.searchLabel || '';
-          var boxTpl = "<div id='pop_{gridId}' style='display:none'>"+
-          "<form class='form-inline popGridHead pad10'>"+
-          "<div class='form-group'><input type='text' class='form-control' name='"+searchName+"' placeholder='"+searchLabel+"'><button type='button' class='btn btn-small btn-primary fnSearch'>查 询</button> </div>"+
-          "<button type='button' class='btn btn-warning fnSure"+(muti?'':' none')+"'>确 定</button>"+
-              // "<span><input type='button' class='btn btn-submit fnSearch' value='查 询' /></span>"+
-              // "<input type='button' class='btn btn-submit fnSure' value='确 定' />"+
-          "</form>"+
-          "<div class='pad-l10 pad-r10 pad-b5'><div id='{gridId}'></div></div></div>";
-          $('body').append($T.format(boxTpl, {gridId: gridId}));
-      }
-
-      var boxOpt = {
-          type :1,
-          title: muti?'选择后点击确定按钮':'请双击选择行',
-    area : ['500px','494px'],
-          content: $('#pop_' + gridId)
-      };
-      $.extend(true, boxOpt, data.boxOpt || {});
-      if (data.boxOpt.width) {boxOpt.area[0] = data.boxOpt.width+'px'};
-      if (data.boxOpt.height) {boxOpt.area[1] = data.boxOpt.height+'px'};
-      //清除验证的tooltip
-      // var $form = $(target).parents('.form-validate');
-      // if ($form) {
-      //     $form.find(".form-validate .txta,:input").tooltip("destroy");
-      // };
-      $pop[gridId] = layer.open(boxOpt);
-      if (!init) {
-          var valueId = data.valueId, textId = data.textId
-          ,valueVal = data.valueVal||'id', textVal = data.textVal||'text'
-              , gridCfg = {height: (boxOpt.height - 85), width: '100%'};
-          $.extend(true, gridCfg, data.gridCfg || {});
-          gridCfg.columns = gridCfg.columns || data.cols;
-          if (!gridCfg.columns && data.code) {
-              var cType = data.code.replace(/[\^@]/g, '');
-              if (!$cols[cType]) {
-                  layer.alert('请在param.js里面定义' + cType + '表格列信息!');
-                  return;
-              }
-              gridCfg.columns = $cols[cType];
-          }
-          if (!gridCfg.columns) {
-              layer.alert("请配置表格列信息!");
-              return;
-          }
-          gridCfg.fitColumns = (opt.fitCol?opt.fitCol:true);
-          gridCfg.onDblClickRow = function (index, row) {
-              window.console && console.log(textId,valueId,row);
-              if (valueId)$('#' + valueId).val(row[valueVal]);
-              if (textId)$('#' + textId).val(row[textVal]);
-              if (boxOpt.onOk)boxOpt.onOk([row]);
-              layer.close($pop[gridId]);
-              if(data.values){
-                  $.each(data.values,function (key,val) {
-                      $('#'+key).val(row[val]);
-                  });
-              }
-              // $pop[gridId].removePop();
-          }
-          $grid.newGrid('#' + gridId, gridCfg);
-          $('.fnSearch', '#pop_' + gridId).click(function () {
-              var ps = $('#pop_' + gridId).find('.popGridHead').sovals();
-              $grid.load('#' + gridId, ps);
-          });
-          if (muti) {
-              $('.fnSure', '#pop_' + gridId).show().click(function () {
-                  console.log("点击确定按钮!");
-                  var rows = muti ? ($('#' + gridId).datagrid("getChecked") || []) : [$('#' + gridId).datagrid("getSelected")];
-                  var id = [], text = [];
-                  for (var i = 0; i < rows.length; i++) {
-                      var row = rows[i];
-                      id.push(row[valueVal]);
-                      text.push(row[textVal]);
-                  }
-                  if (valueId)$('#' + valueId).val(id.join(','));
-                  if (textId)$('#' + textId).val(text.join(','));
-                  if (boxOpt.onOk)boxOpt.onOk(rows);
-                  layer.close($pop[gridId]);
-              });
-          };
-
-      }
-      var params = data.gridParams || data.params || {};
-      if (typeof(params) == "function") {
-          params = params();
-      }
-      var urlParams = data.urlParams || '';
-      if (typeof(urlParams) == "function") {
-          urlParams = urlParams();
-      }
-      // urlParams = $T.parseParam(urlParams);
-      params.$url = url;
-      if (urlParams) {params.$url = params.$url+urlParams};
-      $grid.load('#' + gridId, params);
-  }
-};
 
 var $ff = {
     /**
@@ -827,17 +871,17 @@ var $ff = {
         }
         // if ($(".so-form .btn-cancel").length) {
         //     $(".so-form .btn-cancel").click(function () {
-        //         $util.closePop();
+        //         $pop.closePop();
         //     });
         // }
         if ($(".form-validate .btn-cancel").length) {//表单里的关闭按钮，关闭事件
             $(".form-validate .btn-cancel").click(function () {
-                $util.closePop();
+                $pop.closePop();
             });
         }
         if ($(".form-validate .btn-closePop").length) {//表单里的关闭按钮，关闭事件
             $(".form-validate .btn-closePop").click(function () {
-                $util.closePop();
+                $pop.closePop();
             });
         }
         if ($('.form-enter').length) {//回车替代tab事件
@@ -1041,7 +1085,7 @@ var $ff = {
                  if (rst.state) {
                    layer.msg(msg,{icon:1});
                    setTimeout(function(){
-                     $util.closePop();
+                     $pop.closePop();
                    },400);
                  }else{
                    layer.alert('<p class="red">对不起，提交数据失败！</p>' + msg,{icon: 2, title:false,btnAlign: 'c'});

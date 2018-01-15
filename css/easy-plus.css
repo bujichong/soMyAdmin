@@ -38,6 +38,7 @@ background-color: #fdf7db!important;
 border-color: #fbd396!important;
 color: #000000!important;
 }
+.txt-editable-readonly{background-color:transparent;border:0!important;}
 
 .panel-body{color:#555;}
 .datagrid-htable, .datagrid-btable, .datagrid-ftable{color:#555;}

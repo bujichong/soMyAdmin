@@ -19,6 +19,10 @@ define(['template'],function (template) {
         selectOnCheck : false,
         columns:[[
            {title:'id',field:'id',checkbox:true}
+          ,{title:'详情',field:'op',sortable:true,width:100,formatter:function(v,row,index){
+                return '<span class="s-op icon-search s-op-details" title="查看详情" rel="'+index+'"></span>';
+              }
+            }
           ,{title:'用户名',field:'userName',sortable:true,width:100}
           ,{title:'姓名',field:'realName',sortable:true,width:100}
           ,{title:'性别',field:'sex',sortable:true,width:100,formatter:function(r){
@@ -41,6 +45,12 @@ define(['template'],function (template) {
           ,{title:'创建日期',field:'createTime',width:150,format:'yyyy-MM-dd hh:mm:ss'}
           ,{title:'最后修改时间',field:'lastModifyTime',width:150}
         ]],
+        onLoadSuccess: function (data) {
+          $('.s-op-details').click(function () {
+            var ix = $(this).attr('rel');
+            $pop.newTabWindow('查看详情','userForm.html?id='+ix);
+          });
+        },
         url:'json/users.js'
         // ,offset : -50
       });

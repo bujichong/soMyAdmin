@@ -34,22 +34,25 @@ define(['easygridEdit'],function ($e) {
           ,{title:'性别',field:'sex',sortable:true,width:100,formatter:function(r){
                 return ['','男','女'][r];
               },editor:{
-  							type:'combobox',
-  							options:{
+                type:'combobox',
+                options:{
                   textField: 'text',
                   valueField: 'value',
-              		data: [{text: '男',value: '1'},{text: '女',value: '2'}],
-  								required:true
-  							}
-  						}
+                  data: [{text: '男',value: '1'},{text: '女',value: '2'}],
+                  required:true
+                }
+              }
             }
             ,{title:'状态',field:'state',width:100,formatter:function(r){
               var stateHtml = ['','<span class="green">正常</span>','<span class="orange">停用</span>'];
                   // window.console && console.log(r);
                   return stateHtml[r];
-                },editor:{type:'checkbox',options:{on:'1',off:'2'}}
+                }
+                // ,editor:{type:'checkbox',options:{on:'1',off:'2'}}
               }
-          ,{title:'部门',field:'orgName',sortable:true,width:120,editor:{type:'text'}}
+          ,{title:'部门',field:'orgName',sortable:true,width:120
+          // ,editor:{type:'text'}
+        }
           ,{title:'手机号',field:'mobile',width:120,editor:{type:'text'}}
           ,{title:'Email',field:'email',width:120,editor:{type:'validatebox',options:{validType:'many["email","maxlength[30,\'email超长\']"]'}}}
           // ,{title:'微信号',field:'weChat',width:140}
