@@ -157,7 +157,7 @@ var $pop = {
       })
   },
   newTabWindow : function (tabTitle,url,unselected) {
-    window.parent&&window.parent.eyeIndex&&window.parent.eyeIndex.addTab(tabTitle,url,unselected);
+    window.top.eyeIndex&&window.top.eyeIndex.addTab(tabTitle,url,unselected);
   },
   iframePop : function (opt,grid) {//pop的方式打开iframePop
       window._refreshParent = false;
